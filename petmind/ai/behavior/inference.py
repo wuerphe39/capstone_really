@@ -2,7 +2,7 @@ from pathlib import Path
 from ultralytics import YOLO
 import cv2
 
-LABELS = ["happy", "anxious", "playing", "resting", "alert", "sick_suspect", "hungry"]
+LABELS = ["happy", "anxious", "playing", "resting", "alert"]
 WEIGHTS = Path(__file__).parent / "weights" / "behavior_v1" / "weights" / "best.pt"
 
 

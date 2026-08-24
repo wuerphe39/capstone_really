@@ -1,9 +1,9 @@
 """
-Roboflow에서 반려견 행동 탐지 데이터셋을 다운로드하고
-YOLO 포맷으로 data/ 폴더에 배치.
+Roboflow에서 반려견 행동/자세 데이터셋을 다운로드하고
+YOLO 포맷으로 data/raw/ 폴더에 배치.
 
-사전 조건:
-  pip install roboflow python-dotenv
+클래스 (5개):
+  0: happy  1: anxious  2: playing  3: resting  4: alert
 
 사용법:
   python download_dataset.py
@@ -11,46 +11,45 @@ YOLO 포맷으로 data/ 폴더에 배치.
 import os
 import shutil
 from pathlib import Path
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 from roboflow import Roboflow
+import yaml
 
-load_dotenv(Path(__file__).parents[3] / ".env")
+load_dotenv(find_dotenv(usecwd=True))
 
-API_KEY = os.environ["ROBOFLOW_API_KEY"]
+API_KEY = os.getenv("ROBOFLOW_API_KEY", "")
 DATA_DIR = Path(__file__).parent / "data"
 
-# Roboflow에서 검색한 공개 반려견 행동 데이터셋 목록
-# https://universe.roboflow.com 에서 "dog behavior" 검색 후 원하는 것으로 교체 가능
 DATASETS = [
     {
-        "workspace": "dog-behavior-detection",
-        "project":   "dog-behavior-yolov8",
-        "version":   1,
-    },
-    {
-        "workspace": "animal-detection-lfcae",
-        "project":   "dog-pose-detection",
-        "version":   1,
+        "workspace": "dog-pose-annotation",
+        "project":   "dog-pose-feaal",
+        "version":   12,
     },
 ]
 
-# 프로젝트 라벨 → 우리 라벨 매핑 (다운받은 데이터셋 라벨명에 맞게 수정)
+OUR_LABELS = ["happy", "anxious", "playing", "resting", "alert"]
+
 LABEL_MAP = {
-    "tail_wagging": "happy",
-    "playing":      "playing",
-    "resting":      "resting",
-    "crouching":    "anxious",
-    "alert":        "alert",
-    "sick":         "sick_suspect",
-    "hungry":       "hungry",
+    # dog-pose-feaal (프랑스어)
+    "chien assis":   "resting",
+    "chien debout":  "alert",
+    "chien a pieds": "playing",
+    # 영어 대비
+    "sit":           "resting",
+    "stand":         "alert",
+    "lay":           "resting",
+    "playing":       "playing",
+    "run":           "playing",
+    "happy":         "happy",
+    "anxious":       "anxious",
+    "fearful":       "anxious",
+    "sad":           "anxious",
 }
 
-OUR_LABELS = ["happy", "anxious", "playing", "resting", "alert", "sick_suspect", "hungry"]
 
-
-def remap_label_file(txt_path: Path, src_labels: list[str]):
-    """다운받은 데이터셋의 클래스 인덱스를 우리 인덱스로 변환."""
-    lines = txt_path.read_text().strip().splitlines()
+def remap_label_file(txt_path: Path, src_labels: list):
+    lines = txt_path.read_text(encoding="utf-8").strip().splitlines()
     new_lines = []
     for line in lines:
         parts = line.split()
@@ -59,65 +58,78 @@ def remap_label_file(txt_path: Path, src_labels: list[str]):
         src_idx = int(parts[0])
         if src_idx >= len(src_labels):
             continue
-        src_name = src_labels[src_idx]
+        src_name = src_labels[src_idx].lower()
         mapped = LABEL_MAP.get(src_name)
-        if mapped is None or mapped not in OUR_LABELS:
-            continue  # 매핑 없는 라벨 제외
+        if not mapped or mapped not in OUR_LABELS:
+            continue
         our_idx = OUR_LABELS.index(mapped)
         new_lines.append(f"{our_idx} " + " ".join(parts[1:]))
-    txt_path.write_text("\n".join(new_lines))
+    txt_path.write_text("\n".join(new_lines), encoding="utf-8")
 
 
 def download():
+    if not API_KEY:
+        print("[오류] .env에 ROBOFLOW_API_KEY가 없습니다.")
+        return
+
+    print(f"API 키 확인: {API_KEY[:6]}...")
     rf = Roboflow(api_key=API_KEY)
 
+    dst_img = DATA_DIR / "raw" / "images"
+    dst_lbl = DATA_DIR / "raw" / "labels"
+    dst_img.mkdir(parents=True, exist_ok=True)
+    dst_lbl.mkdir(parents=True, exist_ok=True)
+
+    success = 0
     for ds in DATASETS:
         print(f"\n다운로드: {ds['workspace']}/{ds['project']} v{ds['version']}")
-        project = rf.workspace(ds["workspace"]).project(ds["project"])
-        version = project.version(ds["version"])
-        dataset = version.download("yolov8", location=str(DATA_DIR / "raw_rf"))
+        try:
+            project = rf.workspace(ds["workspace"]).project(ds["project"])
+            version = project.version(ds["version"])
+            tmp_dir = DATA_DIR / "_tmp_rf"
+            dataset = version.download("yolov8", location=str(tmp_dir))
 
-        # 다운로드된 data.yaml에서 원본 클래스명 읽기
-        import yaml
-        yaml_path = Path(dataset.location) / "data.yaml"
-        with open(yaml_path) as f:
-            cfg = yaml.safe_load(f)
-        src_labels = cfg.get("names", [])
-        print(f"  원본 클래스: {src_labels}")
+            with open(Path(dataset.location) / "data.yaml", encoding="utf-8") as f:
+                cfg = yaml.safe_load(f)
+            src_labels = cfg.get("names", [])
+            print(f"  원본 클래스: {src_labels}")
 
-        # 이미지·라벨을 raw/ 폴더로 복사 후 라벨 리매핑
-        for split in ["train", "valid", "test"]:
-            src_img = Path(dataset.location) / split / "images"
-            src_lbl = Path(dataset.location) / split / "labels"
-            dst_name = "val" if split == "valid" else split
+            for split in ["train", "valid", "test"]:
+                src_img = Path(dataset.location) / split / "images"
+                src_lbl = Path(dataset.location) / split / "labels"
+                if src_img.exists():
+                    for f in src_img.iterdir():
+                        shutil.copy(f, dst_img / f.name)
+                if src_lbl.exists():
+                    for f in src_lbl.glob("*.txt"):
+                        dst = dst_lbl / f.name
+                        shutil.copy(f, dst)
+                        remap_label_file(dst, src_labels)
 
-            dst_img = DATA_DIR / "raw" / "images"
-            dst_lbl = DATA_DIR / "raw" / "labels"
-            dst_img.mkdir(parents=True, exist_ok=True)
-            dst_lbl.mkdir(parents=True, exist_ok=True)
+            shutil.rmtree(tmp_dir, ignore_errors=True)
+            success += 1
+            print(f"  완료!")
 
-            if src_img.exists():
-                for f in src_img.iterdir():
-                    shutil.copy(f, dst_img / f.name)
-            if src_lbl.exists():
-                for f in src_lbl.glob("*.txt"):
-                    dst = dst_lbl / f.name
-                    shutil.copy(f, dst)
-                    remap_label_file(dst, src_labels)
+        except Exception as e:
+            print(f"  [오류] {e}")
 
-        shutil.rmtree(Path(dataset.location), ignore_errors=True)
+    print_summary(dst_lbl)
 
-    # 클래스별 샘플 수 출력
-    lbl_dir = DATA_DIR / "raw" / "labels"
+
+def print_summary(lbl_dir: Path):
     counts = {l: 0 for l in OUR_LABELS}
     for txt in lbl_dir.glob("*.txt"):
-        for line in txt.read_text().splitlines():
+        for line in txt.read_text(encoding="utf-8").splitlines():
             if line.strip():
                 idx = int(line.split()[0])
-                counts[OUR_LABELS[idx]] += 1
-    print("\n클래스별 바운딩박스 수:")
+                if idx < len(OUR_LABELS):
+                    counts[OUR_LABELS[idx]] += 1
+
+    print("\n=== 현재 클래스별 바운딩박스 수 ===")
     for name, cnt in counts.items():
-        print(f"  {name:15s}: {cnt}")
+        bar = "█" * (cnt // 20)
+        status = "✅" if cnt >= 200 else "❌"
+        print(f"  {status} {name:10s} {cnt:5d}  {bar}")
 
 
 if __name__ == "__main__":
