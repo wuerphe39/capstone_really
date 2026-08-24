@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+
+# Model weights (대용량 — Git LFS 또는 별도 보관)
+petmind/ai/*/weights/*.pt
+petmind/ai/*/weights/*.pkl
+petmind/ai/*/weights/behavior_v*/
+
+# Dataset (대용량)
+petmind/ai/*/data/images/
+petmind/ai/*/data/labels/
+petmind/ai/bark/data/**/*.wav
+
+# Logs
+*.log
+runs/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
