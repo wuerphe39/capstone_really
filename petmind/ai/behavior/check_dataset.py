@@ -3,7 +3,7 @@ from pathlib import Path
 from collections import Counter
 
 DATA_DIR = Path(__file__).parent / "data"
-LABELS = ["happy", "anxious", "playing", "resting", "alert", "sick_suspect", "hungry"]
+LABELS = ["happy", "anxious", "playing", "resting", "alert"]
 
 
 def check(split: str):

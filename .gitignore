@@ -17,6 +17,11 @@ petmind/ai/*/weights/behavior_v*/
 # Dataset (대용량)
 petmind/ai/*/data/images/
 petmind/ai/*/data/labels/
+petmind/ai/*/data/raw/
+petmind/ai/*/data/train/
+petmind/ai/*/data/val/
+petmind/ai/*/data/test/
+petmind/ai/*/data/_tmp*/
 petmind/ai/bark/data/**/*.wav
 
 # Logs

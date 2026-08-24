@@ -53,7 +53,10 @@ def load_labels(lbl_path: Path) -> np.ndarray:
     if not lbl_path.exists():
         return np.zeros((0, 5))
     lines = lbl_path.read_text().strip().splitlines()
-    return np.array([list(map(float, l.split())) for l in lines if l])
+    rows = [list(map(float, l.split())) for l in lines if l.strip()]
+    if not rows:
+        return np.zeros((0, 5))
+    return np.atleast_2d(np.array(rows))
 
 
 def save_labels(lbl_path: Path, boxes: np.ndarray):
@@ -64,13 +67,32 @@ def save_labels(lbl_path: Path, boxes: np.ndarray):
     lbl_path.write_text("\n".join(lines))
 
 
+def imread_unicode(path: Path) -> np.ndarray:
+    """한글 경로를 포함한 이미지를 읽기 위해 np.fromfile + imdecode 사용."""
+    buf = np.fromfile(str(path), dtype=np.uint8)
+    return cv2.imdecode(buf, cv2.IMREAD_COLOR)
+
+
+def imwrite_unicode(path: Path, img: np.ndarray):
+    """한글 경로에 이미지 저장."""
+    ext = path.suffix  # .jpg or .png
+    ok, buf = cv2.imencode(ext, img)
+    if ok:
+        buf.tofile(str(path))
+
+
 def augment():
     images = sorted(IMG_DIR.glob("*.jpg")) + sorted(IMG_DIR.glob("*.png"))
     print(f"원본 이미지 수: {len(images)}")
 
     generated = 0
+    skipped = 0
     for img_path in images:
-        img = cv2.imread(str(img_path))
+        img = imread_unicode(img_path)
+        if img is None:
+            skipped += 1
+            continue
+
         lbl_path = LBL_DIR / (img_path.stem + ".txt")
         boxes = load_labels(lbl_path).copy()
 
@@ -79,13 +101,15 @@ def augment():
             aug_img, aug_boxes = aug_fn(img.copy(), boxes.copy())
 
             stem = f"{img_path.stem}_aug{i}"
-            cv2.imwrite(str(IMG_DIR / f"{stem}.jpg"), aug_img)
+            imwrite_unicode(IMG_DIR / f"{stem}.jpg", aug_img)
             if aug_boxes.shape[0] > 0:
                 save_labels(LBL_DIR / f"{stem}.txt", aug_boxes)
             generated += 1
 
     print(f"증강 완료 — 생성된 이미지 수: {generated}")
-    print(f"전체 학습 이미지 수: {len(images) + generated}")
+    if skipped:
+        print(f"건너뜀 (읽기 실패): {skipped}장")
+    print(f"전체 학습 이미지 수: {len(images) - skipped + generated}")
 
 
 if __name__ == "__main__":
