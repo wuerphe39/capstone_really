@@ -24,6 +24,9 @@ petmind/ai/*/data/test/
 petmind/ai/*/data/_tmp*/
 petmind/ai/bark/data/**/*.wav
 
+# Database
+petmind/backend/*.db
+
 # Logs
 *.log
 runs/
