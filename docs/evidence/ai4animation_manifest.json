@@ -1,0 +1,541 @@
+{
+  "dataset": "AI4Animation SIGGRAPH 2018 dog motion capture",
+  "url": "https://starke-consult.de/AI4Animation/SIGGRAPH_2018/MotionCapture.zip",
+  "source": "https://github.com/sebastianstarke/AI4Animation",
+  "source_commit": "98aff6c87d73e4af0cbf50df2586f58532475662",
+  "archive_sha256": "0ecd909b673cfca5e20c3f568376dcf27d7da3bd153957c2b034d95af366132a",
+  "archive_bytes": 33422409,
+  "windows_sha256": "0ce649e2b3bf84a5c82bb835c44f10d4d8416b9d40d9f907d5137f0707334c60",
+  "license": "CC BY-NC 4.0; research/education; no commercial use",
+  "attribution": "Sebastian Starke et al., Mode-Adaptive Neural Networks for Quadruped Motion Control, SIGGRAPH 2018; motion capture provided by Bandai-Namco Studios",
+  "role": "unlabeled self-supervised pretraining only",
+  "behavior_labels": null,
+  "fps": 5,
+  "frames_per_window": 50,
+  "split_seed": 2026,
+  "split_unit": "recording_family",
+  "files": [
+    {
+      "name": "D1_001_KAN01_001.bvh",
+      "sha256": "d910f61cacaa89dcd718d0676c5340033d5397b36613b070ea971b40b74e08dd",
+      "motion_sha256": "a689df6e042a4c5e9bd67b9087b38ab492c221068eae72d8d03b4f6271b3e7fd",
+      "group": "D1_001",
+      "native_fps": 59.999880000240005,
+      "native_frames": 1531,
+      "duration_s": 25.500051,
+      "split": "train"
+    },
+    {
+      "name": "D1_003_KAN01_001.bvh",
+      "sha256": "94f95de2d85722a267045b2eaad4ce208e8eddedc57d4fa26a41e9a5325cb3d4",
+      "motion_sha256": "877feae142d89aca2e977926eb28206c9ba55668e8e6207081ae605c920f1e35",
+      "group": "D1_003",
+      "native_fps": 59.999880000240005,
+      "native_frames": 952,
+      "duration_s": 15.850031699999999,
+      "split": "train"
+    },
+    {
+      "name": "D1_004_KAN01_001.bvh",
+      "sha256": "e480efaf46776d5da511d17432d292ad8debdb03d246128ec6445feda9d7f364",
+      "motion_sha256": "2ab85f98c158095848973a1174e0f776aece5255555f1bcf8b77ad48279f59f5",
+      "group": "D1_004",
+      "native_fps": 59.999880000240005,
+      "native_frames": 954,
+      "duration_s": 15.883365099999999,
+      "split": "train"
+    },
+    {
+      "name": "D1_005_KAN01_001.bvh",
+      "sha256": "d9b79fd1020aabbf6ef74585a4887bfdbc2b6b1179ba8e6a100c629ed5228cbd",
+      "motion_sha256": "a553a66fa56faaa9d49d044dcac06fad55886e15b8396a1d89fc020f744ad95b",
+      "group": "D1_005",
+      "native_fps": 59.999880000240005,
+      "native_frames": 994,
+      "duration_s": 16.5500331,
+      "split": "train"
+    },
+    {
+      "name": "D1_006_KAN01_001.bvh",
+      "sha256": "0e2750825829eb36ad1675ffa55767932abdb487e9aacb6982e8024b75558ff5",
+      "motion_sha256": "a04b32d146a68872c54b8099f947da366a1ab391a70d66330dd56e4b9eca0dc2",
+      "group": "D1_006",
+      "native_fps": 59.999880000240005,
+      "native_frames": 979,
+      "duration_s": 16.300032599999998,
+      "split": "test"
+    },
+    {
+      "name": "D1_006_KAN01_002.bvh",
+      "sha256": "7652a82d3c367d7246bbf695eff34a9cc66086084414941328bfda81e03d2c19",
+      "motion_sha256": "5fd1c6186906b77ac73268a6d86d34d8ae293de4d957304f1c5410a7cbed0a04",
+      "group": "D1_006",
+      "native_fps": 59.999880000240005,
+      "native_frames": 1362,
+      "duration_s": 22.6833787,
+      "split": "test"
+    },
+    {
+      "name": "D1_007_KAN01_001.bvh",
+      "sha256": "99fad4469d3e8f35b630d3ae6385f53bfc8d6f9f89d0b39fe69a16decaad21de",
+      "motion_sha256": "19cd5fccd28ae25226404aaceda266a099e835e51e52726363a01cf9de087419",
+      "group": "D1_007",
+      "native_fps": 59.999880000240005,
+      "native_frames": 593,
+      "duration_s": 9.866686399999999,
+      "split": "test"
+    },
+    {
+      "name": "D1_008_KAN01_001.bvh",
+      "sha256": "849ddec2e6a08c8ff2c925b0cb02dd51115f1415febcfb53ccd7f75406d67956",
+      "motion_sha256": "ef104cf15900f5afa21d24f800a19291d87b658f68e84320d4dd93694b52371c",
+      "group": "D1_008",
+      "native_fps": 59.999880000240005,
+      "native_frames": 1072,
+      "duration_s": 17.8500357,
+      "split": "train"
+    },
+    {
+      "name": "D1_008_KAN01_002.bvh",
+      "sha256": "5dc355ceff03c756c3b110e5cba15209b31c47da1d32153c85ad1219affab8cb",
+      "motion_sha256": "0a174bd0ac65a74bf8f9fd6281e424b2862f779f1a3d5017fc90324f42cd935e",
+      "group": "D1_008",
+      "native_fps": 59.999880000240005,
+      "native_frames": 911,
+      "duration_s": 15.166697,
+      "split": "train"
+    },
+    {
+      "name": "D1_009_KAN01_001.bvh",
+      "sha256": "c40aaab06d728ae60df937e388736786d5d0d1ca1240b38ccb96c72c950ec64f",
+      "motion_sha256": "2b87df087df5e6c833e86df5231efffd81970050d39c1c36872b26b345e4d4f5",
+      "group": "D1_009",
+      "native_fps": 59.999880000240005,
+      "native_frames": 548,
+      "duration_s": 9.1166849,
+      "split": "test"
+    },
+    {
+      "name": "D1_009_KAN01_002.bvh",
+      "sha256": "0af831ef91ab85bf2b929641ac8184e51bcbb323e691096316db836073202df3",
+      "motion_sha256": "92062e5ae6806dca221850d0bc09ff5ddb0a9fbad09d0a48b7d50c24f8569a84",
+      "group": "D1_009",
+      "native_fps": 59.999880000240005,
+      "native_frames": 548,
+      "duration_s": 9.1166849,
+      "split": "test"
+    },
+    {
+      "name": "D1_010_KAN01_001.bvh",
+      "sha256": "61239cf09fa93f32060821c74688658a8c7b7c057e030eb8c05816964ba1e07f",
+      "motion_sha256": "073c01b09a6cfa79d358482bd105724784e79034748548ce4d0dd4a918cf832b",
+      "group": "D1_010",
+      "native_fps": 59.999880000240005,
+      "native_frames": 567,
+      "duration_s": 9.4333522,
+      "split": "validation"
+    },
+    {
+      "name": "D1_010_KAN01_002.bvh",
+      "sha256": "b7f7c3016f7751772ff8506cd877a1d042beac7edf4fa70c92051a90a1413a62",
+      "motion_sha256": "d51032860cab695eb71845192d9408687ef08f23c8f31d8dc4371abd5f897e4d",
+      "group": "D1_010",
+      "native_fps": 59.999880000240005,
+      "native_frames": 155,
+      "duration_s": 2.5666718,
+      "split": "validation"
+    },
+    {
+      "name": "D1_010_KAN01_003.bvh",
+      "sha256": "d97492f567f065ac66a220d2650b8ada15ded7c4df68ecf4a5642f46dae966d6",
+      "motion_sha256": "aede94e0c2f69f9fd2c75a20bd4ac0c3499f8d1220b8362ed99cbc361305b245",
+      "group": "D1_010",
+      "native_fps": 59.999880000240005,
+      "native_frames": 203,
+      "duration_s": 3.3666734,
+      "split": "validation"
+    },
+    {
+      "name": "D1_010_KAN01_004.bvh",
+      "sha256": "6998fd8d17f3a11124320257bf026c13f4a845ce11e4015bef0fc99b443ef339",
+      "motion_sha256": "fbdaccaf8af67b2ff1ae25103dd95b4112167736119a03267e1586a3b1a539ec",
+      "group": "D1_010",
+      "native_fps": 59.999880000240005,
+      "native_frames": 360,
+      "duration_s": 5.9833453,
+      "split": "validation"
+    },
+    {
+      "name": "D1_013_KAN01_001.bvh",
+      "sha256": "d8d3326e79e0d48beea9972d9fce75f95f912109ac5f287674ffd4d09847f825",
+      "motion_sha256": "95a75b8b7e8cc4348d03675590138c8803369ca05e869bed68efb812246b51ab",
+      "group": "D1_013",
+      "native_fps": 59.999880000240005,
+      "native_frames": 2839,
+      "duration_s": 47.3000946,
+      "split": "train"
+    },
+    {
+      "name": "D1_025_KAN01_001.bvh",
+      "sha256": "da004c683146a3dd34665cab96cf01b7798b77ecc9d588a5153e179b86369165",
+      "motion_sha256": "b453e2db6d01029635c6d497c2686460b7e5d7f065588ea32ec4cda6b57db3c0",
+      "group": "D1_025",
+      "native_fps": 59.999880000240005,
+      "native_frames": 1077,
+      "duration_s": 17.933369199999998,
+      "split": "test"
+    },
+    {
+      "name": "D1_031_KAN01_001.bvh",
+      "sha256": "7a19e5ad8d1de88343be69bb07880a152d84c0959431de56240711edf1475497",
+      "motion_sha256": "9860dc578b464d31ccc783382a30c64cff6091f1e34edb5b55419915363d369b",
+      "group": "D1_031",
+      "native_fps": 59.999880000240005,
+      "native_frames": 1263,
+      "duration_s": 21.0333754,
+      "split": "train"
+    },
+    {
+      "name": "D1_045_KAN01_001.bvh",
+      "sha256": "7a36e076c91c6b43d8bcc8bb706de4377b8dbc27df7c2dda6d3e122cbaa582dc",
+      "motion_sha256": "2776c4d702c0a13df30f0043ec0fdcbd385aaaa79cb122915815e6e82d914c86",
+      "group": "D1_045",
+      "native_fps": 59.999880000240005,
+      "native_frames": 1348,
+      "duration_s": 22.450044899999998,
+      "split": "train"
+    },
+    {
+      "name": "D1_047_KAN01_001.bvh",
+      "sha256": "59f86278ba73e13c809472a16dc059dacef02ce71f82790038bf70aef7314878",
+      "motion_sha256": "a51b4ea47f40647e7e3e881cf9c03cf2fbc0fb95bdd37a0e924e5aadce8452b7",
+      "group": "D1_047",
+      "native_fps": 59.999880000240005,
+      "native_frames": 1079,
+      "duration_s": 17.966702599999998,
+      "split": "train"
+    },
+    {
+      "name": "D1_047z_KAN01_002.bvh",
+      "sha256": "5a06ee3a421edab863e2463dab608a3903861e0c660ae14fc8d8570e670b56dc",
+      "motion_sha256": "25010059da15b96debed00a8e7b8cb811f08dc91ef5fb609ff83af7f88cc9f3b",
+      "group": "D1_047",
+      "native_fps": 59.999880000240005,
+      "native_frames": 818,
+      "duration_s": 13.6166939,
+      "split": "train"
+    },
+    {
+      "name": "D1_047z_KAN01_003.bvh",
+      "sha256": "94578d16e907c6a3d7e176f0e72d01c415dcea135ec482fec376bb0ff5a86fd9",
+      "motion_sha256": "4e7e5144f1ab73bd5d0773a02035bfe3b6671e834b602b354e5c0e29971af62c",
+      "group": "D1_047",
+      "native_fps": 59.999880000240005,
+      "native_frames": 4686,
+      "duration_s": 78.0834895,
+      "split": "train"
+    },
+    {
+      "name": "D1_047z_KAN01_004.bvh",
+      "sha256": "ecf944c8b91c9d37309b4e0a2ab0cb6b7b5665e17d0aca7d008fea8691d57d71",
+      "motion_sha256": "4fb432068085431032fadca89b1f2d0a3d5026ab9dcf7a774824ba01419d6168",
+      "group": "D1_047",
+      "native_fps": 59.999880000240005,
+      "native_frames": 1054,
+      "duration_s": 17.5500351,
+      "split": "train"
+    },
+    {
+      "name": "D1_047z_KAN01_005.bvh",
+      "sha256": "e5ac695da563deb44ae47f22a589c1b0927b2799a1f1af0453522717fab54830",
+      "motion_sha256": "eedcdf6800f4b7f8660197a3077279a16400ad2e5ddd97bb6c86f8a42b00b198",
+      "group": "D1_047",
+      "native_fps": 59.999880000240005,
+      "native_frames": 2751,
+      "duration_s": 45.833425,
+      "split": "train"
+    },
+    {
+      "name": "D1_049_KAN01_001.bvh",
+      "sha256": "85c8e4ea89440a95d2cfaf6c9c6ae984fc2c54f0399be7d0a65ed5d7b05cf992",
+      "motion_sha256": "2f9641d057b21e3b2b0e1e32cdb287dfc2815f55d319abf8046a981d2726d04e",
+      "group": "D1_049",
+      "native_fps": 59.999880000240005,
+      "native_frames": 887,
+      "duration_s": 14.7666962,
+      "split": "train"
+    },
+    {
+      "name": "D1_053_KAN01_001.bvh",
+      "sha256": "ae4d750aad8cb20dec1b18e5738ad8a2e8418b5f724a1c6033a621eb7f109736",
+      "motion_sha256": "5dda8c434c66ca7cf389c6215040d031614523d61a1dfd215e4f2aa15a38e5d6",
+      "group": "D1_053",
+      "native_fps": 59.999880000240005,
+      "native_frames": 4336,
+      "duration_s": 72.2501445,
+      "split": "train"
+    },
+    {
+      "name": "D1_053_KAN01_002.bvh",
+      "sha256": "86bc2f2912159cb7b1e67a9e2155fe9b36554234952b8f270db0ccc5a79db963",
+      "motion_sha256": "e76751fa0653b907313415595cfa9674a7d3ec22f58e70d88669775744889065",
+      "group": "D1_053",
+      "native_fps": 59.999880000240005,
+      "native_frames": 3844,
+      "duration_s": 64.0501281,
+      "split": "train"
+    },
+    {
+      "name": "D1_055_KAN01_001.bvh",
+      "sha256": "3d0ae39974ca9a22d22b62b63d58599a2807fd191b43a02f16f64b45f8f441f7",
+      "motion_sha256": "cb8385ba2d24fcedbafc61d603c1b48d88f7deb77dbaa7a30b9afbe446046910",
+      "group": "D1_055",
+      "native_fps": 59.999880000240005,
+      "native_frames": 13399,
+      "duration_s": 223.3004466,
+      "split": "train"
+    },
+    {
+      "name": "D1_057_KAN01_001.bvh",
+      "sha256": "60d5ccc9bf4d73917f58d2c855a979c4fbf0eef3d1a892b82e37cfd16010ac99",
+      "motion_sha256": "373833e8d04155f06009b7b064d99bb9e06a5f7ae579ef81518ffbb753e68744",
+      "group": "D1_057",
+      "native_fps": 59.999880000240005,
+      "native_frames": 1907,
+      "duration_s": 31.766730199999998,
+      "split": "train"
+    },
+    {
+      "name": "D1_058_KAN01_001.bvh",
+      "sha256": "af475e8b0c1a2d7b41fd5a4beb2371f6c8a483e5866a8f08351a2fc8056a96ad",
+      "motion_sha256": "a846c9e6f464b719fd8a1630d941217509e9be2d9f494030ac765bf2163036c2",
+      "group": "D1_058",
+      "native_fps": 59.999880000240005,
+      "native_frames": 2180,
+      "duration_s": 36.3167393,
+      "split": "train"
+    },
+    {
+      "name": "D1_059_KAN01_001.bvh",
+      "sha256": "62ebc627d00135b50eaa9f37a482eeddf25e08547e8565fd468049ba01bf9f0b",
+      "motion_sha256": "dbc11255c4dbc008aeafdb5c96a41838086ab7be3b0682f3a07780c6d7949b38",
+      "group": "D1_059",
+      "native_fps": 59.999880000240005,
+      "native_frames": 3025,
+      "duration_s": 50.4001008,
+      "split": "validation"
+    },
+    {
+      "name": "D1_061_KAN01_001.bvh",
+      "sha256": "e4d870f580e07ee530c8529c743acbb196992eed6b92f5a7aef9625d1a3fc9fa",
+      "motion_sha256": "026e7e461c047f42d64e20d104170306926f2229d2fa362120495b8b4f9d58f6",
+      "group": "D1_061",
+      "native_fps": 59.999880000240005,
+      "native_frames": 11691,
+      "duration_s": 194.833723,
+      "split": "train"
+    },
+    {
+      "name": "D1_061z_KAN01_002.bvh",
+      "sha256": "43533d5d916ce3815cab5003c6910d9b71c5f0b9f423d4958eb73be4a1ac91fe",
+      "motion_sha256": "b0809bb89a75e14cbe8f27e3eb868af26cc874cec908bc6956e3bcf8d952e773",
+      "group": "D1_061",
+      "native_fps": 59.999880000240005,
+      "native_frames": 3086,
+      "duration_s": 51.4167695,
+      "split": "train"
+    },
+    {
+      "name": "D1_061z_KAN01_003.bvh",
+      "sha256": "7b017ee9fdfc8f66c05fd6581942c5a95af3ec4e3e5727ef360ec99800d884c8",
+      "motion_sha256": "d19ab407838c14a05a9d8849df1ccbcb678eee203a7cafbcbece5c98330fa6b5",
+      "group": "D1_061",
+      "native_fps": 59.999880000240005,
+      "native_frames": 8746,
+      "duration_s": 145.7502915,
+      "split": "train"
+    },
+    {
+      "name": "D1_071_KAN02_002.bvh",
+      "sha256": "e109b9e494b6498c943a4d6739b9bd8d534bbfeb3a4ed13812ce736704dfdeee",
+      "motion_sha256": "e1920150ed21f56e7efcd70e5bbaba2a530fb0b157a15314722888856511567e",
+      "group": "D1_071",
+      "native_fps": 59.999880000240005,
+      "native_frames": 2856,
+      "duration_s": 47.5834285,
+      "split": "train"
+    },
+    {
+      "name": "D1_073_KAN02_002.bvh",
+      "sha256": "65fc54d991c02fc566440259b860e283a637d3c7cfe7b44950d30720705d1d77",
+      "motion_sha256": "5d8eee069d2891c2a1f1b15916015bdf15d46212c285fc649e84513d58f26a4c",
+      "group": "D1_073",
+      "native_fps": 59.999880000240005,
+      "native_frames": 3238,
+      "duration_s": 53.9501079,
+      "split": "validation"
+    },
+    {
+      "name": "D1_086_KAN02_001.bvh",
+      "sha256": "e80fc624844e77fbb01ca4d947850e0f169e57b93da4ae604d72a27846bfb4e1",
+      "motion_sha256": "86087a073f6831b3a15f7423a40b736878d970ccdc657db3ceab5b0be1f39832",
+      "group": "D1_086",
+      "native_fps": 59.999880000240005,
+      "native_frames": 5098,
+      "duration_s": 84.95016989999999,
+      "split": "train"
+    },
+    {
+      "name": "D1_ex01_KAN01_001.bvh",
+      "sha256": "a274bf7adc10a18a054b51cdae6362e566f4dfc64ac7f70380f6d1a90b3005a0",
+      "motion_sha256": "1c721ad252a91ffac569c909b3d40e367502ec60d2af4c97f4bd643892bbf4a7",
+      "group": "D1_ex01",
+      "native_fps": 59.999880000240005,
+      "native_frames": 856,
+      "duration_s": 14.250028499999999,
+      "split": "train"
+    },
+    {
+      "name": "D1_ex02_KAN02_001.bvh",
+      "sha256": "e17880a7e819326bd5b667b18e423db890c9f52776e9b1e42c8cf045189ee4c4",
+      "motion_sha256": "5d97fe45e3b8c352cc822136dd2bd6403f91b0788f81ec6f44c25ca761de6dd8",
+      "group": "D1_ex02",
+      "native_fps": 59.999880000240005,
+      "native_frames": 4871,
+      "duration_s": 81.16682899999999,
+      "split": "train"
+    },
+    {
+      "name": "D1_ex03_KAN02_001.bvh",
+      "sha256": "fa24d375b1ca6ed66a3dd9b3ced27b44cb7e658be73090cadf58c66eb7af62c7",
+      "motion_sha256": "747aa93f6a935936e978e04b16228c5e159897168e1f5a5836ae5e915562bb99",
+      "group": "D1_ex03",
+      "native_fps": 59.999880000240005,
+      "native_frames": 5052,
+      "duration_s": 84.1835017,
+      "split": "train"
+    },
+    {
+      "name": "D1_ex03_KAN02_003.bvh",
+      "sha256": "6228cdb1e05b1875a5601f330dee5a66c57913413c2b9d2b1c8ca817cb714d87",
+      "motion_sha256": "f5958fd46c9f6b1fae9c033ea94fc3acce3e38ccd133c58bbe11d4ffe3d989bd",
+      "group": "D1_ex03",
+      "native_fps": 59.999880000240005,
+      "native_frames": 8203,
+      "duration_s": 136.7002734,
+      "split": "train"
+    },
+    {
+      "name": "D1_ex03_KAN02_006.bvh",
+      "sha256": "bec9fae85335720a44d11ab82768fbee8fe8f49507053fe18832e65ac24975e3",
+      "motion_sha256": "8d580fe35033ad2cd7892583a0e4ca93af112bdc9e88077687bb9856bb5ea6d8",
+      "group": "D1_ex03",
+      "native_fps": 59.999880000240005,
+      "native_frames": 6797,
+      "duration_s": 113.2668932,
+      "split": "train"
+    },
+    {
+      "name": "D1_ex03_KAN02_012.bvh",
+      "sha256": "96307d48ee3ae55253fca57bb4724db89c202a570de80ee801d792a4f60f6c63",
+      "motion_sha256": "1b2205658954d012c779258ea155a93c191a5094e6a15c53e7d5ac26f4e865be",
+      "group": "D1_ex03",
+      "native_fps": 59.999880000240005,
+      "native_frames": 3594,
+      "duration_s": 59.8834531,
+      "split": "train"
+    },
+    {
+      "name": "D1_ex03_KAN02_013.bvh",
+      "sha256": "782bab15a6eb8895e7befe18310ba4d90ab6691568f6c2768ec69b43fcb80706",
+      "motion_sha256": "720bab73207843d298b7794240cf46ade5d79bea595f814d1ea69c541b91a687",
+      "group": "D1_ex03",
+      "native_fps": 59.999880000240005,
+      "native_frames": 4577,
+      "duration_s": 76.2668192,
+      "split": "train"
+    },
+    {
+      "name": "D1_ex03_KAN02_014.bvh",
+      "sha256": "9c8d72cc097c7a1207c0c8d38fec9e967334a22ac45cfb22d3a47f9612f5fa5b",
+      "motion_sha256": "677222674c4350d3061059dbb0bfa2442de01e5ebb0db395d4dba86401eff43d",
+      "group": "D1_ex03",
+      "native_fps": 59.999880000240005,
+      "native_frames": 3488,
+      "duration_s": 58.1167829,
+      "split": "train"
+    },
+    {
+      "name": "D1_ex04_KAN02_001.bvh",
+      "sha256": "563dff491f0e2c0d5b94ef7960262346fa9b7c9d6cd90d51b0feeb5812ff65be",
+      "motion_sha256": "38744af3b8149f477d675243e6333528ca1e05b52bf2e0cf438eed94ebe76d94",
+      "group": "D1_ex04",
+      "native_fps": 59.999880000240005,
+      "native_frames": 778,
+      "duration_s": 12.9500259,
+      "split": "validation"
+    },
+    {
+      "name": "D1_ex04_KAN02_002.bvh",
+      "sha256": "f7a59b325e1e283657b9e61846b084522d9941021d9f3d716d0f962bf31de8be",
+      "motion_sha256": "a19bdaf94b5217365693e084bc60518e98db93e3f1ca14f21ffb7d03801cf2e1",
+      "group": "D1_ex04",
+      "native_fps": 59.999880000240005,
+      "native_frames": 505,
+      "duration_s": 8.4000168,
+      "split": "validation"
+    },
+    {
+      "name": "D1_ex04_KAN02_003.bvh",
+      "sha256": "877504e68ba6310e9190c4078b3d4d0f71a5d9238f38aba9e49df0f5c19cb848",
+      "motion_sha256": "249796ed1c493bd90bc6875614dbbefc4ae00639a361541eaa467fd2c62df435",
+      "group": "D1_ex04",
+      "native_fps": 59.999880000240005,
+      "native_frames": 498,
+      "duration_s": 8.2833499,
+      "split": "validation"
+    },
+    {
+      "name": "D1_ex04_KAN02_004.bvh",
+      "sha256": "dd81ec77a08c3bc73e076faf7e26439813a72464e3cec0c79fa7e0968e644477",
+      "motion_sha256": "45b5b13b2bdae09dd1c0616fc5ed4961fb6c9c8dfd8b126c4756c89a99c6694d",
+      "group": "D1_ex04",
+      "native_fps": 59.999880000240005,
+      "native_frames": 748,
+      "duration_s": 12.450024899999999,
+      "split": "validation"
+    },
+    {
+      "name": "D1_ex05_KAN02_001.bvh",
+      "sha256": "d1f868b94a4f6b99c3475d11bde37aa75c833f31234162102b979eee93e6ce4f",
+      "motion_sha256": "cfc5d346fb6b66acc15f1b2efed748b3caad3334f5511f7efc5ad79fe95950fd",
+      "group": "D1_ex05",
+      "native_fps": 59.999880000240005,
+      "native_frames": 9281,
+      "duration_s": 154.666976,
+      "split": "train"
+    },
+    {
+      "name": "D1_ex06_KAN02_001.bvh",
+      "sha256": "5a7587fe13e5a6dddae33c3911d1914fd78f071b347c1e15050f1ec5bc2d8210",
+      "motion_sha256": "e907e9e0158fcd842ded23ed595bff52a43fadd0638b542728ffdeb8bde9fb46",
+      "group": "D1_ex06",
+      "native_fps": 59.999880000240005,
+      "native_frames": 5356,
+      "duration_s": 89.2501785,
+      "split": "test"
+    }
+  ],
+  "rejected": [],
+  "window_counts": {
+    "train": 195,
+    "validation": 12,
+    "test": 13
+  },
+  "limitations": [
+    "one captured dog: NOT independent-dog evaluation",
+    "world-plane root projection differs from camera box center",
+    "no still/moving/spinning/pacing ground truth",
+    "hash checks detect exact duplicates, not all near duplicates"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "source": "https://web.eecs.umich.edu/~jjcorso/r/a2d/",
+  "main_archive_sha256": "2abb6c6a35791ddb53ea3ee75b72a116d2595982a3bb22504442d4a52810f9c5",
+  "selected_single_action_dog_clips": 189,
+  "official_annotation_files": 585,
+  "eligible_three_second_trajectories": 58,
+  "candidate_detector_eligible_three_second_trajectories": 87,
+  "short_lstm": {
+    "task": "walking/running versus eating, not four-class behavior",
+    "publisher_test_clips": 13,
+    "test_movement_positives": 4,
+    "validation_selected_threshold": 1.0,
+    "test_tp": 0,
+    "test_fn": 4,
+    "adopted": false
+  },
+  "dog_detection": {
+    "publisher_test_frames": 128,
+    "publisher_test_dog_boxes": 136,
+    "confidence_threshold_from_pre_deduplication_validation": {
+      "base": 0.1,
+      "candidate": 0.5
+    },
+    "base_with_duplicate_suppression": {"tp": 84, "fp": 5, "fn": 52, "precision": 0.9438, "recall": 0.6176},
+    "candidate_with_duplicate_suppression": {"tp": 112, "fp": 16, "fn": 24, "precision": 0.875, "recall": 0.8235},
+    "duplicate_suppression_adopted_for_base": true,
+    "external_behavior_improved": false,
+    "adopted": false
+  },
+  "caveat": "Exploratory A2D test reuse after preprocessing and threshold workflow changes; independent confirmation still needed.",
+  "details": [
+    "docs/29_A2D_공개영상_행동실험.md",
+    "docs/30_A2D_공식주석_개탐지_평가.md",
+    "docs/31_중복_개박스_추적개선.md"
+  ]
+}

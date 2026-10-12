@@ -1,0 +1,31 @@
+{
+  "pet_id": "public-verify-6ba727f2",
+  "observation_id": 16,
+  "source": "public_media",
+  "context": {
+    "timestamp": 12.0,
+    "window_s": 5.0,
+    "bark": {
+      "window_s": 5.0,
+      "count": 9,
+      "rate_per_min": 108.0,
+      "peak_db": -2.794396506046909,
+      "mean_db": -26.35029377280755,
+      "total_bark_s": 2.3000000000000003,
+      "level": "frequent"
+    },
+    "motion": {
+      "window_s": 5.0,
+      "dominant": "unknown",
+      "seconds_by_label": {
+        "unknown": 2.8000000000000007,
+        "spinning": 2.1999999999999993
+      }
+    },
+    "motion_model": "lstm_synthetic",
+    "input_note": "공개 음원 1-32318-A-0.wav; 에너지 기반 후보 감지; 실제 짖음 분류 미검증; 별도 공개 영상의 마지막 구간과 음원을 결합한 합성 시연이며 실제 동시 녹화가 아님; 카메라 움직임 미보정; DAVIS 이미지 시퀀스 5fps 재생용 재구성, 원본 녹화 시간 미검증"
+  },
+  "provider": "rule",
+  "mcp": "ok",
+  "action": "completed"
+}

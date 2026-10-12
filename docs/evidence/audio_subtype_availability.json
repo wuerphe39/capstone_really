@@ -1,0 +1,69 @@
+{
+  "source": "FSD50K official ground_truth CSV and previously inspected balanced eval subset",
+  "official_counts": {
+    "dev_train": {
+      "Dog": 681,
+      "Bark": 352,
+      "Growling": 61,
+      "Whimper": 0,
+      "Howl": 0
+    },
+    "dev_val": {
+      "Dog": 71,
+      "Bark": 62,
+      "Growling": 11,
+      "Whimper": 0,
+      "Howl": 0
+    },
+    "eval_eval": {
+      "Dog": 178,
+      "Bark": 122,
+      "Growling": 51,
+      "Whimper": 0,
+      "Howl": 0
+    }
+  },
+  "official_example_ids": {
+    "dev_train": {
+      "Bark": "23750",
+      "Growling": "55365",
+      "Whimper": null,
+      "Howl": null
+    },
+    "dev_val": {
+      "Bark": "408911",
+      "Growling": "341178",
+      "Whimper": null,
+      "Howl": null
+    },
+    "eval_eval": {
+      "Bark": "118577",
+      "Growling": "327438",
+      "Whimper": null,
+      "Howl": null
+    }
+  },
+  "existing_binary_dog_detector_by_weak_subtype": {
+    "Bark": {
+      "records": 42,
+      "detected": 12,
+      "recall": 0.2857142857142857
+    },
+    "Growling": {
+      "records": 12,
+      "detected": 4,
+      "recall": 0.3333333333333333
+    },
+    "Dog": {
+      "records": 60,
+      "detected": 17,
+      "recall": 0.2833333333333333
+    }
+  },
+  "limits": [
+    "Subtype sets overlap and labels are recording-level weak labels",
+    "FSD50K has no explicit Whimper or Howl class in its released vocabulary",
+    "Binary Dog score does not classify Bark/Growling/Whimper/Howl",
+    "No YouTube audio was downloaded; AudioSet publishes IDs/features, not reusable WAVs"
+  ]
+}

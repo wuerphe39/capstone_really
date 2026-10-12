@@ -1,0 +1,38 @@
+{
+  "dataset": "InterPet4D",
+  "revision": "7835a62bbe1ca3a37cb9957186700b1eb6e40c44",
+  "evaluation": "same two held-out source videos rerun after track-ID reacquisition at 5 fps and tracker updates near 15 fps; 5 fps prediction/output",
+  "records": [
+    {
+      "clip": "dog08_p17_take01_ego_001",
+      "duration_s": 24.5506,
+      "source_video_sha256": "445bb382f674ee2a430f8821c77d318feece1bc4788dc9ec7f03a5def83f0bde",
+      "sampled_frames": 123,
+      "dog_detected_frames": 91,
+      "any_track_frames": 86,
+      "before": {"selected_track_frames": 29, "other_id_only_frames": 57},
+      "after_5fps_tracker": {"selected_track_frames": 68, "other_id_only_frames": 18},
+      "after_15fps_tracker": {"selected_track_frames": 81, "other_id_only_frames": 10, "tracked_observations": 248, "longest_segment_s": 3.61},
+      "post_warmup_prediction_coverage": 0.0,
+      "behavior_accuracy": null
+    },
+    {
+      "clip": "dog10_p07_take01_ego_001",
+      "duration_s": 26.4445,
+      "source_video_sha256": "9d1f6204542b1efb6e440f45d0c8d245fc72914c33bfe50e2840141603cd0053",
+      "sampled_frames": 133,
+      "dog_detected_frames": 100,
+      "any_track_frames": 95,
+      "before": {"selected_track_frames": 29, "other_id_only_frames": 66},
+      "after_5fps_tracker": {"selected_track_frames": 62, "other_id_only_frames": 33},
+      "after_15fps_tracker": {"selected_track_frames": 85, "other_id_only_frames": 13, "tracked_observations": 255, "longest_segment_s": 6.94},
+      "post_warmup_prediction_coverage": 0.0,
+      "behavior_accuracy": null
+    }
+  ],
+  "limitations": [
+    "The appearance and spatial association is heuristic; animal identity is not verified.",
+    "The videos lack frame-level behavior labels; coverage is not accuracy.",
+    "Both videos still have zero LSTM prediction coverage because no continuous segment spans the 9.8-second inference window."
+  ]
+}

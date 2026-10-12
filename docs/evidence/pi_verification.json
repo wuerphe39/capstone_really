@@ -1,0 +1,104 @@
+{
+  "pet_id": "pi-test-b26181cc",
+  "pi": {
+    "hostname": "iot",
+    "architecture": "aarch64",
+    "python": "3.13.5",
+    "api_status": 200,
+    "api_health": {
+      "status": "healthy",
+      "components": {
+        "database": "ok",
+        "care_provider": "gemini",
+        "gemini_key_configured": true,
+        "retrieval_mode": "mcp",
+        "action_mode": "simulated"
+      },
+      "version": "0.3.0"
+    }
+  },
+  "transport": "SSH reverse tunnel; Pi loopback 18010 -> PC loopback 8010",
+  "tests": [
+    {
+      "outcome": "completed",
+      "provider": "gemini:gemini-3.5-flash-lite",
+      "received_on_pi": [
+        {
+          "command_id": "4ec78859-cb68-4731-a80b-5d66db55054f",
+          "status": "completed",
+          "replayed_ack": false
+        }
+      ],
+      "stored_on_pc": {
+        "id": 13,
+        "suggestion_id": 23,
+        "action_type": "music",
+        "command_id": "4ec78859-cb68-4731-a80b-5d66db55054f",
+        "status": "completed",
+        "request": {
+          "style": "calm_piano",
+          "mode": "simulated"
+        },
+        "result": {
+          "simulated": true,
+          "detail": "virtual music; no physical playback"
+        },
+        "error": null,
+        "created_at": "2026-10-11T00:32:13.735942Z",
+        "updated_at": "2026-10-11T00:32:14.333505Z"
+      },
+      "duplicate_poll_result": [],
+      "late_ack_status": 409
+    },
+    {
+      "outcome": "failed",
+      "provider": "gemini:gemini-3.5-flash-lite",
+      "received_on_pi": [
+        {
+          "command_id": "f8c80c14-c17d-4b90-9e73-90ab6f26c59e",
+          "status": "failed",
+          "replayed_ack": false
+        }
+      ],
+      "stored_on_pc": {
+        "id": 14,
+        "suggestion_id": 24,
+        "action_type": "music",
+        "command_id": "f8c80c14-c17d-4b90-9e73-90ab6f26c59e",
+        "status": "failed",
+        "request": {
+          "style": "calm_piano",
+          "mode": "simulated"
+        },
+        "result": {
+          "simulated": true,
+          "detail": "virtual music; no physical playback"
+        },
+        "error": "virtual music; no physical playback",
+        "created_at": "2026-10-11T00:32:17.338613Z",
+        "updated_at": "2026-10-11T00:32:17.917074Z"
+      },
+      "duplicate_poll_result": [],
+      "late_ack_status": 409
+    },
+    {
+      "outcome": "timed_out",
+      "stored_on_pc": {
+        "id": 15,
+        "suggestion_id": 25,
+        "action_type": "music",
+        "command_id": "48bfabfd-3cc4-43e1-ad97-afb130bc3599",
+        "status": "timed_out",
+        "request": {
+          "style": "calm_piano",
+          "mode": "simulated"
+        },
+        "result": null,
+        "error": "가상 장치 완료 응답 시간 초과",
+        "created_at": "2026-10-11T00:32:21.045409Z",
+        "updated_at": "2026-10-11T00:32:51.405142Z"
+      },
+      "elapsed_wait_seconds": 30.35899999999674
+    }
+  ]
+}

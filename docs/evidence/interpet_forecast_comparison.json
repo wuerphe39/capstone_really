@@ -1,0 +1,281 @@
+{
+  "task": "one-second root-coordinate forecasting using frozen classification encoders + ridge readout",
+  "behavior_classification_accuracy": null,
+  "dataset_sha256": "104b604a88673c991dc8963f35454f1e8099f8e6b071f59364a22367fdb2fd72",
+  "dataset": "InterPet4D v1.1 cleaned SMAL root motion",
+  "projection_scale": 10,
+  "comparisons": {
+    "v2_vs_v1": {
+      "error_reduction_percent": -11.478176094602999,
+      "bootstrap": {
+        "unit": "recording_family",
+        "families": 2,
+        "equal_family_error_reduction_percent": -11.209828663014964,
+        "percentile_95_ci": [
+          -15.659553572455831,
+          -3.2382035203740056
+        ],
+        "resamples": 10000,
+        "seed": 20261011
+      }
+    },
+    "v3_vs_v2": {
+      "error_reduction_percent": 12.836605421946224,
+      "bootstrap": {
+        "unit": "recording_family",
+        "families": 2,
+        "equal_family_error_reduction_percent": 13.05767913457191,
+        "percentile_95_ci": [
+          9.524373812633534,
+          20.14914384344314
+        ],
+        "resamples": 10000,
+        "seed": 20261011
+      }
+    }
+  },
+  "models": {
+    "v1": {
+      "checkpoint": "artifacts\\lstm\\trajectory_lstm_v1_backup.pt",
+      "checkpoint_sha256": "f4768f4676e316541196218b771d91db2c0ae51751bab15ee1478d2f115d5bcd",
+      "feature_version": 1,
+      "selected_ridge_alpha": 1.0,
+      "validation_mse": 0.0005590751523078163,
+      "test_mse": 0.0007145577018571747,
+      "test_rmse": 0.026731212128468376
+    },
+    "v2": {
+      "checkpoint": "artifacts\\lstm\\trajectory_lstm.pt",
+      "checkpoint_sha256": "518bfeb4b42eb979b6ca175f4b122ec93d287cb55742704019f7abb9066ff881",
+      "feature_version": 2,
+      "selected_ridge_alpha": 10.0,
+      "validation_mse": 0.0006010814601324885,
+      "test_mse": 0.0007965758931738896,
+      "test_rmse": 0.028223676110207357
+    },
+    "v3": {
+      "checkpoint": "artifacts\\lstm_interpet\\trajectory_lstm.pt",
+      "checkpoint_sha256": "42705dce703aa30412d485c42c2f74c3d0432da4db71b62843c175acacbf3b38",
+      "feature_version": 2,
+      "selected_ridge_alpha": 0.01,
+      "validation_mse": 0.0005242462625217422,
+      "test_mse": 0.0006943225888808135,
+      "test_rmse": 0.026350001686542897
+    }
+  },
+  "constant_velocity_test_mse": 0.0011231591925024986,
+  "window_weighted_error_reduction_percent": -11.478176094602999,
+  "paired_cluster_bootstrap": {
+    "unit": "recording_family",
+    "families": 2,
+    "equal_family_error_reduction_percent": -11.209828663014964,
+    "percentile_95_ci": [
+      -15.659553572455831,
+      -3.2382035203740056
+    ],
+    "resamples": 10000,
+    "seed": 20261011
+  },
+  "split_windows": {
+    "train": 89,
+    "validation": 14,
+    "test": 21
+  },
+  "split_groups": {
+    "train": [
+      "dog01",
+      "dog02",
+      "dog03",
+      "dog06",
+      "dog07",
+      "dog09",
+      "dog11"
+    ],
+    "validation": [
+      "dog04",
+      "dog05"
+    ],
+    "test": [
+      "dog08",
+      "dog10"
+    ]
+  },
+  "windows": [
+    {
+      "index": 85,
+      "group": "dog08",
+      "v1_mse": 0.00034815507767252396,
+      "v2_mse": 0.0003424008586208911,
+      "constant_velocity_mse": 0.000457434740383178,
+      "v3_mse": 0.00028416573936039584
+    },
+    {
+      "index": 86,
+      "group": "dog08",
+      "v1_mse": 0.0003237868577287821,
+      "v2_mse": 0.00027936931846947325,
+      "constant_velocity_mse": 0.0004839405301027,
+      "v3_mse": 0.00031820398527966046
+    },
+    {
+      "index": 87,
+      "group": "dog08",
+      "v1_mse": 0.0010841900838772706,
+      "v2_mse": 0.0012218299139684712,
+      "constant_velocity_mse": 0.002226396929472685,
+      "v3_mse": 0.0011680822073722296
+    },
+    {
+      "index": 88,
+      "group": "dog08",
+      "v1_mse": 0.0013928314920060572,
+      "v2_mse": 0.001304389032549478,
+      "constant_velocity_mse": 0.002104802755638957,
+      "v3_mse": 0.0013041206927791068
+    },
+    {
+      "index": 89,
+      "group": "dog08",
+      "v1_mse": 0.00017326860077159542,
+      "v2_mse": 0.00021605344937286562,
+      "constant_velocity_mse": 0.00021143131016287953,
+      "v3_mse": 0.00020600346260394879
+    },
+    {
+      "index": 90,
+      "group": "dog08",
+      "v1_mse": 0.0035613855567191988,
+      "v2_mse": 0.004859298581381213,
+      "constant_velocity_mse": 0.00641342718154192,
+      "v3_mse": 0.004216239514184065
+    },
+    {
+      "index": 91,
+      "group": "dog08",
+      "v1_mse": 0.0001228909704311039,
+      "v2_mse": 0.0001334921467661997,
+      "constant_velocity_mse": 0.00019034254364669323,
+      "v3_mse": 0.00011745927979863951
+    },
+    {
+      "index": 92,
+      "group": "dog08",
+      "v1_mse": 0.0006049444949126867,
+      "v2_mse": 0.0005160106262750886,
+      "constant_velocity_mse": 0.0008923843270167708,
+      "v3_mse": 0.0005103775698341096
+    },
+    {
+      "index": 93,
+      "group": "dog08",
+      "v1_mse": 0.0012888051239176063,
+      "v2_mse": 0.0014560656266649449,
+      "constant_velocity_mse": 0.0021107462234795094,
+      "v3_mse": 0.0012631762248292951
+    },
+    {
+      "index": 94,
+      "group": "dog08",
+      "v1_mse": 0.0007777528246132096,
+      "v2_mse": 0.0008801708638215811,
+      "constant_velocity_mse": 0.001350190956145525,
+      "v3_mse": 0.0007440953861975988
+    },
+    {
+      "index": 95,
+      "group": "dog08",
+      "v1_mse": 0.00027635399584068277,
+      "v2_mse": 0.00030409379286460006,
+      "constant_velocity_mse": 0.00039940004353411496,
+      "v3_mse": 0.000284692398983749
+    },
+    {
+      "index": 103,
+      "group": "dog10",
+      "v1_mse": 0.0009603765683149499,
+      "v2_mse": 0.0009332798517414939,
+      "constant_velocity_mse": 0.0009393731597810984,
+      "v3_mse": 0.0008863254067962228
+    },
+    {
+      "index": 104,
+      "group": "dog10",
+      "v1_mse": 0.000959582808383204,
+      "v2_mse": 0.0010719699259800568,
+      "constant_velocity_mse": 0.0014436281053349376,
+      "v3_mse": 0.0008601630027981889
+    },
+    {
+      "index": 105,
+      "group": "dog10",
+      "v1_mse": 0.0005118709994974872,
+      "v2_mse": 0.0004014033280149652,
+      "constant_velocity_mse": 0.0007351733511313796,
+      "v3_mse": 0.0004134832100494677
+    },
+    {
+      "index": 106,
+      "group": "dog10",
+      "v1_mse": 0.0005105622718258704,
+      "v2_mse": 0.0004546884349498434,
+      "constant_velocity_mse": 0.0004951407318003476,
+      "v3_mse": 0.0003345961766582603
+    },
+    {
+      "index": 107,
+      "group": "dog10",
+      "v1_mse": 0.00019908512379039888,
+      "v2_mse": 0.00014267746393212459,
+      "constant_velocity_mse": 0.00022670032922178507,
+      "v3_mse": 0.0001368159629024675
+    },
+    {
+      "index": 108,
+      "group": "dog10",
+      "v1_mse": 0.0006098107534267998,
+      "v2_mse": 0.0007442038205984303,
+      "constant_velocity_mse": 0.0009404569864273071,
+      "v3_mse": 0.0005443769917261947
+    },
+    {
+      "index": 109,
+      "group": "dog10",
+      "v1_mse": 0.0005567015899890372,
+      "v2_mse": 0.0007099279673275047,
+      "constant_velocity_mse": 0.000976744806393981,
+      "v3_mse": 0.0003789215480527718
+    },
+    {
+      "index": 110,
+      "group": "dog10",
+      "v1_mse": 0.0001048493788154304,
+      "v2_mse": 9.987950898045679e-05,
+      "constant_velocity_mse": 0.00010062411456601694,
+      "v3_mse": 8.653420981020668e-05
+    },
+    {
+      "index": 111,
+      "group": "dog10",
+      "v1_mse": 0.000560064204702916,
+      "v2_mse": 0.0005782118916540682,
+      "constant_velocity_mse": 0.0008314920123666525,
+      "v3_mse": 0.00042107004111482157
+    },
+    {
+      "index": 112,
+      "group": "dog10",
+      "v1_mse": 7.844296176385522e-05,
+      "v2_mse": 7.867735271793265e-05,
+      "constant_velocity_mse": 5.651356332236901e-05,
+      "v3_mse": 0.0001018713553656815
+    }
+  ],
+  "limitations": [
+    "root-coordinate probe, not camera behavior accuracy",
+    "automated pose fits are not independent ground truth",
+    "few held-out groups; bootstrap interval is exploratory",
+    "development dataset; separate future behavioral benchmark required",
+    "ridge readouts fitted for this probe; operational behavior classifiers unchanged",
+    "no independent human four-class behavior references"
+  ]
+}

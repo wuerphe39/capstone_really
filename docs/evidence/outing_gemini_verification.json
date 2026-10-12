@@ -1,0 +1,124 @@
+{
+  "tested_at": "2026-10-11T07:07:02.765935+00:00",
+  "model": "gemini-3.5-flash-lite",
+  "source": "generated synthetic facts only; no user database or raw audio transmitted",
+  "results": [
+    {
+      "case": "session",
+      "question": "관찰 시간과 판단 불가 시간을 설명해 주세요.",
+      "provider": "gemini:gemini-3.5-flash-lite:fact-selection",
+      "failure": null,
+      "checks": {
+        "real_gemini": true,
+        "no_fallback": true,
+        "nonempty": true,
+        "canonical_text_and_citations": true,
+        "only_retrieved_ids": true,
+        "answer_matches_claims": true,
+        "expected_topics": true
+      },
+      "claims": [
+        {
+          "id": "current.samples",
+          "text": "이번 외출에 연결된 분석 표본은 30초입니다.",
+          "observation_ids": [
+            101,
+            102
+          ],
+          "kind": "summary"
+        },
+        {
+          "id": "current.unknown",
+          "text": "분석 표본 중 영상 판단 불가는 12초입니다.",
+          "observation_ids": [
+            101,
+            102
+          ],
+          "kind": "quality"
+        }
+      ]
+    },
+    {
+      "case": "day",
+      "question": "오늘 기록 요약과 보호자 의견을 알려주세요.",
+      "provider": "gemini:gemini-3.5-flash-lite:fact-selection",
+      "failure": null,
+      "checks": {
+        "real_gemini": true,
+        "no_fallback": true,
+        "nonempty": true,
+        "canonical_text_and_citations": true,
+        "only_retrieved_ids": true,
+        "answer_matches_claims": true,
+        "expected_topics": true
+      },
+      "claims": [
+        {
+          "id": "current.samples",
+          "text": "2026-10-11에 저장된 분석 표본은 30초입니다.",
+          "observation_ids": [
+            101,
+            102
+          ],
+          "kind": "summary"
+        },
+        {
+          "id": "current.unknown",
+          "text": "분석 표본 중 영상 판단 불가는 12초입니다.",
+          "observation_ids": [
+            101,
+            102
+          ],
+          "kind": "quality"
+        },
+        {
+          "id": "current.bark",
+          "text": "중복 제외 저장 구간의 짖음 후보는 3회입니다.",
+          "observation_ids": [
+            101,
+            102
+          ],
+          "kind": "bark"
+        },
+        {
+          "id": "guardian.101",
+          "text": "관찰 #101 보호자 의견: TV·외부 소리. 검증용 가상 보호자 의견: TV 소리로 생각함.",
+          "observation_ids": [
+            101
+          ],
+          "kind": "guardian_opinion"
+        }
+      ]
+    },
+    {
+      "case": "guardian",
+      "question": "보호자 의견을 보여 주세요.",
+      "provider": "gemini:gemini-3.5-flash-lite:fact-selection",
+      "failure": null,
+      "checks": {
+        "real_gemini": true,
+        "no_fallback": true,
+        "nonempty": true,
+        "canonical_text_and_citations": true,
+        "only_retrieved_ids": true,
+        "answer_matches_claims": true,
+        "expected_topics": true
+      },
+      "claims": [
+        {
+          "id": "guardian.101",
+          "text": "관찰 #101 보호자 의견: TV·외부 소리. 검증용 가상 보호자 의견: TV 소리로 생각함.",
+          "observation_ids": [
+            101
+          ],
+          "kind": "guardian_opinion"
+        }
+      ]
+    }
+  ],
+  "passed": true,
+  "limitations": [
+    "three developer-authored integration cases, not independent user accuracy",
+    "local fact retrieval; MCP transport is verified separately"
+  ]
+}

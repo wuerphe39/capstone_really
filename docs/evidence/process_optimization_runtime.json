@@ -1,0 +1,108 @@
+{
+  "session": {
+    "provider": "grounded-template",
+    "retrieval_mode": "mcp",
+    "claims": [
+      {
+        "id": "current.bark",
+        "text": "중복 제외 저장 구간의 짖음 후보는 1회입니다.",
+        "observation_ids": [
+          2
+        ],
+        "kind": "bark"
+      },
+      {
+        "id": "current.samples",
+        "text": "이번 외출에 연결된 분석 표본은 5초입니다.",
+        "observation_ids": [
+          2
+        ],
+        "kind": "summary"
+      },
+      {
+        "id": "current.unknown",
+        "text": "분석 표본 중 영상 판단 불가는 3.2초입니다.",
+        "observation_ids": [
+          2
+        ],
+        "kind": "quality"
+      },
+      {
+        "id": "observation.2",
+        "text": "5초 관찰: 짖음 후보 1회, 주된 궤적 판단 불가.",
+        "observation_ids": [
+          2
+        ],
+        "kind": "observation"
+      }
+    ]
+  },
+  "day": {
+    "sample_seconds": 10.0,
+    "skipped_overlap_ids": [
+      3
+    ],
+    "claims": [
+      {
+        "id": "guardian.1",
+        "text": "관찰 #1 보호자 의견: 판단 어려움. 공개 ESC-50 음원을 사용한 기능 시연. 실제 보호자 기록 아님.",
+        "observation_ids": [
+          1
+        ],
+        "kind": "guardian_opinion"
+      },
+      {
+        "id": "current.samples",
+        "text": "2026-10-11에 저장된 분석 표본은 10초입니다.",
+        "observation_ids": [
+          1,
+          2
+        ],
+        "kind": "summary"
+      },
+      {
+        "id": "current.unknown",
+        "text": "분석 표본 중 영상 판단 불가는 8.2초입니다.",
+        "observation_ids": [
+          1,
+          2
+        ],
+        "kind": "quality"
+      },
+      {
+        "id": "current.bark",
+        "text": "중복 제외 저장 구간의 짖음 후보는 2회입니다.",
+        "observation_ids": [
+          1,
+          2
+        ],
+        "kind": "bark"
+      },
+      {
+        "id": "observation.3",
+        "text": "5초 관찰: 짖음 후보 1회, 주된 궤적 판단 불가.",
+        "observation_ids": [
+          3
+        ],
+        "kind": "observation"
+      },
+      {
+        "id": "observation.2",
+        "text": "5초 관찰: 짖음 후보 1회, 주된 궤적 판단 불가.",
+        "observation_ids": [
+          2
+        ],
+        "kind": "observation"
+      },
+      {
+        "id": "observation.1",
+        "text": "5초 관찰: 짖음 후보 1회, 주된 궤적 판단 불가.",
+        "observation_ids": [
+          1
+        ],
+        "kind": "observation"
+      }
+    ]
+  },
+  "scope": "local public demonstration DB, runtime API + MCP; not user accuracy"
+}

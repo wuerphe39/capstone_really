@@ -1,0 +1,240 @@
+{
+  "training_source": "synthetic_trajectories",
+  "real_behavior_accuracy": null,
+  "split_seeds": {
+    "train": 11,
+    "validation": 22,
+    "test": 33
+  },
+  "split_sizes": {
+    "train": 1600,
+    "validation": 400,
+    "test": 400
+  },
+  "labels": [
+    "still",
+    "moving",
+    "spinning",
+    "pacing"
+  ],
+  "frames": 50,
+  "fps": 5,
+  "epochs": 45,
+  "validation_best": 1.0,
+  "test": {
+    "accuracy": 1.0,
+    "confusion_matrix": [
+      [
+        100,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        100,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        100,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        100
+      ]
+    ]
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "validation_accuracy": 0.33500000834465027
+    },
+    {
+      "epoch": 2,
+      "validation_accuracy": 0.4650000035762787
+    },
+    {
+      "epoch": 3,
+      "validation_accuracy": 0.5774999856948853
+    },
+    {
+      "epoch": 4,
+      "validation_accuracy": 0.5049999952316284
+    },
+    {
+      "epoch": 5,
+      "validation_accuracy": 0.6050000190734863
+    },
+    {
+      "epoch": 6,
+      "validation_accuracy": 0.6324999928474426
+    },
+    {
+      "epoch": 7,
+      "validation_accuracy": 0.6800000071525574
+    },
+    {
+      "epoch": 8,
+      "validation_accuracy": 0.5525000095367432
+    },
+    {
+      "epoch": 9,
+      "validation_accuracy": 0.7275000214576721
+    },
+    {
+      "epoch": 10,
+      "validation_accuracy": 0.9399999976158142
+    },
+    {
+      "epoch": 11,
+      "validation_accuracy": 0.9975000023841858
+    },
+    {
+      "epoch": 12,
+      "validation_accuracy": 0.8849999904632568
+    },
+    {
+      "epoch": 13,
+      "validation_accuracy": 0.9275000095367432
+    },
+    {
+      "epoch": 14,
+      "validation_accuracy": 0.9975000023841858
+    },
+    {
+      "epoch": 15,
+      "validation_accuracy": 0.9649999737739563
+    },
+    {
+      "epoch": 16,
+      "validation_accuracy": 0.9975000023841858
+    },
+    {
+      "epoch": 17,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 18,
+      "validation_accuracy": 0.9975000023841858
+    },
+    {
+      "epoch": 19,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 20,
+      "validation_accuracy": 0.9975000023841858
+    },
+    {
+      "epoch": 21,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 22,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 23,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 24,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 25,
+      "validation_accuracy": 0.9825000166893005
+    },
+    {
+      "epoch": 26,
+      "validation_accuracy": 0.9950000047683716
+    },
+    {
+      "epoch": 27,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 28,
+      "validation_accuracy": 0.9975000023841858
+    },
+    {
+      "epoch": 29,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 30,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 31,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 32,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 33,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 34,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 35,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 36,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 37,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 38,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 39,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 40,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 41,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 42,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 43,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 44,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 45,
+      "validation_accuracy": 0.9950000047683716
+    }
+  ],
+  "limitations": [
+    "synthetic trajectories only",
+    "camera motion not compensated",
+    "no real dog labels"
+  ]
+}

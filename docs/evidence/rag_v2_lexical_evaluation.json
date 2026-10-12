@@ -1,0 +1,526 @@
+{
+  "fixture": "20 authored observation/guardian-note paraphrase pairs",
+  "semantic_enabled": false,
+  "recall_at_5": 0.35,
+  "mean_reciprocal_rank": 0.25416666666666665,
+  "baseline_recall_at_5": 0.25,
+  "unrelated_query_ids": [],
+  "results": [
+    {
+      "question": "문 앞에서 벨 소리가 났을 때 반응은?",
+      "expected": 1,
+      "actual": [
+        5,
+        9,
+        19
+      ],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 0,
+      "reciprocal_rank": 0,
+      "baseline_recall_at_5": 1,
+      "latency_ms": 9.4,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "폭풍 때 큰 소리가 났을 때 어떤 움직임이 있었어?",
+      "expected": 2,
+      "actual": [
+        2,
+        8,
+        9,
+        10,
+        15
+      ],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 1,
+      "reciprocal_rank": 1.0,
+      "baseline_recall_at_5": 1,
+      "latency_ms": 6.63,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "진공 청소 기계가 작동하면 어떻게 반응했어?",
+      "expected": 3,
+      "actual": [
+        3,
+        16
+      ],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 1,
+      "reciprocal_rank": 1.0,
+      "baseline_recall_at_5": 1,
+      "latency_ms": 5.95,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "배송하는 사람이 왔을 때 기록을 보여줘",
+      "expected": 4,
+      "actual": [],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 0,
+      "reciprocal_rank": 0,
+      "baseline_recall_at_5": 1,
+      "latency_ms": 6.12,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "혼자 집에 남았을 때 문 근처에 있었나?",
+      "expected": 5,
+      "actual": [
+        13
+      ],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 0,
+      "reciprocal_rank": 0,
+      "baseline_recall_at_5": 1,
+      "latency_ms": 5.93,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "주인이 돌아왔을 때 회전한 관찰은?",
+      "expected": 6,
+      "actual": [],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 0,
+      "reciprocal_rank": 0,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 5.83,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "볼을 가지고 놀 때 움직인 기록은?",
+      "expected": 7,
+      "actual": [
+        2,
+        10,
+        15,
+        20
+      ],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 0,
+      "reciprocal_rank": 0,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 6.41,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "밖에서 걷고 온 뒤 쉬었을 때 기록은?",
+      "expected": 8,
+      "actual": [],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 0,
+      "reciprocal_rank": 0,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 5.51,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "텔레비전 속 강아지 소리에 반응한 적 있어?",
+      "expected": 9,
+      "actual": [],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 0,
+      "reciprocal_rank": 0,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 5.45,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "차량이 빵 소리를 냈을 때 창가로 갔어?",
+      "expected": 10,
+      "actual": [
+        2,
+        20
+      ],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 0,
+      "reciprocal_rank": 0,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 6.15,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "잔잔한 건반 음악을 듣고 보호자는 뭐라고 했어?",
+      "expected": 11,
+      "actual": [
+        11,
+        12
+      ],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 1,
+      "reciprocal_rank": 1.0,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 5.03,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "숲 소리 케어가 도움이 안 됐다는 의견이 있었어?",
+      "expected": 12,
+      "actual": [
+        2,
+        9,
+        12,
+        19,
+        20
+      ],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 1,
+      "reciprocal_rank": 0.3333333333333333,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 4.71,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "진료를 받고 돌아온 날 쉬었던 기록은?",
+      "expected": 13,
+      "actual": [],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 0,
+      "reciprocal_rank": 0,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 5.67,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "바닥 때문에 균형을 잃었던 관찰은?",
+      "expected": 14,
+      "actual": [
+        14
+      ],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 1,
+      "reciprocal_rank": 1.0,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 5.47,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "방문객을 보고 숨은 곳이 있었나?",
+      "expected": 15,
+      "actual": [
+        11,
+        18
+      ],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 0,
+      "reciprocal_rank": 0,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 6.09,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "자동으로 돌아다니는 청소 장치에 대한 반응은?",
+      "expected": 16,
+      "actual": [
+        3,
+        16
+      ],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 1,
+      "reciprocal_rank": 0.5,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 5.68,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "승강기 소리가 들리면 어디로 이동했어?",
+      "expected": 17,
+      "actual": [
+        9,
+        19
+      ],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 0,
+      "reciprocal_rank": 0,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 4.75,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "밖에 다른 동물이 지나갈 때 창문 근처에 있었어?",
+      "expected": 18,
+      "actual": [
+        10
+      ],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 0,
+      "reciprocal_rank": 0,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 5.0,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "집 주변 작업장의 소음에 반응했나?",
+      "expected": 19,
+      "actual": [],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 0,
+      "reciprocal_rank": 0,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 4.99,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    },
+    {
+      "question": "폭죽이 터질 때 움직임에 대한 기록은?",
+      "expected": 20,
+      "actual": [
+        2,
+        10,
+        15,
+        20
+      ],
+      "baseline": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "recall_at_5": 1,
+      "reciprocal_rank": 0.25,
+      "baseline_recall_at_5": 0,
+      "latency_ms": 4.69,
+      "search": {
+        "method": "lexical",
+        "candidate_count": 20,
+        "semantic_candidate_limit": 100,
+        "recency_context_only": false,
+        "semantic_threshold": 0.55
+      }
+    }
+  ],
+  "limitations": [
+    "small authored fixture",
+    "not independent held-out user questions",
+    "threshold not calibrated on production data",
+    "answer factuality not scored"
+  ]
+}

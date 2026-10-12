@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 
 import numpy as np
 
@@ -42,6 +43,14 @@ class MotionConfig:
     posture_min_run: int = 2          # 이보다 짧은 자세 변화는 노이즈로 무시
     posture_min_flips: int = 3
     posture_max_extent: float = 0.15
+
+    def __post_init__(self):
+        if not all(math.isfinite(v) and v > 0 for v in (self.window_s, self.stride_s)):
+            raise ValueError("window_s and stride_s must be positive and finite")
+        if self.stride_s > self.window_s:
+            raise ValueError("stride_s must not exceed window_s")
+        if self.min_obs < 2 or self.smooth < 1:
+            raise ValueError("min_obs must be >= 2 and smooth >= 1")
 
 
 def _smooth(a: np.ndarray, k: int) -> np.ndarray:
@@ -139,22 +148,27 @@ def summarize_motion(
 ) -> MotionSummary:
     """최근 window_s 구간을 슬라이딩 윈도우로 분류해 라벨별 시간을 집계한다."""
     cfg = cfg or MotionConfig()
+    if not math.isfinite(window_s) or window_s <= 0:
+        raise ValueError("window_s must be positive and finite")
     if not obs:
         return MotionSummary(window_s, "unknown", {})
     end = obs[-1].t if end_s is None else end_s
+    if not math.isfinite(window_s) or window_s <= 0 or not math.isfinite(end):
+        raise ValueError("window_s must be positive and end_s finite")
+    if any(not all(math.isfinite(v) for v in (o.t, o.cx, o.cy)) for o in obs):
+        raise ValueError("observations must be finite")
+    if any(a.t > b.t for a, b in zip(obs, obs[1:])):
+        raise ValueError("observations must be ordered by time")
     start = end - window_s
     seconds: dict[str, float] = {}
     t = start
-    while t + cfg.window_s <= end + 1e-9:
-        seg = [o for o in obs if t <= o.t < t + cfg.window_s]
+    # Each stride contributes its actual duration exactly once. Missing
+    # intervals remain unknown instead of stretching observed labels to 30s.
+    while t < end - 1e-9:
+        stop = min(t + cfg.stride_s, end)
+        seg = [o for o in obs if t <= o.t < min(t + cfg.window_s, end)]
         label = classify_window(seg, cfg)
-        seconds[label] = seconds.get(label, 0.0) + cfg.stride_s
-        t += cfg.stride_s
-    if not seconds:
-        seg = [o for o in obs if start <= o.t <= end]
-        seconds[classify_window(seg, cfg)] = min(window_s, end - start)
-    # 윈도우가 겹치므로 총합이 window_s가 되도록 정규화
-    total = sum(seconds.values())
-    seconds = {k: v * window_s / total for k, v in seconds.items()}
+        seconds[label] = seconds.get(label, 0.0) + stop - t
+        t = stop
     dominant = max(seconds, key=seconds.get)
     return MotionSummary(window_s, dominant, seconds)

@@ -1,0 +1,149 @@
+{
+  "source": "ESC-50 official test split; isolated local presentation database",
+  "pet_id": "demo-dog",
+  "outing_ids": [
+    "cfcb22ccccc94fd084f28df2af373bbd",
+    "7314040fa2a34b54b14eb5d67abf53e9"
+  ],
+  "input_sha256": {
+    "dog_detected": "435e476d5d429aa1cc51c23c9b5e5f8f472faf022846996ade18a457621d0552",
+    "dog_missed": "8b3f5052dad5383ea171aa8feaead47879bf7b5ae3acaf5a26c5167838a49494",
+    "rain": "608fcc0bef32512e2a984c7d3d2cac8ea161f6337ec0056850a6d34f07f8db35"
+  },
+  "review_sources": [
+    "demo_operator_opinion",
+    "demo_operator_opinion",
+    "demo_operator_opinion"
+  ],
+  "summary": {
+    "sample_seconds": 10.0,
+    "bark_candidate_count": 6,
+    "unknown_seconds": 10.0
+  },
+  "model_windows": {
+    "dog_missed": [
+      {
+        "start_s": 0.0,
+        "end_s": 5.0,
+        "dog_score": 0.03979118913412094,
+        "label": "other_candidate",
+        "padded": false
+      }
+    ],
+    "rain": [
+      {
+        "start_s": 0.0,
+        "end_s": 5.0,
+        "dog_score": 0.010265563614666462,
+        "label": "other_candidate",
+        "padded": false
+      }
+    ]
+  },
+  "questions": {
+    "sounds": {
+      "question": "무슨 소리가 있었어?",
+      "provider": "grounded-template",
+      "retrieval_mode": "mcp",
+      "answer": "중복 제외 저장 구간의 짖음 후보는 6회입니다.\n분석 표본 중 영상 판단 불가는 10초입니다.\n관찰 #3 시연 담당자 의견: 기타 소리. ESC-50 rain 라벨의 외부 환경음입니다. TV 소리로 확인한 기록이 아닙니다.\n5초 관찰: 짖음 후보 0회, 주된 궤적 판단 불가.\n관찰 #2 시연 담당자 의견: 판단 어려움. ESC-50 Dog 라벨인데 기존 LSTM은 놓쳤습니다. 공개 자료 검증 사례입니다.\n5초 관찰: 짖음 후보 6회, 주된 궤적 판단 불가.",
+      "claims": [
+        {
+          "id": "current.bark",
+          "text": "중복 제외 저장 구간의 짖음 후보는 6회입니다.",
+          "observation_ids": [
+            2,
+            3
+          ],
+          "kind": "bark"
+        },
+        {
+          "id": "current.unknown",
+          "text": "분석 표본 중 영상 판단 불가는 10초입니다.",
+          "observation_ids": [
+            2,
+            3
+          ],
+          "kind": "quality"
+        },
+        {
+          "id": "guardian.3",
+          "text": "관찰 #3 시연 담당자 의견: 기타 소리. ESC-50 rain 라벨의 외부 환경음입니다. TV 소리로 확인한 기록이 아닙니다.",
+          "observation_ids": [
+            3
+          ],
+          "kind": "guardian_opinion",
+          "review_source": "demo_operator_opinion"
+        },
+        {
+          "id": "observation.3",
+          "text": "5초 관찰: 짖음 후보 0회, 주된 궤적 판단 불가.",
+          "observation_ids": [
+            3
+          ],
+          "kind": "observation"
+        },
+        {
+          "id": "guardian.2",
+          "text": "관찰 #2 시연 담당자 의견: 판단 어려움. ESC-50 Dog 라벨인데 기존 LSTM은 놓쳤습니다. 공개 자료 검증 사례입니다.",
+          "observation_ids": [
+            2
+          ],
+          "kind": "guardian_opinion",
+          "review_source": "demo_operator_opinion"
+        },
+        {
+          "id": "observation.2",
+          "text": "5초 관찰: 짖음 후보 6회, 주된 궤적 판단 불가.",
+          "observation_ids": [
+            2
+          ],
+          "kind": "observation"
+        }
+      ]
+    },
+    "comparison": {
+      "question": "지난번과 달라?",
+      "provider": "grounded-template",
+      "retrieval_mode": "mcp",
+      "answer": "저장 구간의 분당 짖음 후보: 이번 36회, 이전 24회. 전체 외출이나 케어 효과를 비교한 수치는 아닙니다.\n이번 외출에 연결된 분석 표본은 10초입니다.\n분석 표본 중 영상 판단 불가는 10초입니다.",
+      "claims": [
+        {
+          "id": "comparison.bark_rate",
+          "kind": "comparison",
+          "text": "저장 구간의 분당 짖음 후보: 이번 36회, 이전 24회. 전체 외출이나 케어 효과를 비교한 수치는 아닙니다.",
+          "observation_ids": [
+            2,
+            3,
+            1
+          ]
+        },
+        {
+          "id": "current.samples",
+          "text": "이번 외출에 연결된 분석 표본은 10초입니다.",
+          "observation_ids": [
+            2,
+            3
+          ],
+          "kind": "summary"
+        },
+        {
+          "id": "current.unknown",
+          "text": "분석 표본 중 영상 판단 불가는 10초입니다.",
+          "observation_ids": [
+            2,
+            3
+          ],
+          "kind": "quality"
+        }
+      ]
+    },
+    "tv": {
+      "question": "보호자가 TV라고 확인한 것은?",
+      "provider": "grounded-template",
+      "retrieval_mode": "mcp",
+      "answer": "질문을 뒷받침할 외출 기록이 부족합니다.",
+      "claims": []
+    }
+  },
+  "scope": "Public dataset simulation, not longitudinal pet history or user-ground-truth accuracy"
+}

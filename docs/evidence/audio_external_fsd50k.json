@@ -1,0 +1,2933 @@
+{
+  "source": "https://zenodo.org/records/4060432",
+  "manifest_sha256": "db836b6de80634dea33bdfd59ae8474a3b2e8b2e80e510effb1f90e8b459b978",
+  "metrics": {
+    "energy": {
+      "samples": 120,
+      "dog_support": 60,
+      "precision": 0.52,
+      "recall": 0.65,
+      "f1": 0.5777777777777777,
+      "false_positive_rate": 0.6,
+      "confusion": {
+        "tp": 39,
+        "fp": 36,
+        "fn": 21,
+        "tn": 24
+      },
+      "threshold": 0.5
+    },
+    "pooled": {
+      "samples": 120,
+      "dog_support": 60,
+      "precision": 0.5238095238095238,
+      "recall": 0.36666666666666664,
+      "f1": 0.43137254901960786,
+      "false_positive_rate": 0.3333333333333333,
+      "confusion": {
+        "tp": 22,
+        "fp": 20,
+        "fn": 38,
+        "tn": 40
+      },
+      "threshold": 0.65
+    },
+    "lstm": {
+      "samples": 120,
+      "dog_support": 60,
+      "precision": 0.9444444444444444,
+      "recall": 0.2833333333333333,
+      "f1": 0.4358974358974359,
+      "false_positive_rate": 0.016666666666666666,
+      "confusion": {
+        "tp": 17,
+        "fp": 1,
+        "fn": 43,
+        "tn": 59
+      },
+      "threshold": 0.9
+    }
+  },
+  "records": [
+    {
+      "filename": "359120.wav",
+      "source_id": "359120",
+      "labels": [
+        "Wind_chime",
+        "Bark",
+        "Chatter",
+        "Chime",
+        "Bell",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Human_group_actions"
+      ],
+      "expected": 1,
+      "sha256": "c511a91405370ba436f392460146e224e7060b6e607c965a9dac9481fc7cf55f",
+      "duration_s": 23.375986394557824,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "robinsonwill",
+      "title": "Windchimes + Neighborhood Mutt",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.8591529726982117,
+        "lstm": 0.4861317276954651,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "199878.wav",
+      "source_id": "199878",
+      "labels": [
+        "Walk_and_footsteps",
+        "Chirp_and_tweet",
+        "Cricket",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Bird_vocalization_and_bird_call_and_bird_song",
+        "Bird",
+        "Wild_animals",
+        "Insect"
+      ],
+      "expected": 1,
+      "sha256": "6e344b05057d0c379c5ba3c9e22fb71a4bc7e6ebf2b581804c08be97d2c27b9e",
+      "duration_s": 16.207437641723356,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "Gvido",
+      "title": "cricki.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5520690083503723,
+        "lstm": 0.019636821001768112,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "178497.wav",
+      "source_id": "178497",
+      "labels": [
+        "Bark",
+        "Growling",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "65fad23d4e857b6a21fd9472107eec3b6324e0ff0c04603a36426d589266a1f8",
+      "duration_s": 19.493537414965985,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "akent",
+      "title": "ParsonRusselBarking.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.822543203830719,
+        "lstm": 0.13623814284801483,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "396307.wav",
+      "source_id": "396307",
+      "labels": [
+        "Bark",
+        "Chirp_and_tweet",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Bird_vocalization_and_bird_call_and_bird_song",
+        "Bird",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "a9e0586d295402cfe6fd36cd17fc4e1a02cf0b642fa7e31af674264d8684da01",
+      "duration_s": 2.5466439909297054,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "Cribbler",
+      "title": "Dog play.WAV",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5245679020881653,
+        "lstm": 0.07933596521615982,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "38272.wav",
+      "source_id": "38272",
+      "labels": [
+        "Bark",
+        "Rain",
+        "Fireworks",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Water",
+        "Explosion"
+      ],
+      "expected": 1,
+      "sha256": "1f28b8586a6aa174b09eb0e505ddef636804ab59c9d6c69c8ef7940ddec5bd57",
+      "duration_s": 17.47734693877551,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "Heigh-hoo",
+      "title": "fireworks_in_the_rain.aif",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.3334653675556183,
+        "lstm": 0.014545131474733353,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "253754.wav",
+      "source_id": "253754",
+      "labels": [
+        "Bark",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "1dc08cc80dde5f01718ec12e1b35a41d911a2566852b73e6230231b00168af04",
+      "duration_s": 3.06156462585034,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "arightwizard",
+      "title": "Dog Barking",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5482244491577148,
+        "lstm": 0.8666198253631592,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "17810.wav",
+      "source_id": "17810",
+      "labels": [
+        "Bark",
+        "Chirp_and_tweet",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Bird_vocalization_and_bird_call_and_bird_song",
+        "Bird",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "dc845e344efc867f6e7446d0968e1bc95eaf58afaa5d987bd233f9f6c8ff842b",
+      "duration_s": 13.130430839002267,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "cognito perceptu",
+      "title": "hound bark whine.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.4096471667289734,
+        "lstm": 0.009101729840040207,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "402568.wav",
+      "source_id": "402568",
+      "labels": [
+        "Bark",
+        "Cricket",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Insect",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "aeb5c05b95e48ec87e7610447f01c6c39c2009124e359f4394ba15be91e03ede",
+      "duration_s": 8.777414965986395,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "justbradford",
+      "title": "201709018-Ginger-Barking-Indoor-STEREO-H4N-48K_24bit.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.4836657643318176,
+        "lstm": 0.09232422709465027,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "398885.wav",
+      "source_id": "398885",
+      "labels": [
+        "Female_speech_and_woman_speaking",
+        "Bark",
+        "Traffic_noise_and_roadway_noise",
+        "Speech",
+        "Human_voice",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Motor_vehicle_(road)",
+        "Vehicle"
+      ],
+      "expected": 1,
+      "sha256": "022c88f96f2808d1dffa291ca04a53c56481424d09d4f61212232be4325c594c",
+      "duration_s": 10.443786848072563,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "PHetish",
+      "title": "dog.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.6851961016654968,
+        "lstm": 0.6474857926368713,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "415023.wav",
+      "source_id": "415023",
+      "labels": [
+        "Bark",
+        "Growling",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "0353c85c2d5139f5ddc5384da1e9647da9ae7f70c6f6248973df6f5593f10888",
+      "duration_s": 19.481632653061226,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "roman_cgr",
+      "title": "barking dog 2",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.6421789526939392,
+        "lstm": 0.9632725715637207,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "158620.wav",
+      "source_id": "158620",
+      "labels": [
+        "Chirp_and_tweet",
+        "Growling",
+        "Bird_vocalization_and_bird_call_and_bird_song",
+        "Bird",
+        "Wild_animals",
+        "Animal",
+        "Dog",
+        "Domestic_animals_and_pets"
+      ],
+      "expected": 1,
+      "sha256": "7669aac0bdae0cf8e48ddfcad45135e90cb0781e99cdca3882e7fb55ef95d3fe",
+      "duration_s": 24.53734693877551,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "poorenglishjuggler",
+      "title": "Dog eating a bone and growling",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.4843238294124603,
+        "lstm": 0.1716434508562088,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "403207.wav",
+      "source_id": "403207",
+      "labels": [
+        "Bark",
+        "Growling",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "8a5f7a1dfd77cd4ac16116fab40d951fa5011886a00445b7ea9d80bd216c9891",
+      "duration_s": 1.4933333333333334,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "cdangels",
+      "title": "Sonido de perro ladrando 2 (Sound of dog barking 2).wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.38299140334129333,
+        "lstm": 0.2937683165073395,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "260776.wav",
+      "source_id": "260776",
+      "labels": [
+        "Bark",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "c89d9f78ec26214933b825c07bca1b4d1a2d93af1902bdf9c4eaac2fd770bd69",
+      "duration_s": 2.415668934240363,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "Jaylew1987",
+      "title": "ANGRY DOG BARK SNARL Flat.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.3529442548751831,
+        "lstm": 0.02255193144083023,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "220104.wav",
+      "source_id": "220104",
+      "labels": [
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "092e50df3738ae2220ff72a5e2f157a2c2d41268f106c2d066ace05c3364d0fd",
+      "duration_s": 9.528956916099773,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "JohnLaVine333",
+      "title": "MonoWolves3.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.8027974367141724,
+        "lstm": 0.9736906886100769,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "393694.wav",
+      "source_id": "393694",
+      "labels": [
+        "Bark",
+        "Chirp_and_tweet",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Bird_vocalization_and_bird_call_and_bird_song",
+        "Bird",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "874577d4fc3da7b19363c1c33c763fc539187a60bd26b89f044f1906046549ce",
+      "duration_s": 16.3359410430839,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "vdr3",
+      "title": "Dog Barking",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.6890402436256409,
+        "lstm": 0.917579710483551,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "62327.wav",
+      "source_id": "62327",
+      "labels": [
+        "Male_speech_and_man_speaking",
+        "Bark",
+        "Slam",
+        "Cricket",
+        "Speech",
+        "Human_voice",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Door",
+        "Domestic_sounds_and_home_sounds",
+        "Insect",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "4ecd0beff6b502145e47412a4f64b6fa7d665732b3d69af79d8ae9bcce3825eb",
+      "duration_s": 4.607709750566894,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "bsumusictech",
+      "title": "Door slam.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.4100905954837799,
+        "lstm": 0.04800423979759216,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "427152.wav",
+      "source_id": "427152",
+      "labels": [
+        "Bark",
+        "Human_voice",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "6f1a46254c6bcffeab18c0679cdcd9f80ea1dd645c8c9643a7c8020ad73763cc",
+      "duration_s": 0.3170521541950113,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "Caap",
+      "title": "27-PerritoLadra.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7379894256591797,
+        "lstm": 0.5123374462127686,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "393326.wav",
+      "source_id": "393326",
+      "labels": [
+        "Squeak",
+        "Subway_and_metro_and_underground",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Rail_transport",
+        "Vehicle"
+      ],
+      "expected": 1,
+      "sha256": "1d329fbc1ce0b58a6f812133c0ee6a1dc7ebd63146987e4464e6a73321cf9009",
+      "duration_s": 16.8,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "valibuck",
+      "title": "subway arrival",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.42173096537590027,
+        "lstm": 0.01169404573738575,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "220105.wav",
+      "source_id": "220105",
+      "labels": [
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "8e9227b1e7536b2bb47e833d4beecb5681103fb1feecfafdee0db8340b31687b",
+      "duration_s": 9.119138321995464,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "JohnLaVine333",
+      "title": "MonoWolves2.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.8238086104393005,
+        "lstm": 0.8602791428565979,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "403327.wav",
+      "source_id": "403327",
+      "labels": [
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "6fe6fa126cb227f8b8ccc287860ca707ab8aba3cdb538e2d89efa33944acf9b9",
+      "duration_s": 5.168503401360544,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "kellyn_lyn",
+      "title": "Barking.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7954813838005066,
+        "lstm": 0.9229181408882141,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "17206.wav",
+      "source_id": "17206",
+      "labels": [
+        "Chatter",
+        "Chirp_and_tweet",
+        "Train",
+        "Dog",
+        "Music",
+        "Rail_transport",
+        "Vehicle",
+        "Human_group_actions",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Bird_vocalization_and_bird_call_and_bird_song",
+        "Bird",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "25c0c08a07085cc80785a282911a915d5f7150c370d5922a4efe293c0897dd48",
+      "duration_s": 23.381678004535146,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "Heigh-hoo",
+      "title": "from_a_distance.aif",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5053085088729858,
+        "lstm": 0.033932141959667206,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "180257.wav",
+      "source_id": "180257",
+      "labels": [
+        "Bark",
+        "Growling",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "2274d01d406abf9b2520fdf92ed678cb16ffac156c5e862ab46196cc8a57eff9",
+      "duration_s": 14.890680272108844,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "bspiller5",
+      "title": "Dog Barking - Cavalier King Charles Spaniel",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7216682434082031,
+        "lstm": 0.9613933563232422,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "89213.wav",
+      "source_id": "89213",
+      "labels": [
+        "Bark",
+        "Growling",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "4bb08366c15b5406d4a039f1426ec38a69635510df542ad4ef47c5b67280ec18",
+      "duration_s": 1.6123356009070295,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "smokum",
+      "title": "DOG 5.WAV",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.6871153712272644,
+        "lstm": 0.9647089242935181,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "401307.wav",
+      "source_id": "401307",
+      "labels": [
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "754fd2a72af97aca6b5a7dad906f0d2a7c8dc2ecf5a875337ebe7193fbf53f7b",
+      "duration_s": 19.63689342403628,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "pogmothoin",
+      "title": "dog panting + half growl + whine.WAV",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.523090660572052,
+        "lstm": 0.08150943368673325,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "424737.wav",
+      "source_id": "424737",
+      "labels": [
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "d773abaeb9125f7c98a1732e0ef4c25761f22d5963e9d9f62f439ba14daaffdf",
+      "duration_s": 6.0836281179138325,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "Joaofmms",
+      "title": "Yorkshire terrier playing",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.6420173645019531,
+        "lstm": 0.056969478726387024,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "427694.wav",
+      "source_id": "427694",
+      "labels": [
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "4cc045da83307c66be44b6391fa3107c13fc55d10e300dfe9c08596a8378de86",
+      "duration_s": 1.6790022675736962,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "efsdcnveoi",
+      "title": "13-Aullido Lobo.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7733995914459229,
+        "lstm": 0.10164818912744522,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "425905.wav",
+      "source_id": "425905",
+      "labels": [
+        "Female_speech_and_woman_speaking",
+        "Chirp_and_tweet",
+        "Child_speech_and_kid_speaking",
+        "Dog",
+        "Speech",
+        "Human_voice",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Bird_vocalization_and_bird_call_and_bird_song",
+        "Bird",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "082efa065f2087066aa419279384004db35ac714de42ef5fc62c1a373490835b",
+      "duration_s": 10.80204081632653,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "NatalieTre",
+      "title": "dog's breath",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.4336984157562256,
+        "lstm": 0.013377496972680092,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "386766.wav",
+      "source_id": "386766",
+      "labels": [
+        "Bark",
+        "Chirp_and_tweet",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Bird_vocalization_and_bird_call_and_bird_song",
+        "Bird",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "004721a3df85bf3cfdac4d4c61ca76571175e079de2a7d2ed297992413053e6c",
+      "duration_s": 2.6123356009070293,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "ken788",
+      "title": "Dog_Barking.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7387999892234802,
+        "lstm": 0.9645896553993225,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "400994.wav",
+      "source_id": "400994",
+      "labels": [
+        "Bark",
+        "Growling",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "ba84a3638a1351050fe1ed296b1a90dd44194a1e10617a2a7eea4207e1d20906",
+      "duration_s": 8.756054421768708,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "electronpink",
+      "title": "BOUNDER BARKS.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.6038929224014282,
+        "lstm": 0.262979656457901,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "115535.wav",
+      "source_id": "115535",
+      "labels": [
+        "Bark",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "a94c713fe7a1e96a1016e46d153ae41a899919b04687d0e3087bb7075dfa4817",
+      "duration_s": 0.4906802721088435,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "Puniho",
+      "title": "Single Bark.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5858532190322876,
+        "lstm": 0.052853938192129135,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "260773.wav",
+      "source_id": "260773",
+      "labels": [
+        "Bark",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "9ab33f6d9822cdcbbab09f3fccb91ec981dc38b849b4588310323737a6fcc26c",
+      "duration_s": 3.64,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "iccleste",
+      "title": "Throaty dog bark.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5405986905097961,
+        "lstm": 0.9530588984489441,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "266394.wav",
+      "source_id": "266394",
+      "labels": [
+        "Growling",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "7ebe9e4d089df338fdd884a61cb4aac8d4c2af01d9d061132a39fc534695a8a6",
+      "duration_s": 15.249705215419501,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "ThaisMontanariCabral",
+      "title": "snarling dog",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7630554437637329,
+        "lstm": 0.39155256748199463,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "154757.wav",
+      "source_id": "154757",
+      "labels": [
+        "Bark",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "042ba5a4462ed758d2e458f93b11e39449bfd6f403342bfecdce7b35a4d7b881",
+      "duration_s": 4.653015873015873,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "jpkweli",
+      "title": "Car Seat Movement.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.4826717972755432,
+        "lstm": 0.07312023639678955,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "259302.wav",
+      "source_id": "259302",
+      "labels": [
+        "Bark",
+        "Growling",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "6d6e9b08f619dc1bb5c147354d04ebbf49a08ec5eb0702f6e86894e16bd77bf5",
+      "duration_s": 24.419002267573696,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "Zajjman",
+      "title": "Blossom Bark.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.3294917345046997,
+        "lstm": 0.24509164690971375,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "31615.wav",
+      "source_id": "31615",
+      "labels": [
+        "Bark",
+        "Chirp_and_tweet",
+        "Chicken_and_rooster",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Bird_vocalization_and_bird_call_and_bird_song",
+        "Bird",
+        "Wild_animals",
+        "Fowl",
+        "Livestock_and_farm_animals_and_working_animals"
+      ],
+      "expected": 1,
+      "sha256": "a72cdd29ae4938d123ef7219959cc51ee9c152d848c5416f40a2252965d9817e",
+      "duration_s": 12.386031746031746,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "cognito perceptu",
+      "title": "starlings 3.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.23336350917816162,
+        "lstm": 0.008348156698048115,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "328076.wav",
+      "source_id": "328076",
+      "labels": [
+        "Bark",
+        "Wood",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "cc8ab776bf3401e0c634479e9523b57dc77e04443b17199eee7fc3b857f08fd7",
+      "duration_s": 26.0,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "GuntherDorksen",
+      "title": "WOOD CHOPPING_ Chopping hard wood with metal Axe (SFX).wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.8077334761619568,
+        "lstm": 0.3914574980735779,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "382736.wav",
+      "source_id": "382736",
+      "labels": [
+        "Bark",
+        "Growling",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "91c90bf23f468507e74213cc32aae0139c7d55cbdfc0597e3233cf4f657eebef",
+      "duration_s": 2.24,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "schots",
+      "title": "Dog howl",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.3896961212158203,
+        "lstm": 0.06381118297576904,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "58382.wav",
+      "source_id": "58382",
+      "labels": [
+        "Bark",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "4f93fe100b25c4cf602edaf9a688af0b6aadd6480853f2ce9fd491fe1ca33926",
+      "duration_s": 6.069251700680272,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "morgantj",
+      "title": "barking.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5827386379241943,
+        "lstm": 0.9179131388664246,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "15791.wav",
+      "source_id": "15791",
+      "labels": [
+        "Bark",
+        "Growling",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "6016ba88c0645e390c0c614da68f0ae61050d4a8ca6a38b598bcb40c494211c3",
+      "duration_s": 24.463083900226756,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "laurent",
+      "title": "dog 2.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.624305784702301,
+        "lstm": 0.9676368236541748,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "54545.wav",
+      "source_id": "54545",
+      "labels": [
+        "Bark",
+        "Chirp_and_tweet",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Bird_vocalization_and_bird_call_and_bird_song",
+        "Bird",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "3d14c8c24870dfcd5a00f81a299247797fa700c21d227b32dc86e6fd277179f6",
+      "duration_s": 10.261904761904763,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "Heigh-hoo",
+      "title": "distant_dog.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7124931812286377,
+        "lstm": 0.940785825252533,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "411786.wav",
+      "source_id": "411786",
+      "labels": [
+        "Bark",
+        "Cowbell",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Bell"
+      ],
+      "expected": 1,
+      "sha256": "0fb774dd1b7de45c80bfc1c80e5dfdc3e6cca86cf700f3232f5333cdf05f14b8",
+      "duration_s": 12.757120181405895,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "starvingpony",
+      "title": "Cowbell.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.37007755041122437,
+        "lstm": 0.019658880308270454,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "380440.wav",
+      "source_id": "380440",
+      "labels": [
+        "Bark",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "cb6870056f0ead452d8ae06b8ddd6890f6ab7feaceb3e708670565550e54546a",
+      "duration_s": 24.72002267573696,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "FullMetalJedi",
+      "title": "Dog Bark + Mysterious Gurgle.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.8809671401977539,
+        "lstm": 0.9185611605644226,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "26720.wav",
+      "source_id": "26720",
+      "labels": [
+        "Bark",
+        "Screaming",
+        "Run",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Human_voice"
+      ],
+      "expected": 1,
+      "sha256": "e40b8148e513ec17669beae3bb54fe74b23c904ed569ab0998e575b2b1a56dea",
+      "duration_s": 12.562312925170067,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "Leady",
+      "title": "running and gored by dogs.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.2264476865530014,
+        "lstm": 0.032053638249635696,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "328087.wav",
+      "source_id": "328087",
+      "labels": [
+        "Male_speech_and_man_speaking",
+        "Bark",
+        "Mechanisms",
+        "Bicycle",
+        "Speech",
+        "Human_voice",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Vehicle"
+      ],
+      "expected": 1,
+      "sha256": "fecc4533a4b46cc5825b82a3713a4a9709abb57f18373757e91eeccd7add6aba",
+      "duration_s": 27.81201814058957,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "btherad2000",
+      "title": "51. Bicycle chain and cogs.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.4586964547634125,
+        "lstm": 0.06086516007781029,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "91113.wav",
+      "source_id": "91113",
+      "labels": [
+        "Bark",
+        "Raindrop",
+        "Traffic_noise_and_roadway_noise",
+        "Rain",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Water",
+        "Motor_vehicle_(road)",
+        "Vehicle"
+      ],
+      "expected": 1,
+      "sha256": "59879951a2d1cb976efc20eb87878c57f8a27f3697f75c503996a18c2e58bc12",
+      "duration_s": 16.998163265306122,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "Fasolt",
+      "title": "evening_rain.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.28999650478363037,
+        "lstm": 0.010071448050439358,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "275353.wav",
+      "source_id": "275353",
+      "labels": [
+        "Female_speech_and_woman_speaking",
+        "Bark",
+        "Chatter",
+        "Zipper_(clothing)",
+        "Bicycle_bell",
+        "Chirp_and_tweet",
+        "Mechanisms",
+        "Laughter",
+        "Speech",
+        "Human_voice",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Human_group_actions",
+        "Domestic_sounds_and_home_sounds",
+        "Bicycle",
+        "Vehicle",
+        "Alarm",
+        "Bell",
+        "Bird_vocalization_and_bird_call_and_bird_song",
+        "Bird",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "3d925a69c59b87af3ec211346383de7f1345bf1d9656f5eff69918a55a264cb2",
+      "duration_s": 16.49798185941043,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "sonsbcnintercultural",
+      "title": "cadenaFrankito.mp3",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.43235161900520325,
+        "lstm": 0.033367741852998734,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "207962.wav",
+      "source_id": "207962",
+      "labels": [
+        "Bark",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "dfe5ee7bedd14b14348b700ec1f8706551fa70b5c2275c7246bb059db76b42e0",
+      "duration_s": 7.68,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "Crater RF",
+      "title": "Eros Bordant.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7497931122779846,
+        "lstm": 0.9492239356040955,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "50336.wav",
+      "source_id": "50336",
+      "labels": [
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "e51fade289a93972f021d7f4df09ac9a8dc12b5ae68a93470f19f5667d090b1a",
+      "duration_s": 5.526349206349207,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "ingsey101",
+      "title": "echoed wolves howls.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5101819038391113,
+        "lstm": 0.35393252968788147,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "89211.wav",
+      "source_id": "89211",
+      "labels": [
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "725003233091a873e265a2121d1fa9b0bec40391b535aac9307aa7e387854e45",
+      "duration_s": 2.063673469387755,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "smokum",
+      "title": "BARKING 5 -S.WAV",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.4851378798484802,
+        "lstm": 0.6132791638374329,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "64460.wav",
+      "source_id": "64460",
+      "labels": [
+        "Bark",
+        "Thunder",
+        "Chirp_and_tweet",
+        "Rain",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Water",
+        "Thunderstorm",
+        "Bird_vocalization_and_bird_call_and_bird_song",
+        "Bird",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "9886aa0da718adc3434602cc7ceec8ded42b13bc5ae700becd8698361c757bc1",
+      "duration_s": 16.896757369614512,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "nicStage",
+      "title": "thunderClap3.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.4625067710876465,
+        "lstm": 0.03275144100189209,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "321594.wav",
+      "source_id": "321594",
+      "labels": [
+        "Bark",
+        "Stream",
+        "Cricket",
+        "Wind",
+        "Splash_and_splatter",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Water",
+        "Liquid",
+        "Insect",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "2977a4c3d0c4b152e12f439c5e52e074c0e5d751085fc8aa5f6cf62f26440754",
+      "duration_s": 20.19265306122449,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "macdaddyno1",
+      "title": "Wading in a shallow river",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.583954393863678,
+        "lstm": 0.02136814035475254,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "126037.wav",
+      "source_id": "126037",
+      "labels": [
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "9733628eefc435ce8e1c17e2936b4f29a838685a76d9606ae3baf86a99256a94",
+      "duration_s": 5.3415419501133785,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "mhtaylor67",
+      "title": "Dog Huffing",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7180361747741699,
+        "lstm": 0.02139664813876152,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "22973.wav",
+      "source_id": "22973",
+      "labels": [
+        "Bark",
+        "Meow",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Cat"
+      ],
+      "expected": 1,
+      "sha256": "61cea798515807ed446fb287dc114eb8560370761da1d428fa9ab1a1438e61da",
+      "duration_s": 9.066507936507936,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "cognito perceptu",
+      "title": "cats kittens dogs.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.24585695564746857,
+        "lstm": 0.03271932527422905,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "220106.wav",
+      "source_id": "220106",
+      "labels": [
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "886570753a16f4fe730e5e1cec71c3ce635166bd3c384683238cfd28267161dc",
+      "duration_s": 7.4026077097505665,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "JohnLaVine333",
+      "title": "MonoWolves1.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.8383958339691162,
+        "lstm": 0.9686862826347351,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "99185.wav",
+      "source_id": "99185",
+      "labels": [
+        "Chirp_and_tweet",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Bird_vocalization_and_bird_call_and_bird_song",
+        "Bird",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "e80c5b7ad44d1ff8ddef57a24792f17907cd491555d73e0feba4d2dded1d5b86",
+      "duration_s": 2.921473922902494,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "cognito perceptu",
+      "title": "barks with reverb.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5245711803436279,
+        "lstm": 0.9279879331588745,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "31840.wav",
+      "source_id": "31840",
+      "labels": [
+        "Bark",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "7cc608942df7886d02d6c7d1c5451ff6d283f909dee6d179a419071b59803f57",
+      "duration_s": 6.386190476190476,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "gurdonark",
+      "title": "2 barking dogs.WAV",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.4180885851383209,
+        "lstm": 0.06953658908605576,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "57553.wav",
+      "source_id": "57553",
+      "labels": [
+        "Bark",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "2ff297b9cace28d9a836bcf02501637c37ebee05bd1a062d8be4dc8565e0c6a7",
+      "duration_s": 14.279501133786848,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "jppi_Stu",
+      "title": "sw_Coyotes_Dogs_Night_Sample.aif",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.506690263748169,
+        "lstm": 0.1573392152786255,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "262520.wav",
+      "source_id": "262520",
+      "labels": [
+        "Bark",
+        "Growling",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "b136b802f6d8cd7c9f7e45b8b430e4e66861389c86388743bd88614cb817bfbf",
+      "duration_s": 25.09609977324263,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "va7mjl",
+      "title": "Dog Growling at Microphone.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7667831778526306,
+        "lstm": 0.38450857996940613,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "348129.wav",
+      "source_id": "348129",
+      "labels": [
+        "Bark",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal"
+      ],
+      "expected": 1,
+      "sha256": "1ed7b0dc11a7485ee57480d6fa76e1cf8cea84de21b6198f33e3371e930b12a3",
+      "duration_s": 5.131428571428572,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "NikoMyth",
+      "title": "Barking.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7650728821754456,
+        "lstm": 0.9556214809417725,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "165913.wav",
+      "source_id": "165913",
+      "labels": [
+        "Trickle_and_dribble",
+        "Chirp_and_tweet",
+        "Dog",
+        "Domestic_animals_and_pets",
+        "Animal",
+        "Pour",
+        "Liquid",
+        "Bird_vocalization_and_bird_call_and_bird_song",
+        "Bird",
+        "Wild_animals"
+      ],
+      "expected": 1,
+      "sha256": "a4a2fa6612b92b800aabcc7e4fcabcc5189f39dceee1a2c0a8a32b2b332c2564",
+      "duration_s": 28.323015873015873,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "Puniho",
+      "title": "Fergus Whining.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7559560537338257,
+        "lstm": 0.9674414992332458,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "392839.wav",
+      "source_id": "392839",
+      "labels": [
+        "Male_speech_and_man_speaking",
+        "Walk_and_footsteps",
+        "Run",
+        "Breathing",
+        "Speech",
+        "Human_voice",
+        "Respiratory_sounds"
+      ],
+      "expected": 0,
+      "sha256": "7dae7c10df76fa89baad60871f5e62a482d96d85aa30ecc8bfcaaa5ff8113d78",
+      "duration_s": 15.177142857142858,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "sebbas414",
+      "title": "Caminata Rapida.mp3",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7135498523712158,
+        "lstm": 0.03651734068989754,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "38615.wav",
+      "source_id": "38615",
+      "labels": [
+        "Human_voice"
+      ],
+      "expected": 0,
+      "sha256": "bfbf0e01ab0432531494b6c70b05946a6b7d0e33193c5a62e0084d77e5d91183",
+      "duration_s": 28.0,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "UncleSigmund",
+      "title": "hiccups.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.46459850668907166,
+        "lstm": 0.0858159288764,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "241000.wav",
+      "source_id": "241000",
+      "labels": [
+        "Fart"
+      ],
+      "expected": 0,
+      "sha256": "1f22f1ac9175e63fd799fc34cd865033d3a5d441f39fc15aae133271ed4c86d3",
+      "duration_s": 1.2,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "DSISStudios",
+      "title": "Short Fart_01",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.549243688583374,
+        "lstm": 0.06935876607894897,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "161688.wav",
+      "source_id": "161688",
+      "labels": [
+        "Engine",
+        "Fireworks",
+        "Explosion"
+      ],
+      "expected": 0,
+      "sha256": "5d4355efb82624831817f7a39086e856f610a14f6deaa42c302042b8fc80f6cd",
+      "duration_s": 9.94968253968254,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "jppi_Stu",
+      "title": "sw_Fireworks_Mortar_02.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7861312031745911,
+        "lstm": 0.16388502717018127,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "195579.wav",
+      "source_id": "195579",
+      "labels": [
+        "Slam",
+        "Door",
+        "Domestic_sounds_and_home_sounds"
+      ],
+      "expected": 0,
+      "sha256": "58e1af08a1efb30660ec692801ca4fecdb0c4039cdaf540288745ecbf9425e94",
+      "duration_s": 1.9889569160997733,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "jacobalcook",
+      "title": "door_bathroom_slow",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5873084664344788,
+        "lstm": 0.06080862134695053,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "327922.wav",
+      "source_id": "327922",
+      "labels": [
+        "Zipper_(clothing)",
+        "Domestic_sounds_and_home_sounds"
+      ],
+      "expected": 0,
+      "sha256": "af66870c7f9bea730f2dda0ab1f1434d670a56fda918065b60637989778719ed",
+      "duration_s": 10.677301587301587,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "RuonVNiekerk",
+      "title": "Zipping zipper",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.8107931017875671,
+        "lstm": 0.3918426036834717,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "154401.wav",
+      "source_id": "154401",
+      "labels": [
+        "Camera",
+        "Mechanisms"
+      ],
+      "expected": 0,
+      "sha256": "ff605fa15e27fe8d56c1bcedac516728d6a4f0b2071d2fde89a9dc7bb5f17446",
+      "duration_s": 5.806666666666667,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "semccab",
+      "title": "lens focus.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7273920774459839,
+        "lstm": 0.3901377022266388,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "348317.wav",
+      "source_id": "348317",
+      "labels": [
+        "Skateboard",
+        "Vehicle"
+      ],
+      "expected": 0,
+      "sha256": "ca1456fcfe7275a719e020300a920ab47c294daadae6d7ca815ad7ca0528db38",
+      "duration_s": 6.74,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "BlackNeon1234",
+      "title": "Drive over Border.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.4561217427253723,
+        "lstm": 0.015748903155326843,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "330956.wav",
+      "source_id": "330956",
+      "labels": [
+        "Bicycle_bell",
+        "Speech",
+        "Human_voice",
+        "Bicycle",
+        "Vehicle",
+        "Alarm",
+        "Bell"
+      ],
+      "expected": 0,
+      "sha256": "97d73168b0a75785cf7f9a21ee7506154981b2f57ab0c3cd44c2f7662c146710",
+      "duration_s": 22.86310657596372,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "nikiforov5000",
+      "title": "Bicycle_Bell.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5687168836593628,
+        "lstm": 0.02828337252140045,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "185046.wav",
+      "source_id": "185046",
+      "labels": [
+        "Toilet_flush",
+        "Domestic_sounds_and_home_sounds"
+      ],
+      "expected": 0,
+      "sha256": "c2bbf01269726fde1c60014a738072450fee5d4adb58aac381a1df026214f769",
+      "duration_s": 3.3873242630385487,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "justeluis",
+      "title": "Flush.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.11367473751306534,
+        "lstm": 0.009715409949421883,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "257360.wav",
+      "source_id": "257360",
+      "labels": [
+        "Female_singing",
+        "Singing",
+        "Human_voice"
+      ],
+      "expected": 0,
+      "sha256": "0733279c37c34edb2c0f6ce027b4150dad0f3f236eb2069d5cedd9a744e2459b",
+      "duration_s": 5.612426303854876,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "Shuinvy",
+      "title": "DoReMiFaSol Voice",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.8449883460998535,
+        "lstm": 0.7966002821922302,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "250384.wav",
+      "source_id": "250384",
+      "labels": [
+        "Skateboard",
+        "Vehicle"
+      ],
+      "expected": 0,
+      "sha256": "bf9c72445e7fe46c25b9d8dac2e5e5d3da946b1dc03bc11ebc0d3504c3a69359",
+      "duration_s": 10.636190476190476,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "lostphosphene",
+      "title": "Skateboard.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.714821994304657,
+        "lstm": 0.05691494420170784,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "212963.wav",
+      "source_id": "212963",
+      "labels": [
+        "Snare_drum",
+        "Drum",
+        "Percussion",
+        "Musical_instrument",
+        "Music",
+        "Drum_kit"
+      ],
+      "expected": 0,
+      "sha256": "767a7cb0ae23b5a3fb4b03ceb11f4ef7e55bd07fea1f64f0eddd7ccc6666c5c2",
+      "duration_s": 4.102585034013606,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "keinzweiter",
+      "title": "Rapiant_drum_117.aif",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.07210413366556168,
+        "lstm": 0.011093086563050747,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "120028.wav",
+      "source_id": "120028",
+      "labels": [
+        "Chink_and_clink",
+        "Bell",
+        "Glass"
+      ],
+      "expected": 0,
+      "sha256": "7f0d1533493fd43a6d22d858945cce5b7e1f1899f248652e770e1abe946569a9",
+      "duration_s": 3.734716553287982,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "kklab5050",
+      "title": "Glass Bell.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.2255508154630661,
+        "lstm": 0.029018091037869453,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "173933.wav",
+      "source_id": "173933",
+      "labels": [
+        "Giggle",
+        "Laughter",
+        "Cough",
+        "Human_voice",
+        "Respiratory_sounds"
+      ],
+      "expected": 0,
+      "sha256": "959c486fe49e991a18b889c9526fcbf6324a97ddeb51c6df6b612bc31ff6ea8b",
+      "duration_s": 19.04326530612245,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "JohnsonBrandEditing",
+      "title": "Cartoon Laugh",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.34702494740486145,
+        "lstm": 0.025588078424334526,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "235675.wav",
+      "source_id": "235675",
+      "labels": [
+        "Finger_snapping",
+        "Hands"
+      ],
+      "expected": 0,
+      "sha256": "73ff4de2d0e329dc030cb119d9b4e0d896996bb66426320632d1be076a978dc8",
+      "duration_s": 5.944308390022676,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "gpenn76",
+      "title": "finger snap.aif",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.8107931017875671,
+        "lstm": 0.3918426036834717,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "158201.wav",
+      "source_id": "158201",
+      "labels": [
+        "Crackle"
+      ],
+      "expected": 0,
+      "sha256": "ffd621ed51e29546430170ebaac0411182a4698f026590fffbe8e299e8b2cf2d",
+      "duration_s": 15.203265306122448,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "KingOwnian",
+      "title": "Record crackles.mp3",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7160691618919373,
+        "lstm": 0.07327146828174591,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "213910.wav",
+      "source_id": "213910",
+      "labels": [
+        "Domestic_sounds_and_home_sounds"
+      ],
+      "expected": 0,
+      "sha256": "2adc78df036a560045480a41911b80ec744e773b4adbffd9b2dbb604a98377e0",
+      "duration_s": 8.762222222222222,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "jakobhandersen",
+      "title": "HairDryer.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.14668625593185425,
+        "lstm": 0.044862594455480576,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "59578.wav",
+      "source_id": "59578",
+      "labels": [
+        "Crying_and_sobbing",
+        "Human_voice"
+      ],
+      "expected": 0,
+      "sha256": "83bbea133c07ed5ed7731b0cfa86b82c9185834a8b31bdb6f2b2aa53d4752c51",
+      "duration_s": 23.275102040816325,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "morgantj",
+      "title": "babycrying.mp3",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.1780131310224533,
+        "lstm": 0.022174270823597908,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "119858.wav",
+      "source_id": "119858",
+      "labels": [
+        "Keys_jangling",
+        "Domestic_sounds_and_home_sounds"
+      ],
+      "expected": 0,
+      "sha256": "99140d84d9b16040c230ef9d27c487530171f6345b673041746cac98316da98d",
+      "duration_s": 10.03734693877551,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "kbnevel",
+      "title": "Singlekey_jingle.aif",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7784097790718079,
+        "lstm": 0.3770098090171814,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "234363.wav",
+      "source_id": "234363",
+      "labels": [
+        "Writing",
+        "Domestic_sounds_and_home_sounds"
+      ],
+      "expected": 0,
+      "sha256": "c56ba9fbbf042eb6629d85278812a4491238bac580fdbaa4fb8195926ab17e85",
+      "duration_s": 4.3769614512471655,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "AtkinsSJ",
+      "title": "Paper spin",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.16561943292617798,
+        "lstm": 0.01299048587679863,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "144200.wav",
+      "source_id": "144200",
+      "labels": [
+        "Pour",
+        "Liquid"
+      ],
+      "expected": 0,
+      "sha256": "53f65464726b22961ea5fdee3bc2038d51de83c0c02ea07c25d3d509ca593a73",
+      "duration_s": 12.49233560090703,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "lolamadeus",
+      "title": "water pouring.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.11065951734781265,
+        "lstm": 0.008419550955295563,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "117041.wav",
+      "source_id": "117041",
+      "labels": [
+        "Alarm"
+      ],
+      "expected": 0,
+      "sha256": "27701ec22c8e32a2d28e217e1ac84aaf3af0351d79592261144ff728724ecec0",
+      "duration_s": 10.89140589569161,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "joedeshon",
+      "title": "keys_in_ignition_warning.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7341669797897339,
+        "lstm": 0.060022078454494476,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "141309.wav",
+      "source_id": "141309",
+      "labels": [
+        "Alarm"
+      ],
+      "expected": 0,
+      "sha256": "6e552f5d068b14f01d359e64e3d090a0c727b560fa42bad815708551d9bf946c",
+      "duration_s": 4.3973015873015875,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "lluiset7",
+      "title": "alarma 5 curta.aiff",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.652439296245575,
+        "lstm": 0.03828750550746918,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "180536.wav",
+      "source_id": "180536",
+      "labels": [
+        "Rain",
+        "Water"
+      ],
+      "expected": 0,
+      "sha256": "9eeb9e1b1bcbe5c68cdbb935c367e875abaa062bea1056fda81350d9abeec86b",
+      "duration_s": 17.92340136054422,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "Suz_Soundcreations",
+      "title": "stethoscope_rain_44_16.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5057038068771362,
+        "lstm": 0.009336750954389572,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "181919.wav",
+      "source_id": "181919",
+      "labels": [
+        "Rattle",
+        "Hiss",
+        "Crackle",
+        "Fire"
+      ],
+      "expected": 0,
+      "sha256": "5260a2e53b2b88a3cc36482f302f3a3df773b4ab0226656acf76717d4ab13d5d",
+      "duration_s": 29.877437641723358,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "CapsLok",
+      "title": "Matches Light Up.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.2947205901145935,
+        "lstm": 0.01735556684434414,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "38957.wav",
+      "source_id": "38957",
+      "labels": [
+        "Cutlery_and_silverware",
+        "Dishes_and_pots_and_pans",
+        "Chink_and_clink",
+        "Domestic_sounds_and_home_sounds",
+        "Glass"
+      ],
+      "expected": 0,
+      "sha256": "9eaee1da24ab2966e285497d5ef4c13b80d19ead227c81ae212aa819270e9830",
+      "duration_s": 5.94233560090703,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "Wolfsinger",
+      "title": "spoon in cup.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.48020416498184204,
+        "lstm": 0.014604205265641212,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "76404.wav",
+      "source_id": "76404",
+      "labels": [
+        "Wind"
+      ],
+      "expected": 0,
+      "sha256": "cbdddf2fa4d3491869039d828bc2d5dc9cfafa2be1a66e0b9257cc5d3bde02ef",
+      "duration_s": 5.131065759637188,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "dsp9000",
+      "title": "Rough Wind.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7817386984825134,
+        "lstm": 0.39038291573524475,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "266767.wav",
+      "source_id": "266767",
+      "labels": [
+        "Squeak",
+        "Slam",
+        "Door",
+        "Domestic_sounds_and_home_sounds"
+      ],
+      "expected": 0,
+      "sha256": "85e16357de7beaa6ca1c27736fdd15a189994501539fb4df2fa1e076c64e1ff2",
+      "duration_s": 6.780226757369615,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "athenspublic",
+      "title": "open-door-and-shut.aiff",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.3327851891517639,
+        "lstm": 0.021528346464037895,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "422152.wav",
+      "source_id": "422152",
+      "labels": [
+        "Human_group_actions",
+        "Mechanisms"
+      ],
+      "expected": 0,
+      "sha256": "c844971527f2e20e2e627ff992108077176b24f736fd3c43a4b716308e3930ab",
+      "duration_s": 10.253333333333334,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "14G_Panska_Niklova_Michaela",
+      "title": "20 - car toy, children laughing.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.687423050403595,
+        "lstm": 0.016329171136021614,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "324343.wav",
+      "source_id": "324343",
+      "labels": [
+        "Rattle_(instrument)",
+        "Percussion",
+        "Musical_instrument",
+        "Music"
+      ],
+      "expected": 0,
+      "sha256": "bab89d24be1e566a6462b016f78d235c3cc6599e30b590604d27b125b069e003",
+      "duration_s": 2.140544217687075,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "Puniho",
+      "title": "Short Shot Shaker 12.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.3559284508228302,
+        "lstm": 0.019690997898578644,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "198396.wav",
+      "source_id": "198396",
+      "labels": [
+        "Cutlery_and_silverware",
+        "Chink_and_clink",
+        "Domestic_sounds_and_home_sounds",
+        "Glass"
+      ],
+      "expected": 0,
+      "sha256": "c938ef09453be6acbf4a36f44f01c2eae10a6dd38778476dd8be2895b6d5fa34",
+      "duration_s": 0.40546485260770976,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "ani_music",
+      "title": "ANI - Spoons - Clicked 4a",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5693598985671997,
+        "lstm": 0.014232804998755455,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "108474.wav",
+      "source_id": "108474",
+      "labels": [
+        "Rattle",
+        "Drawer_open_or_close",
+        "Domestic_sounds_and_home_sounds"
+      ],
+      "expected": 0,
+      "sha256": "8848b97c1e7a0abcc261431c320b6fe18f38d8600a0f13411abbf13ac91c1aef",
+      "duration_s": 6.073333333333333,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "rpew1",
+      "title": "drawer close.WAV",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.7442256808280945,
+        "lstm": 0.056820955127477646,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "139769.wav",
+      "source_id": "139769",
+      "labels": [
+        "Gurgling",
+        "Liquid",
+        "Water"
+      ],
+      "expected": 0,
+      "sha256": "d0c869d88619207db84cadfa3af489cca5430c06cf44892c2ef8382fbc18f9fa",
+      "duration_s": 10.677823129251701,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "cognito perceptu",
+      "title": "bubbles 1.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5282201766967773,
+        "lstm": 0.015508444979786873,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "205091.wav",
+      "source_id": "205091",
+      "labels": [
+        "Computer_keyboard",
+        "Typing",
+        "Domestic_sounds_and_home_sounds"
+      ],
+      "expected": 0,
+      "sha256": "0da38d855ddbefd8999d60c115310852288cd9912594d1e17f463cd3cb5ced64",
+      "duration_s": 13.931337868480725,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "jadend2",
+      "title": "Typing.WAV",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.6282801628112793,
+        "lstm": 0.11350663006305695,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "422154.wav",
+      "source_id": "422154",
+      "labels": [
+        "Glockenspiel",
+        "Bell",
+        "Human_group_actions",
+        "Musical_instrument",
+        "Music",
+        "Mallet_percussion",
+        "Percussion"
+      ],
+      "expected": 0,
+      "sha256": "82e8984acd3028baba214da9905367117fbfb2c0a8f336bb81b19295fd627763",
+      "duration_s": 14.584013605442177,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "14G_Panska_Niklova_Michaela",
+      "title": "2 - jingle bells, xylophone.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.37980273365974426,
+        "lstm": 0.01905723661184311,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "276535.wav",
+      "source_id": "276535",
+      "labels": [
+        "Waves_and_surf",
+        "Ocean",
+        "Water"
+      ],
+      "expected": 0,
+      "sha256": "0e1c8150a615adbada63272183dc119690db31797ceebd46e5f0014dba63e004",
+      "duration_s": 28.317392290249433,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "blukotek",
+      "title": "sea waves beach Poland Sopot",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.11868981271982193,
+        "lstm": 0.008718535304069519,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "342587.wav",
+      "source_id": "342587",
+      "labels": [
+        "Breathing",
+        "Cough",
+        "Respiratory_sounds"
+      ],
+      "expected": 0,
+      "sha256": "d88a44cb549b30908e743df8323eab7982b0da4e63a4ac37b840b53b08c5eafc",
+      "duration_s": 4.488344671201814,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "fattirewhitey",
+      "title": "Coughing SFX.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.3972405195236206,
+        "lstm": 0.024635720998048782,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "59669.wav",
+      "source_id": "59669",
+      "labels": [
+        "Coin_(dropping)",
+        "Music",
+        "Domestic_sounds_and_home_sounds"
+      ],
+      "expected": 0,
+      "sha256": "508bdb99bee5ef01a29f4a48cfb0d8896ae58a50d84dd7ab890696b0c58e2568",
+      "duration_s": 20.74122448979592,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "morgantj",
+      "title": "sodacanmachine.mp3",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.6832598447799683,
+        "lstm": 0.058663152158260345,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "117420.wav",
+      "source_id": "117420",
+      "labels": [
+        "Rattle"
+      ],
+      "expected": 0,
+      "sha256": "5b340db8b127f8677513a1a7ff6d2d60c9b281a7852d7642ff91b7314cdc33cf",
+      "duration_s": 0.8625170068027211,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "joedeshon",
+      "title": "replacing_gas_nozzle.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5348302125930786,
+        "lstm": 0.0145031176507473,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "58970.wav",
+      "source_id": "58970",
+      "labels": [
+        "Acoustic_guitar",
+        "Guitar",
+        "Plucked_string_instrument",
+        "Musical_instrument",
+        "Music"
+      ],
+      "expected": 0,
+      "sha256": "1434c8536669c1ba57da23d2d38de94f0e9b4799924f1db16b5347dfca2eee2a",
+      "duration_s": 2.0694784580498866,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "lucasgonze",
+      "title": "LucasGonze-FrogInTheWell-bit2.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.40810146927833557,
+        "lstm": 0.027601609006524086,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "191392.wav",
+      "source_id": "191392",
+      "labels": [
+        "Female_speech_and_woman_speaking",
+        "Bus",
+        "Engine",
+        "Speech",
+        "Human_voice",
+        "Motor_vehicle_(road)",
+        "Vehicle"
+      ],
+      "expected": 0,
+      "sha256": "31069c9aaea16473474203809defb706d3fcbcc2e8829294b03bd04cec5b4de3",
+      "duration_s": 5.850997732426304,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "fabiopapa",
+      "title": "berlin bus voice 1.mp3",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.46382978558540344,
+        "lstm": 0.014073646627366543,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "112337.wav",
+      "source_id": "112337",
+      "labels": [
+        "Male_speech_and_man_speaking",
+        "Female_speech_and_woman_speaking",
+        "Subway_and_metro_and_underground",
+        "Speech",
+        "Human_voice",
+        "Rail_transport",
+        "Vehicle"
+      ],
+      "expected": 0,
+      "sha256": "264f03ffcfd8112eb0211932ac8099ac3292a2e02340481d30423da0981e5f56",
+      "duration_s": 28.962312925170068,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "ciccarelli",
+      "title": "LA Subway.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.15951427817344666,
+        "lstm": 0.01901342160999775,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "219262.wav",
+      "source_id": "219262",
+      "labels": [
+        "Tambourine",
+        "Percussion",
+        "Musical_instrument",
+        "Music"
+      ],
+      "expected": 0,
+      "sha256": "8dd2c45273e1ee6e88edbb1aac69f7df59dec7712cd630bd353a9ad920ec2463",
+      "duration_s": 12.800022675736962,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "radiopassiveboy",
+      "title": "Tambourine_Loop_75bpm.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.159104585647583,
+        "lstm": 0.01796407252550125,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "86568.wav",
+      "source_id": "86568",
+      "labels": [
+        "Female_speech_and_woman_speaking",
+        "Crumpling_and_crinkling",
+        "Train",
+        "Speech",
+        "Human_voice",
+        "Rail_transport",
+        "Vehicle"
+      ],
+      "expected": 0,
+      "sha256": "28c0e81f0eb52aa1d4a7eb9fb1fb5cb79404068c47dc1876116365a0888d2832",
+      "duration_s": 22.734172335600906,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "uair01",
+      "title": "tilburg_kusjes_doeidoei.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.2545135021209717,
+        "lstm": 0.011335376650094986,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "37775.wav",
+      "source_id": "37775",
+      "labels": [
+        "Thunder",
+        "Rain",
+        "Water",
+        "Thunderstorm"
+      ],
+      "expected": 0,
+      "sha256": "0a5bb096c16556ab63288f871f81730827e68db03f77020619611aeb80ae3543",
+      "duration_s": 19.3659410430839,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "swuing",
+      "title": "Donner2.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.48411598801612854,
+        "lstm": 0.02018156088888645,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "108456.wav",
+      "source_id": "108456",
+      "labels": [
+        "Raindrop",
+        "Drip",
+        "Rain",
+        "Water",
+        "Liquid"
+      ],
+      "expected": 0,
+      "sha256": "c5f9d9a6a7e98fceac92baeffa4429f6c3c0350c585919d3c33272621b490787",
+      "duration_s": 13.003174603174603,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "Swoboman87",
+      "title": "Water Drops.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5364387631416321,
+        "lstm": 0.059437740594148636,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "400092.wav",
+      "source_id": "400092",
+      "labels": [
+        "Male_speech_and_man_speaking",
+        "Chatter",
+        "Speech",
+        "Human_voice",
+        "Human_group_actions"
+      ],
+      "expected": 0,
+      "sha256": "af62aa3667d4becd5235c651146ba639d9324920760cedd8b8a3aeccaae95732",
+      "duration_s": 26.436009070294784,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "Radio_fragola_gorizia",
+      "title": "noises-background.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.6989127397537231,
+        "lstm": 0.05754685774445534,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "338254.wav",
+      "source_id": "338254",
+      "labels": [
+        "Chatter",
+        "Crowd",
+        "Human_group_actions"
+      ],
+      "expected": 0,
+      "sha256": "5c1801cf607b38f6be716ad311a010d67c143a14816e51a719f0a956cb406c97",
+      "duration_s": 16.015986394557824,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "leo153",
+      "title": "theater_audience_mincing.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.5032105445861816,
+        "lstm": 0.013320252299308777,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "369981.wav",
+      "source_id": "369981",
+      "labels": [
+        "Chink_and_clink",
+        "Thump_and_thud",
+        "Glass"
+      ],
+      "expected": 0,
+      "sha256": "e766b4f6e3e656b6ed5d383be0645f9c8e1c01ba31cc04b02f8b39949427d5f7",
+      "duration_s": 27.10938775510204,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "northern87",
+      "title": "Stone dropping to ground_northern87",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.6478232741355896,
+        "lstm": 0.36889708042144775,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "405585.wav",
+      "source_id": "405585",
+      "labels": [
+        "Siren",
+        "Alarm"
+      ],
+      "expected": 0,
+      "sha256": "87d768321ed90e72230b3009b1787f573407d5e042c4deca47db69f6cb2b082f",
+      "duration_s": 24.0,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "JohnLaVine333",
+      "title": "Siren ( Carpeted Hallway Ambient ).wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.8971021771430969,
+        "lstm": 0.9084426760673523,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "71519.wav",
+      "source_id": "71519",
+      "labels": [
+        "Stream",
+        "Gurgling",
+        "Water"
+      ],
+      "expected": 0,
+      "sha256": "8d8437ff429642ec83915fe70c9844ffc4a484fbd1a8b31357b24e6b2be28861",
+      "duration_s": 22.709115646258503,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "juskiddink",
+      "title": "Stream2.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.39868631958961487,
+        "lstm": 0.009066258557140827,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "186686.wav",
+      "source_id": "186686",
+      "labels": [
+        "Chink_and_clink",
+        "Glass"
+      ],
+      "expected": 0,
+      "sha256": "e95d76cc73291c93dcd44c33544b5dd23d36d8b9104e9d7e0a43d487746e5419",
+      "duration_s": 4.0,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "DrZoom",
+      "title": "Full Wine Glass Hit 2",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.3758080005645752,
+        "lstm": 0.15749311447143555,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "376500.wav",
+      "source_id": "376500",
+      "labels": [
+        "Hammer",
+        "Tools"
+      ],
+      "expected": 0,
+      "sha256": "0d72e109f2c0b33f82c891cc5781b5c5c27445fdc7fcf90762c5bc9cf1f15c71",
+      "duration_s": 5.29453514739229,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "Cribbler",
+      "title": "Hammering plastics.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.700291097164154,
+        "lstm": 0.02496621385216713,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "28716.wav",
+      "source_id": "28716",
+      "labels": [
+        "Crash_cymbal",
+        "Bell",
+        "Musical_instrument",
+        "Music",
+        "Cymbal",
+        "Percussion"
+      ],
+      "expected": 0,
+      "sha256": "f049d57a8961ed0037e3f4e1ec895a1c4c12ba8d61b997ea19525ba8ebf2a7b3",
+      "duration_s": 5.765124716553288,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "teleport8",
+      "title": "crash14_bell.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.8076788187026978,
+        "lstm": 0.391867071390152,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "139767.wav",
+      "source_id": "139767",
+      "labels": [
+        "Gurgling",
+        "Liquid",
+        "Water"
+      ],
+      "expected": 0,
+      "sha256": "3f65e62453c48d0e667c79d6e3dde870692595be0fdaa9336132ef88d2046f47",
+      "duration_s": 18.4175283446712,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "cognito perceptu",
+      "title": "bubbles 3 plastic cup.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.18488188087940216,
+        "lstm": 0.013233384117484093,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "430076.wav",
+      "source_id": "430076",
+      "labels": [
+        "Whoosh_and_swoosh_and_swish"
+      ],
+      "expected": 0,
+      "sha256": "326189d09bd038659044a89e579549bc1537c06660889fb9ddc03bbe2f3bb5c2",
+      "duration_s": 0.47,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "SkyernAklea",
+      "title": "WOOSH RAW.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.628797709941864,
+        "lstm": 0.015892691910266876,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "55083.wav",
+      "source_id": "55083",
+      "labels": [
+        "Electric_guitar",
+        "Guitar",
+        "Plucked_string_instrument",
+        "Musical_instrument",
+        "Music"
+      ],
+      "expected": 0,
+      "sha256": "5d6f1616c4e131afa26356c3af4518643e92a831a0638755bb937f303644c31b",
+      "duration_s": 5.749319727891156,
+      "license": "http://creativecommons.org/licenses/by/3.0/",
+      "uploader": "james duckett",
+      "title": "guitarfx.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.6680821776390076,
+        "lstm": 0.015601733699440956,
+        "energy": 0.0
+      }
+    },
+    {
+      "filename": "120470.wav",
+      "source_id": "120470",
+      "labels": [
+        "Fart",
+        "Laughter",
+        "Human_voice"
+      ],
+      "expected": 0,
+      "sha256": "43a3f25133a3926ffc47475e78e1f89d5e532f50bf5908b889685a4d31f2fe43",
+      "duration_s": 4.440816326530612,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "the_bakerloo_files",
+      "title": "Minor 3rd.mp3",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.41345924139022827,
+        "lstm": 0.04678581282496452,
+        "energy": 1.0
+      }
+    },
+    {
+      "filename": "253606.wav",
+      "source_id": "253606",
+      "labels": [
+        "Chatter",
+        "Engine",
+        "Ocean",
+        "Boat_and_Water_vehicle",
+        "Human_group_actions",
+        "Water",
+        "Vehicle"
+      ],
+      "expected": 0,
+      "sha256": "137ca4b3445d34d4c660ee289098e4c405b4c80cfdd5ace1ada5861c57dfa435",
+      "duration_s": 26.714716553287982,
+      "license": "http://creativecommons.org/publicdomain/zero/1.0/",
+      "uploader": "monotraum",
+      "title": "ship engine.wav",
+      "split": "eval",
+      "original_split": "eval",
+      "scores": {
+        "pooled": 0.4096153676509857,
+        "lstm": 0.028062183409929276,
+        "energy": 0.0
+      }
+    }
+  ],
+  "promoted": false,
+  "checkpoints": {
+    "pooled": "2170d22c5d8c80ec799234bb43e3f2cd725e30c9560f442223b7b62c9e938665",
+    "lstm": "5afd302ec62b37b880a08f3f92d3d2c0d1603fe8395af920a4bcb2e7be6b7499"
+  },
+  "limitations": [
+    "balanced CC0/CC BY selected subset; not population prevalence",
+    "clip-level Dog labels, not barking timestamps or emotion",
+    "5-second window scores max-pooled for up to 30-second clips; thresholds frozen from ESC validation",
+    "ESC source IDs excluded; transformed duplicate audio cannot be fully ruled out",
+    "no source-dog identity annotations; not individual-dog held-out validation"
+  ]
+}

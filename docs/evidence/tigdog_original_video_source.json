@@ -1,0 +1,7 @@
+{
+  "url": "https://calvin-vision.net/bigstuff/youtube-objectsv2/videos/YouTubeObjectsVideos.tar.gz",
+  "compressed_prefix_bytes_read": 3259201536,
+  "full_archive_downloaded": false,
+  "files": 24,
+  "integrity": "publisher tar headers + per-clip local SHA256; no complete gzip CRC claimed"
+}

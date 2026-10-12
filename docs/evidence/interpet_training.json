@@ -1,0 +1,595 @@
+{
+  "training_source": "interpet_pose_pretrain_synthetic_classification",
+  "pretraining": {
+    "source": "InterPet4D v1.1 cleaned SMAL root motion",
+    "role": "self_supervised_pretraining",
+    "behavior_labels": null,
+    "projection_scale": 10,
+    "horizon_seconds": 1.0,
+    "archive_sha256": "d0e8f078629bcc59490b740fa3762cf6d2bd70b36f65458f97ab572caf5c95b6",
+    "windows_sha256": "104b604a88673c991dc8963f35454f1e8099f8e6b071f59364a22367fdb2fd72",
+    "evaluation_status": "dog-separated development evaluation; test not used for checkpoint selection",
+    "initial_validation": {
+      "next_step_mse": 0.001314107677899301,
+      "constant_velocity_mse": 0.001314107677899301
+    },
+    "validation": {
+      "next_step_mse": 0.0006591164274141192,
+      "constant_velocity_mse": 0.001314107677899301
+    },
+    "test": {
+      "next_step_mse": 0.0008539285627193749,
+      "constant_velocity_mse": 0.0016468573594465852
+    },
+    "windows": {
+      "train": 89,
+      "validation": 14,
+      "test": 21
+    },
+    "groups": {
+      "train": [
+        "dog01",
+        "dog02",
+        "dog03",
+        "dog06",
+        "dog07",
+        "dog09",
+        "dog11"
+      ],
+      "validation": [
+        "dog04",
+        "dog05"
+      ],
+      "test": [
+        "dog08",
+        "dog10"
+      ]
+    },
+    "history": [
+      {
+        "epoch": 1,
+        "next_step_mse": 0.0013114484027028084,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 2,
+        "next_step_mse": 0.0012804997386410832,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 3,
+        "next_step_mse": 0.0012541955802589655,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 4,
+        "next_step_mse": 0.0012282241368666291,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 5,
+        "next_step_mse": 0.0011781102512031794,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 6,
+        "next_step_mse": 0.0011532492935657501,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 7,
+        "next_step_mse": 0.0010889344848692417,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 8,
+        "next_step_mse": 0.0010299771092832088,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 9,
+        "next_step_mse": 0.0009549323585815728,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 10,
+        "next_step_mse": 0.0008619887521490455,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 11,
+        "next_step_mse": 0.0008295679581351578,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 12,
+        "next_step_mse": 0.0008117010584101081,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 13,
+        "next_step_mse": 0.0007461474742740393,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 14,
+        "next_step_mse": 0.0007699593552388251,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 15,
+        "next_step_mse": 0.0007170896860770881,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 16,
+        "next_step_mse": 0.0007343977340497077,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 17,
+        "next_step_mse": 0.0006776892114430666,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 18,
+        "next_step_mse": 0.0006770435720682144,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 19,
+        "next_step_mse": 0.0006904861074872315,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 20,
+        "next_step_mse": 0.0006631329888477921,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 21,
+        "next_step_mse": 0.0006780369440093637,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 22,
+        "next_step_mse": 0.0006696855998598039,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 23,
+        "next_step_mse": 0.000660980585962534,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 24,
+        "next_step_mse": 0.000690401706378907,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 25,
+        "next_step_mse": 0.0006611071876250207,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 26,
+        "next_step_mse": 0.0006726633873768151,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 27,
+        "next_step_mse": 0.0006801189738325775,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 28,
+        "next_step_mse": 0.0006734863854944706,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 29,
+        "next_step_mse": 0.00066691281972453,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 30,
+        "next_step_mse": 0.0006666164263151586,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 31,
+        "next_step_mse": 0.0006627897964790463,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 32,
+        "next_step_mse": 0.0006758493836969137,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 33,
+        "next_step_mse": 0.0006615848978981376,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 34,
+        "next_step_mse": 0.0006633887533098459,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 35,
+        "next_step_mse": 0.0006669724243693054,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 36,
+        "next_step_mse": 0.0006691014859825373,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 37,
+        "next_step_mse": 0.0006662815576419234,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 38,
+        "next_step_mse": 0.00067330984165892,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 39,
+        "next_step_mse": 0.0006816860404796898,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 40,
+        "next_step_mse": 0.0006870926008559763,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 41,
+        "next_step_mse": 0.0006721158279106021,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 42,
+        "next_step_mse": 0.0006591164274141192,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 43,
+        "next_step_mse": 0.0006952076801098883,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 44,
+        "next_step_mse": 0.0006604710943065584,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 45,
+        "next_step_mse": 0.000707969709765166,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 46,
+        "next_step_mse": 0.0006634535384364426,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 47,
+        "next_step_mse": 0.0006833907100372016,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 48,
+        "next_step_mse": 0.0006833389634266496,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 49,
+        "next_step_mse": 0.0006728937150910497,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 50,
+        "next_step_mse": 0.0007292930386029184,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 51,
+        "next_step_mse": 0.0006719529628753662,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 52,
+        "next_step_mse": 0.0007597904768772423,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 53,
+        "next_step_mse": 0.000664557097479701,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 54,
+        "next_step_mse": 0.0006991422851569951,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 55,
+        "next_step_mse": 0.0006721378304064274,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 56,
+        "next_step_mse": 0.0006813053041696548,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 57,
+        "next_step_mse": 0.0006761625409126282,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 58,
+        "next_step_mse": 0.000699258700478822,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 59,
+        "next_step_mse": 0.0006609539850614965,
+        "constant_velocity_mse": 0.001314107677899301
+      },
+      {
+        "epoch": 60,
+        "next_step_mse": 0.0006813211948610842,
+        "constant_velocity_mse": 0.001314107677899301
+      }
+    ]
+  },
+  "real_behavior_accuracy": null,
+  "feature_version": 2,
+  "unknown_thresholds": {
+    "confidence": 0.75,
+    "margin": 0.25,
+    "status": "provisional; real OOD calibration required"
+  },
+  "split_seeds": {
+    "train": 11,
+    "validation": 22,
+    "test": 33
+  },
+  "split_sizes": {
+    "train": 1600,
+    "validation": 400,
+    "test": 400
+  },
+  "labels": [
+    "still",
+    "moving",
+    "spinning",
+    "pacing"
+  ],
+  "frames": 50,
+  "fps": 5,
+  "epochs": 45,
+  "validation_best": 1.0,
+  "test": {
+    "accuracy": 1.0,
+    "confusion_matrix": [
+      [
+        100,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        100,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        100,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        100
+      ]
+    ]
+  },
+  "history": [
+    {
+      "epoch": 1,
+      "validation_accuracy": 0.6299999952316284
+    },
+    {
+      "epoch": 2,
+      "validation_accuracy": 0.7450000047683716
+    },
+    {
+      "epoch": 3,
+      "validation_accuracy": 0.7225000262260437
+    },
+    {
+      "epoch": 4,
+      "validation_accuracy": 0.7975000143051147
+    },
+    {
+      "epoch": 5,
+      "validation_accuracy": 0.8349999785423279
+    },
+    {
+      "epoch": 6,
+      "validation_accuracy": 0.8974999785423279
+    },
+    {
+      "epoch": 7,
+      "validation_accuracy": 0.75
+    },
+    {
+      "epoch": 8,
+      "validation_accuracy": 0.9599999785423279
+    },
+    {
+      "epoch": 9,
+      "validation_accuracy": 0.9599999785423279
+    },
+    {
+      "epoch": 10,
+      "validation_accuracy": 0.6650000214576721
+    },
+    {
+      "epoch": 11,
+      "validation_accuracy": 0.9800000190734863
+    },
+    {
+      "epoch": 12,
+      "validation_accuracy": 0.9850000143051147
+    },
+    {
+      "epoch": 13,
+      "validation_accuracy": 0.9975000023841858
+    },
+    {
+      "epoch": 14,
+      "validation_accuracy": 0.9900000095367432
+    },
+    {
+      "epoch": 15,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 16,
+      "validation_accuracy": 0.9850000143051147
+    },
+    {
+      "epoch": 17,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 18,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 19,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 20,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 21,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 22,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 23,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 24,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 25,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 26,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 27,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 28,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 29,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 30,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 31,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 32,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 33,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 34,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 35,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 36,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 37,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 38,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 39,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 40,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 41,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 42,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 43,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 44,
+      "validation_accuracy": 1.0
+    },
+    {
+      "epoch": 45,
+      "validation_accuracy": 1.0
+    }
+  ],
+  "limitations": [
+    "behavior classes trained on synthetic trajectories",
+    "camera motion not compensated",
+    "no real dog behavior labels",
+    "mocap projection is not a camera track"
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "pet_id": "public-verify-dcb34bbe",
+  "provider": "gemini:gemini-3.5-flash-lite",
+  "citations": [
+    39
+  ],
+  "mcp": "ok",
+  "action": "completed"
+}

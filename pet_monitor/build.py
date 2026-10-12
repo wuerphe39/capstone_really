@@ -12,5 +12,5 @@ def build_context(detector: BarkDetector, observations: list[Observation],
         timestamp=detector.now_s,
         window_s=window_s,
         bark=detector.summarize(window_s),
-        motion=summarize_motion(observations, window_s, cfg=motion_cfg),
+        motion=summarize_motion(observations, window_s, end_s=detector.now_s, cfg=motion_cfg),
     )

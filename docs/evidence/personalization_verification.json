@@ -1,0 +1,345 @@
+{
+  "scope": "two synthetic pet histories; real Gemini/MCP; not a general search quality benchmark",
+  "results": [
+    {
+      "history": "quiet_history",
+      "pet_id": "personal-quiet_history-2e233eff",
+      "current": {
+        "timestamp": 30.0,
+        "window_s": 30.0,
+        "bark": {
+          "window_s": 30.0,
+          "count": 2,
+          "rate_per_min": 4.0,
+          "peak_db": -23.53285782198482,
+          "mean_db": -29.834693109206086,
+          "total_bark_s": 0.30000000000000004,
+          "level": "occasional"
+        },
+        "motion": {
+          "window_s": 30.0,
+          "dominant": "pacing",
+          "seconds_by_label": {
+            "unknown": 9.79999999999999,
+            "still": 3.3999999999999986,
+            "spinning": 0.20000000000000107,
+            "pacing": 9.99999999999999,
+            "moving": 6.600000000000019
+          }
+        },
+        "motion_model": "lstm_synthetic",
+        "input_note": "합성 좌표·음성 시나리오; 합성 학습 LSTM; 실제 동작 정확도 미검증"
+      },
+      "suggestion": {
+        "id": 20,
+        "pet_id": "personal-quiet_history-2e233eff",
+        "observation_id": 43,
+        "state": "서성거림 및 짖음 후보 감지",
+        "summary": "합성 시연 기록 기준 현재 30초 관찰에서 짖음 후보 분당 빈도는 4.0회로 나타났으며, 과거 저장된 두 건의 기록(ID 41, ID 42)에서의 분당 빈도 0.0회와 비교하여 높아졌습니다. 다만 이는 합성 시연 기록에 기반한 참고용 비교이며, 검증된 평소 패턴으로 단정할 수 없습니다. 보호자는 환경을 확인하고 이상 징후가 지속되는지 관찰해 주세요.",
+        "reasons": [
+          "현재 관찰 구간의 짖음 후보 분당 빈도가 4.0회로 과거 저장 구간의 0.0회보다 높음",
+          "동작 궤적 근사치로 서성거림이 관찰됨",
+          "출처가 synthetic_demo인 합성 시연 기록임"
+        ],
+        "recommended_actions": [],
+        "music_style": null,
+        "severity": "attention",
+        "status": "informational",
+        "provider": "gemini:gemini-3.5-flash-lite",
+        "context": {
+          "observed_behavior": "pacing",
+          "behavior_duration_seconds": 9.99999999999999,
+          "bark_detected": true,
+          "bark_count": 2,
+          "bark_volume": -23.53285782198482,
+          "window_s": 30.0,
+          "motion_model": "lstm_synthetic",
+          "input_note": "합성 좌표·음성 시나리오; 합성 학습 LSTM; 실제 동작 정확도 미검증"
+        },
+        "retrieval": {
+          "mode": "mcp",
+          "status": "ok",
+          "records": [
+            {
+              "id": 41,
+              "pet_id": "personal-quiet_history-2e233eff",
+              "observed_at": "2026-10-09T23:52:15.965119Z",
+              "source": "synthetic_demo",
+              "summary": "30초 관찰: 짖음 후보 0회, 주된 궤적 정지.",
+              "context": {
+                "timestamp": 30.0,
+                "window_s": 30.0,
+                "bark": {
+                  "window_s": 30.0,
+                  "count": 0,
+                  "rate_per_min": 0.0,
+                  "peak_db": null,
+                  "mean_db": null,
+                  "total_bark_s": 0.0,
+                  "level": "none"
+                },
+                "motion": {
+                  "window_s": 30.0,
+                  "dominant": "still",
+                  "seconds_by_label": {
+                    "unknown": 9.79999999999999,
+                    "still": 20.199999999999978
+                  }
+                },
+                "motion_model": "lstm_synthetic",
+                "input_note": "합성 좌표·음성 시나리오; 합성 학습 LSTM; 실제 동작 정확도 미검증"
+              },
+              "relevance": 1,
+              "guardian_feedback": []
+            },
+            {
+              "id": 42,
+              "pet_id": "personal-quiet_history-2e233eff",
+              "observed_at": "2026-10-08T23:52:15.965119Z",
+              "source": "synthetic_demo",
+              "summary": "30초 관찰: 짖음 후보 0회, 주된 궤적 정지.",
+              "context": {
+                "timestamp": 30.0,
+                "window_s": 30.0,
+                "bark": {
+                  "window_s": 30.0,
+                  "count": 0,
+                  "rate_per_min": 0.0,
+                  "peak_db": null,
+                  "mean_db": null,
+                  "total_bark_s": 0.0,
+                  "level": "none"
+                },
+                "motion": {
+                  "window_s": 30.0,
+                  "dominant": "still",
+                  "seconds_by_label": {
+                    "unknown": 9.79999999999999,
+                    "still": 20.199999999999978
+                  }
+                },
+                "motion_model": "lstm_synthetic",
+                "input_note": "합성 좌표·음성 시나리오; 합성 학습 LSTM; 실제 동작 정확도 미검증"
+              },
+              "relevance": 1,
+              "guardian_feedback": []
+            }
+          ],
+          "stats": {
+            "pet_id": "personal-quiet_history-2e233eff",
+            "days": 7,
+            "sample_count": 2,
+            "bark_candidate_total": 0,
+            "observed_seconds": 60.0,
+            "bark_candidates_per_minute": 0.0,
+            "synthetic_count": 2,
+            "bounded_to_latest": 1000
+          },
+          "care_history": [],
+          "tool_calls": [
+            {
+              "tool": "search_observations",
+              "status": "ok"
+            },
+            {
+              "tool": "get_observation_stats",
+              "status": "ok"
+            },
+            {
+              "tool": "get_care_history",
+              "status": "ok"
+            }
+          ],
+          "profile": null,
+          "frequency_comparison": {
+            "status": "ok",
+            "current_window_s": 30.0,
+            "current_candidates_per_minute": 4.0,
+            "historical_candidates_per_minute": 0.0,
+            "delta_per_minute": 4.0,
+            "historical_window_count": 2,
+            "basis": "stored_observation_windows_not_validated_normal_baseline"
+          }
+        },
+        "cited_observation_ids": [
+          41,
+          42
+        ],
+        "question": "합성 시연 기록입니다. 현재 짖음 후보의 분당 빈도를 과거 저장 구간과 비교해 높아졌는지 낮아졌는지 설명하고 근거 기록 ID를 인용해 주세요. 실제 평소 패턴으로 단정하지 마세요.",
+        "created_at": "2026-10-10T23:52:19.411528Z"
+      }
+    },
+    {
+      "history": "frequent_history",
+      "pet_id": "personal-frequent_history-2e233eff",
+      "current": {
+        "timestamp": 30.0,
+        "window_s": 30.0,
+        "bark": {
+          "window_s": 30.0,
+          "count": 2,
+          "rate_per_min": 4.0,
+          "peak_db": -23.53285782198482,
+          "mean_db": -29.834693109206086,
+          "total_bark_s": 0.30000000000000004,
+          "level": "occasional"
+        },
+        "motion": {
+          "window_s": 30.0,
+          "dominant": "pacing",
+          "seconds_by_label": {
+            "unknown": 9.79999999999999,
+            "still": 3.3999999999999986,
+            "spinning": 0.20000000000000107,
+            "pacing": 9.99999999999999,
+            "moving": 6.600000000000019
+          }
+        },
+        "motion_model": "lstm_synthetic",
+        "input_note": "합성 좌표·음성 시나리오; 합성 학습 LSTM; 실제 동작 정확도 미검증"
+      },
+      "suggestion": {
+        "id": 21,
+        "pet_id": "personal-frequent_history-2e233eff",
+        "observation_id": 46,
+        "state": "합성 시연 기록 기준 짖음 빈도 비교",
+        "summary": "현재 관찰 구간(30초)의 짖음 후보 분당 빈도는 4.0회로, 인용된 과거 저장 기록의 분당 빈도(16.0회)와 비교하여 12.0회 감소했습니다. 본 기록은 합성 시연(synthetic_demo) 데이터이므로 실제 평소 패턴이나 이상 상태로 단정할 수 없으며, 보호자의 직접 확인이 필요합니다.",
+        "reasons": [
+          "현재 짖음 후보 분당 빈도는 4.0회입니다.",
+          "과거 저장된 기록의 분당 빈도는 16.0회입니다.",
+          "빈도 비교는 분당 값인 -12.0회의 차이를 보입니다."
+        ],
+        "recommended_actions": [
+          "music"
+        ],
+        "music_style": "calm_piano",
+        "severity": "info",
+        "status": "pending",
+        "provider": "gemini:gemini-3.5-flash-lite",
+        "context": {
+          "observed_behavior": "pacing",
+          "behavior_duration_seconds": 9.99999999999999,
+          "bark_detected": true,
+          "bark_count": 2,
+          "bark_volume": -23.53285782198482,
+          "window_s": 30.0,
+          "motion_model": "lstm_synthetic",
+          "input_note": "합성 좌표·음성 시나리오; 합성 학습 LSTM; 실제 동작 정확도 미검증"
+        },
+        "retrieval": {
+          "mode": "mcp",
+          "status": "ok",
+          "records": [
+            {
+              "id": 44,
+              "pet_id": "personal-frequent_history-2e233eff",
+              "observed_at": "2026-10-09T23:52:15.965119Z",
+              "source": "synthetic_demo",
+              "summary": "30초 관찰: 짖음 후보 8회, 주된 궤적 제자리 회전.",
+              "context": {
+                "timestamp": 30.0,
+                "window_s": 30.0,
+                "bark": {
+                  "window_s": 30.0,
+                  "count": 8,
+                  "rate_per_min": 16.0,
+                  "peak_db": -23.496292728893344,
+                  "mean_db": -29.842753658444074,
+                  "total_bark_s": 1.2000000000000002,
+                  "level": "frequent"
+                },
+                "motion": {
+                  "window_s": 30.0,
+                  "dominant": "spinning",
+                  "seconds_by_label": {
+                    "unknown": 9.79999999999999,
+                    "spinning": 12.999999999999979,
+                    "pacing": 7.200000000000006
+                  }
+                },
+                "motion_model": "lstm_synthetic",
+                "input_note": "합성 좌표·음성 시나리오; 합성 학습 LSTM; 실제 동작 정확도 미검증"
+              },
+              "relevance": 1,
+              "guardian_feedback": []
+            },
+            {
+              "id": 45,
+              "pet_id": "personal-frequent_history-2e233eff",
+              "observed_at": "2026-10-08T23:52:15.965119Z",
+              "source": "synthetic_demo",
+              "summary": "30초 관찰: 짖음 후보 8회, 주된 궤적 제자리 회전.",
+              "context": {
+                "timestamp": 30.0,
+                "window_s": 30.0,
+                "bark": {
+                  "window_s": 30.0,
+                  "count": 8,
+                  "rate_per_min": 16.0,
+                  "peak_db": -23.496292728893344,
+                  "mean_db": -29.842753658444074,
+                  "total_bark_s": 1.2000000000000002,
+                  "level": "frequent"
+                },
+                "motion": {
+                  "window_s": 30.0,
+                  "dominant": "spinning",
+                  "seconds_by_label": {
+                    "unknown": 9.79999999999999,
+                    "spinning": 12.999999999999979,
+                    "pacing": 7.200000000000006
+                  }
+                },
+                "motion_model": "lstm_synthetic",
+                "input_note": "합성 좌표·음성 시나리오; 합성 학습 LSTM; 실제 동작 정확도 미검증"
+              },
+              "relevance": 1,
+              "guardian_feedback": []
+            }
+          ],
+          "stats": {
+            "pet_id": "personal-frequent_history-2e233eff",
+            "days": 7,
+            "sample_count": 2,
+            "bark_candidate_total": 16,
+            "observed_seconds": 60.0,
+            "bark_candidates_per_minute": 16.0,
+            "synthetic_count": 2,
+            "bounded_to_latest": 1000
+          },
+          "care_history": [],
+          "tool_calls": [
+            {
+              "tool": "search_observations",
+              "status": "ok"
+            },
+            {
+              "tool": "get_observation_stats",
+              "status": "ok"
+            },
+            {
+              "tool": "get_care_history",
+              "status": "ok"
+            }
+          ],
+          "profile": null,
+          "frequency_comparison": {
+            "status": "ok",
+            "current_window_s": 30.0,
+            "current_candidates_per_minute": 4.0,
+            "historical_candidates_per_minute": 16.0,
+            "delta_per_minute": -12.0,
+            "historical_window_count": 2,
+            "basis": "stored_observation_windows_not_validated_normal_baseline"
+          }
+        },
+        "cited_observation_ids": [
+          44,
+          45
+        ],
+        "question": "합성 시연 기록입니다. 현재 짖음 후보의 분당 빈도를 과거 저장 구간과 비교해 높아졌는지 낮아졌는지 설명하고 근거 기록 ID를 인용해 주세요. 실제 평소 패턴으로 단정하지 마세요.",
+        "created_at": "2026-10-10T23:52:21.790457Z"
+      }
+    }
+  ]
+}

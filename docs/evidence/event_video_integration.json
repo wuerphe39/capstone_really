@@ -1,0 +1,56 @@
+{
+  "validation_type": "functional timing fixture, not field accuracy",
+  "input": "30-second generated test pattern plus ESC-50 5-203128-A-0 audio",
+  "observations": 6,
+  "sample_seconds": 30.024,
+  "video_seconds": 15,
+  "video_role": "evidence_only",
+  "event_observation_id": 18,
+  "provider": "grounded-template",
+  "answer": "관찰 #18: 감지 전후 영상 연결 · 앞 0초 / 뒤 0초 미확보 · 영상 자동 행동 분석 없음\n이 요약에는 공개·합성 시연 자료 30.024초가 포함됩니다. 실제 반려견 관찰과 구분해야 합니다.\n관찰 #18 시연 담당자 의견: 판단 어려움. 공개 음원과 테스트 패턴의 기능 검증 자료. 실제 가정 관찰 아님.\n카메라는 원본 확인용이며 영상 행동 분석은 수행하지 않습니다.",
+  "claims": [
+    {
+      "id": "video.18",
+      "kind": "video",
+      "text": "관찰 #18: 감지 전후 영상 연결 · 앞 0초 / 뒤 0초 미확보 · 영상 자동 행동 분석 없음",
+      "observation_ids": [
+        18
+      ]
+    },
+    {
+      "id": "current.demo_scope",
+      "kind": "provenance",
+      "text": "이 요약에는 공개·합성 시연 자료 30.024초가 포함됩니다. 실제 반려견 관찰과 구분해야 합니다.",
+      "observation_ids": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ]
+    },
+    {
+      "id": "guardian.18",
+      "text": "관찰 #18 시연 담당자 의견: 판단 어려움. 공개 음원과 테스트 패턴의 기능 검증 자료. 실제 가정 관찰 아님.",
+      "observation_ids": [
+        18
+      ],
+      "kind": "guardian_opinion",
+      "review_source": "demo_operator_opinion"
+    },
+    {
+      "id": "current.unknown",
+      "text": "카메라는 원본 확인용이며 영상 행동 분석은 수행하지 않습니다.",
+      "observation_ids": [
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "kind": "quality"
+    }
+  ]
+}

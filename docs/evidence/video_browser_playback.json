@@ -1,0 +1,19 @@
+{
+  "tested_at": "2026-10-11T06:27:57.725Z",
+  "observation_id": 2,
+  "source": "DAVIS public image sequence, 5fps reconstruction; separate ESC audio, not synchronized capture",
+  "ui_path": "outing start -> public observation -> end -> MCP summary -> evidence dialog -> new-tab player -> play",
+  "expected_interval": [
+    7,
+    12
+  ],
+  "playback": {
+    "currentTime": 12,
+    "duration": 12,
+    "ended": true,
+    "error": null,
+    "paused": true,
+    "readyState": 4,
+    "status": "근거 구간 재생 완료"
+  }
+}

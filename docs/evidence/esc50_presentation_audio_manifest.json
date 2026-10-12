@@ -1,0 +1,55 @@
+{
+  "source": "https://github.com/karolpiczak/ESC-50",
+  "revision": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6",
+  "purpose": "public-audio UI demo only; official folds 1 and 5, never training or threshold selection",
+  "records": [
+    {
+      "filename": "5-203128-A-0.wav",
+      "category": "dog",
+      "fold": 5,
+      "src_file": "203128",
+      "license": "CC BY",
+      "sha256": "435e476d5d429aa1cc51c23c9b5e5f8f472faf022846996ade18a457621d0552",
+      "original_title": "Toupie1.mp3",
+      "original_source_url": "http://www.freesound.org/people/Pierre%20Grandjean/sounds/203128/",
+      "original_author": "Pierre Grandjean",
+      "original_license": "CC0"
+    },
+    {
+      "filename": "5-208030-A-0.wav",
+      "category": "dog",
+      "fold": 5,
+      "src_file": "208030",
+      "license": "CC BY",
+      "sha256": "8b3f5052dad5383ea171aa8feaead47879bf7b5ae3acaf5a26c5167838a49494",
+      "original_title": "Chihuahua Barks",
+      "original_source_url": "http://www.freesound.org/people/Mewsel/sounds/208030/",
+      "original_author": "Mewsel",
+      "original_license": "CC0"
+    },
+    {
+      "filename": "5-181766-A-10.wav",
+      "category": "rain",
+      "fold": 5,
+      "src_file": "181766",
+      "license": "CC BY",
+      "sha256": "608fcc0bef32512e2a984c7d3d2cac8ea161f6337ec0056850a6d34f07f8db35",
+      "original_title": "rain.aiff",
+      "original_source_url": "http://www.freesound.org/people/laura222/sounds/181766/",
+      "original_author": "laura222",
+      "original_license": "CC0"
+    },
+    {
+      "filename": "1-100032-A-0.wav",
+      "category": "dog",
+      "fold": 1,
+      "src_file": "100032",
+      "license": "CC BY",
+      "sha256": "f40a849a2375c8c63312a73dd2dd6c74007301fcc21b4be2ece29a642831e3d8",
+      "original_title": "rose_bark.wav",
+      "original_source_url": "http://www.freesound.org/people/nfrae/sounds/100032/",
+      "original_author": "nfrae",
+      "original_license": "CC0"
+    }
+  ]
+}

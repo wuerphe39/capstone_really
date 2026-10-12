@@ -1,0 +1,6 @@
+-r requirements-edge.txt
+RPi.GPIO>=0.7.1
+adafruit-circuitpython-dht>=3.7.0
+hx711>=1.1.2.3
+
+# picamera2 and mpv are Raspberry Pi OS system packages. See README.md.

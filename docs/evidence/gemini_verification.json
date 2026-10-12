@@ -1,0 +1,98 @@
+{
+  "id": 15,
+  "pet_id": "gemini-verification-20261010234657",
+  "observation_id": 30,
+  "state": "회전 및 짖음 관찰",
+  "summary": "현재 30초 동안 약 13초의 제자리 회전(spinning) 동작과 8회의 짖음 후보가 감지되었습니다. 과거 검색된 기록(ID 29, 합성 시연)에서는 왕복 이동과 2회의 짖음이 관찰된 바 있어 이전과 비교해 짖음 횟수와 회전 관련 움직임에 변화가 있는지 살펴보실 수 있습니다. 보호자께서는 반려견이 머무는 주변 환경에 불편한 점이나 자극 요인이 있는지 확인해 보시면 좋겠습니다.",
+  "reasons": [
+    "현재 30초 관찰에서 13초 가량의 회전 동작과 8회의 짖음 후보가 확인됨",
+    "과거 기록(ID 29)과 비교하여 짖음 및 움직임 패턴의 차이를 참고할 수 있음"
+  ],
+  "recommended_actions": [],
+  "music_style": null,
+  "severity": "attention",
+  "status": "informational",
+  "provider": "gemini:gemini-3.5-flash-lite",
+  "context": {
+    "observed_behavior": "spinning",
+    "behavior_duration_seconds": 12.999999999999979,
+    "bark_detected": true,
+    "bark_count": 8,
+    "bark_volume": -23.496292728893344,
+    "window_s": 30.0,
+    "motion_model": "lstm_synthetic",
+    "input_note": "합성 좌표·음성 시나리오; 합성 학습 LSTM; 실제 동작 정확도 미검증"
+  },
+  "retrieval": {
+    "mode": "mcp",
+    "status": "ok",
+    "records": [
+      {
+        "id": 29,
+        "pet_id": "gemini-verification-20261010234657",
+        "observed_at": "2026-10-09T23:46:57.188964Z",
+        "source": "synthetic_demo",
+        "summary": "30초 관찰: 짖음 후보 2회, 주된 궤적 왕복 이동.",
+        "context": {
+          "timestamp": 30.0,
+          "window_s": 30.0,
+          "bark": {
+            "window_s": 30.0,
+            "count": 2,
+            "rate_per_min": 4.0,
+            "peak_db": -23.53285782198482,
+            "mean_db": -29.834693109206086,
+            "total_bark_s": 0.30000000000000004,
+            "level": "occasional"
+          },
+          "motion": {
+            "window_s": 30.0,
+            "dominant": "pacing",
+            "seconds_by_label": {
+              "unknown": 9.79999999999999,
+              "still": 3.3999999999999986,
+              "spinning": 0.20000000000000107,
+              "pacing": 9.99999999999999,
+              "moving": 6.600000000000019
+            }
+          },
+          "motion_model": "lstm_synthetic",
+          "input_note": "합성 좌표·음성 시나리오; 합성 학습 LSTM; 실제 동작 정확도 미검증"
+        },
+        "relevance": 0,
+        "guardian_feedback": []
+      }
+    ],
+    "stats": {
+      "pet_id": "gemini-verification-20261010234657",
+      "days": 7,
+      "sample_count": 1,
+      "bark_candidate_total": 2,
+      "observed_seconds": 30.0,
+      "bark_candidates_per_minute": 4.0,
+      "synthetic_count": 1,
+      "bounded_to_latest": 1000
+    },
+    "care_history": [],
+    "tool_calls": [
+      {
+        "tool": "search_observations",
+        "status": "ok"
+      },
+      {
+        "tool": "get_observation_stats",
+        "status": "ok"
+      },
+      {
+        "tool": "get_care_history",
+        "status": "ok"
+      }
+    ],
+    "profile": null
+  },
+  "cited_observation_ids": [
+    29
+  ],
+  "question": "과거 관찰과 비교해서 보호자가 무엇을 확인하면 좋을까요?",
+  "created_at": "2026-10-10T23:47:00.881637Z"
+}

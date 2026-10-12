@@ -1,0 +1,141 @@
+{
+  "id": 26,
+  "pet_id": "rag-v2-20261011010007",
+  "observation_id": 55,
+  "state": "문 앞 벨 소리 당시 기록과 현재 관찰 비교",
+  "summary": "오늘 문 앞 초인종이 울렸을 때의 합성 기록(ID 54)에서는 분당 4회의 짖음 후보와 왕복 이동이 관찰되었으며, 현재 관찰에서는 분당 16회의 짖음 후보와 회전(spinning) 행동이 확인되었습니다. 보호자께서는 반려견의 현재 반응 상태를 확인하시고 안정을 위해 주의 깊게 살펴봐 주시기 바랍니다.",
+  "reasons": [
+    "초인종 당시 기록(ID 54)은 분당 4회의 짖음 후보와 왕복 이동을 보였습니다.",
+    "현재 관찰 구간에서는 분당 16회의 짖음 후보와 회전 행동이 나타났습니다."
+  ],
+  "recommended_actions": [],
+  "music_style": null,
+  "severity": "attention",
+  "status": "informational",
+  "provider": "gemini:gemini-3.5-flash-lite",
+  "context": {
+    "observed_behavior": "spinning",
+    "behavior_duration_seconds": 17.99999999999998,
+    "bark_detected": true,
+    "bark_count": 8,
+    "bark_volume": -23.496292728893344,
+    "window_s": 30.0,
+    "motion_model": "lstm_synthetic",
+    "input_note": "합성 좌표·음성 시나리오; LSTM 행동 분류는 합성 라벨 학습; 실제 행동 정확도 미검증",
+    "lstm_metadata": {
+      "feature_version": 2,
+      "training_source": "real_mocap_pretrain_synthetic_classification"
+    }
+  },
+  "retrieval": {
+    "mode": "mcp",
+    "status": "ok",
+    "records": [
+      {
+        "id": 54,
+        "pet_id": "rag-v2-20261011010007",
+        "observed_at": "2026-10-11T01:00:07.830321Z",
+        "source": "synthetic_demo",
+        "summary": "30초 관찰: 짖음 후보 2회, 주된 궤적 왕복 이동.",
+        "context": {
+          "timestamp": 30.0,
+          "window_s": 30.0,
+          "bark": {
+            "window_s": 30.0,
+            "count": 2,
+            "rate_per_min": 4.0,
+            "peak_db": -23.53285782198482,
+            "mean_db": -29.834693109206086,
+            "total_bark_s": 0.30000000000000004,
+            "level": "occasional"
+          },
+          "motion": {
+            "window_s": 30.0,
+            "dominant": "pacing",
+            "seconds_by_label": {
+              "unknown": 10.199999999999992,
+              "still": 2.1999999999999993,
+              "moving": 6.799999999999997,
+              "pacing": 10.800000000000015
+            }
+          },
+          "motion_model": "lstm_synthetic",
+          "input_note": "합성 좌표·음성 시나리오; LSTM 행동 분류는 합성 라벨 학습; 실제 행동 정확도 미검증",
+          "lstm_metadata": {
+            "feature_version": 2,
+            "training_source": "real_mocap_pretrain_synthetic_classification"
+          }
+        },
+        "relevance": 0,
+        "semantic_similarity": 0.6540735960006714,
+        "match_type": "topic_match",
+        "guardian_feedback": [
+          {
+            "observation_id": 54,
+            "suggestion_id": null,
+            "bark_present": null,
+            "suggestion_appropriate": null,
+            "note": "현관 초인종이 울린 직후 왕복 이동을 관찰했습니다.",
+            "source": "guardian_feedback"
+          }
+        ],
+        "care_outcomes": []
+      }
+    ],
+    "search": {
+      "method": "hybrid_gemini_embedding_001",
+      "candidate_count": 1,
+      "semantic_candidate_limit": 100,
+      "recency_context_only": false,
+      "semantic_threshold": 0.55
+    },
+    "stats": {
+      "pet_id": "rag-v2-20261011010007",
+      "days": 7,
+      "sample_count": 1,
+      "bark_candidate_total": 2,
+      "observed_seconds": 30.0,
+      "bark_candidates_per_minute": 4.0,
+      "synthetic_count": 1,
+      "bounded_to_latest": 1000
+    },
+    "care_history": [],
+    "tool_calls": [
+      {
+        "tool": "search_observations",
+        "status": "ok"
+      },
+      {
+        "tool": "get_observation_stats",
+        "status": "ok"
+      },
+      {
+        "tool": "get_care_history",
+        "status": "ok"
+      }
+    ],
+    "query_plan": {
+      "start": "2026-10-10T15:00:00",
+      "before": "2026-10-11T01:00:08.723828",
+      "days": 7,
+      "period": "today_kst",
+      "timezone": "Asia/Seoul",
+      "intent": "observation"
+    },
+    "profile": null,
+    "frequency_comparison": {
+      "status": "ok",
+      "current_window_s": 30.0,
+      "current_candidates_per_minute": 16.0,
+      "historical_candidates_per_minute": 4.0,
+      "delta_per_minute": 12.0,
+      "historical_window_count": 1,
+      "basis": "stored_observation_windows_not_validated_normal_baseline"
+    }
+  },
+  "cited_observation_ids": [
+    54
+  ],
+  "question": "오늘 문 앞에서 벨 소리가 났을 때 반응과 지금을 비교해줘",
+  "created_at": "2026-10-11T01:00:12.981974Z"
+}

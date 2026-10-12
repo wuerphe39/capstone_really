@@ -1,0 +1,7 @@
+happy
+anxious
+playing
+resting
+alert
+sick_suspect
+hungry

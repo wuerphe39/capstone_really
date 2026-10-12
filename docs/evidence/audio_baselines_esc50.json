@@ -1,0 +1,4104 @@
+{
+  "dataset_revision": "33c8ce9eb2cf0b1c2f8bcf322eb349b6be34dbb6",
+  "manifest_sha256": "8deb6b0f937c5ec7345fb746ead2680cf99a5e5273fb14acee0ea24b4c591a68",
+  "split": "official folds 1-3 train, 4 validation, 5 frozen test; earlier-split shared-source/hash copies excluded",
+  "seed": 20261011,
+  "models": {
+    "pooled": {
+      "epoch": 16,
+      "validation": {
+        "samples": 398,
+        "dog_support": 8,
+        "precision": 0.22727272727272727,
+        "recall": 0.625,
+        "f1": 0.3333333333333333,
+        "false_positive_rate": 0.04358974358974359,
+        "confusion": {
+          "tp": 5,
+          "fp": 17,
+          "fn": 3,
+          "tn": 373
+        },
+        "threshold": 0.65
+      },
+      "test": {
+        "samples": 400,
+        "dog_support": 8,
+        "precision": 0.11764705882352941,
+        "recall": 0.25,
+        "f1": 0.16,
+        "false_positive_rate": 0.03826530612244898,
+        "confusion": {
+          "tp": 2,
+          "fp": 15,
+          "fn": 6,
+          "tn": 377
+        },
+        "threshold": 0.65
+      },
+      "checkpoint_sha256": "2170d22c5d8c80ec799234bb43e3f2cd725e30c9560f442223b7b62c9e938665",
+      "predictions": [
+        {
+          "filename": "5-103415-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.2024252861738205
+        },
+        {
+          "filename": "5-103416-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.1861097514629364
+        },
+        {
+          "filename": "5-103418-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.20080122351646423
+        },
+        {
+          "filename": "5-103420-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.33221375942230225
+        },
+        {
+          "filename": "5-103421-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.07558520883321762
+        },
+        {
+          "filename": "5-103422-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.5081585645675659
+        },
+        {
+          "filename": "5-117118-A-42.wav",
+          "expected": 0,
+          "dog_score": 0.7038629651069641
+        },
+        {
+          "filename": "5-117120-A-42.wav",
+          "expected": 0,
+          "dog_score": 0.08408474922180176
+        },
+        {
+          "filename": "5-117122-A-42.wav",
+          "expected": 0,
+          "dog_score": 0.6865702271461487
+        },
+        {
+          "filename": "5-117250-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.4165152609348297
+        },
+        {
+          "filename": "5-117773-A-16.wav",
+          "expected": 0,
+          "dog_score": 0.21648134291172028
+        },
+        {
+          "filename": "5-127990-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.14692945778369904
+        },
+        {
+          "filename": "5-133989-A-42.wav",
+          "expected": 0,
+          "dog_score": 0.23665748536586761
+        },
+        {
+          "filename": "5-133989-B-42.wav",
+          "expected": 0,
+          "dog_score": 0.30192017555236816
+        },
+        {
+          "filename": "5-141683-A-35.wav",
+          "expected": 0,
+          "dog_score": 0.26777011156082153
+        },
+        {
+          "filename": "5-147297-A-27.wav",
+          "expected": 0,
+          "dog_score": 0.3072691857814789
+        },
+        {
+          "filename": "5-150409-A-42.wav",
+          "expected": 0,
+          "dog_score": 0.37338337302207947
+        },
+        {
+          "filename": "5-151085-A-20.wav",
+          "expected": 0,
+          "dog_score": 0.15820880234241486
+        },
+        {
+          "filename": "5-156026-A-4.wav",
+          "expected": 0,
+          "dog_score": 0.7776158452033997
+        },
+        {
+          "filename": "5-156026-B-4.wav",
+          "expected": 0,
+          "dog_score": 0.705906331539154
+        },
+        {
+          "filename": "5-156026-C-4.wav",
+          "expected": 0,
+          "dog_score": 0.6548402309417725
+        },
+        {
+          "filename": "5-156026-D-4.wav",
+          "expected": 0,
+          "dog_score": 0.7550721168518066
+        },
+        {
+          "filename": "5-156698-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.2148202359676361
+        },
+        {
+          "filename": "5-156999-A-19.wav",
+          "expected": 0,
+          "dog_score": 0.2867494821548462
+        },
+        {
+          "filename": "5-156999-B-19.wav",
+          "expected": 0,
+          "dog_score": 0.43777114152908325
+        },
+        {
+          "filename": "5-156999-C-19.wav",
+          "expected": 0,
+          "dog_score": 0.29145896434783936
+        },
+        {
+          "filename": "5-156999-D-19.wav",
+          "expected": 0,
+          "dog_score": 0.3461552858352661
+        },
+        {
+          "filename": "5-156999-E-19.wav",
+          "expected": 0,
+          "dog_score": 0.16870257258415222
+        },
+        {
+          "filename": "5-157204-A-16.wav",
+          "expected": 0,
+          "dog_score": 0.14105787873268127
+        },
+        {
+          "filename": "5-157204-B-16.wav",
+          "expected": 0,
+          "dog_score": 0.1349453628063202
+        },
+        {
+          "filename": "5-160551-A-42.wav",
+          "expected": 0,
+          "dog_score": 0.33093467354774475
+        },
+        {
+          "filename": "5-160614-A-48.wav",
+          "expected": 0,
+          "dog_score": 0.19791285693645477
+        },
+        {
+          "filename": "5-160614-B-48.wav",
+          "expected": 0,
+          "dog_score": 0.23340050876140594
+        },
+        {
+          "filename": "5-160614-C-48.wav",
+          "expected": 0,
+          "dog_score": 0.19578783214092255
+        },
+        {
+          "filename": "5-160614-D-48.wav",
+          "expected": 0,
+          "dog_score": 0.19211384654045105
+        },
+        {
+          "filename": "5-160614-E-48.wav",
+          "expected": 0,
+          "dog_score": 0.1773008406162262
+        },
+        {
+          "filename": "5-160614-F-48.wav",
+          "expected": 0,
+          "dog_score": 0.20833081007003784
+        },
+        {
+          "filename": "5-160614-G-48.wav",
+          "expected": 0,
+          "dog_score": 0.26796039938926697
+        },
+        {
+          "filename": "5-160614-H-48.wav",
+          "expected": 0,
+          "dog_score": 0.18328973650932312
+        },
+        {
+          "filename": "5-161270-A-33.wav",
+          "expected": 0,
+          "dog_score": 0.26008957624435425
+        },
+        {
+          "filename": "5-161270-B-33.wav",
+          "expected": 0,
+          "dog_score": 0.2504992187023163
+        },
+        {
+          "filename": "5-169983-A-5.wav",
+          "expected": 0,
+          "dog_score": 0.26232439279556274
+        },
+        {
+          "filename": "5-170338-A-41.wav",
+          "expected": 0,
+          "dog_score": 0.0892857164144516
+        },
+        {
+          "filename": "5-170338-B-41.wav",
+          "expected": 0,
+          "dog_score": 0.075337715446949
+        },
+        {
+          "filename": "5-171118-A-26.wav",
+          "expected": 0,
+          "dog_score": 0.291983038187027
+        },
+        {
+          "filename": "5-171653-A-41.wav",
+          "expected": 0,
+          "dog_score": 0.040980029851198196
+        },
+        {
+          "filename": "5-172299-A-5.wav",
+          "expected": 0,
+          "dog_score": 0.41557207703590393
+        },
+        {
+          "filename": "5-172639-A-5.wav",
+          "expected": 0,
+          "dog_score": 0.11607447266578674
+        },
+        {
+          "filename": "5-173568-A-33.wav",
+          "expected": 0,
+          "dog_score": 0.25672388076782227
+        },
+        {
+          "filename": "5-177034-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.17092157900333405
+        },
+        {
+          "filename": "5-177614-A-5.wav",
+          "expected": 0,
+          "dog_score": 0.18631434440612793
+        },
+        {
+          "filename": "5-177779-A-33.wav",
+          "expected": 0,
+          "dog_score": 0.2618888020515442
+        },
+        {
+          "filename": "5-177957-A-40.wav",
+          "expected": 0,
+          "dog_score": 0.16272152960300446
+        },
+        {
+          "filename": "5-177957-B-40.wav",
+          "expected": 0,
+          "dog_score": 0.11882299929857254
+        },
+        {
+          "filename": "5-177957-C-40.wav",
+          "expected": 0,
+          "dog_score": 0.12885133922100067
+        },
+        {
+          "filename": "5-177957-D-40.wav",
+          "expected": 0,
+          "dog_score": 0.21487891674041748
+        },
+        {
+          "filename": "5-177957-E-40.wav",
+          "expected": 0,
+          "dog_score": 0.18871860206127167
+        },
+        {
+          "filename": "5-178997-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.08207403868436813
+        },
+        {
+          "filename": "5-179294-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.45482176542282104
+        },
+        {
+          "filename": "5-179496-A-16.wav",
+          "expected": 0,
+          "dog_score": 0.28548020124435425
+        },
+        {
+          "filename": "5-179496-B-16.wav",
+          "expected": 0,
+          "dog_score": 0.2152116894721985
+        },
+        {
+          "filename": "5-179860-A-43.wav",
+          "expected": 0,
+          "dog_score": 0.3466147482395172
+        },
+        {
+          "filename": "5-179863-A-43.wav",
+          "expected": 0,
+          "dog_score": 0.22423017024993896
+        },
+        {
+          "filename": "5-179865-A-43.wav",
+          "expected": 0,
+          "dog_score": 0.2565532326698303
+        },
+        {
+          "filename": "5-179866-A-43.wav",
+          "expected": 0,
+          "dog_score": 0.4692532420158386
+        },
+        {
+          "filename": "5-179868-A-43.wav",
+          "expected": 0,
+          "dog_score": 0.3736937940120697
+        },
+        {
+          "filename": "5-180156-A-43.wav",
+          "expected": 0,
+          "dog_score": 0.16005846858024597
+        },
+        {
+          "filename": "5-180156-B-43.wav",
+          "expected": 0,
+          "dog_score": 0.10629875212907791
+        },
+        {
+          "filename": "5-180156-C-43.wav",
+          "expected": 0,
+          "dog_score": 0.15904754400253296
+        },
+        {
+          "filename": "5-180229-A-27.wav",
+          "expected": 0,
+          "dog_score": 0.18757131695747375
+        },
+        {
+          "filename": "5-181458-A-33.wav",
+          "expected": 0,
+          "dog_score": 0.4115244448184967
+        },
+        {
+          "filename": "5-181766-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.17714767158031464
+        },
+        {
+          "filename": "5-181977-A-35.wav",
+          "expected": 0,
+          "dog_score": 0.23351947963237762
+        },
+        {
+          "filename": "5-182007-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.06042594090104103
+        },
+        {
+          "filename": "5-182010-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.05402322858572006
+        },
+        {
+          "filename": "5-182012-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.061824798583984375
+        },
+        {
+          "filename": "5-182404-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.08291248232126236
+        },
+        {
+          "filename": "5-184323-A-42.wav",
+          "expected": 0,
+          "dog_score": 0.8096592426300049
+        },
+        {
+          "filename": "5-184871-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.1633649319410324
+        },
+        {
+          "filename": "5-185516-A-27.wav",
+          "expected": 0,
+          "dog_score": 0.06427756696939468
+        },
+        {
+          "filename": "5-185579-A-41.wav",
+          "expected": 0,
+          "dog_score": 0.07761803269386292
+        },
+        {
+          "filename": "5-185579-B-41.wav",
+          "expected": 0,
+          "dog_score": 0.07908649742603302
+        },
+        {
+          "filename": "5-185908-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.16413676738739014
+        },
+        {
+          "filename": "5-186924-A-12.wav",
+          "expected": 0,
+          "dog_score": 0.04582184925675392
+        },
+        {
+          "filename": "5-187201-A-4.wav",
+          "expected": 0,
+          "dog_score": 0.1532306671142578
+        },
+        {
+          "filename": "5-187201-B-4.wav",
+          "expected": 0,
+          "dog_score": 0.1326097697019577
+        },
+        {
+          "filename": "5-187444-A-33.wav",
+          "expected": 0,
+          "dog_score": 0.10014116764068604
+        },
+        {
+          "filename": "5-187979-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.4234379827976227
+        },
+        {
+          "filename": "5-188365-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.08433211594820023
+        },
+        {
+          "filename": "5-188495-A-19.wav",
+          "expected": 0,
+          "dog_score": 0.5859582424163818
+        },
+        {
+          "filename": "5-188606-A-33.wav",
+          "expected": 0,
+          "dog_score": 0.44349104166030884
+        },
+        {
+          "filename": "5-188655-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.09598170965909958
+        },
+        {
+          "filename": "5-188716-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.5204103589057922
+        },
+        {
+          "filename": "5-188796-A-45.wav",
+          "expected": 0,
+          "dog_score": 0.22075077891349792
+        },
+        {
+          "filename": "5-188945-A-45.wav",
+          "expected": 0,
+          "dog_score": 0.2531391680240631
+        },
+        {
+          "filename": "5-189212-A-12.wav",
+          "expected": 0,
+          "dog_score": 0.15672370791435242
+        },
+        {
+          "filename": "5-189237-A-12.wav",
+          "expected": 0,
+          "dog_score": 0.5280870795249939
+        },
+        {
+          "filename": "5-189795-A-4.wav",
+          "expected": 0,
+          "dog_score": 0.19515252113342285
+        },
+        {
+          "filename": "5-191131-A-40.wav",
+          "expected": 0,
+          "dog_score": 0.35032451152801514
+        },
+        {
+          "filename": "5-191497-A-33.wav",
+          "expected": 0,
+          "dog_score": 0.31118518114089966
+        },
+        {
+          "filename": "5-192191-A-19.wav",
+          "expected": 0,
+          "dog_score": 0.414391428232193
+        },
+        {
+          "filename": "5-193339-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.0477609820663929
+        },
+        {
+          "filename": "5-193473-A-12.wav",
+          "expected": 0,
+          "dog_score": 0.14637067914009094
+        },
+        {
+          "filename": "5-193473-B-12.wav",
+          "expected": 0,
+          "dog_score": 0.19213593006134033
+        },
+        {
+          "filename": "5-194533-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.23055195808410645
+        },
+        {
+          "filename": "5-194892-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.047742556780576706
+        },
+        {
+          "filename": "5-194899-A-3.wav",
+          "expected": 0,
+          "dog_score": 0.4374065697193146
+        },
+        {
+          "filename": "5-194899-B-3.wav",
+          "expected": 0,
+          "dog_score": 0.5937700271606445
+        },
+        {
+          "filename": "5-194899-C-3.wav",
+          "expected": 0,
+          "dog_score": 0.5041831135749817
+        },
+        {
+          "filename": "5-194899-D-3.wav",
+          "expected": 0,
+          "dog_score": 0.5233408808708191
+        },
+        {
+          "filename": "5-194930-A-1.wav",
+          "expected": 0,
+          "dog_score": 0.6821761131286621
+        },
+        {
+          "filename": "5-194930-B-1.wav",
+          "expected": 0,
+          "dog_score": 0.5934452414512634
+        },
+        {
+          "filename": "5-194932-A-7.wav",
+          "expected": 0,
+          "dog_score": 0.30820155143737793
+        },
+        {
+          "filename": "5-195517-A-7.wav",
+          "expected": 0,
+          "dog_score": 0.30927661061286926
+        },
+        {
+          "filename": "5-195518-A-7.wav",
+          "expected": 0,
+          "dog_score": 0.10477768629789352
+        },
+        {
+          "filename": "5-195557-A-19.wav",
+          "expected": 0,
+          "dog_score": 0.4228249490261078
+        },
+        {
+          "filename": "5-195710-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.14204642176628113
+        },
+        {
+          "filename": "5-197118-A-45.wav",
+          "expected": 0,
+          "dog_score": 0.11561332643032074
+        },
+        {
+          "filename": "5-197121-A-45.wav",
+          "expected": 0,
+          "dog_score": 0.1481495052576065
+        },
+        {
+          "filename": "5-197121-B-45.wav",
+          "expected": 0,
+          "dog_score": 0.22240230441093445
+        },
+        {
+          "filename": "5-197446-A-7.wav",
+          "expected": 0,
+          "dog_score": 0.2362648844718933
+        },
+        {
+          "filename": "5-197913-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.09582643955945969
+        },
+        {
+          "filename": "5-197988-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.3571839928627014
+        },
+        {
+          "filename": "5-198278-A-7.wav",
+          "expected": 0,
+          "dog_score": 0.13625101745128632
+        },
+        {
+          "filename": "5-198278-B-7.wav",
+          "expected": 0,
+          "dog_score": 0.16459770500659943
+        },
+        {
+          "filename": "5-198278-C-7.wav",
+          "expected": 0,
+          "dog_score": 0.16501560807228088
+        },
+        {
+          "filename": "5-198321-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.10489022731781006
+        },
+        {
+          "filename": "5-198373-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.5500470995903015
+        },
+        {
+          "filename": "5-198411-A-20.wav",
+          "expected": 0,
+          "dog_score": 0.16806001961231232
+        },
+        {
+          "filename": "5-198411-B-20.wav",
+          "expected": 0,
+          "dog_score": 0.1935034692287445
+        },
+        {
+          "filename": "5-198411-C-20.wav",
+          "expected": 0,
+          "dog_score": 0.49552062153816223
+        },
+        {
+          "filename": "5-198411-D-20.wav",
+          "expected": 0,
+          "dog_score": 0.18535558879375458
+        },
+        {
+          "filename": "5-198411-E-20.wav",
+          "expected": 0,
+          "dog_score": 0.21427688002586365
+        },
+        {
+          "filename": "5-198411-F-20.wav",
+          "expected": 0,
+          "dog_score": 0.18448983132839203
+        },
+        {
+          "filename": "5-198411-G-20.wav",
+          "expected": 0,
+          "dog_score": 0.3341216444969177
+        },
+        {
+          "filename": "5-198600-A-45.wav",
+          "expected": 0,
+          "dog_score": 0.11087250709533691
+        },
+        {
+          "filename": "5-198891-A-8.wav",
+          "expected": 0,
+          "dog_score": 0.299935519695282
+        },
+        {
+          "filename": "5-198891-B-8.wav",
+          "expected": 0,
+          "dog_score": 0.3138291835784912
+        },
+        {
+          "filename": "5-198891-C-8.wav",
+          "expected": 0,
+          "dog_score": 0.3401205539703369
+        },
+        {
+          "filename": "5-198891-D-8.wav",
+          "expected": 0,
+          "dog_score": 0.24798861145973206
+        },
+        {
+          "filename": "5-199284-A-45.wav",
+          "expected": 0,
+          "dog_score": 0.2960202991962433
+        },
+        {
+          "filename": "5-199284-B-45.wav",
+          "expected": 0,
+          "dog_score": 0.08069297671318054
+        },
+        {
+          "filename": "5-200329-A-8.wav",
+          "expected": 0,
+          "dog_score": 0.5368934273719788
+        },
+        {
+          "filename": "5-200329-B-8.wav",
+          "expected": 0,
+          "dog_score": 0.5420799851417542
+        },
+        {
+          "filename": "5-200329-C-8.wav",
+          "expected": 0,
+          "dog_score": 0.6125664710998535
+        },
+        {
+          "filename": "5-200334-A-1.wav",
+          "expected": 0,
+          "dog_score": 0.5017949342727661
+        },
+        {
+          "filename": "5-200334-B-1.wav",
+          "expected": 0,
+          "dog_score": 0.40469592809677124
+        },
+        {
+          "filename": "5-200339-A-1.wav",
+          "expected": 0,
+          "dog_score": 0.4934990406036377
+        },
+        {
+          "filename": "5-200461-A-11.wav",
+          "expected": 0,
+          "dog_score": 0.20525451004505157
+        },
+        {
+          "filename": "5-200461-B-11.wav",
+          "expected": 0,
+          "dog_score": 0.18744033575057983
+        },
+        {
+          "filename": "5-201170-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.3742915391921997
+        },
+        {
+          "filename": "5-201172-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.29661479592323303
+        },
+        {
+          "filename": "5-201194-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.43860161304473877
+        },
+        {
+          "filename": "5-201274-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.5667365789413452
+        },
+        {
+          "filename": "5-201664-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.07256201654672623
+        },
+        {
+          "filename": "5-202020-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.1439783126115799
+        },
+        {
+          "filename": "5-202220-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.20359905064105988
+        },
+        {
+          "filename": "5-202540-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.11062119156122208
+        },
+        {
+          "filename": "5-202795-A-3.wav",
+          "expected": 0,
+          "dog_score": 0.43484339118003845
+        },
+        {
+          "filename": "5-202898-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.04403551295399666
+        },
+        {
+          "filename": "5-203128-A-0.wav",
+          "expected": 1,
+          "dog_score": 0.5088729858398438
+        },
+        {
+          "filename": "5-203128-B-0.wav",
+          "expected": 1,
+          "dog_score": 0.6065713167190552
+        },
+        {
+          "filename": "5-203739-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.07307478040456772
+        },
+        {
+          "filename": "5-204114-A-29.wav",
+          "expected": 0,
+          "dog_score": 0.24023640155792236
+        },
+        {
+          "filename": "5-204352-A-13.wav",
+          "expected": 0,
+          "dog_score": 0.07349596917629242
+        },
+        {
+          "filename": "5-204352-B-13.wav",
+          "expected": 0,
+          "dog_score": 0.07940736413002014
+        },
+        {
+          "filename": "5-204604-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.30117374658584595
+        },
+        {
+          "filename": "5-204741-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.3877270519733429
+        },
+        {
+          "filename": "5-205090-A-32.wav",
+          "expected": 0,
+          "dog_score": 0.5621285438537598
+        },
+        {
+          "filename": "5-205589-A-17.wav",
+          "expected": 0,
+          "dog_score": 0.3721592128276825
+        },
+        {
+          "filename": "5-205589-B-17.wav",
+          "expected": 0,
+          "dog_score": 0.44174233078956604
+        },
+        {
+          "filename": "5-205898-A-40.wav",
+          "expected": 0,
+          "dog_score": 0.23213347792625427
+        },
+        {
+          "filename": "5-207681-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.10622413456439972
+        },
+        {
+          "filename": "5-207781-A-17.wav",
+          "expected": 0,
+          "dog_score": 0.20389685034751892
+        },
+        {
+          "filename": "5-207811-A-35.wav",
+          "expected": 0,
+          "dog_score": 0.13985052704811096
+        },
+        {
+          "filename": "5-207811-B-35.wav",
+          "expected": 0,
+          "dog_score": 0.11497698724269867
+        },
+        {
+          "filename": "5-207836-A-29.wav",
+          "expected": 0,
+          "dog_score": 0.185224249958992
+        },
+        {
+          "filename": "5-207836-B-29.wav",
+          "expected": 0,
+          "dog_score": 0.17911291122436523
+        },
+        {
+          "filename": "5-207836-C-29.wav",
+          "expected": 0,
+          "dog_score": 0.24717089533805847
+        },
+        {
+          "filename": "5-207836-D-29.wav",
+          "expected": 0,
+          "dog_score": 0.34853923320770264
+        },
+        {
+          "filename": "5-208030-A-0.wav",
+          "expected": 1,
+          "dog_score": 0.22199423611164093
+        },
+        {
+          "filename": "5-208624-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.5441941618919373
+        },
+        {
+          "filename": "5-208761-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.23989063501358032
+        },
+        {
+          "filename": "5-208810-A-11.wav",
+          "expected": 0,
+          "dog_score": 0.1134033277630806
+        },
+        {
+          "filename": "5-208810-B-11.wav",
+          "expected": 0,
+          "dog_score": 0.13632579147815704
+        },
+        {
+          "filename": "5-209698-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.26861372590065
+        },
+        {
+          "filename": "5-209719-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.5590047240257263
+        },
+        {
+          "filename": "5-209833-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.41446447372436523
+        },
+        {
+          "filename": "5-209989-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.44414809346199036
+        },
+        {
+          "filename": "5-209992-A-44.wav",
+          "expected": 0,
+          "dog_score": 0.27367323637008667
+        },
+        {
+          "filename": "5-209992-B-44.wav",
+          "expected": 0,
+          "dog_score": 0.1703905612230301
+        },
+        {
+          "filename": "5-210540-A-13.wav",
+          "expected": 0,
+          "dog_score": 0.02313978224992752
+        },
+        {
+          "filename": "5-210571-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.6065973043441772
+        },
+        {
+          "filename": "5-210612-A-37.wav",
+          "expected": 0,
+          "dog_score": 0.10653770714998245
+        },
+        {
+          "filename": "5-211197-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.38528335094451904
+        },
+        {
+          "filename": "5-211408-A-37.wav",
+          "expected": 0,
+          "dog_score": 0.1638890951871872
+        },
+        {
+          "filename": "5-212050-A-27.wav",
+          "expected": 0,
+          "dog_score": 0.040957361459732056
+        },
+        {
+          "filename": "5-212054-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.18527786433696747
+        },
+        {
+          "filename": "5-212059-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.053718648850917816
+        },
+        {
+          "filename": "5-212181-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.5912309885025024
+        },
+        {
+          "filename": "5-212454-A-0.wav",
+          "expected": 1,
+          "dog_score": 0.5231298804283142
+        },
+        {
+          "filename": "5-212730-A-17.wav",
+          "expected": 0,
+          "dog_score": 0.13528764247894287
+        },
+        {
+          "filename": "5-212734-A-17.wav",
+          "expected": 0,
+          "dog_score": 0.14294376969337463
+        },
+        {
+          "filename": "5-212736-A-17.wav",
+          "expected": 0,
+          "dog_score": 0.30404964089393616
+        },
+        {
+          "filename": "5-213077-A-11.wav",
+          "expected": 0,
+          "dog_score": 0.09499727189540863
+        },
+        {
+          "filename": "5-213293-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.3342302739620209
+        },
+        {
+          "filename": "5-213802-A-12.wav",
+          "expected": 0,
+          "dog_score": 0.05525693669915199
+        },
+        {
+          "filename": "5-213836-A-9.wav",
+          "expected": 0,
+          "dog_score": 0.17868691682815552
+        },
+        {
+          "filename": "5-213836-B-9.wav",
+          "expected": 0,
+          "dog_score": 0.12633711099624634
+        },
+        {
+          "filename": "5-213836-C-9.wav",
+          "expected": 0,
+          "dog_score": 0.25255393981933594
+        },
+        {
+          "filename": "5-213836-D-9.wav",
+          "expected": 0,
+          "dog_score": 0.15821798145771027
+        },
+        {
+          "filename": "5-213855-A-0.wav",
+          "expected": 1,
+          "dog_score": 0.5875087976455688
+        },
+        {
+          "filename": "5-214362-A-17.wav",
+          "expected": 0,
+          "dog_score": 0.30627796053886414
+        },
+        {
+          "filename": "5-214759-A-5.wav",
+          "expected": 0,
+          "dog_score": 0.44989171624183655
+        },
+        {
+          "filename": "5-214759-B-5.wav",
+          "expected": 0,
+          "dog_score": 0.45201942324638367
+        },
+        {
+          "filename": "5-214869-A-9.wav",
+          "expected": 0,
+          "dog_score": 0.34454891085624695
+        },
+        {
+          "filename": "5-215005-A-32.wav",
+          "expected": 0,
+          "dog_score": 0.42749470472335815
+        },
+        {
+          "filename": "5-215172-A-13.wav",
+          "expected": 0,
+          "dog_score": 0.20583009719848633
+        },
+        {
+          "filename": "5-215179-A-13.wav",
+          "expected": 0,
+          "dog_score": 0.23456674814224243
+        },
+        {
+          "filename": "5-215445-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.7491685152053833
+        },
+        {
+          "filename": "5-215447-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.8224287033081055
+        },
+        {
+          "filename": "5-215449-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.8593069911003113
+        },
+        {
+          "filename": "5-215634-A-17.wav",
+          "expected": 0,
+          "dog_score": 0.17342457175254822
+        },
+        {
+          "filename": "5-215658-A-12.wav",
+          "expected": 0,
+          "dog_score": 0.11306364834308624
+        },
+        {
+          "filename": "5-215658-B-12.wav",
+          "expected": 0,
+          "dog_score": 0.06375819444656372
+        },
+        {
+          "filename": "5-216131-A-32.wav",
+          "expected": 0,
+          "dog_score": 0.23934385180473328
+        },
+        {
+          "filename": "5-216213-A-13.wav",
+          "expected": 0,
+          "dog_score": 0.2603278160095215
+        },
+        {
+          "filename": "5-216214-A-13.wav",
+          "expected": 0,
+          "dog_score": 0.12964186072349548
+        },
+        {
+          "filename": "5-216216-A-13.wav",
+          "expected": 0,
+          "dog_score": 0.15747205913066864
+        },
+        {
+          "filename": "5-216368-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.20039185881614685
+        },
+        {
+          "filename": "5-216370-A-41.wav",
+          "expected": 0,
+          "dog_score": 0.04164708033204079
+        },
+        {
+          "filename": "5-216370-B-41.wav",
+          "expected": 0,
+          "dog_score": 0.04176637902855873
+        },
+        {
+          "filename": "5-217158-A-0.wav",
+          "expected": 1,
+          "dog_score": 0.9152750968933105
+        },
+        {
+          "filename": "5-217186-A-16.wav",
+          "expected": 0,
+          "dog_score": 0.4039306640625
+        },
+        {
+          "filename": "5-217186-B-16.wav",
+          "expected": 0,
+          "dog_score": 0.6177794337272644
+        },
+        {
+          "filename": "5-217186-C-16.wav",
+          "expected": 0,
+          "dog_score": 0.6230388283729553
+        },
+        {
+          "filename": "5-218196-A-27.wav",
+          "expected": 0,
+          "dog_score": 0.2862167954444885
+        },
+        {
+          "filename": "5-218196-B-27.wav",
+          "expected": 0,
+          "dog_score": 0.26249152421951294
+        },
+        {
+          "filename": "5-218494-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.27345627546310425
+        },
+        {
+          "filename": "5-218980-A-30.wav",
+          "expected": 0,
+          "dog_score": 0.6292049288749695
+        },
+        {
+          "filename": "5-218981-A-30.wav",
+          "expected": 0,
+          "dog_score": 0.47404396533966064
+        },
+        {
+          "filename": "5-219044-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.46651288866996765
+        },
+        {
+          "filename": "5-219242-A-37.wav",
+          "expected": 0,
+          "dog_score": 0.10657162964344025
+        },
+        {
+          "filename": "5-219242-B-37.wav",
+          "expected": 0,
+          "dog_score": 0.06168527528643608
+        },
+        {
+          "filename": "5-219318-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.25296831130981445
+        },
+        {
+          "filename": "5-219342-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.7096089720726013
+        },
+        {
+          "filename": "5-219379-A-11.wav",
+          "expected": 0,
+          "dog_score": 0.20226122438907623
+        },
+        {
+          "filename": "5-219379-B-11.wav",
+          "expected": 0,
+          "dog_score": 0.22419941425323486
+        },
+        {
+          "filename": "5-219379-C-11.wav",
+          "expected": 0,
+          "dog_score": 0.22799919545650482
+        },
+        {
+          "filename": "5-220026-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.3784451484680176
+        },
+        {
+          "filename": "5-220027-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.32953470945358276
+        },
+        {
+          "filename": "5-220939-A-27.wav",
+          "expected": 0,
+          "dog_score": 0.3888067305088043
+        },
+        {
+          "filename": "5-220955-A-40.wav",
+          "expected": 0,
+          "dog_score": 0.5225189328193665
+        },
+        {
+          "filename": "5-221518-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.17429794371128082
+        },
+        {
+          "filename": "5-221528-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.4009990990161896
+        },
+        {
+          "filename": "5-221529-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.3795272707939148
+        },
+        {
+          "filename": "5-221567-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.0594656839966774
+        },
+        {
+          "filename": "5-221568-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.0882071852684021
+        },
+        {
+          "filename": "5-221593-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.47431981563568115
+        },
+        {
+          "filename": "5-221878-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.26221275329589844
+        },
+        {
+          "filename": "5-221950-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.46828708052635193
+        },
+        {
+          "filename": "5-222041-A-9.wav",
+          "expected": 0,
+          "dog_score": 0.17219246923923492
+        },
+        {
+          "filename": "5-222524-A-41.wav",
+          "expected": 0,
+          "dog_score": 0.14992816746234894
+        },
+        {
+          "filename": "5-222894-A-32.wav",
+          "expected": 0,
+          "dog_score": 0.0885140523314476
+        },
+        {
+          "filename": "5-223099-A-32.wav",
+          "expected": 0,
+          "dog_score": 0.2564612329006195
+        },
+        {
+          "filename": "5-223099-B-32.wav",
+          "expected": 0,
+          "dog_score": 0.20195327699184418
+        },
+        {
+          "filename": "5-223103-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.25594189763069153
+        },
+        {
+          "filename": "5-223176-A-37.wav",
+          "expected": 0,
+          "dog_score": 0.012415479868650436
+        },
+        {
+          "filename": "5-223317-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.1660703420639038
+        },
+        {
+          "filename": "5-223810-A-35.wav",
+          "expected": 0,
+          "dog_score": 0.2765876352787018
+        },
+        {
+          "filename": "5-231551-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.23461009562015533
+        },
+        {
+          "filename": "5-231762-A-0.wav",
+          "expected": 1,
+          "dog_score": 0.666240930557251
+        },
+        {
+          "filename": "5-232272-A-44.wav",
+          "expected": 0,
+          "dog_score": 0.1568455696105957
+        },
+        {
+          "filename": "5-232802-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.18099261820316315
+        },
+        {
+          "filename": "5-232816-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.3189566731452942
+        },
+        {
+          "filename": "5-233019-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.22114911675453186
+        },
+        {
+          "filename": "5-233160-A-1.wav",
+          "expected": 0,
+          "dog_score": 0.4636363089084625
+        },
+        {
+          "filename": "5-233260-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.4262795150279999
+        },
+        {
+          "filename": "5-233312-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.2329252064228058
+        },
+        {
+          "filename": "5-233605-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.39612504839897156
+        },
+        {
+          "filename": "5-233607-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.3562794327735901
+        },
+        {
+          "filename": "5-233645-A-37.wav",
+          "expected": 0,
+          "dog_score": 0.14407159388065338
+        },
+        {
+          "filename": "5-233787-A-7.wav",
+          "expected": 0,
+          "dog_score": 0.15002669394016266
+        },
+        {
+          "filename": "5-234145-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.1564919799566269
+        },
+        {
+          "filename": "5-234247-A-37.wav",
+          "expected": 0,
+          "dog_score": 0.3395821750164032
+        },
+        {
+          "filename": "5-234263-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.4353278875350952
+        },
+        {
+          "filename": "5-234335-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.30625587701797485
+        },
+        {
+          "filename": "5-234855-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.2165057361125946
+        },
+        {
+          "filename": "5-234879-A-1.wav",
+          "expected": 0,
+          "dog_score": 0.23871375620365143
+        },
+        {
+          "filename": "5-234879-B-1.wav",
+          "expected": 0,
+          "dog_score": 0.25425902009010315
+        },
+        {
+          "filename": "5-234923-A-32.wav",
+          "expected": 0,
+          "dog_score": 0.0755477175116539
+        },
+        {
+          "filename": "5-235507-A-44.wav",
+          "expected": 0,
+          "dog_score": 0.19970208406448364
+        },
+        {
+          "filename": "5-235593-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.22595372796058655
+        },
+        {
+          "filename": "5-235644-A-30.wav",
+          "expected": 0,
+          "dog_score": 0.37788236141204834
+        },
+        {
+          "filename": "5-235671-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.29528459906578064
+        },
+        {
+          "filename": "5-235874-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.18384681642055511
+        },
+        {
+          "filename": "5-235893-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.23636950552463531
+        },
+        {
+          "filename": "5-235956-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.6163525581359863
+        },
+        {
+          "filename": "5-236288-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.2718583345413208
+        },
+        {
+          "filename": "5-236299-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.2266998440027237
+        },
+        {
+          "filename": "5-237315-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.20118306577205658
+        },
+        {
+          "filename": "5-237499-A-4.wav",
+          "expected": 0,
+          "dog_score": 0.7558512091636658
+        },
+        {
+          "filename": "5-237795-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.0761369913816452
+        },
+        {
+          "filename": "5-238021-A-35.wav",
+          "expected": 0,
+          "dog_score": 0.06575215607881546
+        },
+        {
+          "filename": "5-238492-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.10423915088176727
+        },
+        {
+          "filename": "5-238926-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.346760094165802
+        },
+        {
+          "filename": "5-238938-A-27.wav",
+          "expected": 0,
+          "dog_score": 0.22300651669502258
+        },
+        {
+          "filename": "5-240671-A-44.wav",
+          "expected": 0,
+          "dog_score": 0.14049994945526123
+        },
+        {
+          "filename": "5-241846-A-15.wav",
+          "expected": 0,
+          "dog_score": 0.19121593236923218
+        },
+        {
+          "filename": "5-242490-A-14.wav",
+          "expected": 0,
+          "dog_score": 0.5305612087249756
+        },
+        {
+          "filename": "5-242491-A-14.wav",
+          "expected": 0,
+          "dog_score": 0.4583960473537445
+        },
+        {
+          "filename": "5-242492-A-3.wav",
+          "expected": 0,
+          "dog_score": 0.3751160800457001
+        },
+        {
+          "filename": "5-242711-A-9.wav",
+          "expected": 0,
+          "dog_score": 0.39113879203796387
+        },
+        {
+          "filename": "5-242932-A-26.wav",
+          "expected": 0,
+          "dog_score": 0.4451128840446472
+        },
+        {
+          "filename": "5-242932-B-26.wav",
+          "expected": 0,
+          "dog_score": 0.3532385528087616
+        },
+        {
+          "filename": "5-243025-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.2491178959608078
+        },
+        {
+          "filename": "5-243036-A-29.wav",
+          "expected": 0,
+          "dog_score": 0.414937287569046
+        },
+        {
+          "filename": "5-243448-A-14.wav",
+          "expected": 0,
+          "dog_score": 0.3259179890155792
+        },
+        {
+          "filename": "5-243449-A-14.wav",
+          "expected": 0,
+          "dog_score": 0.3818809986114502
+        },
+        {
+          "filename": "5-243450-A-14.wav",
+          "expected": 0,
+          "dog_score": 0.09882768243551254
+        },
+        {
+          "filename": "5-243459-A-14.wav",
+          "expected": 0,
+          "dog_score": 0.09308625757694244
+        },
+        {
+          "filename": "5-243459-B-14.wav",
+          "expected": 0,
+          "dog_score": 0.1519208550453186
+        },
+        {
+          "filename": "5-243635-A-29.wav",
+          "expected": 0,
+          "dog_score": 0.5845240950584412
+        },
+        {
+          "filename": "5-243773-A-44.wav",
+          "expected": 0,
+          "dog_score": 0.2742113471031189
+        },
+        {
+          "filename": "5-243773-B-44.wav",
+          "expected": 0,
+          "dog_score": 0.218154639005661
+        },
+        {
+          "filename": "5-243783-A-44.wav",
+          "expected": 0,
+          "dog_score": 0.273435115814209
+        },
+        {
+          "filename": "5-244178-A-32.wav",
+          "expected": 0,
+          "dog_score": 0.28138643503189087
+        },
+        {
+          "filename": "5-244310-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.13162142038345337
+        },
+        {
+          "filename": "5-244315-A-6.wav",
+          "expected": 0,
+          "dog_score": 0.43296709656715393
+        },
+        {
+          "filename": "5-244315-B-6.wav",
+          "expected": 0,
+          "dog_score": 0.26523271203041077
+        },
+        {
+          "filename": "5-244315-C-6.wav",
+          "expected": 0,
+          "dog_score": 0.24679748713970184
+        },
+        {
+          "filename": "5-244327-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.13505946099758148
+        },
+        {
+          "filename": "5-244459-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.23372654616832733
+        },
+        {
+          "filename": "5-244526-A-26.wav",
+          "expected": 0,
+          "dog_score": 0.17548879981040955
+        },
+        {
+          "filename": "5-244651-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.4643378257751465
+        },
+        {
+          "filename": "5-244933-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.2131381332874298
+        },
+        {
+          "filename": "5-245040-A-35.wav",
+          "expected": 0,
+          "dog_score": 0.3449169099330902
+        },
+        {
+          "filename": "5-248341-A-6.wav",
+          "expected": 0,
+          "dog_score": 0.4695376455783844
+        },
+        {
+          "filename": "5-248341-B-6.wav",
+          "expected": 0,
+          "dog_score": 0.6377971768379211
+        },
+        {
+          "filename": "5-248341-C-6.wav",
+          "expected": 0,
+          "dog_score": 0.3585923910140991
+        },
+        {
+          "filename": "5-249748-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.3069545328617096
+        },
+        {
+          "filename": "5-249937-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.19133494794368744
+        },
+        {
+          "filename": "5-250026-A-30.wav",
+          "expected": 0,
+          "dog_score": 0.7997586727142334
+        },
+        {
+          "filename": "5-250026-B-30.wav",
+          "expected": 0,
+          "dog_score": 0.23638203740119934
+        },
+        {
+          "filename": "5-250258-A-49.wav",
+          "expected": 0,
+          "dog_score": 0.14989860355854034
+        },
+        {
+          "filename": "5-250629-A-37.wav",
+          "expected": 0,
+          "dog_score": 0.050443779677152634
+        },
+        {
+          "filename": "5-250753-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.08696816116571426
+        },
+        {
+          "filename": "5-251426-A-30.wav",
+          "expected": 0,
+          "dog_score": 0.7783867716789246
+        },
+        {
+          "filename": "5-251426-B-30.wav",
+          "expected": 0,
+          "dog_score": 0.5606061220169067
+        },
+        {
+          "filename": "5-251489-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.5376400947570801
+        },
+        {
+          "filename": "5-251957-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.17323781549930573
+        },
+        {
+          "filename": "5-251962-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.12401466816663742
+        },
+        {
+          "filename": "5-251963-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.11639099568128586
+        },
+        {
+          "filename": "5-251971-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.09480287879705429
+        },
+        {
+          "filename": "5-252248-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.3425314128398895
+        },
+        {
+          "filename": "5-253085-A-3.wav",
+          "expected": 0,
+          "dog_score": 0.30996251106262207
+        },
+        {
+          "filename": "5-253085-B-3.wav",
+          "expected": 0,
+          "dog_score": 0.15821893513202667
+        },
+        {
+          "filename": "5-253094-A-49.wav",
+          "expected": 0,
+          "dog_score": 0.07657283544540405
+        },
+        {
+          "filename": "5-253094-B-49.wav",
+          "expected": 0,
+          "dog_score": 0.07360880821943283
+        },
+        {
+          "filename": "5-253094-C-49.wav",
+          "expected": 0,
+          "dog_score": 0.08973293006420135
+        },
+        {
+          "filename": "5-253094-D-49.wav",
+          "expected": 0,
+          "dog_score": 0.11254457384347916
+        },
+        {
+          "filename": "5-253101-A-49.wav",
+          "expected": 0,
+          "dog_score": 0.047094106674194336
+        },
+        {
+          "filename": "5-253101-B-49.wav",
+          "expected": 0,
+          "dog_score": 0.06865990906953812
+        },
+        {
+          "filename": "5-253101-C-49.wav",
+          "expected": 0,
+          "dog_score": 0.056511566042900085
+        },
+        {
+          "filename": "5-253534-A-26.wav",
+          "expected": 0,
+          "dog_score": 0.2641763687133789
+        },
+        {
+          "filename": "5-254160-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.2600865662097931
+        },
+        {
+          "filename": "5-254832-A-15.wav",
+          "expected": 0,
+          "dog_score": 0.33322063088417053
+        },
+        {
+          "filename": "5-254832-B-15.wav",
+          "expected": 0,
+          "dog_score": 0.35507524013519287
+        },
+        {
+          "filename": "5-256452-A-5.wav",
+          "expected": 0,
+          "dog_score": 0.3705236315727234
+        },
+        {
+          "filename": "5-256512-A-30.wav",
+          "expected": 0,
+          "dog_score": 0.4374922811985016
+        },
+        {
+          "filename": "5-257349-A-15.wav",
+          "expected": 0,
+          "dog_score": 0.33854302763938904
+        },
+        {
+          "filename": "5-257642-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.11022346466779709
+        },
+        {
+          "filename": "5-257839-A-14.wav",
+          "expected": 0,
+          "dog_score": 0.02760321833193302
+        },
+        {
+          "filename": "5-259169-A-5.wav",
+          "expected": 0,
+          "dog_score": 0.4180808663368225
+        },
+        {
+          "filename": "5-259180-A-15.wav",
+          "expected": 0,
+          "dog_score": 0.44118914008140564
+        },
+        {
+          "filename": "5-259514-A-26.wav",
+          "expected": 0,
+          "dog_score": 0.21368497610092163
+        },
+        {
+          "filename": "5-259640-A-29.wav",
+          "expected": 0,
+          "dog_score": 0.47936832904815674
+        },
+        {
+          "filename": "5-260011-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.41374439001083374
+        },
+        {
+          "filename": "5-260164-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.06972214579582214
+        },
+        {
+          "filename": "5-260432-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.42778918147087097
+        },
+        {
+          "filename": "5-260433-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.47497859597206116
+        },
+        {
+          "filename": "5-260434-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.3453468680381775
+        },
+        {
+          "filename": "5-260875-A-35.wav",
+          "expected": 0,
+          "dog_score": 0.25492483377456665
+        },
+        {
+          "filename": "5-261325-A-9.wav",
+          "expected": 0,
+          "dog_score": 0.22720688581466675
+        },
+        {
+          "filename": "5-261433-A-15.wav",
+          "expected": 0,
+          "dog_score": 0.524963915348053
+        },
+        {
+          "filename": "5-261439-A-15.wav",
+          "expected": 0,
+          "dog_score": 0.40218156576156616
+        },
+        {
+          "filename": "5-261464-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.42021444439888
+        },
+        {
+          "filename": "5-262641-A-15.wav",
+          "expected": 0,
+          "dog_score": 0.564129114151001
+        },
+        {
+          "filename": "5-262957-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.12022905796766281
+        },
+        {
+          "filename": "5-263490-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.3970550298690796
+        },
+        {
+          "filename": "5-263491-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.43781429529190063
+        },
+        {
+          "filename": "5-263501-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.4202107787132263
+        },
+        {
+          "filename": "5-263775-A-26.wav",
+          "expected": 0,
+          "dog_score": 0.3207780718803406
+        },
+        {
+          "filename": "5-263775-B-26.wav",
+          "expected": 0,
+          "dog_score": 0.23100237548351288
+        },
+        {
+          "filename": "5-263831-A-6.wav",
+          "expected": 0,
+          "dog_score": 0.34938758611679077
+        },
+        {
+          "filename": "5-263831-B-6.wav",
+          "expected": 0,
+          "dog_score": 0.35626769065856934
+        },
+        {
+          "filename": "5-263902-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.09573998302221298
+        },
+        {
+          "filename": "5-51149-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.11560830473899841
+        },
+        {
+          "filename": "5-61635-A-8.wav",
+          "expected": 0,
+          "dog_score": 0.2282092124223709
+        },
+        {
+          "filename": "5-9032-A-0.wav",
+          "expected": 1,
+          "dog_score": 0.24258126318454742
+        }
+      ]
+    },
+    "lstm": {
+      "epoch": 18,
+      "validation": {
+        "samples": 398,
+        "dog_support": 8,
+        "precision": 0.8,
+        "recall": 1.0,
+        "f1": 0.8888888888888888,
+        "false_positive_rate": 0.005128205128205128,
+        "confusion": {
+          "tp": 8,
+          "fp": 2,
+          "fn": 0,
+          "tn": 388
+        },
+        "threshold": 0.9
+      },
+      "test": {
+        "samples": 400,
+        "dog_support": 8,
+        "precision": 0.625,
+        "recall": 0.625,
+        "f1": 0.625,
+        "false_positive_rate": 0.007653061224489796,
+        "confusion": {
+          "tp": 5,
+          "fp": 3,
+          "fn": 3,
+          "tn": 389
+        },
+        "threshold": 0.9
+      },
+      "checkpoint_sha256": "5afd302ec62b37b880a08f3f92d3d2c0d1603fe8395af920a4bcb2e7be6b7499",
+      "predictions": [
+        {
+          "filename": "5-103415-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.013691982254385948
+        },
+        {
+          "filename": "5-103416-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.05932121351361275
+        },
+        {
+          "filename": "5-103418-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.024214359000325203
+        },
+        {
+          "filename": "5-103420-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.017094137147068977
+        },
+        {
+          "filename": "5-103421-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.022517669945955276
+        },
+        {
+          "filename": "5-103422-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.061974309384822845
+        },
+        {
+          "filename": "5-117118-A-42.wav",
+          "expected": 0,
+          "dog_score": 0.020157465711236
+        },
+        {
+          "filename": "5-117120-A-42.wav",
+          "expected": 0,
+          "dog_score": 0.010602259077131748
+        },
+        {
+          "filename": "5-117122-A-42.wav",
+          "expected": 0,
+          "dog_score": 0.025832265615463257
+        },
+        {
+          "filename": "5-117250-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.05013791099190712
+        },
+        {
+          "filename": "5-117773-A-16.wav",
+          "expected": 0,
+          "dog_score": 0.0054857456125319
+        },
+        {
+          "filename": "5-127990-A-2.wav",
+          "expected": 0,
+          "dog_score": 0.008122933097183704
+        },
+        {
+          "filename": "5-133989-A-42.wav",
+          "expected": 0,
+          "dog_score": 0.03350120782852173
+        },
+        {
+          "filename": "5-133989-B-42.wav",
+          "expected": 0,
+          "dog_score": 0.011429701000452042
+        },
+        {
+          "filename": "5-141683-A-35.wav",
+          "expected": 0,
+          "dog_score": 0.005666873883455992
+        },
+        {
+          "filename": "5-147297-A-27.wav",
+          "expected": 0,
+          "dog_score": 0.024780748412013054
+        },
+        {
+          "filename": "5-150409-A-42.wav",
+          "expected": 0,
+          "dog_score": 0.014691908843815327
+        },
+        {
+          "filename": "5-151085-A-20.wav",
+          "expected": 0,
+          "dog_score": 0.02187487855553627
+        },
+        {
+          "filename": "5-156026-A-4.wav",
+          "expected": 0,
+          "dog_score": 0.2651771605014801
+        },
+        {
+          "filename": "5-156026-B-4.wav",
+          "expected": 0,
+          "dog_score": 0.1360313892364502
+        },
+        {
+          "filename": "5-156026-C-4.wav",
+          "expected": 0,
+          "dog_score": 0.11381783336400986
+        },
+        {
+          "filename": "5-156026-D-4.wav",
+          "expected": 0,
+          "dog_score": 0.2217692881822586
+        },
+        {
+          "filename": "5-156698-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.005408289842307568
+        },
+        {
+          "filename": "5-156999-A-19.wav",
+          "expected": 0,
+          "dog_score": 0.013380518183112144
+        },
+        {
+          "filename": "5-156999-B-19.wav",
+          "expected": 0,
+          "dog_score": 0.057955849915742874
+        },
+        {
+          "filename": "5-156999-C-19.wav",
+          "expected": 0,
+          "dog_score": 0.021291783079504967
+        },
+        {
+          "filename": "5-156999-D-19.wav",
+          "expected": 0,
+          "dog_score": 0.02489626035094261
+        },
+        {
+          "filename": "5-156999-E-19.wav",
+          "expected": 0,
+          "dog_score": 0.02667251043021679
+        },
+        {
+          "filename": "5-157204-A-16.wav",
+          "expected": 0,
+          "dog_score": 0.007277893368154764
+        },
+        {
+          "filename": "5-157204-B-16.wav",
+          "expected": 0,
+          "dog_score": 0.007344776764512062
+        },
+        {
+          "filename": "5-160551-A-42.wav",
+          "expected": 0,
+          "dog_score": 0.021546754986047745
+        },
+        {
+          "filename": "5-160614-A-48.wav",
+          "expected": 0,
+          "dog_score": 0.007409646175801754
+        },
+        {
+          "filename": "5-160614-B-48.wav",
+          "expected": 0,
+          "dog_score": 0.005809110123664141
+        },
+        {
+          "filename": "5-160614-C-48.wav",
+          "expected": 0,
+          "dog_score": 0.010075598955154419
+        },
+        {
+          "filename": "5-160614-D-48.wav",
+          "expected": 0,
+          "dog_score": 0.005032064858824015
+        },
+        {
+          "filename": "5-160614-E-48.wav",
+          "expected": 0,
+          "dog_score": 0.009844337590038776
+        },
+        {
+          "filename": "5-160614-F-48.wav",
+          "expected": 0,
+          "dog_score": 0.0060324901714921
+        },
+        {
+          "filename": "5-160614-G-48.wav",
+          "expected": 0,
+          "dog_score": 0.0076583195477724075
+        },
+        {
+          "filename": "5-160614-H-48.wav",
+          "expected": 0,
+          "dog_score": 0.005096173379570246
+        },
+        {
+          "filename": "5-161270-A-33.wav",
+          "expected": 0,
+          "dog_score": 0.009969018399715424
+        },
+        {
+          "filename": "5-161270-B-33.wav",
+          "expected": 0,
+          "dog_score": 0.00883554108440876
+        },
+        {
+          "filename": "5-169983-A-5.wav",
+          "expected": 0,
+          "dog_score": 0.013107231818139553
+        },
+        {
+          "filename": "5-170338-A-41.wav",
+          "expected": 0,
+          "dog_score": 0.009460902772843838
+        },
+        {
+          "filename": "5-170338-B-41.wav",
+          "expected": 0,
+          "dog_score": 0.010626289993524551
+        },
+        {
+          "filename": "5-171118-A-26.wav",
+          "expected": 0,
+          "dog_score": 0.011991498991847038
+        },
+        {
+          "filename": "5-171653-A-41.wav",
+          "expected": 0,
+          "dog_score": 0.019813135266304016
+        },
+        {
+          "filename": "5-172299-A-5.wav",
+          "expected": 0,
+          "dog_score": 0.058498647063970566
+        },
+        {
+          "filename": "5-172639-A-5.wav",
+          "expected": 0,
+          "dog_score": 0.021847190335392952
+        },
+        {
+          "filename": "5-173568-A-33.wav",
+          "expected": 0,
+          "dog_score": 0.013472147285938263
+        },
+        {
+          "filename": "5-177034-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.008984885178506374
+        },
+        {
+          "filename": "5-177614-A-5.wav",
+          "expected": 0,
+          "dog_score": 0.01495265495032072
+        },
+        {
+          "filename": "5-177779-A-33.wav",
+          "expected": 0,
+          "dog_score": 0.016817312687635422
+        },
+        {
+          "filename": "5-177957-A-40.wav",
+          "expected": 0,
+          "dog_score": 0.006969974376261234
+        },
+        {
+          "filename": "5-177957-B-40.wav",
+          "expected": 0,
+          "dog_score": 0.008225581608712673
+        },
+        {
+          "filename": "5-177957-C-40.wav",
+          "expected": 0,
+          "dog_score": 0.008335037156939507
+        },
+        {
+          "filename": "5-177957-D-40.wav",
+          "expected": 0,
+          "dog_score": 0.009365241974592209
+        },
+        {
+          "filename": "5-177957-E-40.wav",
+          "expected": 0,
+          "dog_score": 0.008646074682474136
+        },
+        {
+          "filename": "5-178997-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.010059640742838383
+        },
+        {
+          "filename": "5-179294-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.007668671663850546
+        },
+        {
+          "filename": "5-179496-A-16.wav",
+          "expected": 0,
+          "dog_score": 0.010081428103148937
+        },
+        {
+          "filename": "5-179496-B-16.wav",
+          "expected": 0,
+          "dog_score": 0.021709507331252098
+        },
+        {
+          "filename": "5-179860-A-43.wav",
+          "expected": 0,
+          "dog_score": 0.011233913712203503
+        },
+        {
+          "filename": "5-179863-A-43.wav",
+          "expected": 0,
+          "dog_score": 0.01275493111461401
+        },
+        {
+          "filename": "5-179865-A-43.wav",
+          "expected": 0,
+          "dog_score": 0.01978996768593788
+        },
+        {
+          "filename": "5-179866-A-43.wav",
+          "expected": 0,
+          "dog_score": 0.03947528451681137
+        },
+        {
+          "filename": "5-179868-A-43.wav",
+          "expected": 0,
+          "dog_score": 0.009424738585948944
+        },
+        {
+          "filename": "5-180156-A-43.wav",
+          "expected": 0,
+          "dog_score": 0.024401830509305
+        },
+        {
+          "filename": "5-180156-B-43.wav",
+          "expected": 0,
+          "dog_score": 0.017183737829327583
+        },
+        {
+          "filename": "5-180156-C-43.wav",
+          "expected": 0,
+          "dog_score": 0.015355316922068596
+        },
+        {
+          "filename": "5-180229-A-27.wav",
+          "expected": 0,
+          "dog_score": 0.01287805289030075
+        },
+        {
+          "filename": "5-181458-A-33.wav",
+          "expected": 0,
+          "dog_score": 0.06768834590911865
+        },
+        {
+          "filename": "5-181766-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.010265563614666462
+        },
+        {
+          "filename": "5-181977-A-35.wav",
+          "expected": 0,
+          "dog_score": 0.006686640437692404
+        },
+        {
+          "filename": "5-182007-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.016542088240385056
+        },
+        {
+          "filename": "5-182010-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.019337832927703857
+        },
+        {
+          "filename": "5-182012-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.019359011203050613
+        },
+        {
+          "filename": "5-182404-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.03633231669664383
+        },
+        {
+          "filename": "5-184323-A-42.wav",
+          "expected": 0,
+          "dog_score": 0.9805005788803101
+        },
+        {
+          "filename": "5-184871-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.02356112003326416
+        },
+        {
+          "filename": "5-185516-A-27.wav",
+          "expected": 0,
+          "dog_score": 0.005281150806695223
+        },
+        {
+          "filename": "5-185579-A-41.wav",
+          "expected": 0,
+          "dog_score": 0.01231035403907299
+        },
+        {
+          "filename": "5-185579-B-41.wav",
+          "expected": 0,
+          "dog_score": 0.02548035979270935
+        },
+        {
+          "filename": "5-185908-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.006739841308444738
+        },
+        {
+          "filename": "5-186924-A-12.wav",
+          "expected": 0,
+          "dog_score": 0.009501361288130283
+        },
+        {
+          "filename": "5-187201-A-4.wav",
+          "expected": 0,
+          "dog_score": 0.007229484152048826
+        },
+        {
+          "filename": "5-187201-B-4.wav",
+          "expected": 0,
+          "dog_score": 0.008357455022633076
+        },
+        {
+          "filename": "5-187444-A-33.wav",
+          "expected": 0,
+          "dog_score": 0.00785139948129654
+        },
+        {
+          "filename": "5-187979-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.017398467287421227
+        },
+        {
+          "filename": "5-188365-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.011942937038838863
+        },
+        {
+          "filename": "5-188495-A-19.wav",
+          "expected": 0,
+          "dog_score": 0.16089409589767456
+        },
+        {
+          "filename": "5-188606-A-33.wav",
+          "expected": 0,
+          "dog_score": 0.014013966545462608
+        },
+        {
+          "filename": "5-188655-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.00862087681889534
+        },
+        {
+          "filename": "5-188716-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.012989073991775513
+        },
+        {
+          "filename": "5-188796-A-45.wav",
+          "expected": 0,
+          "dog_score": 0.027334056794643402
+        },
+        {
+          "filename": "5-188945-A-45.wav",
+          "expected": 0,
+          "dog_score": 0.045090824365615845
+        },
+        {
+          "filename": "5-189212-A-12.wav",
+          "expected": 0,
+          "dog_score": 0.013228216208517551
+        },
+        {
+          "filename": "5-189237-A-12.wav",
+          "expected": 0,
+          "dog_score": 0.02109885960817337
+        },
+        {
+          "filename": "5-189795-A-4.wav",
+          "expected": 0,
+          "dog_score": 0.009550017304718494
+        },
+        {
+          "filename": "5-191131-A-40.wav",
+          "expected": 0,
+          "dog_score": 0.009586209431290627
+        },
+        {
+          "filename": "5-191497-A-33.wav",
+          "expected": 0,
+          "dog_score": 0.017464065924286842
+        },
+        {
+          "filename": "5-192191-A-19.wav",
+          "expected": 0,
+          "dog_score": 0.01458525750786066
+        },
+        {
+          "filename": "5-193339-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.00654522143304348
+        },
+        {
+          "filename": "5-193473-A-12.wav",
+          "expected": 0,
+          "dog_score": 0.009049993939697742
+        },
+        {
+          "filename": "5-193473-B-12.wav",
+          "expected": 0,
+          "dog_score": 0.013524525798857212
+        },
+        {
+          "filename": "5-194533-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.016114646568894386
+        },
+        {
+          "filename": "5-194892-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.014976180158555508
+        },
+        {
+          "filename": "5-194899-A-3.wav",
+          "expected": 0,
+          "dog_score": 0.02537405863404274
+        },
+        {
+          "filename": "5-194899-B-3.wav",
+          "expected": 0,
+          "dog_score": 0.7694205641746521
+        },
+        {
+          "filename": "5-194899-C-3.wav",
+          "expected": 0,
+          "dog_score": 0.034887269139289856
+        },
+        {
+          "filename": "5-194899-D-3.wav",
+          "expected": 0,
+          "dog_score": 0.014006444253027439
+        },
+        {
+          "filename": "5-194930-A-1.wav",
+          "expected": 0,
+          "dog_score": 0.9119585752487183
+        },
+        {
+          "filename": "5-194930-B-1.wav",
+          "expected": 0,
+          "dog_score": 0.19915851950645447
+        },
+        {
+          "filename": "5-194932-A-7.wav",
+          "expected": 0,
+          "dog_score": 0.0051400745287537575
+        },
+        {
+          "filename": "5-195517-A-7.wav",
+          "expected": 0,
+          "dog_score": 0.01476326584815979
+        },
+        {
+          "filename": "5-195518-A-7.wav",
+          "expected": 0,
+          "dog_score": 0.006081189960241318
+        },
+        {
+          "filename": "5-195557-A-19.wav",
+          "expected": 0,
+          "dog_score": 0.01081218384206295
+        },
+        {
+          "filename": "5-195710-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.005902005825191736
+        },
+        {
+          "filename": "5-197118-A-45.wav",
+          "expected": 0,
+          "dog_score": 0.005189604125916958
+        },
+        {
+          "filename": "5-197121-A-45.wav",
+          "expected": 0,
+          "dog_score": 0.005276476498693228
+        },
+        {
+          "filename": "5-197121-B-45.wav",
+          "expected": 0,
+          "dog_score": 0.00614269869402051
+        },
+        {
+          "filename": "5-197446-A-7.wav",
+          "expected": 0,
+          "dog_score": 0.006594039965420961
+        },
+        {
+          "filename": "5-197913-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.00799186434596777
+        },
+        {
+          "filename": "5-197988-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.023537486791610718
+        },
+        {
+          "filename": "5-198278-A-7.wav",
+          "expected": 0,
+          "dog_score": 0.008378071710467339
+        },
+        {
+          "filename": "5-198278-B-7.wav",
+          "expected": 0,
+          "dog_score": 0.008316580206155777
+        },
+        {
+          "filename": "5-198278-C-7.wav",
+          "expected": 0,
+          "dog_score": 0.007732548285275698
+        },
+        {
+          "filename": "5-198321-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.00926108006387949
+        },
+        {
+          "filename": "5-198373-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.022224698215723038
+        },
+        {
+          "filename": "5-198411-A-20.wav",
+          "expected": 0,
+          "dog_score": 0.020127980038523674
+        },
+        {
+          "filename": "5-198411-B-20.wav",
+          "expected": 0,
+          "dog_score": 0.008639005944132805
+        },
+        {
+          "filename": "5-198411-C-20.wav",
+          "expected": 0,
+          "dog_score": 0.38900116086006165
+        },
+        {
+          "filename": "5-198411-D-20.wav",
+          "expected": 0,
+          "dog_score": 0.01605955883860588
+        },
+        {
+          "filename": "5-198411-E-20.wav",
+          "expected": 0,
+          "dog_score": 0.018889835104346275
+        },
+        {
+          "filename": "5-198411-F-20.wav",
+          "expected": 0,
+          "dog_score": 0.01220644824206829
+        },
+        {
+          "filename": "5-198411-G-20.wav",
+          "expected": 0,
+          "dog_score": 0.03204828500747681
+        },
+        {
+          "filename": "5-198600-A-45.wav",
+          "expected": 0,
+          "dog_score": 0.014383248053491116
+        },
+        {
+          "filename": "5-198891-A-8.wav",
+          "expected": 0,
+          "dog_score": 0.015311839990317822
+        },
+        {
+          "filename": "5-198891-B-8.wav",
+          "expected": 0,
+          "dog_score": 0.01434256974607706
+        },
+        {
+          "filename": "5-198891-C-8.wav",
+          "expected": 0,
+          "dog_score": 0.016718383878469467
+        },
+        {
+          "filename": "5-198891-D-8.wav",
+          "expected": 0,
+          "dog_score": 0.010772980749607086
+        },
+        {
+          "filename": "5-199284-A-45.wav",
+          "expected": 0,
+          "dog_score": 0.005733347497880459
+        },
+        {
+          "filename": "5-199284-B-45.wav",
+          "expected": 0,
+          "dog_score": 0.014791854657232761
+        },
+        {
+          "filename": "5-200329-A-8.wav",
+          "expected": 0,
+          "dog_score": 0.019820934161543846
+        },
+        {
+          "filename": "5-200329-B-8.wav",
+          "expected": 0,
+          "dog_score": 0.020246461033821106
+        },
+        {
+          "filename": "5-200329-C-8.wav",
+          "expected": 0,
+          "dog_score": 0.04213295876979828
+        },
+        {
+          "filename": "5-200334-A-1.wav",
+          "expected": 0,
+          "dog_score": 0.8171784281730652
+        },
+        {
+          "filename": "5-200334-B-1.wav",
+          "expected": 0,
+          "dog_score": 0.026122160255908966
+        },
+        {
+          "filename": "5-200339-A-1.wav",
+          "expected": 0,
+          "dog_score": 0.046701982617378235
+        },
+        {
+          "filename": "5-200461-A-11.wav",
+          "expected": 0,
+          "dog_score": 0.010244423523545265
+        },
+        {
+          "filename": "5-200461-B-11.wav",
+          "expected": 0,
+          "dog_score": 0.013175508007407188
+        },
+        {
+          "filename": "5-201170-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.020957281813025475
+        },
+        {
+          "filename": "5-201172-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.01171725895255804
+        },
+        {
+          "filename": "5-201194-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.029630085453391075
+        },
+        {
+          "filename": "5-201274-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.15800374746322632
+        },
+        {
+          "filename": "5-201664-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.006384496111422777
+        },
+        {
+          "filename": "5-202020-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.009538023732602596
+        },
+        {
+          "filename": "5-202220-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.02282518334686756
+        },
+        {
+          "filename": "5-202540-A-18.wav",
+          "expected": 0,
+          "dog_score": 0.007931793108582497
+        },
+        {
+          "filename": "5-202795-A-3.wav",
+          "expected": 0,
+          "dog_score": 0.007528259884566069
+        },
+        {
+          "filename": "5-202898-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.008053484372794628
+        },
+        {
+          "filename": "5-203128-A-0.wav",
+          "expected": 1,
+          "dog_score": 0.9391481280326843
+        },
+        {
+          "filename": "5-203128-B-0.wav",
+          "expected": 1,
+          "dog_score": 0.9173386693000793
+        },
+        {
+          "filename": "5-203739-A-10.wav",
+          "expected": 0,
+          "dog_score": 0.008083022199571133
+        },
+        {
+          "filename": "5-204114-A-29.wav",
+          "expected": 0,
+          "dog_score": 0.013335270807147026
+        },
+        {
+          "filename": "5-204352-A-13.wav",
+          "expected": 0,
+          "dog_score": 0.0051401518285274506
+        },
+        {
+          "filename": "5-204352-B-13.wav",
+          "expected": 0,
+          "dog_score": 0.005677141714841127
+        },
+        {
+          "filename": "5-204604-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.017867237329483032
+        },
+        {
+          "filename": "5-204741-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.013012047857046127
+        },
+        {
+          "filename": "5-205090-A-32.wav",
+          "expected": 0,
+          "dog_score": 0.13409820199012756
+        },
+        {
+          "filename": "5-205589-A-17.wav",
+          "expected": 0,
+          "dog_score": 0.009459231048822403
+        },
+        {
+          "filename": "5-205589-B-17.wav",
+          "expected": 0,
+          "dog_score": 0.0188713651150465
+        },
+        {
+          "filename": "5-205898-A-40.wav",
+          "expected": 0,
+          "dog_score": 0.01717347279191017
+        },
+        {
+          "filename": "5-207681-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.010669379495084286
+        },
+        {
+          "filename": "5-207781-A-17.wav",
+          "expected": 0,
+          "dog_score": 0.01307202223688364
+        },
+        {
+          "filename": "5-207811-A-35.wav",
+          "expected": 0,
+          "dog_score": 0.00561521528288722
+        },
+        {
+          "filename": "5-207811-B-35.wav",
+          "expected": 0,
+          "dog_score": 0.008943464607000351
+        },
+        {
+          "filename": "5-207836-A-29.wav",
+          "expected": 0,
+          "dog_score": 0.010761826299130917
+        },
+        {
+          "filename": "5-207836-B-29.wav",
+          "expected": 0,
+          "dog_score": 0.01120695099234581
+        },
+        {
+          "filename": "5-207836-C-29.wav",
+          "expected": 0,
+          "dog_score": 0.012729580514132977
+        },
+        {
+          "filename": "5-207836-D-29.wav",
+          "expected": 0,
+          "dog_score": 0.01795690692961216
+        },
+        {
+          "filename": "5-208030-A-0.wav",
+          "expected": 1,
+          "dog_score": 0.03979118913412094
+        },
+        {
+          "filename": "5-208624-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.03475179895758629
+        },
+        {
+          "filename": "5-208761-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.011089780367910862
+        },
+        {
+          "filename": "5-208810-A-11.wav",
+          "expected": 0,
+          "dog_score": 0.01391600351780653
+        },
+        {
+          "filename": "5-208810-B-11.wav",
+          "expected": 0,
+          "dog_score": 0.010538151487708092
+        },
+        {
+          "filename": "5-209698-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.01798344776034355
+        },
+        {
+          "filename": "5-209719-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.05389101058244705
+        },
+        {
+          "filename": "5-209833-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.025274619460105896
+        },
+        {
+          "filename": "5-209989-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.024188637733459473
+        },
+        {
+          "filename": "5-209992-A-44.wav",
+          "expected": 0,
+          "dog_score": 0.013030102476477623
+        },
+        {
+          "filename": "5-209992-B-44.wav",
+          "expected": 0,
+          "dog_score": 0.02395942434668541
+        },
+        {
+          "filename": "5-210540-A-13.wav",
+          "expected": 0,
+          "dog_score": 0.0050494130700826645
+        },
+        {
+          "filename": "5-210571-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.019426414743065834
+        },
+        {
+          "filename": "5-210612-A-37.wav",
+          "expected": 0,
+          "dog_score": 0.012177476659417152
+        },
+        {
+          "filename": "5-211197-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.017900068312883377
+        },
+        {
+          "filename": "5-211408-A-37.wav",
+          "expected": 0,
+          "dog_score": 0.00667906878516078
+        },
+        {
+          "filename": "5-212050-A-27.wav",
+          "expected": 0,
+          "dog_score": 0.011864458210766315
+        },
+        {
+          "filename": "5-212054-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.11931203305721283
+        },
+        {
+          "filename": "5-212059-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.049151912331581116
+        },
+        {
+          "filename": "5-212181-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.18203005194664001
+        },
+        {
+          "filename": "5-212454-A-0.wav",
+          "expected": 1,
+          "dog_score": 0.838856041431427
+        },
+        {
+          "filename": "5-212730-A-17.wav",
+          "expected": 0,
+          "dog_score": 0.019419964402914047
+        },
+        {
+          "filename": "5-212734-A-17.wav",
+          "expected": 0,
+          "dog_score": 0.013207837007939816
+        },
+        {
+          "filename": "5-212736-A-17.wav",
+          "expected": 0,
+          "dog_score": 0.07131810486316681
+        },
+        {
+          "filename": "5-213077-A-11.wav",
+          "expected": 0,
+          "dog_score": 0.00685742637142539
+        },
+        {
+          "filename": "5-213293-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.01677725277841091
+        },
+        {
+          "filename": "5-213802-A-12.wav",
+          "expected": 0,
+          "dog_score": 0.0063372161239385605
+        },
+        {
+          "filename": "5-213836-A-9.wav",
+          "expected": 0,
+          "dog_score": 0.00989750400185585
+        },
+        {
+          "filename": "5-213836-B-9.wav",
+          "expected": 0,
+          "dog_score": 0.00881822407245636
+        },
+        {
+          "filename": "5-213836-C-9.wav",
+          "expected": 0,
+          "dog_score": 0.01251380518078804
+        },
+        {
+          "filename": "5-213836-D-9.wav",
+          "expected": 0,
+          "dog_score": 0.025681646540760994
+        },
+        {
+          "filename": "5-213855-A-0.wav",
+          "expected": 1,
+          "dog_score": 0.9579912424087524
+        },
+        {
+          "filename": "5-214362-A-17.wav",
+          "expected": 0,
+          "dog_score": 0.01443786732852459
+        },
+        {
+          "filename": "5-214759-A-5.wav",
+          "expected": 0,
+          "dog_score": 0.01507395226508379
+        },
+        {
+          "filename": "5-214759-B-5.wav",
+          "expected": 0,
+          "dog_score": 0.0163798239082098
+        },
+        {
+          "filename": "5-214869-A-9.wav",
+          "expected": 0,
+          "dog_score": 0.005274839699268341
+        },
+        {
+          "filename": "5-215005-A-32.wav",
+          "expected": 0,
+          "dog_score": 0.018018698319792747
+        },
+        {
+          "filename": "5-215172-A-13.wav",
+          "expected": 0,
+          "dog_score": 0.01984417252242565
+        },
+        {
+          "filename": "5-215179-A-13.wav",
+          "expected": 0,
+          "dog_score": 0.01023530401289463
+        },
+        {
+          "filename": "5-215445-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.04551282897591591
+        },
+        {
+          "filename": "5-215447-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.08639492839574814
+        },
+        {
+          "filename": "5-215449-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.09640282392501831
+        },
+        {
+          "filename": "5-215634-A-17.wav",
+          "expected": 0,
+          "dog_score": 0.014440481550991535
+        },
+        {
+          "filename": "5-215658-A-12.wav",
+          "expected": 0,
+          "dog_score": 0.009844236075878143
+        },
+        {
+          "filename": "5-215658-B-12.wav",
+          "expected": 0,
+          "dog_score": 0.004219905938953161
+        },
+        {
+          "filename": "5-216131-A-32.wav",
+          "expected": 0,
+          "dog_score": 0.020474454388022423
+        },
+        {
+          "filename": "5-216213-A-13.wav",
+          "expected": 0,
+          "dog_score": 0.012278404086828232
+        },
+        {
+          "filename": "5-216214-A-13.wav",
+          "expected": 0,
+          "dog_score": 0.008650653064250946
+        },
+        {
+          "filename": "5-216216-A-13.wav",
+          "expected": 0,
+          "dog_score": 0.01081380620598793
+        },
+        {
+          "filename": "5-216368-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.006865397095680237
+        },
+        {
+          "filename": "5-216370-A-41.wav",
+          "expected": 0,
+          "dog_score": 0.008288555778563023
+        },
+        {
+          "filename": "5-216370-B-41.wav",
+          "expected": 0,
+          "dog_score": 0.016459165140986443
+        },
+        {
+          "filename": "5-217158-A-0.wav",
+          "expected": 1,
+          "dog_score": 0.9737820029258728
+        },
+        {
+          "filename": "5-217186-A-16.wav",
+          "expected": 0,
+          "dog_score": 0.009931690990924835
+        },
+        {
+          "filename": "5-217186-B-16.wav",
+          "expected": 0,
+          "dog_score": 0.01836330257356167
+        },
+        {
+          "filename": "5-217186-C-16.wav",
+          "expected": 0,
+          "dog_score": 0.01922116056084633
+        },
+        {
+          "filename": "5-218196-A-27.wav",
+          "expected": 0,
+          "dog_score": 0.011250533163547516
+        },
+        {
+          "filename": "5-218196-B-27.wav",
+          "expected": 0,
+          "dog_score": 0.011201540008187294
+        },
+        {
+          "filename": "5-218494-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.015461738221347332
+        },
+        {
+          "filename": "5-218980-A-30.wav",
+          "expected": 0,
+          "dog_score": 0.06076255440711975
+        },
+        {
+          "filename": "5-218981-A-30.wav",
+          "expected": 0,
+          "dog_score": 0.04072403907775879
+        },
+        {
+          "filename": "5-219044-A-46.wav",
+          "expected": 0,
+          "dog_score": 0.00934468861669302
+        },
+        {
+          "filename": "5-219242-A-37.wav",
+          "expected": 0,
+          "dog_score": 0.012628849595785141
+        },
+        {
+          "filename": "5-219242-B-37.wav",
+          "expected": 0,
+          "dog_score": 0.011047116480767727
+        },
+        {
+          "filename": "5-219318-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.06060493364930153
+        },
+        {
+          "filename": "5-219342-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.7690956592559814
+        },
+        {
+          "filename": "5-219379-A-11.wav",
+          "expected": 0,
+          "dog_score": 0.009963898919522762
+        },
+        {
+          "filename": "5-219379-B-11.wav",
+          "expected": 0,
+          "dog_score": 0.00872101727873087
+        },
+        {
+          "filename": "5-219379-C-11.wav",
+          "expected": 0,
+          "dog_score": 0.010439257137477398
+        },
+        {
+          "filename": "5-220026-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.014784406870603561
+        },
+        {
+          "filename": "5-220027-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.014495307579636574
+        },
+        {
+          "filename": "5-220939-A-27.wav",
+          "expected": 0,
+          "dog_score": 0.01589982584118843
+        },
+        {
+          "filename": "5-220955-A-40.wav",
+          "expected": 0,
+          "dog_score": 0.019855983555316925
+        },
+        {
+          "filename": "5-221518-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.024342713877558708
+        },
+        {
+          "filename": "5-221528-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.018051953986287117
+        },
+        {
+          "filename": "5-221529-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.016361534595489502
+        },
+        {
+          "filename": "5-221567-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.019445298239588737
+        },
+        {
+          "filename": "5-221568-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.010072726756334305
+        },
+        {
+          "filename": "5-221593-A-21.wav",
+          "expected": 0,
+          "dog_score": 0.016907889395952225
+        },
+        {
+          "filename": "5-221878-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.02210703119635582
+        },
+        {
+          "filename": "5-221950-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.030021781101822853
+        },
+        {
+          "filename": "5-222041-A-9.wav",
+          "expected": 0,
+          "dog_score": 0.02297455631196499
+        },
+        {
+          "filename": "5-222524-A-41.wav",
+          "expected": 0,
+          "dog_score": 0.022088956087827682
+        },
+        {
+          "filename": "5-222894-A-32.wav",
+          "expected": 0,
+          "dog_score": 0.008941435255110264
+        },
+        {
+          "filename": "5-223099-A-32.wav",
+          "expected": 0,
+          "dog_score": 0.025367818772792816
+        },
+        {
+          "filename": "5-223099-B-32.wav",
+          "expected": 0,
+          "dog_score": 0.03135128691792488
+        },
+        {
+          "filename": "5-223103-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.032673195004463196
+        },
+        {
+          "filename": "5-223176-A-37.wav",
+          "expected": 0,
+          "dog_score": 0.013044668361544609
+        },
+        {
+          "filename": "5-223317-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.014650708995759487
+        },
+        {
+          "filename": "5-223810-A-35.wav",
+          "expected": 0,
+          "dog_score": 0.005448466166853905
+        },
+        {
+          "filename": "5-231551-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.047795336693525314
+        },
+        {
+          "filename": "5-231762-A-0.wav",
+          "expected": 1,
+          "dog_score": 0.9688007235527039
+        },
+        {
+          "filename": "5-232272-A-44.wav",
+          "expected": 0,
+          "dog_score": 0.005743024405092001
+        },
+        {
+          "filename": "5-232802-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.014272833243012428
+        },
+        {
+          "filename": "5-232816-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.03100411221385002
+        },
+        {
+          "filename": "5-233019-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.01738194189965725
+        },
+        {
+          "filename": "5-233160-A-1.wav",
+          "expected": 0,
+          "dog_score": 0.020446568727493286
+        },
+        {
+          "filename": "5-233260-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.03444835916161537
+        },
+        {
+          "filename": "5-233312-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.01208401471376419
+        },
+        {
+          "filename": "5-233605-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.017674829810857773
+        },
+        {
+          "filename": "5-233607-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.015709031373262405
+        },
+        {
+          "filename": "5-233645-A-37.wav",
+          "expected": 0,
+          "dog_score": 0.012105688452720642
+        },
+        {
+          "filename": "5-233787-A-7.wav",
+          "expected": 0,
+          "dog_score": 0.005614310037344694
+        },
+        {
+          "filename": "5-234145-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.009700457565486431
+        },
+        {
+          "filename": "5-234247-A-37.wav",
+          "expected": 0,
+          "dog_score": 0.006275508552789688
+        },
+        {
+          "filename": "5-234263-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.018818324431777
+        },
+        {
+          "filename": "5-234335-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.019317341968417168
+        },
+        {
+          "filename": "5-234855-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.01350050512701273
+        },
+        {
+          "filename": "5-234879-A-1.wav",
+          "expected": 0,
+          "dog_score": 0.014188925735652447
+        },
+        {
+          "filename": "5-234879-B-1.wav",
+          "expected": 0,
+          "dog_score": 0.023884395137429237
+        },
+        {
+          "filename": "5-234923-A-32.wav",
+          "expected": 0,
+          "dog_score": 0.006810511462390423
+        },
+        {
+          "filename": "5-235507-A-44.wav",
+          "expected": 0,
+          "dog_score": 0.0072937156073749065
+        },
+        {
+          "filename": "5-235593-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.010965666733682156
+        },
+        {
+          "filename": "5-235644-A-30.wav",
+          "expected": 0,
+          "dog_score": 0.02772851660847664
+        },
+        {
+          "filename": "5-235671-A-38.wav",
+          "expected": 0,
+          "dog_score": 0.019264044240117073
+        },
+        {
+          "filename": "5-235874-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.020669421181082726
+        },
+        {
+          "filename": "5-235893-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.015206778421998024
+        },
+        {
+          "filename": "5-235956-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.030810153111815453
+        },
+        {
+          "filename": "5-236288-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.013315835036337376
+        },
+        {
+          "filename": "5-236299-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.015848523005843163
+        },
+        {
+          "filename": "5-237315-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.011927878484129906
+        },
+        {
+          "filename": "5-237499-A-4.wav",
+          "expected": 0,
+          "dog_score": 0.40518948435783386
+        },
+        {
+          "filename": "5-237795-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.011515561491250992
+        },
+        {
+          "filename": "5-238021-A-35.wav",
+          "expected": 0,
+          "dog_score": 0.006808850448578596
+        },
+        {
+          "filename": "5-238492-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.01062597893178463
+        },
+        {
+          "filename": "5-238926-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.013177312910556793
+        },
+        {
+          "filename": "5-238938-A-27.wav",
+          "expected": 0,
+          "dog_score": 0.0051069315522909164
+        },
+        {
+          "filename": "5-240671-A-44.wav",
+          "expected": 0,
+          "dog_score": 0.007524990011006594
+        },
+        {
+          "filename": "5-241846-A-15.wav",
+          "expected": 0,
+          "dog_score": 0.014605806209146976
+        },
+        {
+          "filename": "5-242490-A-14.wav",
+          "expected": 0,
+          "dog_score": 0.02625030279159546
+        },
+        {
+          "filename": "5-242491-A-14.wav",
+          "expected": 0,
+          "dog_score": 0.03192560747265816
+        },
+        {
+          "filename": "5-242492-A-3.wav",
+          "expected": 0,
+          "dog_score": 0.013620829209685326
+        },
+        {
+          "filename": "5-242711-A-9.wav",
+          "expected": 0,
+          "dog_score": 0.01989923045039177
+        },
+        {
+          "filename": "5-242932-A-26.wav",
+          "expected": 0,
+          "dog_score": 0.03372747823596001
+        },
+        {
+          "filename": "5-242932-B-26.wav",
+          "expected": 0,
+          "dog_score": 0.01795230805873871
+        },
+        {
+          "filename": "5-243025-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.01417477149516344
+        },
+        {
+          "filename": "5-243036-A-29.wav",
+          "expected": 0,
+          "dog_score": 0.02473379299044609
+        },
+        {
+          "filename": "5-243448-A-14.wav",
+          "expected": 0,
+          "dog_score": 0.013032793998718262
+        },
+        {
+          "filename": "5-243449-A-14.wav",
+          "expected": 0,
+          "dog_score": 0.023676862940192223
+        },
+        {
+          "filename": "5-243450-A-14.wav",
+          "expected": 0,
+          "dog_score": 0.017308397218585014
+        },
+        {
+          "filename": "5-243459-A-14.wav",
+          "expected": 0,
+          "dog_score": 0.01091916486620903
+        },
+        {
+          "filename": "5-243459-B-14.wav",
+          "expected": 0,
+          "dog_score": 0.014124060049653053
+        },
+        {
+          "filename": "5-243635-A-29.wav",
+          "expected": 0,
+          "dog_score": 0.09042710065841675
+        },
+        {
+          "filename": "5-243773-A-44.wav",
+          "expected": 0,
+          "dog_score": 0.007075564004480839
+        },
+        {
+          "filename": "5-243773-B-44.wav",
+          "expected": 0,
+          "dog_score": 0.011255402117967606
+        },
+        {
+          "filename": "5-243783-A-44.wav",
+          "expected": 0,
+          "dog_score": 0.00882076844573021
+        },
+        {
+          "filename": "5-244178-A-32.wav",
+          "expected": 0,
+          "dog_score": 0.01794062741100788
+        },
+        {
+          "filename": "5-244310-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.0054597328417003155
+        },
+        {
+          "filename": "5-244315-A-6.wav",
+          "expected": 0,
+          "dog_score": 0.02461869828402996
+        },
+        {
+          "filename": "5-244315-B-6.wav",
+          "expected": 0,
+          "dog_score": 0.006143100094050169
+        },
+        {
+          "filename": "5-244315-C-6.wav",
+          "expected": 0,
+          "dog_score": 0.012368234805762768
+        },
+        {
+          "filename": "5-244327-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.025548720732331276
+        },
+        {
+          "filename": "5-244459-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.017566585913300514
+        },
+        {
+          "filename": "5-244526-A-26.wav",
+          "expected": 0,
+          "dog_score": 0.008728638291358948
+        },
+        {
+          "filename": "5-244651-A-31.wav",
+          "expected": 0,
+          "dog_score": 0.018654227256774902
+        },
+        {
+          "filename": "5-244933-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.014541699551045895
+        },
+        {
+          "filename": "5-245040-A-35.wav",
+          "expected": 0,
+          "dog_score": 0.006107180844992399
+        },
+        {
+          "filename": "5-248341-A-6.wav",
+          "expected": 0,
+          "dog_score": 0.18849870562553406
+        },
+        {
+          "filename": "5-248341-B-6.wav",
+          "expected": 0,
+          "dog_score": 0.9535942077636719
+        },
+        {
+          "filename": "5-248341-C-6.wav",
+          "expected": 0,
+          "dog_score": 0.8415144085884094
+        },
+        {
+          "filename": "5-249748-A-28.wav",
+          "expected": 0,
+          "dog_score": 0.01522010751068592
+        },
+        {
+          "filename": "5-249937-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.015268275514245033
+        },
+        {
+          "filename": "5-250026-A-30.wav",
+          "expected": 0,
+          "dog_score": 0.14345501363277435
+        },
+        {
+          "filename": "5-250026-B-30.wav",
+          "expected": 0,
+          "dog_score": 0.04107053950428963
+        },
+        {
+          "filename": "5-250258-A-49.wav",
+          "expected": 0,
+          "dog_score": 0.012115592136979103
+        },
+        {
+          "filename": "5-250629-A-37.wav",
+          "expected": 0,
+          "dog_score": 0.01035921648144722
+        },
+        {
+          "filename": "5-250753-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.010746619664132595
+        },
+        {
+          "filename": "5-251426-A-30.wav",
+          "expected": 0,
+          "dog_score": 0.24393174052238464
+        },
+        {
+          "filename": "5-251426-B-30.wav",
+          "expected": 0,
+          "dog_score": 0.10727795213460922
+        },
+        {
+          "filename": "5-251489-A-24.wav",
+          "expected": 0,
+          "dog_score": 0.01739620789885521
+        },
+        {
+          "filename": "5-251957-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.010661893524229527
+        },
+        {
+          "filename": "5-251962-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.013809118419885635
+        },
+        {
+          "filename": "5-251963-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.013711482286453247
+        },
+        {
+          "filename": "5-251971-A-47.wav",
+          "expected": 0,
+          "dog_score": 0.006248159799724817
+        },
+        {
+          "filename": "5-252248-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.01488459575921297
+        },
+        {
+          "filename": "5-253085-A-3.wav",
+          "expected": 0,
+          "dog_score": 0.019707508385181427
+        },
+        {
+          "filename": "5-253085-B-3.wav",
+          "expected": 0,
+          "dog_score": 0.020016491413116455
+        },
+        {
+          "filename": "5-253094-A-49.wav",
+          "expected": 0,
+          "dog_score": 0.010042750276625156
+        },
+        {
+          "filename": "5-253094-B-49.wav",
+          "expected": 0,
+          "dog_score": 0.009285788983106613
+        },
+        {
+          "filename": "5-253094-C-49.wav",
+          "expected": 0,
+          "dog_score": 0.007062902208417654
+        },
+        {
+          "filename": "5-253094-D-49.wav",
+          "expected": 0,
+          "dog_score": 0.007388266269117594
+        },
+        {
+          "filename": "5-253101-A-49.wav",
+          "expected": 0,
+          "dog_score": 0.007523167412728071
+        },
+        {
+          "filename": "5-253101-B-49.wav",
+          "expected": 0,
+          "dog_score": 0.0198019091039896
+        },
+        {
+          "filename": "5-253101-C-49.wav",
+          "expected": 0,
+          "dog_score": 0.014770149253308773
+        },
+        {
+          "filename": "5-253534-A-26.wav",
+          "expected": 0,
+          "dog_score": 0.014722464606165886
+        },
+        {
+          "filename": "5-254160-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.008522657677531242
+        },
+        {
+          "filename": "5-254832-A-15.wav",
+          "expected": 0,
+          "dog_score": 0.01787145622074604
+        },
+        {
+          "filename": "5-254832-B-15.wav",
+          "expected": 0,
+          "dog_score": 0.01726708374917507
+        },
+        {
+          "filename": "5-256452-A-5.wav",
+          "expected": 0,
+          "dog_score": 0.013331631198525429
+        },
+        {
+          "filename": "5-256512-A-30.wav",
+          "expected": 0,
+          "dog_score": 0.1144527867436409
+        },
+        {
+          "filename": "5-257349-A-15.wav",
+          "expected": 0,
+          "dog_score": 0.018576232716441154
+        },
+        {
+          "filename": "5-257642-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.01934843137860298
+        },
+        {
+          "filename": "5-257839-A-14.wav",
+          "expected": 0,
+          "dog_score": 0.0045685009099543095
+        },
+        {
+          "filename": "5-259169-A-5.wav",
+          "expected": 0,
+          "dog_score": 0.016261067241430283
+        },
+        {
+          "filename": "5-259180-A-15.wav",
+          "expected": 0,
+          "dog_score": 0.016552316024899483
+        },
+        {
+          "filename": "5-259514-A-26.wav",
+          "expected": 0,
+          "dog_score": 0.008491222746670246
+        },
+        {
+          "filename": "5-259640-A-29.wav",
+          "expected": 0,
+          "dog_score": 0.017177481204271317
+        },
+        {
+          "filename": "5-260011-A-34.wav",
+          "expected": 0,
+          "dog_score": 0.014657096937298775
+        },
+        {
+          "filename": "5-260164-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.015171760693192482
+        },
+        {
+          "filename": "5-260432-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.01377099845558405
+        },
+        {
+          "filename": "5-260433-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.014072113670408726
+        },
+        {
+          "filename": "5-260434-A-39.wav",
+          "expected": 0,
+          "dog_score": 0.01322086714208126
+        },
+        {
+          "filename": "5-260875-A-35.wav",
+          "expected": 0,
+          "dog_score": 0.008307567797601223
+        },
+        {
+          "filename": "5-261325-A-9.wav",
+          "expected": 0,
+          "dog_score": 0.011941863223910332
+        },
+        {
+          "filename": "5-261433-A-15.wav",
+          "expected": 0,
+          "dog_score": 0.04324416443705559
+        },
+        {
+          "filename": "5-261439-A-15.wav",
+          "expected": 0,
+          "dog_score": 0.03235916048288345
+        },
+        {
+          "filename": "5-261464-A-23.wav",
+          "expected": 0,
+          "dog_score": 0.013494637794792652
+        },
+        {
+          "filename": "5-262641-A-15.wav",
+          "expected": 0,
+          "dog_score": 0.10300261527299881
+        },
+        {
+          "filename": "5-262957-A-22.wav",
+          "expected": 0,
+          "dog_score": 0.01627839170396328
+        },
+        {
+          "filename": "5-263490-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.04490695148706436
+        },
+        {
+          "filename": "5-263491-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.025291770696640015
+        },
+        {
+          "filename": "5-263501-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.02752925083041191
+        },
+        {
+          "filename": "5-263775-A-26.wav",
+          "expected": 0,
+          "dog_score": 0.022324083372950554
+        },
+        {
+          "filename": "5-263775-B-26.wav",
+          "expected": 0,
+          "dog_score": 0.0226693544536829
+        },
+        {
+          "filename": "5-263831-A-6.wav",
+          "expected": 0,
+          "dog_score": 0.01215730793774128
+        },
+        {
+          "filename": "5-263831-B-6.wav",
+          "expected": 0,
+          "dog_score": 0.011161831207573414
+        },
+        {
+          "filename": "5-263902-A-36.wav",
+          "expected": 0,
+          "dog_score": 0.01046822126954794
+        },
+        {
+          "filename": "5-51149-A-25.wav",
+          "expected": 0,
+          "dog_score": 0.011000992730259895
+        },
+        {
+          "filename": "5-61635-A-8.wav",
+          "expected": 0,
+          "dog_score": 0.01017467025667429
+        },
+        {
+          "filename": "5-9032-A-0.wav",
+          "expected": 1,
+          "dog_score": 0.01570587418973446
+        }
+      ]
+    },
+    "energy": {
+      "test": {
+        "samples": 400,
+        "dog_support": 8,
+        "precision": 0.033707865168539325,
+        "recall": 0.75,
+        "f1": 0.06451612903225806,
+        "false_positive_rate": 0.4387755102040816,
+        "confusion": {
+          "tp": 6,
+          "fp": 172,
+          "fn": 2,
+          "tn": 220
+        },
+        "threshold": 0.5
+      }
+    }
+  },
+  "promoted": false,
+  "limitations": [
+    "Dog clip-level label is not precise bark onset/offset or emotion",
+    "only 8 positive clips in frozen test fold; not household validation",
+    "previous 20-file pilot used fold 1, now training-only",
+    "no pretrained encoder evaluated in this report"
+  ]
+}

@@ -1,0 +1,2323 @@
+{
+  "dataset": "InterPet4D v1.1 cleaned SMAL root motion",
+  "source": "https://huggingface.co/datasets/ohicarip/interpet4d",
+  "revision": "7835a62bbe1ca3a37cb9957186700b1eb6e40c44",
+  "license": "CC BY-NC 4.0",
+  "source_fps": 60.0,
+  "fps": 5,
+  "frames": 50,
+  "projection_scale": 10,
+  "coordinate_units": "publisher dog body units, world Z up",
+  "role": "unlabeled pretraining; automated pose fits, not behavior ground truth",
+  "split_seed": 20261011,
+  "split_unit": "dog",
+  "dog_assignments": {
+    "dog07": "train",
+    "dog11": "train",
+    "dog01": "train",
+    "dog03": "train",
+    "dog02": "train",
+    "dog09": "train",
+    "dog06": "train",
+    "dog12": "train",
+    "dog05": "validation",
+    "dog04": "validation",
+    "dog08": "test",
+    "dog10": "test"
+  },
+  "window_counts": {
+    "train": 89,
+    "validation": 14,
+    "test": 21
+  },
+  "quality_policy": {
+    "respect_publisher_segments": true,
+    "max_native_gap_s": 0.2,
+    "minimum_quality_fraction": 0.9,
+    "median_reprojection_px_max": 40
+  },
+  "windows_sha256": "104b604a88673c991dc8963f35454f1e8099f8e6b071f59364a22367fdb2fd72",
+  "archive_sha256": "d0e8f078629bcc59490b740fa3762cf6d2bd70b36f65458f97ab572caf5c95b6",
+  "archive_hash_scope": "publisher manifest; not a full archive",
+  "files": [
+    {
+      "clip": "dog01_p01_take01_ego_001",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "9185ec72a1853982c4144d0b5c495d4b5a1e553c36ad853c55eb69a5e11a3e48",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p01_take01_ego_003",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "441ffef9b2e14e2ed5e116de469b3bc47291a45055c68e78d2e0e393cea96632",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p01_take02_ego_001",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "eb6dda84a1075cc8e3bba327f5c90e729dc53968cdb9e8cca7581665c6587024",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog01_p01_take02_ego_002",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "e05f4b65504199c2c9ee98f06a7a3d4e456bca627da8cbb9282c34243fc53819",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog01_p01_take03_ego_001",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "603c93558976e191cbf6bfde8b78a8ab1e66ef6a032d39c420685d85e5f6b3fb",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog01_p01_take03_ego_002",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "d1eb7e9d509a522d8d8e9c4e724d38e549f3a7903083a5b6dd978f2b32cd5435",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p01_take04_ego_001",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "1cfcb762cd568968e7e7d9ec20b59536616f825c187d63722d8bd674d12d67cf",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog01_p01_take04_ego_002",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "07bf99e08b2faad3c0fce863f99f2d348f850a20c183cdbad448e1bedd8fc0e7",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p01_take05_ego_001",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "3eafec598e150cb38ebb71aface0e10152fee96270f7d0afebdd829e90228042",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p01_take05_ego_002",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "0a789fc1c640880f7ce4e4c74e9fc98afd55eff1e65d2cb48d61537c913faa65",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p01_take06_ego_001",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "26040575e60fe8ffa9177fb9f1172cacb286bb8e1b16751cf6a6c7301bf41476",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p01_take06_ego_002",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "dd719e334e7bd04b6884e92c19865a408ed35546c1d0d5534101edf4a4709863",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog01_p01_take07_ego_001",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "6589bb0c3e2052136497bd987883658cc1a88cf3ac8d8df99b61e851ae2b120f",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog01_p01_take07_ego_002",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "8b3108bddf0e9f0bb99c3f799fbce1ac9b636b67887d451fa67d391073832aa2",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog01_p01_take08_ego_001",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "c99a921c483a361007fe5066185421525dc20ac0695aa38b642703108ef2d487",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p01_take08_ego_002",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "b251ade9b549b2cb1f71360b9527ad4f09dbd5357c629f83bab9366a959366e6",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p01_take09_ego_001",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "f1f9bc150493f3794c11211f19bb796b53de8e22694fd3064b471fe1ce8a2e00",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p01_take09_ego_002",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "dc53f9b3fcd07e828666d20ecfb23ddd15be8afd4506c49110516b4c0ca57119",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p01_take09_ego_003",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "e6198946581b8d1f7e0403e2980276f36e3c1488e843b27e7ea8338619d2f99c",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p01_take10_ego_001",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "99b2a4e753f217f05e772b61571471a3e42b92a9f813859a6c86802b8b7c3f4d",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog01_p01_take10_ego_002",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "ef9a34f73d208106cc493fcc99fa429ced1ee829504cc78a9cfeb6db8cdd8e31",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog01_p01_take11_ego_001",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "ea9fa1d47b7bb98a6d213dc107ee8736a1a6a579ba1237fbbdc5aa7e484a21b4",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p01_take11_ego_002",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "c5d7ab3e3431e8e21f935b8d1eebd13633d5abb611e189a68a4618feefd3b3c8",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog01_p01_take11_ego_003",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "5fdc3c7277e28584424d2c925c0477dced7b9ac6642ebd01273fed01f1a89620",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog01_p01_take12_ego_001",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "b3e8e5c8af39cbbd1b2411a4cdb3b268c2a036bb1668d8d118ed05966bb51457",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog01_p02_take01_ego_001",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "b4bdb9b7f2e1e73bd09f313e8e8686d0e031ebfbeb36fb6e11f93bed60dee27a",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p03_take01_ego_001",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "a9ab0b5c41f01ce218f5ac5becfcf065f38499d0e2c08c0aef13133657dd42f4",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog01_p03_take01_ego_002",
+      "dog": "dog01",
+      "split": "train",
+      "sha256": "01595b59cc97f8863834cc2322c1ed3b95260b8f9b2400f6236469646faed03d",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog02_p04_take01_ego_001",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "f196efa5e99328349c2e75e18492bc0dd9e6c6bd7e726bf3f536c57491a48331",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p04_take01_ego_002",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "3bedbb84dad6b9626e283628193756c4af45c3cfb0156861d646e9ebf7179ce6",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog02_p04_take02_ego_001",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "e647af03b617b501f85e6c3305004381abda2af7005f036d7e05d1b2a2827492",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog02_p04_take02_ego_002",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "0702acd36ff5458b0310ed85f9bcfb3d05d12c17901c43949457155103526f56",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog02_p04_take05_ego_001",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "9b2b2397e1c804c3b9475b65059acdf6dc73cacf40391d8592a8ce3cc1f48485",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p04_take05_ego_002",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "2fd5077e2dfc41eb537ccd0d9b69ae940f49a7ef8897758e88a571aa82cfea96",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p04_take05_ego_003",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "190332b95c47cddadf49ac0ba43551fece348f78411513d218bfe8f90c743d74",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog02_p04_take07_ego_001",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "fd9461031693b8bca4cc966d7e524fa74d2ea5d505db311e5051d5c482bbc4d6",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p04_take07_ego_002",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "48b4c5590a36eb3acf56439ba4d6ba91404f589ffd8df040117b9b09d5126515",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog02_p04_take08_ego_001",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "dfdfa1faa89d81dbf087b865895adb4e8d69edd8b1db5eb07cfda16426356b96",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p04_take08_ego_002",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "6dbf5c0a8437652f75a584a54e4f5f5915f561a911311902498396fcf6fcafe7",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog02_p04_take09_ego_001",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "cab0c9e08610528712f9c2492e1d1b366bbc5929fa404f4695a5c0092fac6020",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog02_p04_take09_ego_002",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "b0a5b4144dae0057da1dcfcdfdcc6a110ff8f5ce854033ab74ae1450f529da82",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p05_take01_ego_001",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "c6c41d4a800e5f7981078cfeec13f4802289bd96ec9646150339f3a7984fd398",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p05_take01_ego_002",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "c56dd3cbfc4bd0e8880ead2c399e1d737f0231b663f0f18dcd18bbae21dcd455",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p05_take03_ego_001",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "576c06a3b9f22edc9562855f83d675dbd9a50867457da2673c798ebb05ac3c5f",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p05_take03_ego_002",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "365ece2f5b424a796ff1d9cffa899b5272e9ab964b4afafd2f058e4f55c8f131",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog02_p05_take04_ego_001",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "1e6b194d8efae6d881482939d9ccd9b90847d4ba42a9e1b9ea315fd76d33ad5b",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p05_take04_ego_002",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "2bc0e50a65a139ef07a98aa061ad71310f9059a47cccdaca4813076f0877568a",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p05_take05_ego_001",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "8397b0d33df4414865f36ec64123840703e80e201ba4fe072e79ab6de8619219",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog02_p05_take05_ego_002",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "012eadc6673e798e819dbfaab09841c9c85a0c1db03ff2415a2b5e3e7c597c0e",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p05_take06_ego_001",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "ebedf52311382103f83c4382ebb80d2afcc547736dd9d140f47735aa98672a2f",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p05_take06_ego_002",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "ae9491a03ff51f39858ea46d4bf70248b53a6a0a90c287291045ba3a5af59e82",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p07_take01_ego_001",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "ba62973eacd66154fdd1491d278156cc12ee9dd3686aae71dc939965d0d8d351",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog02_p07_take01_ego_002",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "fc1156cd0d947e1c53a6cc4e1f64267d931d00723a174d036c5b82aff80f4e01",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p08_take02_ego_001",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "7ed5bade5925d1e98b4da70c32c3283ab4bce2f491c17975741e8f1f7941284e",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog02_p08_take02_ego_002",
+      "dog": "dog02",
+      "split": "train",
+      "sha256": "746db7f4d052bd0bac7306424a35fa31009f124879b0133a720f5c56be8ee245",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog03_p02_take01_ego_001",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "21272a965cff319458ace0d3a2a0a2277eca9c8096017d24b8b3a71a7ed6c192",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog03_p02_take01_ego_002",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "07843472378def2dec5f2743b4b154037e27eb028e87ff55c565d19faf5fee10",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p02_take02_ego_001",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "cb6a67cbe57845890e06289ae214a68c86ebf5f78c0a298d4c5ba99f8bb88732",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p02_take02_ego_002",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "f8338e333b0d52361f62166d793f11dfe9318f00c48b1ebf6f93982ec115914c",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take01_ego_001",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "284b0b3e1d12792ebbe9bbe90884cc236113d02a7171b0f97ea4026b5049faec",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog03_p08_take01_ego_002",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "8c5bcb90ca42d018fa55e0cdf29fb2a4e3b3e8e95d92f33eca47fec035505e3d",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog03_p08_take02_ego_001",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "8bcb1acf538c64f838479d183262f7c43e2466021996cd41cfe627633018eddf",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take02_ego_002",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "74fb610175fa93e23296d6505235c66c4106cd82766281073b92cbe88c575057",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog03_p08_take03_ego_001",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "3b2b29240a1d455dbf9389d754ba81e604160e502c76bf8f7ee74129db5198d4",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take03_ego_002",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "5c828796592c9a258b943cfb6e802897b9b413ff3eb431d431798ca4456a8cd7",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take03_ego_003",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "499e710dea9850cee03b038db6da4a5f973c2eec8d85c1a970e11f8660451993",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog03_p08_take04_ego_001",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "54279f11be166fa0cf028b5fb4880eb36cc2772d52c7f04177568c703f55f900",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take04_ego_002",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "75ef557cecb7156190898337976779efd409c6eac50207064e236880f85f32cb",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take04_ego_003",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "3f8a760c5d3a6453741ee4354e44983489e31db6ed2d084e49c976cbf1fe3057",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog03_p08_take05_ego_001",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "6b6288e97a5cd21fb42bc8c6fb2f53d92349b6be34e98afeb7a4941e8791dfa2",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take05_ego_002",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "a2cdaf1aff4e13b9a7db35bc9253f16569b37a5df52ed7d21e45ecc29ad9cdf2",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog03_p08_take06_ego_001",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "951385cb23a0ef401a7b33f0179e028c816c600e9cc9a2fca98e65182ed4cd4a",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take06_ego_002",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "fc8e2924e40fd89eabd280b324dc294e2671c6b93010507d52976389465a294f",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take06_ego_003",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "b65af6537762ce841dc5660c6068f848c77850176460e5ec9b4d2eb4aeb921a8",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take08_ego_001",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "4e0d807b03f23c7336377969389e4559351541fe579711642873c25121ed040e",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog03_p08_take08_ego_002",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "dff1db44ed9eb871754c0334f61a50d4b5e6cbaf2877ba171b2f642032925cf3",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take09_ego_001",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "eb1a3ed146d04d67e7d1949bdc57b65abce9e5971aed1bdba84a4da86e857e39",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog03_p08_take09_ego_002",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "222f8db7d355bd18ea915027d482f91d73415b2ac4ae61859ed9c0a101cd0e64",
+      "source_split": "train",
+      "windows": 2
+    },
+    {
+      "clip": "dog03_p08_take10_ego_001",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "7b9d9613fe625de26816f5c69cda37a158f9573ca87beb41357d7ecaa37b533e",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take10_ego_002",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "4677f215b95c20502cd79297db15a89ee94875ef9ce000fcfb174c448be29c37",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog03_p08_take10_ego_003",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "73926b7ca0ea8ff829ea42edbb310eadead4ad50cd648720c5e877f898edfa50",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take11_ego_001",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "4db226c339cf740c56b32a750f5d920744b6088ea72115f90824c79df7b50a6a",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take11_ego_002",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "e1afd8e0bcfb67c37a031950ff7c324f5c2732f393cc30b72f05ad5daf22e385",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p08_take11_ego_003",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "aa56e49fcd7ad3c1388a39dd348f2380cf4e3bc3120f3ba79590b92ca23f951c",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p09_take01_ego_001",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "68cbbc26c432053ea2147465b9311fd9614d27ba9e81040ed0cd4590ff783813",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p09_take01_ego_002",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "61d87e8f21bc5b642b305342fc42a263d6adc9d28a41d6c3ccf077cb4037c008",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p09_take01_ego_003",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "3647290ccc8606eb0f4c776d7e856d0ece73cf32d4ff734e2d61a7b0511ad205",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog03_p10_take01_ego_001",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "6d399e978a56ed2953e27c03e37ae3fbfc386ea1dcf166c6a307f785bfe26975",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog03_p10_take01_ego_002",
+      "dog": "dog03",
+      "split": "train",
+      "sha256": "e88aa6060d349055989a06c11d58b0cafc0e5de917bf76da7b127f786d87b360",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog04_p02_take01_ego_001",
+      "dog": "dog04",
+      "split": "validation",
+      "sha256": "9182c2ca85081f6c80d694741d42423b8f3fe1f587334e1aaeb44465d9e5cc75",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog04_p02_take01_ego_002",
+      "dog": "dog04",
+      "split": "validation",
+      "sha256": "7984877e860b610b83ee7326c31caf4f870d39a1695a5183be9f62e4bfa6c6d3",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog04_p02_take01_ego_003",
+      "dog": "dog04",
+      "split": "validation",
+      "sha256": "4f34282dbcad6d8902609050c78af8576803d79705b70333fa303d6affa7b762",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog04_p02_take02_ego_001",
+      "dog": "dog04",
+      "split": "validation",
+      "sha256": "fb1d1a292b7589ee373dfe0ca49b0a84c741d3f3d9b6a6a99409796ffd6ec1fe",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog04_p11_take02_ego_001",
+      "dog": "dog04",
+      "split": "validation",
+      "sha256": "1876b8ac1f97255dd887db03108930676f6e7175832fa81a5909f0ac77bd7087",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog04_p11_take03_ego_001",
+      "dog": "dog04",
+      "split": "validation",
+      "sha256": "71ec8f707cd9ad5f6cf54b7459a73915151bca8ad2febe944f1bc301ab694a30",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog04_p11_take03_ego_002",
+      "dog": "dog04",
+      "split": "validation",
+      "sha256": "8f445b7842fb96619adfa03e76f1f9bc8d613fb9f042729460e99f73bf061b3b",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog04_p11_take04_ego_001",
+      "dog": "dog04",
+      "split": "validation",
+      "sha256": "e0dca1e42246471a2602799b2d5a68745006de2db2c1e3097855ea3f83484219",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog04_p11_take05_ego_001",
+      "dog": "dog04",
+      "split": "validation",
+      "sha256": "abafb0ea26f0b12ca918d28e6a8abd165d73e5ae44594ddd8aa2bfbea441fc95",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog04_p11_take06_ego_001",
+      "dog": "dog04",
+      "split": "validation",
+      "sha256": "3673d61b2e8cb01f78584fbd0a2d390141c8e29347f36e6318bed0237ece74c8",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog04_p11_take07_ego_001",
+      "dog": "dog04",
+      "split": "validation",
+      "sha256": "4c7a97b052711ce8afed8e34b9291750ba5f7a48eee375c18f6ff57ca3c9d440",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog04_p11_take08_ego_001",
+      "dog": "dog04",
+      "split": "validation",
+      "sha256": "14d52c8c83eae280ec506c7eaa446e77548997910887e2e26f45733700ee46b0",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog04_p11_take08_ego_002",
+      "dog": "dog04",
+      "split": "validation",
+      "sha256": "3bb48da1055039231fe454481d45caaf5095c5cdf09d013ed37d541beb27a8aa",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog05_p02_take02_ego_001",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "9b9fd47aa0bec0af162b85a15e7b35673e1890142ee06a4f38d06191044d158a",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog05_p02_take02_ego_002",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "5ae969c07b89da7330ff642c59c05fe31215664b57cde1f8d9099047f60df0a6",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog05_p07_take01_ego_001",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "d9adbcc739809917d52779883691b33b51723abff35129a9433bc6b07732a741",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog05_p12_take01_ego_001",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "8d8d246d7616af5c06ac6caea49fff61c7be4ab982ee08822d2295ab50d2bcb1",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog05_p12_take01_ego_002",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "5137f044a76a2cb79a896a60a819a75d831e4f94b5ef634cff1875c1e9e96722",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog05_p12_take02_ego_001",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "42e2a2cf3d0832265930f981ec9063f73298a6fbcfa6848253a11bcbb5a83686",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog05_p12_take02_ego_002",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "56edd4d14fa4836927cd1707a7ef95e2d979c29e1aad97b9ce7bd3f166c20e8a",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog05_p12_take06_ego_001",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "26cf73c17cec2e0a353c069131ccca1e7ed22f8cac3822ef59e694d84671af39",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog05_p12_take06_ego_002",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "ec362b86c3ec770af8a975f85cd68a50b30848dbabea772e5e51d2e8e082d1b1",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog05_p12_take07_ego_001",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "08bdd50cc7d2b9b706b18d43e7b96a37d1b6739ffd66a63af772831e02b41d23",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog05_p12_take07_ego_002",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "797dd8ccfb401bf5a5061b3446a6102b7380369745377badd6b6f00fd99f4701",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog05_p12_take08_ego_001",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "0028bf629f1b58761612036d3979eec260f7c800357d07a099a9bd6c19420b60",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog05_p12_take08_ego_002",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "83c76c91bbf5e5517fdc5b22f3388cbdafffb1a151229490f298d991c14b4867",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog05_p12_take09_ego_001",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "5d8de0f39297b99088243ede26c876bfe50dd8ca1ccba22284a221800b096734",
+      "source_split": "val",
+      "windows": 2
+    },
+    {
+      "clip": "dog05_p12_take10_ego_001",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "477c19af10eefd14148e0a320ab6ac34d58e32614a2d714fc1ed129e42140dbe",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog05_p12_take10_ego_002",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "6e6e8415707a3d657b6710637a812e904514bd14dd7605c24286a62156b1dd75",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog05_p12_take11_ego_001",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "78f568a05f158c05db259fc3abf686cee531d080d4cc07db78592e8017de8b88",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog05_p12_take11_ego_002",
+      "dog": "dog05",
+      "split": "validation",
+      "sha256": "4150e4dc95228fbb8aa1dc5978297c23b549bc03ff69daa0a3597ec0d7547859",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog06_p02_take01_ego_001",
+      "dog": "dog06",
+      "split": "train",
+      "sha256": "326d0413831be7f1a595d7fa18da4b15ad68d4a4bd3a3ecf98a5c2b58fb6b072",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog06_p02_take01_ego_002",
+      "dog": "dog06",
+      "split": "train",
+      "sha256": "7189a2873f5bdcbeeff716fae0c18834c58e3710614489fc01430c095f62051c",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog06_p09_take01_ego_001",
+      "dog": "dog06",
+      "split": "train",
+      "sha256": "a77a59fd7f266981d65d9fb9c3ae6438ffd7dc99883a7a7561ff155e0231b489",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog06_p09_take01_ego_002",
+      "dog": "dog06",
+      "split": "train",
+      "sha256": "156b562dd3e4bda14990c98d4dfdadb4d61a98e6ddc28b5812f33620f9699da4",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog06_p09_take01_ego_003",
+      "dog": "dog06",
+      "split": "train",
+      "sha256": "9cf0ef17e6829ad0cdc8ad139f310943446f561bf2a215b72159185d33e30cc6",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog06_p13_take02_ego_001",
+      "dog": "dog06",
+      "split": "train",
+      "sha256": "5e58cacad2123438e7f91892242e03792c2aa7290d4cbc836fc1637af3bfa80e",
+      "source_split": "train",
+      "windows": 2
+    },
+    {
+      "clip": "dog06_p13_take02_ego_002",
+      "dog": "dog06",
+      "split": "train",
+      "sha256": "5b84dceed39d03fa07d9621375b2708e1dfe002dae90905d7aedd94794513dd8",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog06_p13_take03_ego_001",
+      "dog": "dog06",
+      "split": "train",
+      "sha256": "3a41311fc297bb091961e4c4f8ae28a4d2dd7c6a18e15622e932a05bb0b6eab3",
+      "source_split": "train",
+      "windows": 2
+    },
+    {
+      "clip": "dog06_p13_take03_ego_002",
+      "dog": "dog06",
+      "split": "train",
+      "sha256": "9830d778ca8c6f042c0272c9872c25360be551fca6a43e1ba00bc0d4d47e3837",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog06_p13_take05_ego_001",
+      "dog": "dog06",
+      "split": "train",
+      "sha256": "fd23ff65c9d500ed90f91a2f3febcf9ba66e44c9da38a54613c23054705a27ad",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog06_p13_take05_ego_002",
+      "dog": "dog06",
+      "split": "train",
+      "sha256": "4e83db57c6274c667c68794213335a1ad3c1bb165d399c4ad8a61b4d81f6673b",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog06_p13_take06_ego_001",
+      "dog": "dog06",
+      "split": "train",
+      "sha256": "9832ee7669a68971af7e53c4e1cf197b952a293e4c5882ab4efcb52247e91a48",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog06_p14_take02_ego_001",
+      "dog": "dog06",
+      "split": "train",
+      "sha256": "64c9d35a04306aef008747e5fca96514d52d81bdb8e46beef29d008bcae05dbe",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog07_p07_take01_ego_001",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "fa33ec198a74836d060065d53994d0cb092f7384fe5a05834f5775be703ae792",
+      "source_split": "train",
+      "windows": 2
+    },
+    {
+      "clip": "dog07_p07_take01_ego_002",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "ea0f7721b22f5c0e0eb8746bf497ccf434e1f85960fdfedd16f7c7175182d5a0",
+      "source_split": "train",
+      "windows": 2
+    },
+    {
+      "clip": "dog07_p09_take01_ego_001",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "0a24c5472f1caacba9351235e7028ca5b30e64428285cd6cc5dfe4286ea849b3",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog07_p09_take01_ego_002",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "ccbf97209502be642726bd07880af6cfe4c8887559b98c6dbbfce5cab6e19db0",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog07_p15_take02_ego_001",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "deee5a195854203466bbbb77948da6019fe57cb312ca66e072c2484248a25bdd",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog07_p15_take02_ego_002",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "7a5643077105f4ff25a623b3026a58aaaf89c8837dc93c59a8e1f9fcb5b43b06",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog07_p15_take03_ego_001",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "8d617b60c9db56e7f2d1d859716051fa4d4a0e23c2f411e108f213377c7ab113",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog07_p15_take03_ego_002",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "376dfe604f0aa412b38230fdebcbeb062c6e722690a97e68e117ca76e2fc7d1a",
+      "source_split": "train",
+      "windows": 2
+    },
+    {
+      "clip": "dog07_p15_take04_ego_001",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "5845e6c45c848876fcc77a792b32c00328593cd16c226a5aa6813669202ba7de",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog07_p15_take04_ego_002",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "2e0ae7f85f70b9eb836b66cd5aa3a795040f52e7f6388d6fd57473d37a7dd00a",
+      "source_split": "train",
+      "windows": 2
+    },
+    {
+      "clip": "dog07_p15_take05_ego_001",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "3ea3709671a05d75098d2f2771b56c7bd0c5a00a68b193d31744c205fe5d88de",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog07_p15_take05_ego_002",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "20aff8683962915f66f0517706fa6b37fe66c18b8b748c01a68d129459ad6a3f",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog07_p16_take02_ego_001",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "8b3ffbd6216114aa0c8f2cdc5747ee04a877664d315b1e003fbf051c293720e8",
+      "source_split": "train",
+      "windows": 2
+    },
+    {
+      "clip": "dog07_p16_take03_ego_001",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "4890f52545f6491ebb09cb2a26d7538b67f5516fb0972d96067e3ff0200ffc17",
+      "source_split": "train",
+      "windows": 2
+    },
+    {
+      "clip": "dog07_p16_take03_ego_002",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "8490f21c11d6225ea0fea4a29b2b58aaeef9d97d9b1978f35f842cb2a6142690",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog07_p16_take04_ego_001",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "56135997d166527f289c54b885c5edad99a7754b72811af41a3267439d84fc32",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog07_p16_take04_ego_002",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "960ec08713959e516a18aa71ad476180fee69fcdc594fe0693ea2ebf98e2d4f1",
+      "source_split": "train",
+      "windows": 2
+    },
+    {
+      "clip": "dog07_p16_take05_ego_001",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "8fc77aca79c8489832e10959ffd7df611f241913bb1938f0e27ebbb967451d2b",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog07_p16_take05_ego_002",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "bec67fe9607a4a9b2665f2a39f9e72adbbc90f3256655a7afb9a59270ca4d451",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog07_p16_take06_ego_001",
+      "dog": "dog07",
+      "split": "train",
+      "sha256": "b0dce1c00b88ed5dcc60bab58bb3193ec72e94d8fda927b97c8819c2efebcf9d",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog08_p17_take01_ego_001",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "7152ba7276064035c085e019526945adccbb7d8b7fb1c9c620ae9def5df8d32f",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog08_p17_take01_ego_002",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "5028e6ac1ad3f2687f9297710a1c4f4375cb14fca835e90c203015bbea003aef",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog08_p17_take02_ego_001",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "9d71423712a3a9347de1afa39320fa6b50367d23012f09f8f4590586ec5e7ad0",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog08_p17_take02_ego_002",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "5eec5c07b8c230f02e44a5ef1e9042254a772745836ed077e3eeb2470aeb7b46",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog08_p17_take03_ego_001",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "ae5dcf0d3560b54aa5144f1967301d52c5fbd439f351419776db1c0d3eb52ee6",
+      "source_split": "train",
+      "windows": 2
+    },
+    {
+      "clip": "dog08_p17_take04_ego_001",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "9d79e009e4df452bc9bf09492a47a397b0c140296fbec497de7506d07aebb66e",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog08_p17_take04_ego_002",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "aef377cab4006dcd6f01105f5438d64f8432ce204cfb47f8a2764d6000103493",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog08_p17_take04_ego_003",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "d70ffad5cb5021768c3ee5d2f51e410720fb8d7f3983cc2968272dd6e671abf4",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog08_p17_take05_ego_001",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "8fcc408e1031aa0caa87e81ed93b586ea0295843d36df7db41a45c35aaaf194b",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog08_p17_take05_ego_002",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "aad9d14836e0abd8680d9cd180b216853ac2db7b7414322db487d48200206e51",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog08_p17_take06_ego_001",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "b3e91604ab1815020250e28a52587678026b8adea72e6390717ec5833c97b2de",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog08_p17_take06_ego_002",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "c47fd3934f62b3329382cf9044877a9a281ae1b2ed5a657b98b15eefb626ed8e",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog08_p17_take07_ego_001",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "1f6e383883de31aebb01266189aa7badef14819e78ecfa976cffa7ecc7c0f203",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog08_p17_take07_ego_002",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "8b70030c45416fc1845193dc23a2e7acfc571283c29733da692b283d57d932cd",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog08_p17_take10_ego_001",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "3b6f4dadfb9f32497aa50da33573b6a24540f3003ca4cbec4a0ac38209c57672",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog08_p17_take10_ego_002",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "4cb064f080c6f5a8cce713805bcef3fae9306a14d79c52ce37221abd9bcb04d2",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog08_p18_take01_ego_001",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "d7ff46139e98cc36856ca85b88714eefd0d25c4926edd63b4fb99f9c2fd81993",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog08_p18_take01_ego_002",
+      "dog": "dog08",
+      "split": "test",
+      "sha256": "5d2cd3adee70db890fba9865705a73d67f2b63907fc941cbac22ab60ee8291d2",
+      "source_split": "train",
+      "windows": 2
+    },
+    {
+      "clip": "dog09_p19_take01_ego_001",
+      "dog": "dog09",
+      "split": "train",
+      "sha256": "45604e0572b12b5600474bdee7d424cebcc1d266b885d13af98f1aafb8b31153",
+      "source_split": "val",
+      "windows": 2
+    },
+    {
+      "clip": "dog09_p19_take03_ego_001",
+      "dog": "dog09",
+      "split": "train",
+      "sha256": "e0b30a6b305d72b5abea0e5e18debd82120d336c587820cf9b5017a0d952f245",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog09_p19_take04_ego_001",
+      "dog": "dog09",
+      "split": "train",
+      "sha256": "561f7e930784083e3b1f4c18ab0d479dab15c2ac89618c238e07261efcc656c6",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog09_p19_take04_ego_002",
+      "dog": "dog09",
+      "split": "train",
+      "sha256": "e6c6929b3a2cb289da48b767b3facca14ad6b2828e1b86ecee4d3ea78c2fc71d",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog09_p20_take01_ego_001",
+      "dog": "dog09",
+      "split": "train",
+      "sha256": "3a64ff642dad0148c33c0d63287347f63d006e35d6f75492c9c0aec9f52230be",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog09_p20_take01_ego_002",
+      "dog": "dog09",
+      "split": "train",
+      "sha256": "c4f844cce07d9d36b26c5f131d1c3c314662224b322f796d16cd5edbcfb36206",
+      "source_split": "train",
+      "windows": 2
+    },
+    {
+      "clip": "dog09_p20_take01_ego_003",
+      "dog": "dog09",
+      "split": "train",
+      "sha256": "77577a59cad9a2d1136b855d760a403048b00d064c8edc8e43c785d791bec29f",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog10_p07_take01_ego_001",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "9210017f4e07fbabf62b983d7d9cc156bd53588ad5334bd4c26548b6f15dce1f",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog10_p07_take01_ego_002",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "255a6a55a8a172886a64b76dd40987706d7cd29f0f1a9fd4b93f51113c29643b",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p09_take01_ego_001",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "2406b96f81db2e328ca0cf47449fa08719e69d85e68920c517834b9da2228ab8",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog10_p09_take01_ego_002",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "2688bacacb01ad159612bab5327c0104b28606a218dd198b32de319e6a95f137",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p09_take01_ego_003",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "0b88a38ee7094eedb6f2be8ad00cf429dbebdb2ed19f6135fd5bc77d290b62ff",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p20_take01_ego_001",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "d12abe962defcdd5980452224e821b5120b8d5e46af3ea51e05f487c176b2f3b",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog10_p20_take01_ego_002",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "aebb9ef297e6551159d4a52867ea99294a353b612c22529a22a1e345f6099779",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog10_p21_take01_ego_001",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "3f2b74525917c9b374d459e3871d28475865f84029e429c0d728f067e09cf486",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take01_ego_002",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "9004b423b3eed7f9b2f4f2784995fc187b99ca6cee739ea9cd9f2a84bf6873b1",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog10_p21_take02_ego_001",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "6305b3caa3c360de45d39452acb47879e0f62b2e8f86843ed7f2b79d2c1cde9b",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take02_ego_002",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "a7947f917d073a6b9493aadf008fb7f38c2a876cacc78f68d15b80a0ebe66ab1",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take02_ego_003",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "c352f64be2bba4f042ce4c8e80082584d36d3143ea14e780352a5a939cdab71a",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take03_ego_001",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "974eda83d2e415e744e9bff35598cb728bb3e18e608209caf9fb820f0331787c",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take03_ego_002",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "beccefd93c38a0efad61621ce43f02c9d04ac028f83868d0b8bf32305fc735fb",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take04_ego_001",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "31c1486b43d0e12ade4b4fd15bb5d82572db05650111af1d1228089a135a254c",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take04_ego_002",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "bcde890bac0fce64a5c160ae27dab15e783703ca709102cd240fc2b3d123409f",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take04_ego_003",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "134197e51ec253a8c3e0e2453032ad5ff57769ccfe00f567ae15369019a38b03",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take05_ego_001",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "cb846dd843c4a23531c39371989e78dc41ca12c9a4ddbb792e1f527ea26a8da9",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog10_p21_take06_ego_001",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "a6897e294329f4f61e2920ad4caa83b1912d6c4b0d3fd0f983d0c552993c7a50",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog10_p21_take06_ego_002",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "d70046d8aa140a2665c4d507e4f5bb5a0b2112603596b7e7455cc5212e5befd8",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take07_ego_001",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "50cce92defb01b8a278e6ca3719c85d26592c0c479e324eac6808f051982f2a4",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take07_ego_002",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "7097055e60d19b26442f2e79a4e4d25bf75e251b0464f29b4402fc59052f7c1c",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog10_p21_take09_ego_001",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "b1ed5ac30324cd37af9bdda1320f4e1092cafe52dff003b2bf2c986a079e4f72",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take09_ego_002",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "24dddcd1106de4b962230e93cfe971ba7c0001aa6f571f438d983483b9806c58",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take10_ego_001",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "65872bb3e60ac9a7cc26de691760d3f4271e4625529e94aaa145ae7bfa963d5d",
+      "source_split": "val",
+      "windows": 2
+    },
+    {
+      "clip": "dog10_p21_take10_ego_002",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "c660bff664c280059cd0c23dabd6fc049f1cf09cba78896494360e5a41f7c72e",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take11_ego_001",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "e618562468a850c7ec4913e19c6c61dbb8167ef3aee869d263483d377f7e4268",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog10_p21_take11_ego_002",
+      "dog": "dog10",
+      "split": "test",
+      "sha256": "57843cb8d7acce9b5180ac5d8b0e65fb8bb26bb9e0d533155f5d5d4995e1a224",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog11_p22_take01_ego_001",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "21fce25385832e4419888d0139da462b8742492a57cfad5da3f2a3d04fff1d62",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog11_p22_take01_ego_002",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "aba83cf7c4107d6ba13a24544dbd592117605396656fa67a28206e4d955c61dc",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog11_p22_take02_ego_001",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "6776e90ab4b973cd40782f5e6275530a142fceabbe0092da4df2b7b399de1d04",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog11_p22_take02_ego_002",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "f1500e1764f8fb62ba801aa79596fec11c917da54526279cad66e73a7486bbf4",
+      "source_split": "train",
+      "windows": 2
+    },
+    {
+      "clip": "dog11_p22_take03_ego_001",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "2971ab29e166c89b866a322dff7999010d8e919afd18f1dbe84d3ba4ac8b55f3",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog11_p22_take03_ego_002",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "1ad882654a840da8d2935b10dbbe1eaadfb2f4ff74ac79784fa3d8365f09978e",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog11_p22_take03_ego_003",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "701842e438f729488ec2d425d851d2bdb1b0b6425bf29647174d2cd97e87082a",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog11_p22_take04_ego_001",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "3a475db257bf68874ea444fcc13ab74ceefce8b62fcce9ff8377d783197bd39a",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog11_p22_take04_ego_002",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "f65f4c8eeca7689d5af0a06e8e6eb1cc5eeece45de053f3f0192e060aff2cdb2",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog11_p22_take06_ego_001",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "ad4e58896dd7b556d750591b20359fd24f0d2095d155ad0bae14e7d89c733192",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog11_p22_take06_ego_002",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "a6683230f24399e920d6901b28e1a7235f3e02441ca7dd3cce8da5de1e032b92",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog11_p23_take02_ego_001",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "41dcd5329b53529f6d0f5139f97947c0b8fd0239b54289f731f3ab53f50f5469",
+      "source_split": "val",
+      "windows": 0
+    },
+    {
+      "clip": "dog11_p23_take02_ego_002",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "fbb3425dda04b3aeec03d01eeece0fbf42557b95b7db61e249c52c28b8a9f681",
+      "source_split": "val",
+      "windows": 1
+    },
+    {
+      "clip": "dog11_p23_take06_ego_001",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "4b78dcdb860fd6c24c3ea39644c310dc66f37addf61afa4c2ebc840a3d473193",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog11_p23_take06_ego_002",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "6d43bbc85e240912bebb8bf5a5d9cceb48ddc4b6bed91b1931fc0fff6fcde73e",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog11_p23_take06_ego_003",
+      "dog": "dog11",
+      "split": "train",
+      "sha256": "e8b6eb844175d9dff353b560af0eea390736847e4f0a25629434882f9cd5f282",
+      "source_split": "train",
+      "windows": 1
+    },
+    {
+      "clip": "dog12_p11_take01_ego_001",
+      "dog": "dog12",
+      "split": "train",
+      "sha256": "8a493af67442c62930ab7a72a9b6a85d64505148b21c9f04d75096ca784edffa",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog12_p11_take01_ego_002",
+      "dog": "dog12",
+      "split": "train",
+      "sha256": "055564415c53f4a200ea1726c92f184d4a5a6dfef316d9e34259648f925a58d5",
+      "source_split": "train",
+      "windows": 0
+    },
+    {
+      "clip": "dog12_p11_take01_ego_003",
+      "dog": "dog12",
+      "split": "train",
+      "sha256": "694e18ac0ce6615bd7aefceb84e44be650630609b109d1cc6b68cd8d31a3f618",
+      "source_split": "train",
+      "windows": 0
+    }
+  ],
+  "excluded": [
+    {
+      "clip": "dog01_p01_take01_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p01_take01_ego_003",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p01_take03_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p01_take04_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p01_take05_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p01_take05_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p01_take06_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p01_take08_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p01_take08_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p01_take09_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p01_take09_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p01_take09_ego_003",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p01_take11_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p02_take01_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p03_take01_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog01_p03_take01_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog02_p04_take01_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog02_p04_take02_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog02_p04_take02_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog02_p04_take05_ego_003",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog02_p04_take07_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog02_p04_take08_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog02_p04_take09_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog02_p05_take03_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog02_p05_take05_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog02_p07_take01_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p02_take01_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p02_take02_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p02_take02_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take02_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take03_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take03_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take04_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take04_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take05_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take06_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take06_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take06_ego_003",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take08_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take10_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take10_ego_003",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take11_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take11_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p08_take11_ego_003",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p09_take01_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p09_take01_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p10_take01_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog03_p10_take01_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog04_p02_take01_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog04_p02_take01_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog04_p02_take01_ego_003",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog04_p02_take02_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog04_p11_take02_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog04_p11_take03_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog04_p11_take06_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog04_p11_take07_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog04_p11_take08_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog04_p11_take08_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog05_p02_take02_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog05_p02_take02_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog05_p07_take01_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog05_p12_take06_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog05_p12_take06_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog05_p12_take08_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog05_p12_take10_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog05_p12_take11_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog06_p02_take01_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog06_p02_take01_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog06_p09_take01_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog06_p09_take01_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog06_p09_take01_ego_003",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog06_p13_take02_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog06_p13_take03_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog06_p13_take05_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog06_p13_take05_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog07_p09_take01_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog07_p16_take03_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog07_p16_take04_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog07_p16_take05_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog08_p17_take02_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog08_p17_take04_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog08_p17_take04_ego_003",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog08_p17_take05_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog08_p17_take05_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog08_p17_take06_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog08_p17_take07_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog08_p17_take10_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog08_p17_take10_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog09_p19_take04_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog09_p20_take01_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p07_take01_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p09_take01_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p09_take01_ego_003",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take01_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take02_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take02_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take02_ego_003",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take03_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take03_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take04_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take04_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take04_ego_003",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take06_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take07_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take09_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take09_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take10_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take11_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog10_p21_take11_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog11_p22_take01_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog11_p22_take02_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog11_p22_take03_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog11_p22_take06_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog11_p22_take06_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog11_p23_take02_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog12_p11_take01_ego_001",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog12_p11_take01_ego_002",
+      "reason": "no quality-qualified native 10-second window"
+    },
+    {
+      "clip": "dog12_p11_take01_ego_003",
+      "reason": "no quality-qualified native 10-second window"
+    }
+  ],
+  "limitations": [
+    "automatically fitted motion can contain errors",
+    "world root differs from camera box center",
+    "no independent four-class temporal behavior labels"
+  ]
+}

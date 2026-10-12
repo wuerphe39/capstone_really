@@ -1,0 +1,22 @@
+{
+  "rows": 1000,
+  "runs": [
+    {
+      "seconds": 0.09903599999961443,
+      "queries": 4,
+      "output_sha256": "aa08d2e6e64b9db9df010b88c2ee85f89d57e9c8a456b3fdffd4d68137d84ff6"
+    },
+    {
+      "seconds": 0.009452799989958294,
+      "queries": 4,
+      "output_sha256": "aa08d2e6e64b9db9df010b88c2ee85f89d57e9c8a456b3fdffd4d68137d84ff6"
+    },
+    {
+      "seconds": 0.010890199991990812,
+      "queries": 4,
+      "output_sha256": "aa08d2e6e64b9db9df010b88c2ee85f89d57e9c8a456b3fdffd4d68137d84ff6"
+    }
+  ],
+  "median_seconds": 0.010890199991990812,
+  "scope": "in-memory SQLite synthetic records, aggregate only; not network or LLM latency"
+}

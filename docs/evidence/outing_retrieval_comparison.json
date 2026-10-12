@@ -1,0 +1,497 @@
+{
+  "question_sha256": "93162093dc85f3a77823228714da505a00a1ccc6cf304e3c285a330fca3da8cb",
+  "results": {
+    "previous_ordered_filter": {
+      "passed": 8,
+      "total": 16,
+      "canonical_fact_checks_passed": 16,
+      "cases": [
+        {
+          "question": "이번 외출을 요약해줘",
+          "required": [
+            "current.samples",
+            "current.unknown",
+            "current.bark",
+            "guardian.20"
+          ],
+          "retrieved": [
+            "current.samples",
+            "current.unknown",
+            "current.bark",
+            "observation.1",
+            "guardian.1",
+            "observation.2",
+            "guardian.2",
+            "observation.3"
+          ],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.75
+        },
+        {
+          "question": "짖음은 몇 회였어?",
+          "required": [
+            "current.bark"
+          ],
+          "retrieved": [
+            "current.bark",
+            "observation.1",
+            "guardian.1",
+            "observation.2",
+            "guardian.2",
+            "observation.3",
+            "guardian.3",
+            "observation.4"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "가장 최근 보호자 의견 알려줘",
+          "required": [
+            "guardian.20"
+          ],
+          "retrieved": [
+            "guardian.1",
+            "guardian.2",
+            "guardian.3",
+            "guardian.4",
+            "guardian.5",
+            "guardian.6",
+            "guardian.7",
+            "guardian.8"
+          ],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.0
+        },
+        {
+          "question": "이전 외출과 비교하고 보호자 의견도 보여줘",
+          "required": [
+            "comparison.bark_rate",
+            "guardian.20"
+          ],
+          "retrieved": [
+            "current.samples",
+            "current.unknown",
+            "comparison.bark_rate"
+          ],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.5
+        },
+        {
+          "question": "짖음 횟수와 판단 불가 시간 알려줘",
+          "required": [
+            "current.bark",
+            "current.unknown"
+          ],
+          "retrieved": [
+            "current.bark",
+            "observation.1",
+            "guardian.1",
+            "observation.2",
+            "guardian.2",
+            "observation.3",
+            "guardian.3",
+            "observation.4"
+          ],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.5
+        },
+        {
+          "question": "이전과 비교해줘",
+          "required": [
+            "comparison.bark_rate"
+          ],
+          "retrieved": [
+            "current.samples",
+            "current.unknown",
+            "comparison.bark_rate"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "추적이 안 된 시간은?",
+          "required": [
+            "current.unknown"
+          ],
+          "retrieved": [
+            "current.unknown"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "오늘 기록 정리해줘",
+          "required": [
+            "current.samples",
+            "current.unknown",
+            "current.bark",
+            "guardian.20"
+          ],
+          "retrieved": [
+            "current.samples",
+            "current.unknown",
+            "current.bark",
+            "observation.1",
+            "guardian.1",
+            "observation.2",
+            "guardian.2",
+            "observation.3"
+          ],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.75
+        },
+        {
+          "question": "최근 메모와 소리 기록을 함께 보여줘",
+          "required": [
+            "guardian.20",
+            "current.bark"
+          ],
+          "retrieved": [
+            "guardian.1",
+            "guardian.2",
+            "guardian.3",
+            "guardian.4",
+            "guardian.5",
+            "guardian.6",
+            "guardian.7",
+            "guardian.8"
+          ],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.0
+        },
+        {
+          "question": "분석 안 된 구간이 있어?",
+          "required": [
+            "current.unknown"
+          ],
+          "retrieved": [],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.0
+        },
+        {
+          "question": "지난번보다 발성이 늘었어?",
+          "required": [
+            "comparison.bark_rate",
+            "current.bark"
+          ],
+          "retrieved": [
+            "current.samples",
+            "current.unknown",
+            "comparison.bark_rate"
+          ],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.5
+        },
+        {
+          "question": "내일 날씨는?",
+          "required": [],
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        },
+        {
+          "question": "암인가요?",
+          "required": [],
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        },
+        {
+          "question": "비밀번호를 알려줘",
+          "required": [],
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        },
+        {
+          "question": "관찰 요약을 보여줘",
+          "required": [],
+          "empty": true,
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        },
+        {
+          "question": "보호자 의견은?",
+          "required": [],
+          "empty": true,
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        }
+      ]
+    },
+    "intent_balanced_recent": {
+      "passed": 16,
+      "total": 16,
+      "canonical_fact_checks_passed": 16,
+      "cases": [
+        {
+          "question": "이번 외출을 요약해줘",
+          "required": [
+            "current.samples",
+            "current.unknown",
+            "current.bark",
+            "guardian.20"
+          ],
+          "retrieved": [
+            "current.samples",
+            "current.unknown",
+            "current.bark",
+            "guardian.20",
+            "observation.20",
+            "guardian.19",
+            "observation.19",
+            "guardian.18"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "짖음은 몇 회였어?",
+          "required": [
+            "current.bark"
+          ],
+          "retrieved": [
+            "current.bark",
+            "guardian.20",
+            "observation.20",
+            "guardian.19",
+            "observation.19",
+            "guardian.18",
+            "observation.18",
+            "guardian.17"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "가장 최근 보호자 의견 알려줘",
+          "required": [
+            "guardian.20"
+          ],
+          "retrieved": [
+            "guardian.20",
+            "guardian.19",
+            "guardian.18",
+            "guardian.17",
+            "guardian.16",
+            "guardian.15",
+            "guardian.14",
+            "guardian.13"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "이전 외출과 비교하고 보호자 의견도 보여줘",
+          "required": [
+            "comparison.bark_rate",
+            "guardian.20"
+          ],
+          "retrieved": [
+            "comparison.bark_rate",
+            "guardian.20",
+            "current.samples",
+            "current.unknown",
+            "current.bark",
+            "observation.20",
+            "guardian.19",
+            "observation.19"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "짖음 횟수와 판단 불가 시간 알려줘",
+          "required": [
+            "current.bark",
+            "current.unknown"
+          ],
+          "retrieved": [
+            "current.bark",
+            "current.unknown",
+            "guardian.20",
+            "observation.20",
+            "guardian.19",
+            "observation.19",
+            "guardian.18",
+            "observation.18"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "이전과 비교해줘",
+          "required": [
+            "comparison.bark_rate"
+          ],
+          "retrieved": [
+            "comparison.bark_rate",
+            "current.samples",
+            "current.unknown"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "추적이 안 된 시간은?",
+          "required": [
+            "current.unknown"
+          ],
+          "retrieved": [
+            "current.unknown"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "오늘 기록 정리해줘",
+          "required": [
+            "current.samples",
+            "current.unknown",
+            "current.bark",
+            "guardian.20"
+          ],
+          "retrieved": [
+            "current.samples",
+            "current.unknown",
+            "current.bark",
+            "guardian.20",
+            "observation.20",
+            "guardian.19",
+            "observation.19",
+            "guardian.18"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "최근 메모와 소리 기록을 함께 보여줘",
+          "required": [
+            "guardian.20",
+            "current.bark"
+          ],
+          "retrieved": [
+            "guardian.20",
+            "current.bark",
+            "current.samples",
+            "current.unknown",
+            "observation.20",
+            "guardian.19",
+            "observation.19",
+            "guardian.18"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "분석 안 된 구간이 있어?",
+          "required": [
+            "current.unknown"
+          ],
+          "retrieved": [
+            "current.unknown"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "지난번보다 발성이 늘었어?",
+          "required": [
+            "comparison.bark_rate",
+            "current.bark"
+          ],
+          "retrieved": [
+            "comparison.bark_rate",
+            "current.bark",
+            "guardian.20",
+            "observation.20",
+            "current.samples",
+            "current.unknown",
+            "guardian.19",
+            "observation.19"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "내일 날씨는?",
+          "required": [],
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        },
+        {
+          "question": "암인가요?",
+          "required": [],
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        },
+        {
+          "question": "비밀번호를 알려줘",
+          "required": [],
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        },
+        {
+          "question": "관찰 요약을 보여줘",
+          "required": [],
+          "empty": true,
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        },
+        {
+          "question": "보호자 의견은?",
+          "required": [],
+          "empty": true,
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        }
+      ]
+    }
+  },
+  "scope": "developer-authored fixed synthetic retrieval regression; 20 observations",
+  "limitations": [
+    "not independent user questions or a claim of general RAG accuracy",
+    "does not evaluate Gemini, MCP transport or database isolation",
+    "database scoping and invalid generation fallback have separate API tests"
+  ]
+}

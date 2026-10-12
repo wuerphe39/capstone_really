@@ -1,0 +1,105 @@
+{
+  "platform": "Windows-11-10.0.26300-SP0",
+  "processor": "AMD64 Family 26 Model 68 Stepping 0, AuthenticAMD",
+  "torch": "2.14.1+cpu",
+  "threads": 2,
+  "device": "cpu",
+  "models": {
+    "lstm": {
+      "load_s": 0.003554199996870011,
+      "checkpoint_bytes": 42167,
+      "checkpoint_sha256": "5afd302ec62b37b880a08f3f92d3d2c0d1603fe8395af920a4bcb2e7be6b7499",
+      "rss_after_runs_bytes": 284078080,
+      "timings": [
+        {
+          "filename": "5-203128-A-0.wav",
+          "sha256": "435e476d5d429aa1cc51c23c9b5e5f8f472faf022846996ade18a457621d0552",
+          "duration_s": 5,
+          "first_call_s": 0.009081600001081824,
+          "repeat_s": [
+            0.004792100007762201,
+            0.004971000002115034,
+            0.004549099990981631
+          ],
+          "median_realtime_factor": 0.0009584200015524402
+        },
+        {
+          "filename": "5-181766-A-10.wav",
+          "sha256": "608fcc0bef32512e2a984c7d3d2cac8ea161f6337ec0056850a6d34f07f8db35",
+          "duration_s": 5,
+          "first_call_s": 0.004196099995169789,
+          "repeat_s": [
+            0.0051817000057781115,
+            0.004361300001619384,
+            0.0038763000047765672
+          ],
+          "median_realtime_factor": 0.0008722600003238767
+        },
+        {
+          "filename": "5-201194-A-38.wav",
+          "sha256": "61599b9d388e887b0318d4b008ca3f545b28f327ba3ecb12afdff7a128162c28",
+          "duration_s": 5,
+          "first_call_s": 0.004197900008875877,
+          "repeat_s": [
+            0.004619700004695915,
+            0.004218999994918704,
+            0.004920799998217262
+          ],
+          "median_realtime_factor": 0.0009239400009391829
+        }
+      ]
+    },
+    "clap": {
+      "load_s": 0.3151949000020977,
+      "checkpoint_bytes": 614525833,
+      "checkpoint_sha256": "1cd3c601bc4afe0fa87be3de4c13dd2cfadd249fac1e29acf74a9b296c3219bb",
+      "rss_after_runs_bytes": 591122432,
+      "timings": [
+        {
+          "filename": "5-203128-A-0.wav",
+          "sha256": "435e476d5d429aa1cc51c23c9b5e5f8f472faf022846996ade18a457621d0552",
+          "duration_s": 5,
+          "first_call_s": 0.5598401999886846,
+          "repeat_s": [
+            0.12607720000960398,
+            0.1295191000099294,
+            0.11495909999939613
+          ],
+          "median_realtime_factor": 0.025215440001920796
+        },
+        {
+          "filename": "5-181766-A-10.wav",
+          "sha256": "608fcc0bef32512e2a984c7d3d2cac8ea161f6337ec0056850a6d34f07f8db35",
+          "duration_s": 5,
+          "first_call_s": 0.13040259999979753,
+          "repeat_s": [
+            0.12438149999070447,
+            0.127137399991625,
+            0.12855019999551587
+          ],
+          "median_realtime_factor": 0.025427479998325
+        },
+        {
+          "filename": "5-201194-A-38.wav",
+          "sha256": "61599b9d388e887b0318d4b008ca3f545b28f327ba3ecb12afdff7a128162c28",
+          "duration_s": 5,
+          "first_call_s": 0.13068960000236984,
+          "repeat_s": [
+            0.13205739999830257,
+            0.10900660000334028,
+            0.12819579998904373
+          ],
+          "median_realtime_factor": 0.025639159997808747
+        }
+      ],
+      "revision": "8fa0f1c6d0433df6e97c127f64b2a1d6c0dcda8a"
+    }
+  },
+  "limitations": [
+    "three five-second clips, three repetitions each; not load testing",
+    "RSS snapshots are not peak allocation; OS file cache not cleared",
+    "model load excludes library import; CLAP excludes text encoding and retrieval",
+    "same process loads LSTM then CLAP; memory is not an isolated incremental measurement",
+    "not measured on Raspberry Pi; not evidence of live recording support"
+  ]
+}

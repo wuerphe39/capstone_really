@@ -1,0 +1,20 @@
+{
+  "pet_id": "public-verify-6ba727f2",
+  "before": {
+    "observations": 4,
+    "suggestions": 1,
+    "mcp_successes": 1,
+    "gemini_successes": 0,
+    "actions_completed": 1,
+    "actions_failed": 0
+  },
+  "after": {
+    "observations": 4,
+    "suggestions": 1,
+    "mcp_successes": 1,
+    "gemini_successes": 0,
+    "actions_completed": 1,
+    "actions_failed": 0
+  },
+  "equal": true
+}

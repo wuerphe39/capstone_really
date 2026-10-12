@@ -1,0 +1,14 @@
+[
+  {"question":"기록한 소리 후보와 구분이 불분명한 시간을 같이 설명해줘", "required":["current.bark","current.unknown"]},
+  {"question":"텔레비전 때문이라는 메모가 남아 있나요?", "required":["guardian.20"]},
+  {"question":"저장된 녹음 길이가 궁금해", "required":["current.samples"]},
+  {"question":"귀가했어. 오늘 관찰과 마지막 보호자 의견 정리 부탁해", "required":["current.samples","current.bark","current.unknown","guardian.20"]},
+  {"question":"전보다 발성이 줄었는지와 추적 누락을 함께 알려줘", "required":["comparison.bark_rate","current.bark","current.unknown"]},
+  {"question":"보호자가 확인한 소리와 모델 후보 수를 구분해줘", "required":["guardian.20","current.bark"]},
+  {"question":"ＴＶ 소음과 관련된 최근 의견은?", "required":["guardian.20","current.bark"]},
+  {"question":"녹음이 총 몇 분이나 쌓였나요?", "required":["current.samples"]},
+  {"question":"얼마나 오래 봤는지 알려줘", "required":["current.samples"]},
+  {"question":"항공편 예약해줘", "required":[]},
+  {"question":"약을 몇 알 먹여야 하나요?", "required":[]},
+  {"question":"오늘 소리 요약해줘", "required":[], "empty":true}
+]

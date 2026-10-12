@@ -1,0 +1,48 @@
+{
+  "pet_id": "extras-verify-31a062bf",
+  "profile": {
+    "pet_id": "extras-verify-31a062bf",
+    "source": "guardian_input",
+    "name": "가상 시연 반려견",
+    "age_years": 3.0,
+    "living_pattern": "합성 시연용 생활 패턴",
+    "guardian_note": "실제 반려견 프로필이 아닌 검증용 자료",
+    "updated_at": "2026-10-10T23:30:23.987119Z"
+  },
+  "feedback": {
+    "id": 1,
+    "source": "synthetic_demo",
+    "observation_id": 19,
+    "suggestion_id": 10,
+    "bark_present": null,
+    "suggestion_appropriate": true,
+    "note": "합성 시연용 의견; 실제 보호자 평가가 아님",
+    "created_at": "2026-10-10T23:30:25.577870Z"
+  },
+  "comparison": {
+    "command_id": "cbc55f73-967d-4a39-b5dc-6e364ab6ec43",
+    "causality_established": false,
+    "window_s": 30.0,
+    "scope": "demo_windows",
+    "status": "ok",
+    "before_observation_id": 19,
+    "note": "같은 길이의 관찰 구간 변화이며 음악의 효과를 증명하지 않습니다.",
+    "after_observation_id": 20,
+    "before_bark_candidates": 8,
+    "after_bark_candidates": 0,
+    "candidate_count_delta": -8,
+    "before_motion": "spinning",
+    "after_motion": "still"
+  },
+  "baseline": {
+    "pet_id": "extras-verify-31a062bf",
+    "observation_id": 20,
+    "status": "insufficient_data",
+    "days": 14,
+    "minimum_windows": 10,
+    "minimum_distinct_days": 3,
+    "timezone_offset_hours": 9,
+    "sample_count": 0,
+    "reason": "평소 패턴에는 실제 live 관찰만 사용합니다."
+  }
+}

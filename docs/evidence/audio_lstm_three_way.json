@@ -1,0 +1,408 @@
+{
+  "protocol": "frozen ESC and FSD official dev/val candidate selection; previous inspected tests are development comparisons",
+  "counts": {
+    "esc_train": 1200,
+    "esc_val": 398,
+    "esc_test": 400,
+    "fsd_train": 240,
+    "fsd_val": 110,
+    "fsd_eval": 120
+  },
+  "manifest_sha256": {
+    "artifacts\\datasets\\esc50\\manifest.json": "8deb6b0f937c5ec7345fb746ead2680cf99a5e5273fb14acee0ea24b4c591a68",
+    "artifacts\\datasets\\fsd50k\\dev_subset\\manifest.json": "a05e260b776cf97fc25ac13de8d3990b49229a20c3554e98fd0ca9da02bc7383",
+    "artifacts\\datasets\\fsd50k\\dev_val_subset\\manifest.json": "4fd1fb47393d1480c7ad28c644ef51a5f29b9bd1dc4026d102a19b3b92883446",
+    "artifacts\\datasets\\fsd50k\\eval_subset\\manifest.json": "db836b6de80634dea33bdfd59ae8474a3b2e8b2e80e510effb1f90e8b459b978"
+  },
+  "checkpoint_original_sha256": "5afd302ec62b37b880a08f3f92d3d2c0d1603fe8395af920a4bcb2e7be6b7499",
+  "candidate_checkpoint": "artifacts\\audio_lstm\\esc50_fsd_augmented_lstm.pt",
+  "candidate_checkpoint_sha256": "d0044c943bc65d3d2e428528e2b4feb42126691b5f075dac00661a4456b09a95",
+  "selected": "augmented_mil",
+  "candidates": {
+    "baseline": {
+      "threshold": 0.9,
+      "validation": {
+        "esc_val": {
+          "samples": 398,
+          "dog_support": 8,
+          "precision": 0.8,
+          "recall": 1.0,
+          "f1": 0.8888888888888888,
+          "false_positive_rate": 0.005128205128205128,
+          "confusion": {
+            "tp": 8,
+            "fp": 2,
+            "fn": 0,
+            "tn": 388
+          },
+          "threshold": 0.9
+        },
+        "fsd_val": {
+          "samples": 110,
+          "dog_support": 50,
+          "precision": 1.0,
+          "recall": 0.28,
+          "f1": 0.4375,
+          "false_positive_rate": 0.0,
+          "confusion": {
+            "tp": 14,
+            "fp": 0,
+            "fn": 36,
+            "tn": 60
+          },
+          "threshold": 0.9
+        }
+      },
+      "validation_mean_f1": 0.6631944444444444
+    },
+    "threshold_only": {
+      "threshold": 0.85,
+      "validation_mean_f1": 0.6981757877280266,
+      "validation": {
+        "esc_val": {
+          "samples": 398,
+          "dog_support": 8,
+          "precision": 0.8,
+          "recall": 1.0,
+          "f1": 0.8888888888888888,
+          "false_positive_rate": 0.005128205128205128,
+          "confusion": {
+            "tp": 8,
+            "fp": 2,
+            "fn": 0,
+            "tn": 388
+          },
+          "threshold": 0.85
+        },
+        "fsd_val": {
+          "samples": 110,
+          "dog_support": 50,
+          "precision": 1.0,
+          "recall": 0.34,
+          "f1": 0.5074626865671642,
+          "false_positive_rate": 0.0,
+          "confusion": {
+            "tp": 17,
+            "fp": 0,
+            "fn": 33,
+            "tn": 60
+          },
+          "threshold": 0.85
+        }
+      }
+    },
+    "augmented_mil": {
+      "threshold": 0.95,
+      "validation_mean_f1": 0.745727956254272,
+      "validation": {
+        "esc_val": {
+          "samples": 398,
+          "dog_support": 8,
+          "precision": 0.7272727272727273,
+          "recall": 1.0,
+          "f1": 0.8421052631578947,
+          "false_positive_rate": 0.007692307692307693,
+          "confusion": {
+            "tp": 8,
+            "fp": 3,
+            "fn": 0,
+            "tn": 387
+          },
+          "threshold": 0.95
+        },
+        "fsd_val": {
+          "samples": 110,
+          "dog_support": 50,
+          "precision": 0.9259259259259259,
+          "recall": 0.5,
+          "f1": 0.6493506493506493,
+          "false_positive_rate": 0.03333333333333333,
+          "confusion": {
+            "tp": 25,
+            "fp": 2,
+            "fn": 25,
+            "tn": 58
+          },
+          "threshold": 0.95
+        }
+      },
+      "epoch": 4
+    }
+  },
+  "training_history": [
+    {
+      "epoch": 1,
+      "selection": {
+        "threshold": 0.9,
+        "validation_mean_f1": 0.7142857142857142,
+        "validation": {
+          "esc_val": {
+            "samples": 398,
+            "dog_support": 8,
+            "precision": 0.6153846153846154,
+            "recall": 1.0,
+            "f1": 0.7619047619047619,
+            "false_positive_rate": 0.01282051282051282,
+            "confusion": {
+              "tp": 8,
+              "fp": 5,
+              "fn": 0,
+              "tn": 385
+            },
+            "threshold": 0.9
+          },
+          "fsd_val": {
+            "samples": 110,
+            "dog_support": 50,
+            "precision": 0.9285714285714286,
+            "recall": 0.52,
+            "f1": 0.6666666666666666,
+            "false_positive_rate": 0.03333333333333333,
+            "confusion": {
+              "tp": 26,
+              "fp": 2,
+              "fn": 24,
+              "tn": 58
+            },
+            "threshold": 0.9
+          }
+        }
+      }
+    },
+    {
+      "epoch": 2,
+      "selection": {
+        "threshold": 0.95,
+        "validation_mean_f1": 0.7094017094017094,
+        "validation": {
+          "esc_val": {
+            "samples": 398,
+            "dog_support": 8,
+            "precision": 0.7,
+            "recall": 0.875,
+            "f1": 0.7777777777777778,
+            "false_positive_rate": 0.007692307692307693,
+            "confusion": {
+              "tp": 7,
+              "fp": 3,
+              "fn": 1,
+              "tn": 387
+            },
+            "threshold": 0.95
+          },
+          "fsd_val": {
+            "samples": 110,
+            "dog_support": 50,
+            "precision": 0.8928571428571429,
+            "recall": 0.5,
+            "f1": 0.6410256410256411,
+            "false_positive_rate": 0.05,
+            "confusion": {
+              "tp": 25,
+              "fp": 3,
+              "fn": 25,
+              "tn": 57
+            },
+            "threshold": 0.95
+          }
+        }
+      }
+    },
+    {
+      "epoch": 3,
+      "selection": {
+        "threshold": 0.95,
+        "validation_mean_f1": 0.7222222222222222,
+        "validation": {
+          "esc_val": {
+            "samples": 398,
+            "dog_support": 8,
+            "precision": 0.7,
+            "recall": 0.875,
+            "f1": 0.7777777777777778,
+            "false_positive_rate": 0.007692307692307693,
+            "confusion": {
+              "tp": 7,
+              "fp": 3,
+              "fn": 1,
+              "tn": 387
+            },
+            "threshold": 0.95
+          },
+          "fsd_val": {
+            "samples": 110,
+            "dog_support": 50,
+            "precision": 0.9285714285714286,
+            "recall": 0.52,
+            "f1": 0.6666666666666666,
+            "false_positive_rate": 0.03333333333333333,
+            "confusion": {
+              "tp": 26,
+              "fp": 2,
+              "fn": 24,
+              "tn": 58
+            },
+            "threshold": 0.95
+          }
+        }
+      }
+    },
+    {
+      "epoch": 4,
+      "selection": {
+        "threshold": 0.95,
+        "validation_mean_f1": 0.745727956254272,
+        "validation": {
+          "esc_val": {
+            "samples": 398,
+            "dog_support": 8,
+            "precision": 0.7272727272727273,
+            "recall": 1.0,
+            "f1": 0.8421052631578947,
+            "false_positive_rate": 0.007692307692307693,
+            "confusion": {
+              "tp": 8,
+              "fp": 3,
+              "fn": 0,
+              "tn": 387
+            },
+            "threshold": 0.95
+          },
+          "fsd_val": {
+            "samples": 110,
+            "dog_support": 50,
+            "precision": 0.9259259259259259,
+            "recall": 0.5,
+            "f1": 0.6493506493506493,
+            "false_positive_rate": 0.03333333333333333,
+            "confusion": {
+              "tp": 25,
+              "fp": 2,
+              "fn": 25,
+              "tn": 58
+            },
+            "threshold": 0.95
+          }
+        }
+      }
+    }
+  ],
+  "evaluation": {
+    "esc_test": {
+      "baseline": {
+        "samples": 400,
+        "dog_support": 8,
+        "precision": 0.625,
+        "recall": 0.625,
+        "f1": 0.625,
+        "false_positive_rate": 0.007653061224489796,
+        "confusion": {
+          "tp": 5,
+          "fp": 3,
+          "fn": 3,
+          "tn": 389
+        },
+        "threshold": 0.9
+      },
+      "threshold_only": {
+        "samples": 400,
+        "dog_support": 8,
+        "precision": 0.625,
+        "recall": 0.625,
+        "f1": 0.625,
+        "false_positive_rate": 0.007653061224489796,
+        "confusion": {
+          "tp": 5,
+          "fp": 3,
+          "fn": 3,
+          "tn": 389
+        },
+        "threshold": 0.85
+      },
+      "augmented_mil": {
+        "samples": 400,
+        "dog_support": 8,
+        "precision": 0.5454545454545454,
+        "recall": 0.75,
+        "f1": 0.631578947368421,
+        "false_positive_rate": 0.012755102040816327,
+        "confusion": {
+          "tp": 6,
+          "fp": 5,
+          "fn": 2,
+          "tn": 387
+        },
+        "threshold": 0.95
+      }
+    },
+    "fsd_eval": {
+      "baseline": {
+        "samples": 120,
+        "dog_support": 60,
+        "precision": 0.9444444444444444,
+        "recall": 0.2833333333333333,
+        "f1": 0.4358974358974359,
+        "false_positive_rate": 0.016666666666666666,
+        "confusion": {
+          "tp": 17,
+          "fp": 1,
+          "fn": 43,
+          "tn": 59
+        },
+        "threshold": 0.9
+      },
+      "threshold_only": {
+        "samples": 120,
+        "dog_support": 60,
+        "precision": 0.95,
+        "recall": 0.31666666666666665,
+        "f1": 0.475,
+        "false_positive_rate": 0.016666666666666666,
+        "confusion": {
+          "tp": 19,
+          "fp": 1,
+          "fn": 41,
+          "tn": 59
+        },
+        "threshold": 0.85
+      },
+      "augmented_mil": {
+        "samples": 120,
+        "dog_support": 60,
+        "precision": 0.8947368421052632,
+        "recall": 0.2833333333333333,
+        "f1": 0.43037974683544306,
+        "false_positive_rate": 0.03333333333333333,
+        "confusion": {
+          "tp": 17,
+          "fp": 2,
+          "fn": 43,
+          "tn": 58
+        },
+        "threshold": 0.95
+      }
+    }
+  },
+  "runtime": {
+    "esc_test": {
+      "baseline_total_s": 0.11553779999667313,
+      "augmented_total_s": 0.12667169999622274,
+      "recordings": 400,
+      "scope": "feature tensors already loaded; model forward only"
+    },
+    "fsd_eval": {
+      "baseline_total_s": 0.051624299987452105,
+      "augmented_total_s": 0.04940060000808444,
+      "recordings": 120,
+      "scope": "feature tensors already loaded; model forward only"
+    }
+  },
+  "promoted": false,
+  "promotion_reason": "No untouched household evaluation; selected augmentation regressed on inspected FSD eval",
+  "limitations": [
+    "Weak clip labels do not locate individual barks",
+    "Previously inspected ESC/FSD evaluation is not blind",
+    "Source IDs and hashes checked; transformed duplicate overlap remains possible",
+    "Balanced selected samples are not natural home prevalence"
+  ]
+}

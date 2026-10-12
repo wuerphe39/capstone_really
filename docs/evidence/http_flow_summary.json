@@ -1,0 +1,31 @@
+{
+  "pet_id": "verify-c436d96a",
+  "metrics": {
+    "observations": 6,
+    "suggestions": 3,
+    "mcp_successes": 3,
+    "gemini_successes": 0,
+    "actions_completed": 2,
+    "actions_failed": 0
+  },
+  "scenarios": [
+    {
+      "scenario": "calm",
+      "provider": "rule",
+      "mcp": "ok",
+      "action": null
+    },
+    {
+      "scenario": "anxious",
+      "provider": "rule",
+      "mcp": "ok",
+      "action": "completed"
+    },
+    {
+      "scenario": "bored_pacing",
+      "provider": "rule",
+      "mcp": "ok",
+      "action": "completed"
+    }
+  ]
+}

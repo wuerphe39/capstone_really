@@ -1,0 +1,18 @@
+[
+  {"question":"이번 외출을 요약해줘", "required":["current.samples","current.unknown","current.bark","guardian.20"]},
+  {"question":"짖음은 몇 회였어?", "required":["current.bark"]},
+  {"question":"가장 최근 보호자 의견 알려줘", "required":["guardian.20"]},
+  {"question":"이전 외출과 비교하고 보호자 의견도 보여줘", "required":["comparison.bark_rate","guardian.20"]},
+  {"question":"짖음 횟수와 판단 불가 시간 알려줘", "required":["current.bark","current.unknown"]},
+  {"question":"이전과 비교해줘", "required":["comparison.bark_rate"]},
+  {"question":"추적이 안 된 시간은?", "required":["current.unknown"]},
+  {"question":"오늘 기록 정리해줘", "required":["current.samples","current.unknown","current.bark","guardian.20"]},
+  {"question":"최근 메모와 소리 기록을 함께 보여줘", "required":["guardian.20","current.bark"]},
+  {"question":"분석 안 된 구간이 있어?", "required":["current.unknown"]},
+  {"question":"지난번보다 발성이 늘었어?", "required":["comparison.bark_rate","current.bark"]},
+  {"question":"내일 날씨는?", "required":[]},
+  {"question":"암인가요?", "required":[]},
+  {"question":"비밀번호를 알려줘", "required":[]},
+  {"question":"관찰 요약을 보여줘", "required":[], "empty":true},
+  {"question":"보호자 의견은?", "required":[], "empty":true}
+]

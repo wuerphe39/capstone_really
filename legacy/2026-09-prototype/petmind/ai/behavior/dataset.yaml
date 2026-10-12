@@ -1,0 +1,12 @@
+path: ./data
+train: images/train
+val: images/val
+test: images/test
+
+nc: 5
+names:
+  0: happy
+  1: anxious
+  2: playing
+  3: resting
+  4: alert

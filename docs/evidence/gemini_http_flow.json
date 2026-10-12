@@ -1,0 +1,40 @@
+{
+  "metrics": {
+    "observations": 6,
+    "suggestions": 3,
+    "mcp_successes": 3,
+    "gemini_successes": 3,
+    "actions_completed": 1,
+    "actions_failed": 0
+  },
+  "scenarios": [
+    {
+      "scenario": "calm",
+      "provider": "gemini:gemini-3.5-flash-lite",
+      "citations": [
+        31
+      ],
+      "mcp": "ok",
+      "action": null
+    },
+    {
+      "scenario": "anxious",
+      "provider": "gemini:gemini-3.5-flash-lite",
+      "citations": [
+        33,
+        34
+      ],
+      "mcp": "ok",
+      "action": "completed"
+    },
+    {
+      "scenario": "bored_pacing",
+      "provider": "gemini:gemini-3.5-flash-lite",
+      "citations": [
+        32
+      ],
+      "mcp": "ok",
+      "action": null
+    }
+  ]
+}

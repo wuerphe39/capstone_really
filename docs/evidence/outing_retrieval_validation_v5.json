@@ -1,0 +1,382 @@
+{
+  "question_sha256": "392e8f20ad5ff5225deaf29e5708887c1c609ad39322f47a86055ae57d6cfcc7",
+  "implementation_sha256": "9febb4ab4e5f1707db0ff2963f77eb32b2bea306d74b33f6b8db467050818016",
+  "results": {
+    "previous_ordered_filter": {
+      "passed": 3,
+      "total": 12,
+      "canonical_fact_checks_passed": 12,
+      "cases": [
+        {
+          "question": "기록한 소리 후보와 구분이 불분명한 시간을 같이 설명해줘",
+          "required": [
+            "current.bark",
+            "current.unknown"
+          ],
+          "retrieved": [
+            "current.bark",
+            "observation.1",
+            "guardian.1",
+            "observation.2",
+            "guardian.2",
+            "observation.3",
+            "guardian.3",
+            "observation.4"
+          ],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.5
+        },
+        {
+          "question": "텔레비전 때문이라는 메모가 남아 있나요?",
+          "required": [
+            "guardian.20"
+          ],
+          "retrieved": [
+            "guardian.1",
+            "guardian.2",
+            "guardian.3",
+            "guardian.4",
+            "guardian.5",
+            "guardian.6",
+            "guardian.7",
+            "guardian.8"
+          ],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.0
+        },
+        {
+          "question": "저장된 녹음 길이가 궁금해",
+          "required": [
+            "current.samples"
+          ],
+          "retrieved": [],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.0
+        },
+        {
+          "question": "귀가했어. 오늘 관찰과 마지막 보호자 의견 정리 부탁해",
+          "required": [
+            "current.samples",
+            "current.bark",
+            "current.unknown",
+            "guardian.20"
+          ],
+          "retrieved": [
+            "guardian.1",
+            "guardian.2",
+            "guardian.3",
+            "guardian.4",
+            "guardian.5",
+            "guardian.6",
+            "guardian.7",
+            "guardian.8"
+          ],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.0
+        },
+        {
+          "question": "전보다 발성이 줄었는지와 추적 누락을 함께 알려줘",
+          "required": [
+            "comparison.bark_rate",
+            "current.bark",
+            "current.unknown"
+          ],
+          "retrieved": [
+            "current.unknown"
+          ],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.3333333333333333
+        },
+        {
+          "question": "보호자가 확인한 소리와 모델 후보 수를 구분해줘",
+          "required": [
+            "guardian.20",
+            "current.bark"
+          ],
+          "retrieved": [
+            "guardian.1",
+            "guardian.2",
+            "guardian.3",
+            "guardian.4",
+            "guardian.5",
+            "guardian.6",
+            "guardian.7",
+            "guardian.8"
+          ],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.0
+        },
+        {
+          "question": "ＴＶ 소음과 관련된 최근 의견은?",
+          "required": [
+            "guardian.20",
+            "current.bark"
+          ],
+          "retrieved": [
+            "guardian.1",
+            "guardian.2",
+            "guardian.3",
+            "guardian.4",
+            "guardian.5",
+            "guardian.6",
+            "guardian.7",
+            "guardian.8"
+          ],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.0
+        },
+        {
+          "question": "녹음이 총 몇 분이나 쌓였나요?",
+          "required": [
+            "current.samples"
+          ],
+          "retrieved": [],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.0
+        },
+        {
+          "question": "얼마나 오래 봤는지 알려줘",
+          "required": [
+            "current.samples"
+          ],
+          "retrieved": [],
+          "passed": false,
+          "canonical_facts_unchanged": true,
+          "required_recall": 0.0
+        },
+        {
+          "question": "항공편 예약해줘",
+          "required": [],
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        },
+        {
+          "question": "약을 몇 알 먹여야 하나요?",
+          "required": [],
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        },
+        {
+          "question": "오늘 소리 요약해줘",
+          "required": [],
+          "empty": true,
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        }
+      ]
+    },
+    "intent_balanced_recent": {
+      "passed": 12,
+      "total": 12,
+      "canonical_fact_checks_passed": 12,
+      "cases": [
+        {
+          "question": "기록한 소리 후보와 구분이 불분명한 시간을 같이 설명해줘",
+          "required": [
+            "current.bark",
+            "current.unknown"
+          ],
+          "retrieved": [
+            "current.bark",
+            "current.unknown",
+            "current.samples",
+            "guardian.20",
+            "observation.20",
+            "guardian.19",
+            "observation.19",
+            "guardian.18"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "텔레비전 때문이라는 메모가 남아 있나요?",
+          "required": [
+            "guardian.20"
+          ],
+          "retrieved": [
+            "guardian.20",
+            "guardian.19",
+            "guardian.18",
+            "guardian.17",
+            "guardian.16",
+            "guardian.15",
+            "guardian.14",
+            "guardian.13"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "저장된 녹음 길이가 궁금해",
+          "required": [
+            "current.samples"
+          ],
+          "retrieved": [
+            "current.samples",
+            "current.unknown"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "귀가했어. 오늘 관찰과 마지막 보호자 의견 정리 부탁해",
+          "required": [
+            "current.samples",
+            "current.bark",
+            "current.unknown",
+            "guardian.20"
+          ],
+          "retrieved": [
+            "guardian.20",
+            "current.samples",
+            "current.unknown",
+            "current.bark",
+            "observation.20",
+            "guardian.19",
+            "observation.19",
+            "guardian.18"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "전보다 발성이 줄었는지와 추적 누락을 함께 알려줘",
+          "required": [
+            "comparison.bark_rate",
+            "current.bark",
+            "current.unknown"
+          ],
+          "retrieved": [
+            "comparison.bark_rate",
+            "current.bark",
+            "current.unknown",
+            "guardian.20",
+            "observation.20",
+            "current.samples",
+            "guardian.19",
+            "observation.19"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "보호자가 확인한 소리와 모델 후보 수를 구분해줘",
+          "required": [
+            "guardian.20",
+            "current.bark"
+          ],
+          "retrieved": [
+            "guardian.20",
+            "current.bark",
+            "current.unknown",
+            "observation.20",
+            "guardian.19",
+            "observation.19",
+            "guardian.18",
+            "observation.18"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "ＴＶ 소음과 관련된 최근 의견은?",
+          "required": [
+            "guardian.20",
+            "current.bark"
+          ],
+          "retrieved": [
+            "guardian.20",
+            "current.bark",
+            "current.unknown",
+            "observation.20",
+            "guardian.19",
+            "observation.19",
+            "guardian.18",
+            "observation.18"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "녹음이 총 몇 분이나 쌓였나요?",
+          "required": [
+            "current.samples"
+          ],
+          "retrieved": [
+            "current.samples",
+            "current.unknown"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "얼마나 오래 봤는지 알려줘",
+          "required": [
+            "current.samples"
+          ],
+          "retrieved": [
+            "current.samples",
+            "current.unknown"
+          ],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": 1.0
+        },
+        {
+          "question": "항공편 예약해줘",
+          "required": [],
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        },
+        {
+          "question": "약을 몇 알 먹여야 하나요?",
+          "required": [],
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        },
+        {
+          "question": "오늘 소리 요약해줘",
+          "required": [],
+          "empty": true,
+          "retrieved": [],
+          "passed": true,
+          "canonical_facts_unchanged": true,
+          "required_recall": null
+        }
+      ]
+    }
+  },
+  "scope": "developer-authored fixed synthetic retrieval regression; 20 observations",
+  "limitations": [
+    "not independent user questions or a claim of general RAG accuracy",
+    "does not evaluate Gemini, MCP transport or database isolation",
+    "database scoping and invalid generation fallback have separate API tests"
+  ]
+}

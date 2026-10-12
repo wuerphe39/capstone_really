@@ -1,0 +1,180 @@
+{
+  "task": "one-second root-coordinate forecasting using frozen classification encoders + ridge readout",
+  "behavior_classification_accuracy": null,
+  "dataset_sha256": "0ce649e2b3bf84a5c82bb835c44f10d4d8416b9d40d9f907d5137f0707334c60",
+  "models": {
+    "v1": {
+      "checkpoint": "artifacts\\lstm\\trajectory_lstm_v1_backup.pt",
+      "checkpoint_sha256": "f4768f4676e316541196218b771d91db2c0ae51751bab15ee1478d2f115d5bcd",
+      "feature_version": 1,
+      "selected_ridge_alpha": 10.0,
+      "validation_mse": 0.00043762732841376277,
+      "test_mse": 0.00020694867722573248,
+      "test_rmse": 0.014385710869669683
+    },
+    "v2": {
+      "checkpoint": "artifacts\\lstm\\trajectory_lstm.pt",
+      "checkpoint_sha256": "518bfeb4b42eb979b6ca175f4b122ec93d287cb55742704019f7abb9066ff881",
+      "feature_version": 2,
+      "selected_ridge_alpha": 10.0,
+      "validation_mse": 0.00044163491234070623,
+      "test_mse": 0.00020898615448908432,
+      "test_rmse": 0.014456353429862052
+    }
+  },
+  "constant_velocity_test_mse": 0.00019031275587622076,
+  "window_weighted_error_reduction_percent": -0.984532634209323,
+  "paired_cluster_bootstrap": {
+    "unit": "recording_family",
+    "families": 4,
+    "equal_family_error_reduction_percent": -4.434207814532787,
+    "percentile_95_ci": [
+      -6.831120935954971,
+      0.9791904425419107
+    ],
+    "resamples": 10000,
+    "seed": 20261011
+  },
+  "split_windows": {
+    "train": 195,
+    "validation": 12,
+    "test": 13
+  },
+  "split_groups": {
+    "train": [
+      "D1_001",
+      "D1_003",
+      "D1_004",
+      "D1_005",
+      "D1_008",
+      "D1_013",
+      "D1_031",
+      "D1_045",
+      "D1_047",
+      "D1_049",
+      "D1_053",
+      "D1_055",
+      "D1_057",
+      "D1_058",
+      "D1_061",
+      "D1_071",
+      "D1_086",
+      "D1_ex01",
+      "D1_ex02",
+      "D1_ex03",
+      "D1_ex05"
+    ],
+    "validation": [
+      "D1_059",
+      "D1_073",
+      "D1_ex04"
+    ],
+    "test": [
+      "D1_006",
+      "D1_007",
+      "D1_025",
+      "D1_ex06"
+    ]
+  },
+  "windows": [
+    {
+      "index": 5,
+      "group": "D1_006",
+      "v1_mse": 1.961166091850385e-06,
+      "v2_mse": 4.400977898184558e-06,
+      "constant_velocity_mse": 1.4078318599786144e-07
+    },
+    {
+      "index": 6,
+      "group": "D1_006",
+      "v1_mse": 1.8247735342440893e-06,
+      "v2_mse": 4.281746699882021e-06,
+      "constant_velocity_mse": 9.137644418899526e-09
+    },
+    {
+      "index": 7,
+      "group": "D1_006",
+      "v1_mse": 0.00015285524392542305,
+      "v2_mse": 0.0001568451191476818,
+      "constant_velocity_mse": 0.00019236105435993522
+    },
+    {
+      "index": 8,
+      "group": "D1_007",
+      "v1_mse": 0.0006376015466304163,
+      "v2_mse": 0.000681761442200154,
+      "constant_velocity_mse": 0.00023403536761179566
+    },
+    {
+      "index": 15,
+      "group": "D1_025",
+      "v1_mse": 0.0004227676427502133,
+      "v2_mse": 0.00043842285902242415,
+      "constant_velocity_mse": 0.0003518439771141857
+    },
+    {
+      "index": 212,
+      "group": "D1_ex06",
+      "v1_mse": 9.006302502872517e-05,
+      "v2_mse": 7.931663751683998e-05,
+      "constant_velocity_mse": 8.513325155945495e-05
+    },
+    {
+      "index": 213,
+      "group": "D1_ex06",
+      "v1_mse": 0.0001506408210536296,
+      "v2_mse": 0.00015268984468399738,
+      "constant_velocity_mse": 0.00019688924658112228
+    },
+    {
+      "index": 214,
+      "group": "D1_ex06",
+      "v1_mse": 0.00013972360521504536,
+      "v2_mse": 0.0001384177656083111,
+      "constant_velocity_mse": 0.00017611970542930067
+    },
+    {
+      "index": 215,
+      "group": "D1_ex06",
+      "v1_mse": 0.00021855459654218607,
+      "v2_mse": 0.000240131734391777,
+      "constant_velocity_mse": 0.0003337134257890284
+    },
+    {
+      "index": 216,
+      "group": "D1_ex06",
+      "v1_mse": 0.00010878370734218021,
+      "v2_mse": 0.00011394997889588452,
+      "constant_velocity_mse": 0.0001240205019712448
+    },
+    {
+      "index": 217,
+      "group": "D1_ex06",
+      "v1_mse": 9.85351545681023e-05,
+      "v2_mse": 0.00011155154277672029,
+      "constant_velocity_mse": 0.0001565417042002082
+    },
+    {
+      "index": 218,
+      "group": "D1_ex06",
+      "v1_mse": 0.00012134946343884534,
+      "v2_mse": 0.00012662146335823133,
+      "constant_velocity_mse": 0.00014150503557175398
+    },
+    {
+      "index": 219,
+      "group": "D1_ex06",
+      "v1_mse": 0.0005456720578136615,
+      "v2_mse": 0.00046842889615800794,
+      "constant_velocity_mse": 0.00048175276606343687
+    }
+  ],
+  "limitations": [
+    "real mocap root coordinates, not camera video",
+    "one dog",
+    "four test recording families only; bootstrap interval is exploratory",
+    "development splits reused in earlier forecasting exploration",
+    "ridge readouts fitted for this probe; operational behavior classifiers unchanged",
+    "no independent human four-class behavior references"
+  ]
+}

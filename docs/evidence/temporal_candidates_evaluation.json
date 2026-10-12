@@ -1,0 +1,210 @@
+{
+  "reference": "tigdog_original_evaluation.json",
+  "reference_sha256": "38f8fdf9421ce488866bf93412e5897212cbf649232daa52a2796da0b6eada8b",
+  "scope": "previously examined TigDog development subset, coarse homogeneous locomotion labels",
+  "metrics": {
+    "baseline": {
+      "samples": 6,
+      "decision_ratio": 0.6666666666666666,
+      "correct_fraction": 0.6666666666666666,
+      "recall": {
+        "non_locomotion": null,
+        "locomotion": 0.6666666666666666
+      },
+      "support": {
+        "non_locomotion": 0,
+        "locomotion": 6
+      }
+    },
+    "guarded_short": {
+      "samples": 6,
+      "decision_ratio": 0.0,
+      "correct_fraction": 0.0,
+      "recall": {
+        "non_locomotion": null,
+        "locomotion": 0.0
+      },
+      "support": {
+        "non_locomotion": 0,
+        "locomotion": 6
+      }
+    },
+    "unverified_camera_ablation": {
+      "samples": 6,
+      "decision_ratio": 0.16666666666666666,
+      "correct_fraction": 0.16666666666666666,
+      "recall": {
+        "non_locomotion": null,
+        "locomotion": 0.16666666666666666
+      },
+      "support": {
+        "non_locomotion": 0,
+        "locomotion": 6
+      }
+    }
+  },
+  "records": [
+    {
+      "video_id": 8,
+      "shot": 59,
+      "expected": "locomotion",
+      "baseline": "locomotion",
+      "guarded_short": "unknown",
+      "unverified_camera_ablation": "unknown",
+      "short_reason": "short window tracking gap"
+    },
+    {
+      "video_id": 8,
+      "shot": 77,
+      "expected": "locomotion",
+      "baseline": "unknown",
+      "guarded_short": "unknown",
+      "unverified_camera_ablation": "unknown",
+      "short_reason": "short window tracking coverage"
+    },
+    {
+      "video_id": 8,
+      "shot": 84,
+      "expected": "locomotion",
+      "baseline": "locomotion",
+      "guarded_short": "unknown",
+      "unverified_camera_ablation": "unknown",
+      "short_reason": "short window tracking gap"
+    },
+    {
+      "video_id": 8,
+      "shot": 95,
+      "expected": "locomotion",
+      "baseline": "locomotion",
+      "guarded_short": "unknown",
+      "unverified_camera_ablation": "locomotion",
+      "short_reason": "image-plane extent; coarse candidate only"
+    },
+    {
+      "video_id": 8,
+      "shot": 95,
+      "expected": "locomotion",
+      "baseline": "locomotion",
+      "guarded_short": "unknown",
+      "unverified_camera_ablation": "unknown",
+      "short_reason": "short window tracking gap"
+    },
+    {
+      "video_id": 13,
+      "shot": 130,
+      "expected": "locomotion",
+      "baseline": "unknown",
+      "guarded_short": "unknown",
+      "unverified_camera_ablation": "unknown",
+      "short_reason": "short window tracking coverage"
+    }
+  ],
+  "video_diagnostics": [
+    {
+      "report": "dog08_p17_take01_ego_001_v2.json",
+      "sha256": "8c2c907a3c608fac301d415587c567c0bd662dd4cf83a3f14042043b1f71ccea",
+      "baseline": {
+        "duration_s": 24.550637651821862,
+        "covered_timeline_s": 24.550637651821862,
+        "decision_ratio": 0.0,
+        "seconds_by_label": {
+          "unknown": 24.550637651821862
+        },
+        "unknown_reason_seconds": {
+          "selected dog track missing": 8.283957489878542,
+          "less than 80% tracking coverage": 15.06174089068826,
+          "tracking gap or insufficient time": 1.2049392712550615
+        },
+        "tracking_events": {
+          "ambiguous_or_missing": 42,
+          "same_id": 80,
+          "new_segment_reacquisition": 1
+        },
+        "accuracy": null,
+        "note": "coverage is not correctness; unknown includes warm-up and tracking failures"
+      },
+      "stabilized": {
+        "duration_s": 24.550637651821862,
+        "covered_timeline_s": 24.550637651821862,
+        "decision_ratio": 0.0,
+        "seconds_by_label": {
+          "unknown": 24.550637651821862
+        },
+        "unknown_reason_seconds": {
+          "selected dog track missing": 8.283957489878542,
+          "less than 80% tracking coverage": 15.06174089068826,
+          "tracking gap or insufficient time": 1.2049392712550615
+        },
+        "tracking_events": {
+          "ambiguous_or_missing": 42,
+          "same_id": 80,
+          "new_segment_reacquisition": 1
+        },
+        "accuracy": null,
+        "note": "coverage is not correctness; unknown includes warm-up and tracking failures"
+      },
+      "baseline_label_switches": 0,
+      "stabilized_label_switches": 0,
+      "changed_predictions": 0,
+      "behavior_accuracy": null
+    },
+    {
+      "report": "dog10_p07_take01_ego_001_v2.json",
+      "sha256": "f8e113b4ee0362263cdeaeddb987354b41c9688a9fbd07ca4d72e3d5ea682b1b",
+      "baseline": {
+        "duration_s": 26.444525434243175,
+        "covered_timeline_s": 26.444525434243175,
+        "decision_ratio": 0.0,
+        "seconds_by_label": {
+          "unknown": 26.444525434243175
+        },
+        "unknown_reason_seconds": {
+          "selected dog track missing": 9.61012406947891,
+          "less than 80% tracking coverage": 11.612233250620351,
+          "tracking gap or insufficient time": 5.222168114143916
+        },
+        "tracking_events": {
+          "ambiguous_or_missing": 48,
+          "new_segment_reacquisition": 3,
+          "same_id": 81,
+          "short_gap_association": 1
+        },
+        "accuracy": null,
+        "note": "coverage is not correctness; unknown includes warm-up and tracking failures"
+      },
+      "stabilized": {
+        "duration_s": 26.444525434243175,
+        "covered_timeline_s": 26.444525434243175,
+        "decision_ratio": 0.0,
+        "seconds_by_label": {
+          "unknown": 26.444525434243175
+        },
+        "unknown_reason_seconds": {
+          "selected dog track missing": 9.61012406947891,
+          "less than 80% tracking coverage": 11.612233250620351,
+          "tracking gap or insufficient time": 5.222168114143916
+        },
+        "tracking_events": {
+          "ambiguous_or_missing": 48,
+          "new_segment_reacquisition": 3,
+          "same_id": 81,
+          "short_gap_association": 1
+        },
+        "accuracy": null,
+        "note": "coverage is not correctness; unknown includes warm-up and tracking failures"
+      },
+      "baseline_label_switches": 0,
+      "stabilized_label_switches": 0,
+      "changed_predictions": 0,
+      "behavior_accuracy": null
+    }
+  ],
+  "promoted": false,
+  "four_class_accuracy": null,
+  "decision": "Keep baseline: no fixed-camera verification or four-class references. Reduced switches alone do not prove accuracy.",
+  "limitations": [
+    "one-class subset cannot establish overall accuracy or specificity",
+    "unverified-camera ablation is not an eligible deployment candidate",
+    "smoothing delay and behavior transitions need independent temporal annotations"
+  ]
+}

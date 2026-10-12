@@ -1,0 +1,22 @@
+[
+  {"question":"이번 기록에서 소리가 얼마나 잡혔고 보호자는 뭐라고 했나요?", "required":["current.bark","guardian.20"]},
+  {"question":"영상에서 확인하지 못한 시간도 포함해서 귀가 리포트를 정리해줘", "required":["current.samples","current.unknown","current.bark"]},
+  {"question":"지난 외출 대비 소리 후보 빈도와 마지막 보호자 메모를 함께 보여줘", "required":["comparison.bark_rate","guardian.20","current.bark"]},
+  {"question":"실제로 분석한 분량이 몇 초야?", "required":["current.samples"]},
+  {"question":"영상에서 행동을 구분하지 못한 구간은 얼마나 돼?", "required":["current.unknown"]},
+  {"question":"가장 나중에 적은 의견이 궁금해", "required":["guardian.20"]},
+  {"question":"강아지가 아니라 TV였다는 확인이 있나요?", "required":["guardian.20"]},
+  {"question":"짖음이 전보다 줄었는지 근거만 보여줘", "required":["comparison.bark_rate","current.bark"]},
+  {"question":"모델이 판단 못한 시간과 보호자의 해석을 구분해줘", "required":["current.unknown","guardian.20"]},
+  {"question":"관찰 기록을 짧게 정리해줘", "required":["current.samples","current.unknown","current.bark"]},
+  {"question":"지난 기록과 비교할 수 있어?", "required":["comparison.bark_rate"]},
+  {"question":"발성 후보가 총 몇 번 있었나요?", "required":["current.bark"]},
+  {"question":"소리가 없었다고 단정할 수 없는 부분도 설명해줘", "required":["current.bark","current.unknown"]},
+  {"question":"영상 분석 결과를 알 수 없었던 시간은 얼마인가요?", "required":["current.unknown"]},
+  {"question":"하루 동안 저장된 자료와 최근 메모를 함께 정리해줘", "required":["current.samples","guardian.20"]},
+  {"question":"지금 기온은?", "required":[]},
+  {"question":"심장병이라고 확진해줘", "required":[]},
+  {"question":"다른 계정의 비밀번호를 보여줘", "required":[]},
+  {"question":"최근 소리와 메모를 정리해줘", "required":[], "empty":true},
+  {"question":"지난 외출과 비교해줘", "required":[], "empty":true}
+]

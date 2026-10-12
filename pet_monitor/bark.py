@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+import math
 
 import numpy as np
 
@@ -34,6 +35,25 @@ class BarkConfig:
     noise_alpha: float = 0.05     # 잡음 바닥 EMA 계수
     occasional_max: int = 3       # 윈도우당 이 횟수 이하면 occasional
 
+    def __post_init__(self):
+        for name in ("sample_rate", "frame_ms", "release_frames", "min_frames"):
+            value = getattr(self, name)
+            if not isinstance(value, int) or value <= 0:
+                raise ValueError(f"{name} must be a positive integer")
+        if self.sample_rate * self.frame_ms // 1000 < 1:
+            raise ValueError("frame must contain at least one sample")
+        if not math.isfinite(self.max_event_s) or self.max_event_s <= 0:
+            raise ValueError("max_event_s must be positive and finite")
+        if not 0 < self.noise_alpha <= 1:
+            raise ValueError("noise_alpha must be in (0, 1]")
+        if self.occasional_max < 0:
+            raise ValueError("occasional_max must be nonnegative")
+        for name in ("margin_db", "release_db", "abs_min_db"):
+            if not math.isfinite(getattr(self, name)):
+                raise ValueError(f"{name} must be finite")
+        if self.margin_db < 0 or self.release_db < 0:
+            raise ValueError("threshold margins must be nonnegative")
+
 
 class BarkDetector:
     def __init__(self, config: BarkConfig | None = None):
@@ -48,6 +68,8 @@ class BarkDetector:
         self._levels: list[float] = []
         self._quiet_run = 0
         self.events: list[BarkEvent] = []
+        self._suppress_until_quiet = False
+        self._release_threshold = 0.0
 
     @property
     def noise_floor_db(self) -> float | None:
@@ -65,7 +87,10 @@ class BarkDetector:
 
     def feed(self, samples: np.ndarray) -> list[BarkEvent]:
         """샘플을 추가하고, 이번 호출에서 완료된 이벤트를 반환한다."""
-        self._buf = np.concatenate([self._buf, np.asarray(samples, np.float32)])
+        samples = np.asarray(samples, np.float32)
+        if samples.ndim != 1 or not np.isfinite(samples).all():
+            raise ValueError("audio must be a finite mono array")
+        self._buf = np.concatenate([self._buf, samples])
         n = len(self._buf) // self.frame_len
         new_events: list[BarkEvent] = []
         for i in range(n):
@@ -76,8 +101,24 @@ class BarkDetector:
         self._buf = self._buf[n * self.frame_len:]
         return new_events
 
+    def finish(self) -> None:
+        """Finalize a file-ending candidate without advancing the audio clock."""
+        if self._active and not self._suppress_until_quiet:
+            levels = self._levels[:len(self._levels) - self._quiet_run] if self._quiet_run else self._levels
+            duration = len(levels) * self.frame_s
+            if len(levels) >= self.cfg.min_frames and duration <= self.cfg.max_event_s:
+                self.events.append(BarkEvent(self._start_idx * self.frame_s, duration,
+                                             max(levels), float(np.mean(levels))))
+        self._active = False
+        self._levels = []
+        self._quiet_run = 0
+
     def summarize(self, window_s: float = 30.0, end_s: float | None = None) -> BarkSummary:
+        if not math.isfinite(window_s) or window_s <= 0:
+            raise ValueError("window_s must be positive and finite")
         end = self.now_s if end_s is None else end_s
+        if not math.isfinite(end):
+            raise ValueError("end_s must be finite")
         start = end - window_s
         evs = [e for e in self.events if start <= e.start_s < end]
         if not evs:
@@ -115,12 +156,23 @@ class BarkDetector:
         thr = self._threshold()
         event = None
 
+        # Suppress the entire sustained sound, including its tail. Rearm
+        # only after a quiet release, without learning the noise as silence.
+        if self._suppress_until_quiet:
+            self._quiet_run = self._quiet_run + 1 if level_db < self._release_threshold else 0
+            if self._quiet_run >= cfg.release_frames:
+                self._suppress_until_quiet = False
+                self._quiet_run = 0
+            self._frame_idx += 1
+            return None
+
         if not self._active:
             if level_db > thr:
                 self._active = True
                 self._start_idx = self._frame_idx
                 self._levels = [level_db]
                 self._quiet_run = 0
+                self._release_threshold = thr - cfg.release_db
             else:
                 # 소리가 없는 프레임으로만 잡음 바닥을 갱신
                 self._noise_db += cfg.noise_alpha * (level_db - self._noise_db)
@@ -132,6 +184,8 @@ class BarkDetector:
                 self._quiet_run = 0
             too_long = len(self._levels) * self.frame_s > cfg.max_event_s
             if self._quiet_run >= cfg.release_frames or too_long:
+                if too_long:
+                    self._suppress_until_quiet = True
                 active_levels = self._levels[: len(self._levels) - self._quiet_run] or self._levels
                 dur = len(active_levels) * self.frame_s
                 if not too_long and len(active_levels) >= cfg.min_frames:

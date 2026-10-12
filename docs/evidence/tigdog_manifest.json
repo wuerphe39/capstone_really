@@ -1,0 +1,190 @@
+{
+  "dataset": "TigDog v1 behavioral annotations + YouTube-Objects v2.2 native videos",
+  "source": "https://calvin-vision.net/datasets/tigdog/",
+  "license": "non-commercial research only",
+  "annotation_shots": 102,
+  "annotated_frames": 22427,
+  "native_dog_videos": [
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0001.mp4",
+      "filename": "0001.mp4",
+      "bytes": 44994760,
+      "sha256": "7cc836df0e5c9c208b24c5a0951fdaa7d6b4f4974e8b639bdf06f911567d0299"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0002.mp4",
+      "filename": "0002.mp4",
+      "bytes": 106802641,
+      "sha256": "78c7a26085d00a379786821ad9fd4750735ef9d2e6af3caebd9acee308764db6"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0003.mp4",
+      "filename": "0003.mp4",
+      "bytes": 60281241,
+      "sha256": "db72fd01161ab989de852ae1b2058de116a670988a6568b57b1a9b3aa04d264b"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0004.mp4",
+      "filename": "0004.mp4",
+      "bytes": 159546040,
+      "sha256": "e92a98d3ea85efd1f269a643ae0583da497dfc455e5962617f2f54e911094653"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0005.mp4",
+      "filename": "0005.mp4",
+      "bytes": 3563900,
+      "sha256": "a313b8ec1d9c3e84087823a5d6699e5f2f3010782489dca8b85c4f737ac74512"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0006.mp4",
+      "filename": "0006.mp4",
+      "bytes": 18484634,
+      "sha256": "fb2ad597ff8627f33e30e425f743204f132737214d4785f7de2813fa4136b736"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0007.mp4",
+      "filename": "0007.mp4",
+      "bytes": 54111305,
+      "sha256": "186b57d6d0a2202cd5dbf2cef91c914cd3dbf744dfc04ced62e7d6cfa7e3653b"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0008.mp4",
+      "filename": "0008.mp4",
+      "bytes": 151174992,
+      "sha256": "dab2f4c320811137587c7e7649b343d7c46cb93ad5199fda6869f69b17e71ce4"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0009.mp4",
+      "filename": "0009.mp4",
+      "bytes": 5548440,
+      "sha256": "159daba294b9de756bc8ce6d27bfe12af3c67ab031d22f1498446a01b42a9bfa"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0010.flv",
+      "filename": "0010.flv",
+      "bytes": 11154182,
+      "sha256": "45b06dfc39d3124bd4fcfe67643b6ae318e315cbb4fec685a05972fef962a432"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0011.mp4",
+      "filename": "0011.mp4",
+      "bytes": 9635392,
+      "sha256": "8aeb229dc6684f4ce255d89eec2113b4a71ff8b4b86683c8bc7abcd2168b03e2"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0012.flv",
+      "filename": "0012.flv",
+      "bytes": 7248226,
+      "sha256": "3c02a1f181681b2ef227788d8b61577fc4552dbd604de1b9ab9a008db0d2e068"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0013.mp4",
+      "filename": "0013.mp4",
+      "bytes": 73066464,
+      "sha256": "cbd2dc86c0ef160c1acaf9b1f184cda7c18fee0596ec79de7ddc0c8b5070f06c"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0014.mp4",
+      "filename": "0014.mp4",
+      "bytes": 49695744,
+      "sha256": "8f86fd5ffe80c6b2c04c70b9df703ba297b6ddea8583d42ea9c8570f2f415dcb"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0015.mp4",
+      "filename": "0015.mp4",
+      "bytes": 3692321,
+      "sha256": "840d806b8d03c39c994e3c0c4be6d5a9b6349e0e953fc7bd3dce76431810bf9d"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0016.mp4",
+      "filename": "0016.mp4",
+      "bytes": 2318112,
+      "sha256": "196f04186f06033ee02273ad93a352a99660c1ba636d1a2abc8444ca3252d246"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0017.mp4",
+      "filename": "0017.mp4",
+      "bytes": 38517301,
+      "sha256": "0fc808f23b112bdb03744a434f8b0c9364971b6097602075d045283783b53f17"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0018.mp4",
+      "filename": "0018.mp4",
+      "bytes": 38270079,
+      "sha256": "a67a2d3efae6255c65b9ec74bbbf228b61a2ba6b713833908d1cc2039c94bb8c"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0019.mp4",
+      "filename": "0019.mp4",
+      "bytes": 28751435,
+      "sha256": "d826722df8a4e80e6e372284d0e446884d39097d34c05c5259fc2476a7cfcd03"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0020.mp4",
+      "filename": "0020.mp4",
+      "bytes": 18634137,
+      "sha256": "98e4a00b95a05188595b70cfad4e7464a872b7bf85c1fa1d0c5ce52681a24a85"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0021.mp4",
+      "filename": "0021.mp4",
+      "bytes": 35079552,
+      "sha256": "5e2796a9b086f70297738c6c8b1ac91b0d9def9ad52c04cb18df0b46f51319c3"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0022.mp4",
+      "filename": "0022.mp4",
+      "bytes": 11550242,
+      "sha256": "5c352c7316e9a844c696649466e8fb9671bd3e62dc54c2ee0cf772d14f078cdc"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0023.mp4",
+      "filename": "0023.mp4",
+      "bytes": 19921827,
+      "sha256": "43717070d45dec3dc7bf4938cfc47a22695e855924b7724f320cfffd62386e52"
+    },
+    {
+      "archive_member": "YouTube-Objects_v2 dog/0024.mp4",
+      "filename": "0024.mp4",
+      "bytes": 24190063,
+      "sha256": "3593ac5e95e12f9b62d01092f39fffb3f1a079dfcf1c2426d7bdd2cab3af8cfd"
+    }
+  ],
+  "downloads": [
+    {
+      "filename": "dog.tar.gz",
+      "bytes": 1570579623,
+      "sha256": "6a4b384b2fbfc47b51a525f42d0aed5bb68855bda2015c47e82f27a946c40847"
+    },
+    {
+      "filename": "behaviors.tar.gz",
+      "bytes": 111547,
+      "sha256": "9f8b886b21df284f9e79879a68c6772e0670ecf7660b25c57a842cf0940f5e25"
+    },
+    {
+      "filename": "ranges.tar.gz",
+      "bytes": 14919,
+      "sha256": "70067124965b9d07733c452d685db1aa3b53d07971afb46a2852fd25a2ebc9e8"
+    },
+    {
+      "filename": "README.txt",
+      "bytes": 7221,
+      "sha256": "c3c937433b219336837c3eb85b885630f035031c583aba1382be77871665f73b"
+    },
+    {
+      "filename": "YTO_Ranges.tar.gz",
+      "bytes": 12526,
+      "sha256": "fae58f1b365f254433d6de374c03d70ca7be2a607e768315db5e00528e7da55d"
+    },
+    {
+      "filename": "YTO_UsefulFiles.tar.gz",
+      "bytes": 27873255,
+      "sha256": "6529a7755f0432b2f633989235f812b980d92db984941cc74c8ff1631aa2f0fa"
+    }
+  ],
+  "evaluation_input": "original native resolution and presentation timestamps",
+  "models_frozen": {
+    "v1": "f4768f4676e316541196218b771d91db2c0ae51751bab15ee1478d2f115d5bcd",
+    "v2": "518bfeb4b42eb979b6ca175f4b122ec93d287cb55742704019f7abb9066ff881"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "tested_at": "2026-10-11T05:53:57.894Z",
+  "source": "ESC-50 public sample, UI demonstration only",
+  "playback": {
+    "currentTime": 5,
+    "duration": 5,
+    "ended": true,
+    "readyState": 4
+  },
+  "screenshot": "browser capture timed out"
+}

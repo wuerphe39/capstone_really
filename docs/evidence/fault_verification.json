@@ -1,0 +1,37 @@
+{
+  "pet_id": "fault-verify-de8b5c78",
+  "failure": {
+    "id": 6,
+    "suggestion_id": 8,
+    "action_type": "music",
+    "command_id": "dd4bc64e-6dcc-4a21-a726-05d34050bce3",
+    "status": "failed",
+    "request": {
+      "style": "calm_piano",
+      "mode": "simulated"
+    },
+    "result": {
+      "simulated": true,
+      "detail": "virtual music; no physical playback"
+    },
+    "error": "virtual music; no physical playback",
+    "created_at": "2026-10-10T23:21:13.286348Z",
+    "updated_at": "2026-10-10T23:21:13.369867Z"
+  },
+  "timeout": {
+    "id": 7,
+    "suggestion_id": 9,
+    "action_type": "music",
+    "command_id": "b041bbd0-902d-4f69-a9bf-d38e571d67f6",
+    "status": "timed_out",
+    "request": {
+      "style": "calm_piano",
+      "mode": "simulated"
+    },
+    "result": null,
+    "error": "가상 장치 완료 응답 시간 초과",
+    "created_at": "2026-10-10T23:21:14.116678Z",
+    "updated_at": "2026-10-10T23:21:44.333395Z"
+  },
+  "elapsed_wait_seconds": 30.202999999994063
+}
