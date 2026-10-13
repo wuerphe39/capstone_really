@@ -7,6 +7,8 @@
 - 재생·일시정지·단계 이동이 되는 버전: [PetMind_동작_애니메이션.html](PetMind_동작_애니메이션.html) (파일을 내려받아 브라우저에서 열면 됩니다. GitHub 파일 화면에서는 HTML 스크립트가 실행되지 않습니다.)
 - 애니메이션은 이 README 0~4장을 근거로 만들었고, `python scripts/build_flow_animation.py`로 다시 생성합니다.
 
+> **범위 변경 (2026-10-13):** 교수님과 상의해 **Raspberry Pi 5는 사용하지 않기로 했다.** 소리·영상 입력은 PC의 마이크·웹캠(FFmpeg)과 파일 재생으로 한다. 아래의 Pi 관련 서술(2장 표, 7장, SSH 터널, `pi_*` 스크립트)은 이전 계획에서 구현·시험한 선택 사항으로 남겨 두며 현재 시연 경로가 아니다.
+
 ---
 
 ## 목차
@@ -70,7 +72,7 @@ cd petmind_app; flutter run -d chrome --web-port 8021
 
 ### 1-1. 구성 — 음성 감지와 근거 영상
 
-WAV 업로드·분석·의견·RAG에 더해 **동일 입력의 음성 LSTM 감지 → 전후 영상 저장 → 관찰 연결·재생**을 구현했다. FFmpeg 장치 입력 어댑터도 제공하지만 실제 Pi 카메라·마이크 연결은 아직 검증하지 않았다. 파일 재생은 `file_replay`, 장치 입력은 `device`로 구분한다.
+WAV 업로드·분석·의견·RAG에 더해 **동일 입력의 음성 LSTM 감지 → 전후 영상 저장 → 관찰 연결·재생**을 구현했다. FFmpeg 장치 입력 어댑터도 제공하지만 실제 PC 마이크·웹캠 연결은 아직 검증하지 않았다(Raspberry Pi는 사용하지 않기로 결정). 파일 재생은 `file_replay`, 장치 입력은 `device`로 구분한다.
 
 ![PetMind 전체 신호 흐름도](docs/PetMind_전체_블록도.svg)
 
@@ -108,7 +110,17 @@ Pi/Linux 장치 입력 예: 먼저 [SSH 터널](docs/AUTOMATIC_OUTING.md)을 열
 python -m scripts.monitor_audio_events --input-args-file capture-input.json --audio-map 1:a:0 --video-map 0:v:0 --ffmpeg ffmpeg --base http://127.0.0.1:18010 --pet-id my-dog --new-outing --store-consent
 ```
 
-Pi에는 수집 스크립트와 `requests`, `soundfile` 및 FFmpeg가 필요하고 모델 추론은 PC API에서 수행한다. 현재 API는 비로컬 접속과 외부 웹 Origin을 403으로 거부한다. PC 서버는 `127.0.0.1`에 두고 Pi는 [SSH 역방향 터널](docs/AUTOMATIC_OUTING.md)로 연결한다. `pet_id`와 Pi 작업 소유 토큰은 사용자·장치 인증이 아니므로 인터넷 또는 공용 LAN에 공개해서는 안 된다. 수집 시각은 프로세스 시작 UTC와 미디어 상대 시각으로 계산하고, 자동 외출 에이전트는 서버 시각을 왕복 지연과 함께 검사한다. 파일 재생·수동 장치 스크립트는 이 사전 검사를 거치지 않으며 장치 지연·실제 시각 오차는 현장에서 확인해야 한다.
+**Windows PC 입력 예(Raspberry Pi를 쓰지 않기로 한 뒤의 기본 경로):** `ffmpeg -list_devices true -f dshow -i dummy`로 장치 이름을 확인한 뒤 `capture-input.json`에 저장한다. 서버에 직접 접속하므로 SSH 터널은 필요 없다. 장치 이름은 PC마다 다르며 아래는 예시일 뿐 동작을 보증하지 않는다.
+
+```json
+["-f", "dshow", "-i", "video=720p HD Camera", "-f", "dshow", "-i", "audio=마이크 배열(디지털 마이크용 인텔® 스마트 사운드 기술)"]
+```
+
+```powershell
+python -m scripts.monitor_audio_events --input-args-file capture-input.json --audio-map 1:a:0 --video-map 0:v:0 --ffmpeg ffmpeg --base http://127.0.0.1:8010 --pet-id my-dog --new-outing --store-consent
+```
+
+(이전 계획) Pi에는 수집 스크립트와 `requests`, `soundfile` 및 FFmpeg가 필요하고 모델 추론은 PC API에서 수행한다. 현재 API는 비로컬 접속과 외부 웹 Origin을 403으로 거부한다. PC 서버는 `127.0.0.1`에 두고 Pi는 [SSH 역방향 터널](docs/AUTOMATIC_OUTING.md)로 연결한다. `pet_id`와 Pi 작업 소유 토큰은 사용자·장치 인증이 아니므로 인터넷 또는 공용 LAN에 공개해서는 안 된다. 수집 시각은 프로세스 시작 UTC와 미디어 상대 시각으로 계산하고, 자동 외출 에이전트는 서버 시각을 왕복 지연과 함께 검사한다. 파일 재생·수동 장치 스크립트는 이 사전 검사를 거치지 않으며 장치 지연·실제 시각 오차는 현장에서 확인해야 한다.
 
 **확인한 결과:** 30초 테스트 입력에서 6개 음성 관찰(실제 디코딩 표본 30.024초), 감지 사건 1개, 15초 MP4 저장과 브라우저 끝까지 재생을 확인했다. 공개 ESC-50 음원에 생성한 테스트 패턴을 붙인 **기능 검증 자료**로, 실제 반려견 영상이나 감지 정확도 평가가 아니다. [검증 기록](docs/evidence/event_video_integration.json)에는 근거 ID·출처·의견을 포함한 규칙 기반 RAG 응답을 저장했다. 이번 기능은 새로운 Gemini 응답 품질 측정이나 모델 재학습이 아니다.
 
@@ -133,7 +145,8 @@ Pi에는 수집 스크립트와 `requests`, `soundfile` 및 FFmpeg가 필요하�
 |---|---|---|
 | 개발 PC | Windows 11, Python 3.12, Flutter 웹 | 백엔드 `127.0.0.1:8010`, 화면 `localhost:8021` |
 | 저장소 DB | PC 로컬 SQLite `petmind.db` | Git에서 제외, 재시작 후 기록 유지 |
-| Raspberry Pi | `/home/pi/Desktop/PetMind_Test`, Python 3.13.5 | SSH 역방향 터널로 **가상 장치 명령** 왕복 확인 |
+| PC 마이크·웹캠 | FFmpeg DirectShow 입력으로 수집(2026-10-13 이후 기본 경로) | 개발 PC에서 FFmpeg가 장치를 인식하는 것까지 확인. 수집·드라이버·음성/영상 시각 차이는 미검증 |
+| Raspberry Pi | `/home/pi/Desktop/PetMind_Test`, Python 3.13.5 | **사용하지 않기로 결정(2026-10-13).** 이전에 SSH 역방향 터널로 **가상 장치 명령** 왕복 확인 |
 | 외부 서비스 | Gemini 생성·임베딩 API | 로컬 `.env`의 키가 있을 때 사용; 실패 시 폴백 표시 |
 | 카메라·마이크·스피커 | FFmpeg 장치 입력·사건 녹화 코드 제공; 물리 재생 미연결 | 파일 입력 검증 완료, 실제 장비·드라이버 검증은 남음 |
 
@@ -409,7 +422,7 @@ DB는 기존 `ObservationMedia`와 JSON 메타데이터를 재사용하므로 �
 - [ ] **P0 — 발표 증거:** 실제 브라우저 조작 녹화와 발표 PPT·설명 원고 확보. 최신 코드의 새 환경 설치·재현 검증은 남음.
 - [x] **P0 — 감지 기반 근거 영상 코드:** 최근 구간 버퍼, 감지 창 전후 저장·병합, 관찰 ID 연결, 재생·누락 표시·삭제 연동 구현. 실제 체크포인트와 파일 입력으로 통합 검증.
 - [x] **P0 — 기록 해석·시각 사전 검사:** 에너지 후보와 LSTM 감지 창을 분리하고, 자동 외출에서 Pi·PC 시계 차이와 왕복 지연을 검사한다. 실장비 정확도 검증을 완료했다는 뜻은 아니다.
-- [ ] **P0 — 실장비 수집 검증:** Pi 마이크·카메라 입력 드라이버와 음성·영상 시각 오차, 장시간 수집을 확인.
+- [ ] **P0 — 입력 장치 수집 검증:** PC 마이크·웹캠 입력(FFmpeg dshow)의 드라이버와 음성·영상 시각 차이, 장시간 수집을 확인. (Raspberry Pi는 2026-10-13 교수님과 상의해 사용하지 않기로 함)
 - [ ] **P1 — 장비 안정화·선택 실행:** 중복 없는 재전송·수집 재시작, 네트워크 장애 복구와 저장 용량 관리, 승인 후 물리 음악 재생 확인.
 - [ ] **P1 — 개별 케어 검증:** 생성된 문장·수치의 근거 대조, 장기 관찰·실제 보호자 피드백으로 RAG 무관 근거율과 제안 유용성 평가.
 - [ ] **외부 사용자 수집 전 필수:** 인증·사용자별 접근 제어. 로컬 저장 동의·철회·보관 기간·검수 내보내기는 구현됐지만 개인화 정확도와 이미 학습한 모델의 역학습은 미검증/미구현.
