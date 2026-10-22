@@ -36,6 +36,7 @@ class _AudioPanelState extends State<AudioPanel> {
   int retention = 7, epoch = 0, uploadRevision = 0;
   static const pageSize = 100, maxRefresh = 500;  // the server pages newest-first; maxRefresh is its limit cap
   bool hasMore = false, loadingMore = false;
+  final _storage = PageStorageBucket();
   String get petQuery => 'pet_id=${Uri.encodeQueryComponent(widget.petId)}';
   String scoreLabel(dynamic value) => value is num
     ? '${(value * 100).toStringAsFixed(1)} / 100' : '값 없음';
@@ -181,7 +182,13 @@ class _AudioPanelState extends State<AudioPanel> {
       actions:[TextButton(onPressed:() => Navigator.pop(context),child:const Text('닫기'))]));
   }
   @override
-  Widget build(BuildContext context) => ExpansionTile(
+  Widget build(BuildContext context) => PageStorage(
+    // PageStorage slots are shared by every widget with the same chain of PageStorageKeys. main.dart builds each
+    // section as ListView(key: PageStorageKey(...)), which stores its scroll offset (a double) there; the tile
+    // read that slot as its expanded flag and threw "type 'int' is not a subtype of type 'bool?'" (a gray box in
+    // release builds) when the section was entered again after scrolling. A private bucket keeps them apart.
+    bucket: _storage,
+    child: ExpansionTile(
     tilePadding: const EdgeInsets.symmetric(horizontal: 8),
     childrenPadding: const EdgeInsets.only(bottom: 8),
     title: Text(widget.allowUpload ? '사용자 음원 · 보호자 확인' : '자동 수집 음원 · 보호자 확인', style: Theme.of(context).textTheme.titleMedium),
@@ -278,5 +285,5 @@ class _AudioPanelState extends State<AudioPanel> {
       if (busy) const LinearProgressIndicator(),
       if (error.isNotEmpty) Text(error,style:const TextStyle(color: GenesisTheme.warningInk)),
     ])),
-  ]);
+  ]));
 }

@@ -83,6 +83,38 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('audio panel survives re-entering a section whose list saved its scroll position', (tester) async {
+    // main.dart builds every section as ListView(key: PageStorageKey(...)), which stores the scroll offset (a double)
+    // in PageStorage. A key-less ExpansionTile inside reads the same slot as a bool and used to throw
+    // "type 'int' is not a subtype of type 'bool?'", which release builds show as a gray box.
+    final client = MockClient((request) async => request.url.path.endsWith('/review-queue')
+      ? http.Response(jsonEncode({'items': []}), 200, headers: {'content-type': 'application/json; charset=utf-8'})
+      : http.Response('[]', 200, headers: {'content-type': 'application/json; charset=utf-8'}));
+    final bucket = PageStorageBucket();
+    Widget section(bool visible) => MaterialApp(home: Scaffold(body: PageStorage(bucket: bucket,
+      child: visible ? ListView(key: const PageStorageKey('section-1'), children: [
+        AudioPanel(client: client, base: 'http://localhost', petId: 'dog-a', onChanged: () {}),
+        const SizedBox(height: 3000),
+      ]) : const SizedBox())));
+    await tester.pumpWidget(section(true));
+    await tester.pumpAndSettle();
+    await tester.drag(find.byType(ListView), const Offset(0, -300));   // the list saves its scroll offset
+    await tester.pumpAndSettle();
+    await tester.pumpWidget(section(false));                            // leave the section ...
+    await tester.pumpAndSettle();
+    await tester.pumpWidget(section(true));                             // ... and come back
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    await tester.drag(find.byType(ListView), const Offset(0, 400));     // the saved scroll offset was restored: back to the top
+    await tester.pumpAndSettle();
+    expect(find.text('사용자 음원 · 보호자 확인'), findsOneWidget);
+    await tester.tap(find.text('사용자 음원 · 보호자 확인'));              // and the tile still opens
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    expect(find.text('음원 목록 새로고침'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets('review queue failure still shows clips and recovers', (tester) async {
     tester.view.physicalSize = const Size(1200, 1500);
     tester.view.devicePixelRatio = 1;
