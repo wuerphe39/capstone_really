@@ -211,9 +211,12 @@ async def upload(request: Request, pet_id: str = Query(min_length=1,max_length=8
 
 
 @router.get('')
-def list_clips(pet_id: str, db=Depends(get_db)):
+def list_clips(pet_id: str, limit: int = Query(default=100, ge=1, le=500), offset: int = Query(default=0, ge=0),
+               db=Depends(get_db)):
+    """Newest first. Page with limit/offset (a page shorter than limit is the last one)."""
     purge_expired(db)
-    rows = db.scalars(select(AudioClipLog).where(AudioClipLog.pet_id == pet_id).order_by(AudioClipLog.created_at.desc()).limit(100)).all()
+    rows = db.scalars(select(AudioClipLog).where(AudioClipLog.pet_id == pet_id)
+        .order_by(AudioClipLog.created_at.desc(), AudioClipLog.observation_id.desc()).limit(limit).offset(offset)).all()
     return [to_out(row) for row in rows]
 
 

@@ -34,6 +34,8 @@ class _AudioPanelState extends State<AudioPanel> {
   bool publicDemo = false;
   String publicSource = '';
   int retention = 7, epoch = 0, uploadRevision = 0;
+  static const pageSize = 100, maxRefresh = 500;  // the server pages newest-first; maxRefresh is its limit cap
+  bool hasMore = false, loadingMore = false;
   String get petQuery => 'pet_id=${Uri.encodeQueryComponent(widget.petId)}';
   String scoreLabel(dynamic value) => value is num
     ? '${(value * 100).toStringAsFixed(1)} / 100' : '값 없음';
@@ -56,7 +58,7 @@ class _AudioPanelState extends State<AudioPanel> {
   void didUpdateWidget(covariant AudioPanel oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.petId != widget.petId) {
-      epoch++; uploadRevision++; clips = []; reviewQueue = []; queueOnly = false; bytes = null; filename = ''; store = false; training = false; error = ''; publicDemo = false; publicSource = ''; retention = 7;
+      epoch++; uploadRevision++; clips = []; hasMore = false; loadingMore = false; reviewQueue = []; queueOnly = false; bytes = null; filename = ''; store = false; training = false; error = ''; publicDemo = false; publicSource = ''; retention = 7;
       load();
     }
   }
@@ -78,7 +80,9 @@ class _AudioPanelState extends State<AudioPanel> {
   Future<void> load() async {
     final token = ++epoch;
     try {
-      final data = decode(await widget.client.get(Uri.parse('${widget.base}/audio-clips?$petQuery')).timeout(const Duration(seconds: 20)));
+      // Refresh as many clips as are already shown, so reviewing an old clip does not collapse the list.
+      final size = clips.length > pageSize ? (clips.length > maxRefresh ? maxRefresh : clips.length) : pageSize;
+      final data = decode(await widget.client.get(Uri.parse('${widget.base}/audio-clips?$petQuery&limit=$size')).timeout(const Duration(seconds: 20)));
       if (!mounted || token != epoch) { return; }
       dynamic queue;
       var queueUnavailable = false;
@@ -89,12 +93,30 @@ class _AudioPanelState extends State<AudioPanel> {
       if (mounted && token == epoch) {
         setState(() {
           clips = data as List<dynamic>;
+          hasMore = clips.length >= size;
           reviewQueue = queue is Map ? queue['items'] as List<dynamic> : [];
           if (queueUnavailable) queueOnly = false;
           error = queueUnavailable ? '확인 추천을 불러오지 못했습니다. 전체 음원 목록은 표시 중입니다.' : '';
         });
       }
     } catch (e) { if (mounted && token == epoch) setState(() => error = '$e'); }
+  }
+  Future<void> loadMore() async {
+    if (loadingMore) return;
+    final token = epoch, offset = clips.length;
+    setState(() => loadingMore = true);
+    try {
+      final page = decode(await widget.client.get(Uri.parse('${widget.base}/audio-clips?$petQuery&limit=$pageSize&offset=$offset'))
+        .timeout(const Duration(seconds: 20))) as List<dynamic>;
+      if (!mounted || token != epoch) return;
+      setState(() {
+        final known = {for (final c in clips) c['id']};  // new uploads shift the offset: skip repeats
+        clips = [...clips, ...page.where((c) => !known.contains(c['id']))];
+        hasMore = page.length >= pageSize;
+        error = '';
+      });
+    } catch (e) { if (mounted && token == epoch) setState(() => error = '$e'); }
+    finally { if (mounted) setState(() => loadingMore = false); }
   }
   Future<void> run(Future<void> Function() action) async {
     if (busy) return;
@@ -251,6 +273,8 @@ class _AudioPanelState extends State<AudioPanel> {
           ]),
         ]))));
       }),
+      if (!queueOnly && hasMore) TextButton(onPressed: busy || loadingMore ? null : loadMore,
+        child: Text(loadingMore ? '불러오는 중…' : '이전 음원 더 보기 (지금 ${clips.length}건 표시)')),
       if (busy) const LinearProgressIndicator(),
       if (error.isNotEmpty) Text(error,style:const TextStyle(color: GenesisTheme.warningInk)),
     ])),

@@ -40,6 +40,49 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('older clips load page by page and a refresh keeps them', (tester) async {
+    tester.view.physicalSize = const Size(1200, 1500);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    Map<String, dynamic> clip(int n) => {'id': 'clip-$n', 'observation_id': n, 'duration_s': 5,
+      'training_consent': false, 'expires_at': '2026-10-18T00:00:00Z', 'deleted': false,
+      'audio_available': false, 'review_priority': 'routine_sample', 'source_note': '수집', 'analysis': {}, 'review': {}};
+    final all = [for (var n = 130; n >= 1; n--) clip(n)];  // newest first, like the server
+    final requested = <String>[];
+    final client = MockClient((request) async {
+      if (request.url.path.endsWith('/review-queue')) {
+        return http.Response(jsonEncode({'items': []}), 200, headers: {'content-type': 'application/json; charset=utf-8'});
+      }
+      requested.add(request.url.query);
+      final limit = int.parse(request.url.queryParameters['limit'] ?? '100');
+      final offset = int.parse(request.url.queryParameters['offset'] ?? '0');
+      final page = all.skip(offset).take(limit).toList();
+      return http.Response(jsonEncode(page), 200, headers: {'content-type': 'application/json; charset=utf-8'});
+    });
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: SingleChildScrollView(child: AudioPanel(
+      client: client, base: 'http://localhost', petId: 'dog-a', onChanged: () {})))));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('사용자 음원 · 보호자 확인'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('관찰 #130 '), findsOneWidget);
+    expect(find.textContaining('관찰 #30 '), findsNothing);          // beyond the first 100
+    final more = find.textContaining('이전 음원 더 보기');
+    await tester.ensureVisible(more);
+    await tester.tap(more);
+    await tester.pumpAndSettle();
+    expect(find.textContaining('관찰 #30 '), findsOneWidget);
+    expect(find.textContaining('관찰 #1 '), findsOneWidget);          // the oldest clip is reachable
+    expect(find.textContaining('이전 음원 더 보기'), findsNothing);     // a short page was the last one
+    expect(requested.any((q) => q.contains('offset=100')), isTrue);
+    await tester.ensureVisible(find.text('음원 목록 새로고침'));
+    await tester.tap(find.text('음원 목록 새로고침'));                    // refresh asks for everything shown
+    await tester.pumpAndSettle();
+    expect(requested.last.contains('limit=130'), isTrue);
+    expect(find.textContaining('관찰 #1 '), findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets('review queue failure still shows clips and recovers', (tester) async {
     tester.view.physicalSize = const Size(1200, 1500);
     tester.view.devicePixelRatio = 1;

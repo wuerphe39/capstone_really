@@ -225,3 +225,20 @@ def test_demo_audio_is_labeled_and_not_compared_with_user_upload(client):
         'pet_id':'dog-a', 'question':'지난 외출과 비교해 주세요.'}).json()
     assert comparison['report']['comparison']['status'] == 'incompatible_provenance'
     assert not any(c['id'] == 'comparison.bark_rate' for c in comparison['claims'])
+
+
+def test_clip_list_pages_newest_first_without_gaps_or_repeats(client):
+    ids = [upload(client)['id'] for _ in range(5)]
+    first = [c['id'] for c in client.get('/audio-clips?pet_id=dog-a&limit=2').json()]
+    second = [c['id'] for c in client.get('/audio-clips?pet_id=dog-a&limit=2&offset=2').json()]
+    last = [c['id'] for c in client.get('/audio-clips?pet_id=dog-a&limit=2&offset=4').json()]
+    assert first + second + last == ids[::-1]       # newest first, every clip exactly once
+    assert len(last) == 1                            # a short page marks the end
+    assert client.get('/audio-clips?pet_id=dog-a&limit=2&offset=6').json() == []
+    assert len(client.get('/audio-clips?pet_id=dog-a').json()) == 5   # default page still covers small lists
+
+
+def test_clip_list_rejects_out_of_range_paging(client):
+    assert client.get('/audio-clips?pet_id=dog-a&limit=0').status_code == 422
+    assert client.get('/audio-clips?pet_id=dog-a&limit=501').status_code == 422
+    assert client.get('/audio-clips?pet_id=dog-a&offset=-1').status_code == 422
