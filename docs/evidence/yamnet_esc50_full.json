@@ -1,0 +1,342 @@
+{
+ "dataset": "ESC-50 (all 2,000 clips, official revision 33c8ce9e)",
+ "detector": "YAMNet Bark direct score, max over windows",
+ "threshold": 0.05,
+ "threshold_note": "fixed operating value; not chosen from this evaluation",
+ "dog_clips": 40,
+ "other_clips": 1960,
+ "confusion": {
+  "tp": 40,
+  "fn": 0,
+  "fp": 34,
+  "tn": 1926
+ },
+ "recall": 1.0,
+ "recall_95ci": [
+  0.912,
+  1.0
+ ],
+ "false_alarm_rate": 0.0173,
+ "false_alarm_95ci": [
+  0.0124,
+  0.0241
+ ],
+ "precision": 0.541,
+ "f1": 0.702,
+ "precision_note": "depends on the 40:1,960 class ratio of this set, not on a home",
+ "dog_score_quantiles": {
+  "0.1": 0.448,
+  "0.25": 0.634,
+  "0.5": 0.776,
+  "0.75": 0.843,
+  "0.9": 0.905
+ },
+ "missed_dog_clips": [],
+ "false_alarm_categories": [
+  {
+   "category": "rooster",
+   "false_alarms": 6,
+   "clips": 40
+  },
+  {
+   "category": "pig",
+   "false_alarms": 4,
+   "clips": 40
+  },
+  {
+   "category": "cat",
+   "false_alarms": 4,
+   "clips": 40
+  },
+  {
+   "category": "frog",
+   "false_alarms": 3,
+   "clips": 40
+  },
+  {
+   "category": "cow",
+   "false_alarms": 3,
+   "clips": 40
+  },
+  {
+   "category": "hen",
+   "false_alarms": 3,
+   "clips": 40
+  },
+  {
+   "category": "door_wood_creaks",
+   "false_alarms": 3,
+   "clips": 40
+  },
+  {
+   "category": "sneezing",
+   "false_alarms": 2,
+   "clips": 40
+  },
+  {
+   "category": "crow",
+   "false_alarms": 1,
+   "clips": 40
+  },
+  {
+   "category": "drinking_sipping",
+   "false_alarms": 1,
+   "clips": 40
+  },
+  {
+   "category": "laughing",
+   "false_alarms": 1,
+   "clips": 40
+  },
+  {
+   "category": "breathing",
+   "false_alarms": 1,
+   "clips": 40
+  },
+  {
+   "category": "crying_baby",
+   "false_alarms": 1,
+   "clips": 40
+  },
+  {
+   "category": "toilet_flush",
+   "false_alarms": 1,
+   "clips": 40
+  }
+ ],
+ "household_sounds": {
+  "false_alarms": 10,
+  "clips": 1160,
+  "categories": [
+   {
+    "category": "door_wood_knock",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "mouse_click",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "keyboard_typing",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "door_wood_creaks",
+    "false_alarms": 3,
+    "clips": 40
+   },
+   {
+    "category": "can_opening",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "washing_machine",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "vacuum_cleaner",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "clock_alarm",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "clock_tick",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "glass_breaking",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "toilet_flush",
+    "false_alarms": 1,
+    "clips": 40
+   },
+   {
+    "category": "brushing_teeth",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "footsteps",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "laughing",
+    "false_alarms": 1,
+    "clips": 40
+   },
+   {
+    "category": "crying_baby",
+    "false_alarms": 1,
+    "clips": 40
+   },
+   {
+    "category": "sneezing",
+    "false_alarms": 2,
+    "clips": 40
+   },
+   {
+    "category": "coughing",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "breathing",
+    "false_alarms": 1,
+    "clips": 40
+   },
+   {
+    "category": "snoring",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "drinking_sipping",
+    "false_alarms": 1,
+    "clips": 40
+   },
+   {
+    "category": "siren",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "car_horn",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "helicopter",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "train",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "airplane",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "hand_saw",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "chainsaw",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "church_bells",
+    "false_alarms": 0,
+    "clips": 40
+   },
+   {
+    "category": "clapping",
+    "false_alarms": 0,
+    "clips": 40
+   }
+  ]
+ },
+ "animal_sounds": [
+  {
+   "category": "rooster",
+   "false_alarms": 6,
+   "clips": 40
+  },
+  {
+   "category": "pig",
+   "false_alarms": 4,
+   "clips": 40
+  },
+  {
+   "category": "cow",
+   "false_alarms": 3,
+   "clips": 40
+  },
+  {
+   "category": "frog",
+   "false_alarms": 3,
+   "clips": 40
+  },
+  {
+   "category": "cat",
+   "false_alarms": 4,
+   "clips": 40
+  },
+  {
+   "category": "hen",
+   "false_alarms": 3,
+   "clips": 40
+  },
+  {
+   "category": "insects",
+   "false_alarms": 0,
+   "clips": 40
+  },
+  {
+   "category": "sheep",
+   "false_alarms": 0,
+   "clips": 40
+  },
+  {
+   "category": "crow",
+   "false_alarms": 1,
+   "clips": 40
+  }
+ ],
+ "threshold_sweep_informational": [
+  {
+   "threshold": 0.02,
+   "dog_detected": 40,
+   "dog_total": 40,
+   "false_alarms": 62,
+   "negatives": 1960
+  },
+  {
+   "threshold": 0.05,
+   "dog_detected": 40,
+   "dog_total": 40,
+   "false_alarms": 34,
+   "negatives": 1960
+  },
+  {
+   "threshold": 0.1,
+   "dog_detected": 40,
+   "dog_total": 40,
+   "false_alarms": 20,
+   "negatives": 1960
+  },
+  {
+   "threshold": 0.2,
+   "dog_detected": 40,
+   "dog_total": 40,
+   "false_alarms": 10,
+   "negatives": 1960
+  },
+  {
+   "threshold": 0.5,
+   "dog_detected": 32,
+   "dog_total": 40,
+   "false_alarms": 3,
+   "negatives": 1960
+  }
+ ]
+}
