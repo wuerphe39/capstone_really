@@ -25,6 +25,11 @@ def run_ffmpeg(executable, arguments):
                    check=True, timeout=120, stdout=subprocess.DEVNULL)
 
 
+def model_ready(analysis):
+    """Detector output lives under audio_model (YAMNet) or audio_lstm (LSTM)."""
+    return bool(analysis.get('audio_model') or analysis.get('audio_lstm'))
+
+
 def build_capture_command(ffmpeg, input_args, video_map, audio_map, folder):
     return [ffmpeg,'-hide_banner','-loglevel','error','-nostdin','-y',*input_args,
             '-map',video_map,'-map',audio_map,'-vf','scale=640:-2','-r','10',
@@ -173,7 +178,7 @@ def main():
                     if args.progress_file:
                         progress=args.progress_file.with_suffix('.tmp')
                         progress.write_text(json.dumps({'at':time.time(),
-                            'model_ready':bool(result['analysis'].get('audio_lstm'))}),encoding='utf-8')
+                            'model_ready':model_ready(result['analysis'])}),encoding='utf-8')
                         progress.replace(args.progress_file)
                     for w in windows: planner.add(start+w['start_s'],start+w['end_s'],result['id'])
                     log(observation_id=result['observation_id'],dog_windows=len(windows),model_status=result['analysis'].get('model_status','ready'))

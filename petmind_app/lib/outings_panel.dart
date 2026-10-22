@@ -27,13 +27,13 @@ class _OutingsPanelState extends State<OutingsPanel> {
   Map<String, dynamic>? capture;
   Timer? captureTimer;
   bool polling = false;
-  static const captureLabels = {'waiting': 'Pi 연결 대기 · 아직 분석하지 않음',
+  static const captureLabels = {'waiting': '수집 프로그램 연결 대기 · 아직 분석하지 않음',
     'starting': '장치 준비 중 · 분석 결과 대기', 'capturing': '음성 분석 중',
     'model_unavailable': '수집 중 · 음성 모델 사용 불가',
     'draining': '종료 처리 중 · 남은 분석과 사건 영상 저장',
-    'disconnected': 'Pi 연결 끊김 · 분석 상태 확인 불가',
+    'disconnected': '수집 프로그램 연결 끊김 · 분석 상태 확인 불가',
     'stopped': '수집 종료', 'failed': '수집 실패 · 확인 필요',
-    'clock_mismatch': 'Pi·PC 시각 차이 또는 연결 지연 · 시계 동기화 확인', 'manual': '수동 입력'};
+    'clock_mismatch': '수집 프로그램·서버 시각 차이 또는 연결 지연 · 시계 동기화 확인', 'manual': '수동 입력'};
   String error = '';
   bool busy = false;
   int generation = 0;
@@ -274,7 +274,7 @@ class _OutingsPanelState extends State<OutingsPanel> {
         const SizedBox(height: 20),
         if (active == null) Wrap(spacing: 12, crossAxisAlignment: WrapCrossAlignment.center, children: [
           DropdownButton<String>(value: mode, items: const [
-            DropdownMenuItem(value: 'live', child: Text('자동 관찰 · Pi 마이크')),
+            DropdownMenuItem(value: 'live', child: Text('자동 관찰 · PC 입력')),
             DropdownMenuItem(value: 'uploaded_audio', child: Text('사용자 음원')),
             DropdownMenuItem(value: 'prepared_video', child: Text('준비된 영상·음원')),
             DropdownMenuItem(value: 'synthetic_demo', child: Text('합성 시연')),

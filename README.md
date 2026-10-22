@@ -8,6 +8,37 @@
 - 애니메이션은 이 README 0~4장을 근거로 만들었고, `python scripts/build_flow_animation.py`로 다시 생성합니다.
 
 > **범위 변경 (2026-10-13):** 교수님과 상의해 **Raspberry Pi 5는 사용하지 않기로 했다.** 소리·영상 입력은 PC의 마이크·웹캠(FFmpeg)과 파일 재생으로 한다. 아래의 Pi 관련 서술(2장 표, 7장, SSH 터널, `pi_*` 스크립트)은 이전 계획에서 구현·시험한 선택 사항으로 남겨 두며 현재 시연 경로가 아니다.
+>
+> **음성 모델 확정:** 음성 감지는 **YAMNet**을 쓴다(PC에서 로컬 실행). 이 문서의 "음성 LSTM" 서술 중 운영 모델을 가리키는 부분은 YAMNet 채택 이전 기준이며, 운영 설정은 `PETMIND_AUDIO_DETECTOR=yamnet`이다. LSTM 경로는 비교 기준으로 코드에 남아 있다.
+
+### 빠른 실행 — 노트북 하나로 (YAMNet, 2026-10-22 확인)
+
+`.venv`에는 `requirements-core.txt`와 `soundfile scipy opencv-python`을, YAMNet 서비스 환경(TensorFlow 포함)에는 `requirements-yamnet-experiment.txt`를 설치한다. 저장소 루트에서 서로 다른 터미널 세 개를 쓴다.
+
+```powershell
+# 1) YAMNet 분석 서비스 (TensorFlow 환경)
+py -3.12 -m experimental.yamnet_only_site.app --port 8030
+
+# 2) 백엔드 (.venv). 데이터는 git에서 제외되는 artifacts/live/에 둔다
+$env:PETMIND_DATABASE_URL='sqlite:///artifacts/live/petmind_live.db'
+$env:PETMIND_AUDIO_STORAGE_DIR='artifacts/live/user_audio'
+$env:PETMIND_AUDIO_DETECTOR='yamnet'; $env:PETMIND_LLM_PROVIDER='rule'; $env:PETMIND_SEMANTIC_SEARCH='off'
+.\.venv\Scripts\python.exe -m uvicorn petmind.backend.main:app --host 127.0.0.1 --port 8010
+
+# 3) 노트북 웹캠·마이크 수집 (아래 capture-input.json 예시 참고)
+.\.venv\Scripts\python.exe -m scripts.monitor_audio_events --input-args-file capture-input.json --audio-map 1:a:0 --video-map 0:v:0 --ffmpeg <ffmpeg 경로> --base http://127.0.0.1:8010 --pet-id my-dog --new-outing --store-consent
+```
+
+보호자 화면(Flutter 웹)은 Flutter 3.32.4(Dart 3.8.1)로 빌드해 정적 서버로 연다. **Windows에서 프로젝트 경로에 한글이 있으면 `flutter build web`이 셰이더 컴파일 단계에서 실패한다.** `petmind_app`을 ASCII 경로(예: `C:\petmind_build\petmind_app`)에 복사해서 빌드한다.
+
+```powershell
+cd C:\petmind_build\petmind_app
+flutter pub get
+flutter build web --release --no-web-resources-cdn --output=C:\petmind_build\web --dart-define=PETMIND_API_BASE=http://localhost:8010
+py -3.12 -m http.server 8021 --bind 127.0.0.1 --directory C:\petmind_build\web   # 브라우저: http://localhost:8021/
+```
+
+이 PC에서 확인한 것: `/health`의 `audio_detector`가 `yamnet`이고, 공개 개 짖음 WAV의 Bark 점수 0.842·0.299, 문 두드리는 소리 0.00001, 빗소리 0.0이 저장됐다. 웹캠·마이크 수집은 5초 구간 단위로 분석·저장되고 `model_ready`가 `true`로 보고됐다. 개 짖음이 들어 있는 A/V 파일을 재생하면 앞뒤 5초가 붙은 사건 영상이 만들어졌다. **내장 마이크는 음량이 0(무음)이었다**(Windows 마이크 권한·음소거 확인 필요). 따라서 실제 마이크로 짖음을 잡은 시험은 아직 하지 않았다. `torch`가 없는 환경에서는 LSTM 관련 테스트(`tests/test_audio_lstm.py` 등 6개)와 `petmind/backend/tests/test_event_videos.py` 5개가 실행되지 않으며, 나머지 백엔드·루트 테스트 141개와 Flutter 테스트 21개는 통과했고 `flutter analyze`도 문제가 없다.
 
 ---
 
@@ -43,7 +74,7 @@
 |---|---|---|
 | 관찰 | 합성 시나리오·준비된 공개 음원/영상 입력을 SQLite에 저장 | 실제 HTTP 흐름 확인 |
 | 카메라 근거 | FFmpeg 최근 구간 버퍼 → 음성 LSTM 감지 전후 MP4 저장·관찰 연결·재생 | 30초 파일 입력과 실제 체크포인트로 15초 사건 영상 생성·브라우저 재생 확인; 실장비 미검증 |
-| 음성 | WAV 에너지 후보와 별도 오디오 LSTM 실험 점수, 보호자 확인 | ESC-50·FSD50K 비교; FSD 추가 학습의 LSTM 개선은 미확인 |
+| 음성 | WAV 에너지 후보와 **YAMNet Bark 점수**(채택), 보호자 확인. 이전 log-mel LSTM은 비교 기준으로 보존 | 공개 음원 182개 비교에서 YAMNet 단독 F1 0.795, 기존 LSTM 0.429; 1초 미만 짖음은 많이 놓침 |
 | 외출·귀가 | 세션별 관찰·근거 재생·귀가/하루 요약·과거 세션 비교 | 영상 세션 브라우저 흐름과 원본 7~12초 재생 확인 |
 | 사용자 음원 | 별도 저장/학습 동의·확인 의견·추천 큐·만료/삭제·참여 철회 | 로컬 단일 가정 시제품; 실제 개인화 정확도 미검증 |
 | 개별 기록 RAG | 같은 반려견의 과거 기록을 MCP로 검색, 기간·근거 ID 저장 | 실제 Gemini·임베딩 호출 및 합성 사례 확인 |
@@ -174,7 +205,7 @@ Pi 시험은 필수 실행 경로가 아니다. SSH 별칭 `raspberrypi-ai`는 �
 | 역할 | 현재 방식 | 판단에 필요한 한계 |
 |---|---|---|
 | 카메라 원본 확인 | 음성 감지 전후 MP4 저장·관찰 연결·구간 재생 | 보호자 확인용이며 영상 자동 행동 분석은 현재 범위에서 제외 |
-| 음성 | 에너지 후보와 16kHz·5초 log-mel 오디오 LSTM 점수를 별도로 제공 | FSD 외부 평가 재현율 28.3%; 개체·감정·질환 판정 아님 |
+| 음성 | 에너지 후보와 YAMNet Bark 점수(5초 창)를 별도로 제공. 이전 16kHz·5초 log-mel LSTM은 비교 기준 | LSTM의 FSD 외부 재현율 28.3%, YAMNet은 [docs/45~47](docs/45_YAMNet_임베딩_LSTM_비교.md); 개체·감정·질환 판정 아님 |
 | 기록 검색 | 반려견·기간 필터, 기존 케어 의미 검색, 세션 질문 의도별 근거 검색 | 세션 검색과 기존 임베딩 검색의 평가를 구분 |
 | 귀가/하루 설명 | 코드로 중복 제외 집계 → 사실 검색 → Gemini 근거 ID 선택 또는 템플릿 | 수치·문장은 서버가 렌더링, 필수 근거 누락 시 폴백 |
 | 제안 생성 | 검색·통계·케어 이력을 Gemini에 전달, 유효하지 않은 인용·호출 실패 시 규칙 폴백 | 케어 효과·의학적 판단을 검증한 시스템이 아님 |

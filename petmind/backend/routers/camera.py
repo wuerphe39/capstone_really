@@ -12,7 +12,7 @@ MAX_FRAME = 2 * 1024 * 1024
 def snapshot():
     url = os.getenv('PETMIND_CAMERA_SNAPSHOT_URL', '')
     if not url:
-        raise HTTPException(503, '라즈베리파이 카메라 연결이 설정되지 않았습니다.')
+        raise HTTPException(503, 'PC 카메라 미리보기 연결이 설정되지 않았습니다.')
     try:
         with requests.get(url, timeout=(2, 3), stream=True, allow_redirects=False) as upstream:
             if upstream.status_code != 200:
@@ -25,7 +25,7 @@ def snapshot():
             if not data.startswith(b'\xff\xd8') or not data.endswith(b'\xff\xd9'):
                 raise ValueError('invalid jpeg')
     except (requests.RequestException, ValueError):
-        raise HTTPException(503, '카메라 영상을 받지 못했습니다. Pi·웹캠·SSH 연결을 확인하세요.') from None
+        raise HTTPException(503, '카메라 영상을 받지 못했습니다. 웹캠과 수집 프로그램 연결을 확인하세요.') from None
     return Response(bytes(data), media_type='image/jpeg', headers={'Cache-Control': 'no-store'})
 
 
@@ -35,9 +35,9 @@ def view():
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>PetMind 최근 카메라 장면</title>
 <style>body{font:16px system-ui;background:#f8faf9;color:#244437;margin:16px}img{width:100%;max-height:65vh;object-fit:contain;background:#e8eeeb;border-radius:12px}button{padding:10px;margin-bottom:12px}#state{min-height:48px}</style>
-<h3>라즈베리파이 · 최근 카메라 장면</h3>
+<h3>PC 웹캠 · 최근 카메라 장면</h3>
 <p>최근 화면을 주기적으로 확인합니다. 자동 외출 수집 중에는 약 5초 단위 장면이며 지연될 수 있습니다. 이 보기 버튼은 녹화·음성 분석을 시작하지 않습니다.</p>
-<button id="toggle">카메라 보기 시작</button><div id="state" role="status">중지됨</div><img id="frame" hidden alt="라즈베리파이 웹캠 최근 화면">
+<button id="toggle">카메라 보기 시작</button><div id="state" role="status">중지됨</div><img id="frame" hidden alt="PC 웹캠 최근 화면">
 <script>
 let running=false, epoch=0, timer, objectUrl;
 const button=document.getElementById('toggle'), state=document.getElementById('state'), frame=document.getElementById('frame');
@@ -45,7 +45,7 @@ function clearFrame(){frame.hidden=true;frame.removeAttribute('src');if(objectUr
 async function refresh(e){
  if(!running||e!==epoch)return;
  try{const res=await fetch('/camera/snapshot',{cache:'no-store',signal:AbortSignal.timeout(6000)});
- if(!res.ok)throw Error('카메라 연결 불가 · Pi·웹캠·SSH 설정을 확인하고 다시 시작하세요.');
+ if(!res.ok)throw Error('카메라 연결 불가 · 웹캠·수집 프로그램 설정을 확인하고 다시 시작하세요.');
  const blob=await res.blob();if(!running||e!==epoch)return;
  clearFrame();objectUrl=URL.createObjectURL(blob);frame.src=objectUrl;frame.hidden=false;
  state.textContent='연결됨 · 수신 '+new Date().toLocaleTimeString();

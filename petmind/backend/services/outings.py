@@ -24,7 +24,7 @@ def outing_out(row):
             'input_note': {'synthetic_demo': '합성 시연이며 실제 외출 관찰이 아닙니다.',
                            'prepared_video': '준비된 파일 재생입니다. 실시간 카메라가 아닙니다.',
                            'uploaded_audio': '사용자가 올린 음원입니다. 실시간 녹음·자동 촬영이 아닙니다.',
-                           'live': 'Pi 장치 입력입니다. 자동 수집 여부는 장치 연결 상태를 확인하세요.'}[row.input_mode]}
+                           'live': 'PC 마이크·웹캠 입력입니다. 자동 수집 여부는 수집 프로그램 연결 상태를 확인하세요.'}[row.input_mode]}
 
 
 def require_outing(db, outing_id, pet_id):

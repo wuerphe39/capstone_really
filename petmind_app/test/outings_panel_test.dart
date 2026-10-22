@@ -115,7 +115,7 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
-  testWidgets('automatic outing requires consent and waits for Pi', (tester) async {
+  testWidgets('automatic outing requires consent and waits for the collector', (tester) async {
     tester.view.physicalSize = const Size(1200, 1800);
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
@@ -130,7 +130,7 @@ void main() {
         expect(jsonDecode(request.body)['auto_capture'], isTrue);
         expect(jsonDecode(request.body)['store_consent'], isTrue);
         started = {'id': 'outing-audio', 'status': 'active',
-          'input_mode': 'live', 'input_note': 'Pi 장치 입력',
+          'input_mode': 'live', 'input_note': 'PC 장치 입력',
           'started_at': '2026-10-11T08:00:00Z'};
         return http.Response(jsonEncode(started), 201,
           headers: {'content-type': 'application/json; charset=utf-8'});
@@ -145,7 +145,7 @@ void main() {
       child: OutingsPanel(client: client, base: 'http://localhost',
         petId: 'demo-dog', onActiveChanged: (_) {})))));
     await tester.pumpAndSettle();
-    expect(find.text('자동 관찰 · Pi 마이크'), findsOneWidget);
+    expect(find.text('자동 관찰 · PC 입력'), findsOneWidget);
     final startButton = find.widgetWithText(FilledButton, '외출 시작');
     expect(tester.widget<FilledButton>(startButton).onPressed, isNull);
     await tester.tap(find.byType(CheckboxListTile));
@@ -154,7 +154,7 @@ void main() {
     await tester.pumpAndSettle();
     expect(started?['input_mode'], 'live');
     expect(find.textContaining('외출 진행 중'), findsOneWidget);
-    expect(find.text('Pi 연결 대기 · 아직 분석하지 않음'), findsOneWidget);
+    expect(find.text('수집 프로그램 연결 대기 · 아직 분석하지 않음'), findsOneWidget);
     await tester.pumpWidget(const SizedBox());
   });
 
