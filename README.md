@@ -38,6 +38,7 @@ Windows는 기본적으로 `.ps1` 실행을 막으므로 **`scripts\start_demo.c
 .\scripts\start_demo.cmd -Seed            # 처음: 웹 빌드 → 서비스 시작 → 공개 음원으로 시연 데이터 → 브라우저
 .\scripts\start_demo.cmd -Capture         # 웹캠·마이크 수집까지 켜기(데이터 유지)
 .\scripts\start_demo.cmd -Rebuild         # petmind_app/lib을 고친 뒤 웹 다시 빌드
+.\scripts\start_demo.cmd -Gemini          # 설명을 Gemini로(.env의 GEMINI_API_KEY 필요, 파생 문장만 전송, 음원·영상은 보내지 않음)
 .\scripts\start_demo.cmd -Stop            # 모두 끄기
 ```
 
@@ -76,7 +77,7 @@ TensorFlow를 시스템 Python 대신 별도 가상환경에 설치했다면 `$e
 | 음성 모델 | 임계값 0.05 고정. **ESC-50 2,000클립: 개 40/40, 오탐 1.7%.** **FSD50K 가정 소음 680클립: 짖음 40/49, 오탐 1.4%(말소리 1/80, 초인종·노크·전화·알람·음악 0, 울음 4/28, 고양이 3/60).** AudioSet 구간 평가 F1 0.816(106창) | ESC-50 짖음은 또렷해 재현율이 낙관적. FSD50K에서 놓친 9개는 긴 클립 속의 약한 짖음. 1초 미만 짖음은 AudioSet 평가에서 다수 놓침(FSD50K에는 3초 미만 클립이 6개뿐). 울음·고양이·수탉·돼지 같은 비슷한 음색 오탐. 실제 강아지 미평가 ([ESC-50](docs/YAMNET_ESC50_EVAL.md), [FSD50K 가정 소음](docs/YAMNET_FSD50K_HOUSEHOLD_EVAL.md), [docs/47](docs/47_AudioSet_시간구간_짖음_평가.md)) |
 | 보관·삭제 | 원본·사건 영상 보관 기간 만료 삭제, 삭제·학습 철회 (자동 시험) | 7일 경과 실기 확인 |
 | 화면 | Flutter 웹: 외출·음원, RAG·케어, 기록, 설정·시연 | |
-| 설명 | 규칙 제공자로 근거 ID 인용 설명 | Gemini 실제 호출은 이 노트북에서 재확인 안 함 (이전 기록: [docs/evidence/rag_v2_real_integration.json](docs/evidence/rag_v2_real_integration.json)) |
+| 설명 | 규칙 제공자(기본)와 Gemini(`start_demo.cmd -Gemini`, `.env`의 키)로 근거 ID 인용 설명. **Gemini 실호출 확인: 귀가 설명 3/3, 앱 수준 3/3, 폴백 없음** | 합성·공개 음원 시연 자료로만 확인. 케어 제안 문장의 사실성은 독립 평가 아님. 무료 구간 입력은 Google 제품 개선에 쓰일 수 있음 ([docs/GEMINI_REAL_CALL_CHECK.md](docs/GEMINI_REAL_CALL_CHECK.md)) |
 | 테스트 | Python **205 passed, 10 skipped**(torch 없으면 학습용 건너뜀), Flutter **30 passed**, `flutter analyze` 문제 없음 | |
 
 실제 반려견·가정 환경 정확도, 개체·감정·질환 판정, 음악의 케어 효과는 검증하지 않았고 주장하지 않습니다.
@@ -125,7 +126,7 @@ cd petmind_app; flutter analyze; flutter test
 
 1. **독립 평가 보완**: ESC-50 전체와 FSD50K 가정 소음 평가는 완료. 1초 미만 짖음은 표본이 부족하고, 실제 반려견 소리(시연은 사용자 강아지로 촬영 예정, 예행연습 필요)는 아직 없음.
 2. 장시간 운용과 물리적 장치 분리 시험.
-3. Gemini 실제 호출 재확인(키 필요).
+3. (완료) Gemini 실제 호출 확인.
 4. 외부 사용자 모집 전: 사용자 인증·접근 제어(현재 `pet_id`는 인증이 아니며 로컬 단일 가정 시제품).
 
 ## 문서

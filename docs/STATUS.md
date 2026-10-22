@@ -14,6 +14,7 @@
 | 실제 소리 감지 | 노트북 스피커로 튼 개 짖음을 내장 마이크가 받아 2/2·3/4 감지, 사건 영상(H.264+AAC 35초) 저장, 빗소리·조용한 구간 오탐 없음 | [LIVE_BARK_TEST.md](LIVE_BARK_TEST.md) |
 | 음성 모델 | 임계값 0.05 고정. ESC-50 2,000클립: 개 40/40, 오탐 1.7%. FSD50K 가정 소음 680클립: 짖음 40/49, 오탐 1.4%(말소리 1/80, 초인종·노크·전화·알람·음악 0, 울음 4/28, 고양이 3/60). AudioSet 106창 F1 0.816 | [ESC-50](YAMNET_ESC50_EVAL.md), [FSD50K 가정 소음](YAMNET_FSD50K_HOUSEHOLD_EVAL.md), [파트 47](47_AudioSet_시간구간_짖음_평가.md) |
 | 새 환경 설치 | 이 노트북에서 가능한 범위로 시험: (1) 로컬 저장소를 `C:\petmind_fresh`에 새로 clone → 새 `.venv`에 `requirements-runtime.txt`만 설치(3분 47초) → Python 202 passed·10 skipped. (2) 시스템 TensorFlow와 분리된 새 venv에 `requirements-yamnet-experiment.txt`를 **파일 그대로**(TensorFlow 2.20.0) 설치, 빈 캐시에서 모델을 새로 내려받아 서비스가 30초 만에 시작, 점수가 기존 환경(2.21.0)과 **동일**(5개 클립 최대 차이 0). (3) 새 clone + 새 `.venv` + 분리된 TensorFlow venv(`PETMIND_YAMNET_PYTHON`) + `start_demo.cmd -Seed`로 웹 빌드부터 시연 데이터까지 성공. (4) PowerShell 기본 실행 정책(Restricted)에서는 `.ps1`이 실행되지 않음을 확인해 `scripts\start_demo.cmd`를 추가하고 README에 안내. (5) 런처가 시작 전에 Python·패키지·TensorFlow·Flutter 누락을 한꺼번에 알려 주는지 시험(누락 시 아무것도 켜거나 끄지 않음). **Python·Git·Flutter가 없는 PC에서의 `winget`·Flutter 설치 자체는 시험하지 못했다**(이 노트북은 Windows 11 Home이라 샌드박스·가상 머신 불가, 다른 PC 없음) | |
+| Gemini 실호출 | `gemini-3.5-flash-lite`로 케어 제안 1건, 귀가 설명 3/3, 앱 수준(공개 음원 시연 외출) 3/3 통과, 폴백 없음. 잘못된 키는 HTTP 400 후 규칙 제공자로 안전하게 내려감 | [GEMINI_REAL_CALL_CHECK.md](GEMINI_REAL_CALL_CHECK.md) |
 | 화면·API | 외출·음원·RAG·기록 화면, 음원 목록 페이징(`limit`/`offset`), 오류 표시 상자, 음원 패널 PageStorage 오류 수정 | git 이력 |
 | 테스트 | Python **205 passed, 10 skipped**(torch 없으면 학습용 건너뜀), Flutter **30 passed**, `flutter analyze` 문제 없음 | |
 
@@ -22,7 +23,7 @@
 - **실제 반려견 소리**: 시연은 사용자 강아지로 찍을 예정이며 예행연습이 필요하다. 지금까지는 공개 음원을 스피커로 되녹음한 기능 확인뿐이다.
 - 짧은(1초 미만) 짖음의 재현율(FSD50K에는 3초 미만 클립이 6개뿐, AudioSet 평가는 다수 놓침), 비슷한 음색 오탐(다른 동물 ESC-50 6.7%, 울음 FSD50K 14%).
 - 수 시간 이상 운용, 장치를 실제로 뽑았다 꽂는 시험.
-- Gemini 실제 호출(이 노트북에는 키 없음. 규칙 제공자로 시연). 과거 기록: [rag_v2_real_integration.json](evidence/rag_v2_real_integration.json).
+- Gemini는 합성·공개 음원 시연 자료로만 확인했다. 실제 반려견 기록으로 설명을 요청할 때는 무료 구간 입력이 Google 제품 개선에 쓰일 수 있다는 점을 정해야 한다.
 - 물리 음악 재생(가상 장치 왕복만), 사용자 인증(로컬 단일 가정 시제품).
 
 **이 아래는 날짜순 작업 이력이다.** 당시 기준이라 Raspberry Pi, 음성 LSTM 운영, 5초 지연 미리보기 같은 서술은 현재와 다르다. 현재 상태는 위 블록과 README를 따른다.

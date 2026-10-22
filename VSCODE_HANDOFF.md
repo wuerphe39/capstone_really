@@ -35,7 +35,7 @@ cd petmind_app; flutter analyze; flutter test
 1. **실제 강아지로 예행연습**: 시연 영상은 사용자 강아지로 촬영한다. 같은 방에서 30~60초 수집해 점수·마이크 위치·"오디오 개선 사항"(스피커 재생 시험 때문에 현재 꺼 둠) 설정을 비교한다. 다른 동물 소리(TV 등)가 나오지 않게 한다.
 2. 평가 보완: 1초 미만 짖음 자료(표본이 부족함). 가정 소음은 ESC-50·FSD50K로 평가했다([ESC-50](docs/YAMNET_ESC50_EVAL.md), [FSD50K](docs/YAMNET_FSD50K_HOUSEHOLD_EVAL.md)).
 3. **진짜 다른 PC에서의 설치 검증**: 이 노트북에서는 새 clone·새 venv·분리된 TensorFlow venv·실행 정책·누락 점검까지 시험했다([docs/STATUS.md](docs/STATUS.md)). Python·Git·Flutter가 없는 PC에서 README의 "새 PC에서 준비" 명령(`winget`, Flutter clone)이 되는지는 아직 시험하지 못했다.
-4. 장시간 운용과 장치 물리 분리 시험, Gemini 실호출(키 필요), 외부 사용자 모집 전 인증.
+4. 장시간 운용과 장치 물리 분리 시험, 외부 사용자 모집 전 인증. (Gemini 실호출은 2026-10-23에 확인함: [docs/GEMINI_REAL_CALL_CHECK.md](docs/GEMINI_REAL_CALL_CHECK.md))
 
 ## 지켜야 할 것
 

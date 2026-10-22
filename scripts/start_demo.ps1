@@ -14,6 +14,7 @@
   .\scripts\start_demo.ps1 -Seed        first run: build, start, fill demo data, open the browser
   .\scripts\start_demo.ps1              start again (keeps data)
   .\scripts\start_demo.ps1 -Rebuild     rebuild the web app after changing petmind_app/lib
+  .\scripts\start_demo.ps1 -Gemini      explanations by Gemini (key in .env); only derived facts are sent, never audio
   .\scripts\start_demo.ps1 -Stop        stop everything
 
   Requirements: .venv (requirements-runtime.txt), Python 3.12 with TensorFlow (requirements-yamnet-experiment.txt)
@@ -29,6 +30,7 @@ param(
     [switch]$Stop,
     [switch]$NoBrowser,
     [switch]$Capture,
+    [switch]$Gemini,
     [string]$PetId = 'demo-dog',
     [string]$BuildRoot = $(if ($env:PETMIND_BUILD_ROOT) { $env:PETMIND_BUILD_ROOT } else { 'C:\petmind_build' })
 )
@@ -95,6 +97,13 @@ function Test-PythonModules([string]$Exe, [string[]]$Pre, [string[]]$Modules) {
     return ("$out").Trim()
 }
 
+function Test-GeminiKey {
+    $envFile = Join-Path $Root '.env'
+    if ($env:GEMINI_API_KEY) { return $true }
+    if (-not (Test-Path $envFile)) { return $false }
+    return [bool](Select-String -Path $envFile -Pattern '^\s*GEMINI_API_KEY\s*=\s*\S+' -Quiet)
+}
+
 function Test-Prerequisites {
     # Check everything up front and report all problems at once, instead of failing minutes into the start-up.
     $problems = @()
@@ -113,6 +122,9 @@ function Test-Prerequisites {
     }
     if ($Rebuild -or -not (Test-Path (Join-Path $BuildRoot 'web\index.html'))) {
         try { $null = Find-Flutter } catch { $problems += "Flutter is needed to build the web app: $($_.Exception.Message)`n    Fix: install Flutter 3.32.x and put it on PATH (or set FLUTTER_HOME)." }
+    }
+    if ($Gemini -and -not (Test-GeminiKey)) {
+        $problems += "-Gemini needs an API key, but GEMINI_API_KEY is not set.`n    Fix: copy .env.example to .env and put your key after GEMINI_API_KEY= (never paste it into chat or commit it)."
     }
     if ($problems.Count -gt 0) {
         Write-Host ''
@@ -179,7 +191,8 @@ if ($Capture) {
     $CaptureConfig = Get-Content (Join-Path $Demo 'capture-config.json') -Raw -Encoding UTF8 | ConvertFrom-Json
     $env:PETMIND_CAMERA_SNAPSHOT_URL = 'http://127.0.0.1:18081/snapshot.jpg'
 }
-$env:PETMIND_LLM_PROVIDER = 'rule'
+# Explanations use the rule-based provider (no external calls) unless -Gemini is given; the key is read from .env only.
+$env:PETMIND_LLM_PROVIDER = if ($Gemini) { 'gemini' } else { 'rule' }
 $env:PETMIND_SEMANTIC_SEARCH = 'off'
 $ids.backend = Start-Hidden 'backend' $Python @('-m', 'uvicorn', 'petmind.backend.main:app', '--host', '127.0.0.1', '--port', '8010')
 $ids.web = Start-Hidden 'web' $Python @('-m', 'http.server', '8021', '--bind', '127.0.0.1', '--directory', $WebDir)

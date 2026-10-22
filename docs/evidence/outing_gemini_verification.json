@@ -1,5 +1,5 @@
 {
-  "tested_at": "2026-10-11T07:07:02.765935+00:00",
+  "tested_at": "2026-10-22T20:27:21.152809+00:00",
   "model": "gemini-3.5-flash-lite",
   "source": "generated synthetic facts only; no user database or raw audio transmitted",
   "results": [
@@ -19,6 +19,22 @@
       },
       "claims": [
         {
+          "id": "observation.101",
+          "text": "합성 관찰: 소리 후보 3회.",
+          "observation_ids": [
+            101
+          ],
+          "kind": "observation"
+        },
+        {
+          "id": "observation.102",
+          "text": "합성 관찰: 영상 판단 불가 12초.",
+          "observation_ids": [
+            102
+          ],
+          "kind": "observation"
+        },
+        {
           "id": "current.samples",
           "text": "이번 외출에 연결된 분석 표본은 30초입니다.",
           "observation_ids": [
@@ -29,7 +45,7 @@
         },
         {
           "id": "current.unknown",
-          "text": "분석 표본 중 영상 판단 불가는 12초입니다.",
+          "text": "카메라는 원본 확인용이며 영상 행동 분석은 수행하지 않습니다.",
           "observation_ids": [
             101,
             102
@@ -63,30 +79,23 @@
           "kind": "summary"
         },
         {
-          "id": "current.unknown",
-          "text": "분석 표본 중 영상 판단 불가는 12초입니다.",
-          "observation_ids": [
-            101,
-            102
-          ],
-          "kind": "quality"
-        },
-        {
-          "id": "current.bark",
-          "text": "중복 제외 저장 구간의 짖음 후보는 3회입니다.",
-          "observation_ids": [
-            101,
-            102
-          ],
-          "kind": "bark"
-        },
-        {
           "id": "guardian.101",
           "text": "관찰 #101 보호자 의견: TV·외부 소리. 검증용 가상 보호자 의견: TV 소리로 생각함.",
           "observation_ids": [
             101
           ],
-          "kind": "guardian_opinion"
+          "kind": "guardian_opinion",
+          "review_label": "external_or_tv",
+          "review_source": "guardian_opinion"
+        },
+        {
+          "id": "current.unknown",
+          "text": "카메라는 원본 확인용이며 영상 행동 분석은 수행하지 않습니다.",
+          "observation_ids": [
+            101,
+            102
+          ],
+          "kind": "quality"
         }
       ]
     },
@@ -111,7 +120,9 @@
           "observation_ids": [
             101
           ],
-          "kind": "guardian_opinion"
+          "kind": "guardian_opinion",
+          "review_label": "external_or_tv",
+          "review_source": "guardian_opinion"
         }
       ]
     }

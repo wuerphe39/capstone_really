@@ -15,6 +15,9 @@ def main():
         raise RuntimeError('Set GEMINI_API_KEY and PETMIND_LLM_PROVIDER=gemini locally')
     report = {'day': '2026-10-11', 'pet_id': 'synthetic-verification-only',
               'sample_seconds': 30, 'unknown_seconds': 12, 'bark_candidate_count': 3,
+              # Fields the current report carries (YAMNet detector, camera as evidence only, no demo material).
+              'video_role': 'evidence_only', 'audio_model_name': 'YAMNet Bark', 'lstm_analyzed_window_count': 6,
+              'lstm_dog_window_count': 1, 'lstm_unavailable_seconds': 0, 'demo_sample_seconds': 0, 'demo_observation_ids': [],
               'counted_observation_ids': [101, 102], 'moments': [
                   {'observation_id': 101, 'summary': '합성 관찰: 소리 후보 3회.',
                    'guardian_review': {'label': 'external_or_tv', 'note': '검증용 가상 보호자 의견: TV 소리로 생각함.'}},
