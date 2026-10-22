@@ -1,72 +1,49 @@
-# PetMind VS Code 작업 인계
+# PetMind 작업 인계
 
-기준일: 2026-10-11. 최신 상태는 `docs/STATUS.md`와 루트 `README.md`를 읽는다. 최초 통합 계획의 당시 원본은 `legacy/initial-source-docs/PetMind_통합_개발_계획_2026-10-07.md`에 보관했다. 파트별 결과는 `docs/01_*`부터 기록했다.
+기준일: 2026-10-23. 이 문서는 새로 시작하는 사람(또는 새 세션)이 바로 이어서 일하도록 현재 상태만 적는다. 2026-10-11 이전 인계 내용은 git 이력과 `docs/01_*`~`docs/48_*`에 남아 있다.
 
-## 최신 진행을 먼저 확인
+먼저 읽을 것: [AGENTS.md](AGENTS.md)(작업 원칙), [README.md](README.md)(실행·현황), [docs/STATUS.md](docs/STATUS.md)(확인한 것/못 한 것).
 
-[33 — 음성 중심 개발 진행](docs/33_음성중심_개발진행.md)이 아래 과거 실험 기록보다 최신이다. 오디오 LSTM·공개 FSD50K·CLAP 비교와 사용자 음원 동의/검수 흐름을 추가했다. 실제 개인화 정확도와 전체 목표 완료를 주장하지 않는다. 변경은 현재 작업 트리에 있으며 원본 음원·모델·개인 DB를 커밋하면 안 된다.
+## 지금 구성
 
-`scripts/train_audio_mil.py`는 기존 ESC 모델에서 FSD 공식 학습 자료로 추가 학습한다. 긴 음원의 양성 정답을 모든 구간에 복제하지 않는 max-window 학습이며 `artifacts/audio_lstm/esc50_fsd_mil_*.pt`에 별도 저장한다. 성능 증거는 실행 완료 후 `docs/evidence/audio_mil_comparison.json`에서 확인한다. 실행 프로세스를 확인하지 않고 중복 실행하지 않는다.
-
-추가 학습은 종료했고 LSTM은 개선이 없어 기존 모델을 유지했다. 고정 개발자 질문 회귀 비교와 하루 근거 설명 API/화면을 추가했다(파트 33). Python 99개·Flutter 4개 통과. 남은 작업: 독립 질문 기반 RAG 검증, 최신 서버 재시작과 영상/음원 근거 브라우저 연속 시연, 전체 문서·검증 정합성 점검. 현재 API는 로컬 단일 가정용이며 `pet_id`는 인증이 아니다. 새 보호자를 원격 모집하기 전에 인증·접근 제어를 구현해야 한다.
-
-## 확정 범위
-
-서버 후속 갱신: 최신 원본 부재 표시까지 반영해 API 8011을 재시작했고 실제 하루 조회를 확인했다. `scripts/benchmark_audio_models.py`의 로컬 CPU 시간·메모리 측정도 완료했다(파트 33 / `audio_runtime_benchmark.json`). API 실행 PID는 변경될 수 있으므로 이름·명령줄을 확인한 뒤 조작한다.
-
-최신 인계: [시연·완료 점검](docs/34_음성중심_시연_완료점검.md). Python 101개, Flutter 4개 테스트 통과. 실제 Gemini 새 설명 경로 3건, 별도 개발 질문 20개(8→15건 근거 포함), 브라우저 영상 구간 재생·하루 설명·추천 큐·학습 철회 확인을 마쳤다. 중복 음원 집계와 원본 파일 유실 표시를 보강했다. 시연 녹화는 브라우저 캡처 시간초과/녹화 API 미제공으로 확보하지 못했다. 사용자 자료 학습과 개인화 정확도는 미검증이며 전체 완료로 주장하지 않는다. 현재 서버는 마지막 원본 부재 표시 수정 전이므로 이어서 시연할 때 최신 코드를 재시작한다.
-
-현재 기준 저장소는 `kuro-0211/capstone`의 루트다. 급식기는 제외한다. `wuerphe39/capstone_really`의 분석과 이 저장소의 이전 시제품에서 FastAPI·SQLite·Flutter·Gemini 코드를 선별 통합했다. 이전 시제품 전체는 `legacy/2026-09-prototype/`에 보관한다. LSTM·음성 관찰 → 개별 기록 검색/MCP → 케어 제안 → 보호자 승인 → 가상 음악 → 이력을 전체 시연으로 만든다.
-
-## 현재 검증된 상태
-
-- 이전 로컬 개발 환경에서 전용 `.venv` 설치·`pip check` 정상. 새 복제본에서는 루트 `README.md`의 설치 명령을 먼저 실행한다.
-- 모델 산출물이 있는 개발 환경에서 Python 테스트 66개 통과. 모델 없는 새 복제본은 65개 통과·1개 건너뜀.
-- Flutter 기능 테스트 2개, 분석·웹 릴리스 빌드 통과.
-- 합성 시나리오 3종, 공개 WAV·공개 이미지 재생 영상의 실제 HTTP 전체 처리 확인.
-- 공식 MCP SDK 2.3.0으로 별도 stdio 서버의 도구 3개를 실제 호출했다.
-- 가상 음악 수신·완료·실패·30초 무응답, 서버 재시작 후 이력 보존 확인.
-- 프로필·보호자 피드백·타임라인·처리 수치·전후 비교·평소 패턴의 자료 부족 처리 연결.
-- 실제 API 응답을 Flutter 렌더러로 캡처한 `artifacts/flutter_dashboard.png` 생성. 실제 브라우저 클릭/영상은 아직 미검증.
-
-## 완료로 주장하면 안 되는 항목
-
-- Gemini 키를 로컬 `.env`에 설정하고 실제 RAG·MCP·인용·HTTP 시나리오를 검증했다. 키를 채팅·문서·Git에 기록하지 않는다. 파트 14를 확인한다.
-- LSTM 100%는 합성 테스트 성적이다. 실제 반려견 행동 정확도는 미검증이다.
-- 에너지 감지는 짖음 후보이며 공개 대조 음원에서 오탐이 있다.
-- DAVIS 이미지 시퀀스는 5fps 시연 재생용 영상으로 구성했다. 원본 녹화 시간과 다르며 카메라 움직임을 보정하지 않았다.
-- 전후 비교는 합성 관찰 차이다. 실제 Pi의 가상 에이전트 왕복은 파트 20에서 검증했다. 음악의 실제 효과·물리 재생·센서는 검증하지 않았다.
-- 실제 장기 기록이 없어 평소 기준선의 실제 적용은 미검증이다.
-
-## 실행·검증
-
-저장소 루트에서:
+노트북 하나. 마이크·웹캠(FFmpeg) → 5초 구간 → YAMNet Bark(임계값 0.05) → SQLite → 보호자 확인 → 개별 기록 RAG 설명 → 승인형 음악 명령(가상). Raspberry Pi·영상 행동 분류·급식기는 범위 밖이다(`legacy/`와 일부 `docs/NN_*`는 보존용).
 
 ```powershell
+.\scripts\start_demo.ps1 -Seed      # 처음: 웹 빌드·서비스 시작·공개 음원 시연 데이터
+.\scripts\start_demo.ps1 -Capture   # 웹캠·마이크 수집까지(화면에서 '자동 관찰'로 외출 시작)
+.\scripts\start_demo.ps1 -Stop
 .\.venv\Scripts\python.exe -m pytest tests petmind\backend\tests -q -p no:cacheprovider
-.\.venv\Scripts\python.exe -m uvicorn petmind.backend.main:app --host 127.0.0.1 --port 8010
-.\.venv\Scripts\python.exe -m petmind.device_agent
+cd petmind_app; flutter analyze; flutter test
 ```
 
-화면은 `petmind_app`에서 `flutter run -d chrome --web-port 8021` 또는 `README.md`의 웹 빌드 실행법을 사용한다. 실제 통합 검증은 `scripts.verify_flow`, `verify_media_flow`, `verify_faults`, `verify_extras`를 사용한다. 장애 검증 중에는 상시 가상 장치를 끈다.
+환경: `.venv`(Python 3.12, `requirements-runtime.txt`), TensorFlow가 있는 `py -3.12`(YAMNet, `requirements-yamnet-experiment.txt`), Flutter 3.32.x. 한글 경로에서는 `flutter build web`이 실패하므로 런처가 `C:\petmind_build`에서 빌드한다.
 
-## 이어갈 작업
+## 코드 지도
 
-최신 실험은 `docs/27_InterPet4D_적용_평가.md`와 `docs/28_추적_ID_재연결_개선.md`다. 실제 공개 자료로 후보 v3를 학습했지만 영상 성능이 악화해 `artifacts/lstm_interpet/trajectory_lstm.pt`에 별도로 보관했다. 운영 v2를 덮어쓰지 않는다. 추적 ID 재획득과 약 15fps 추적 갱신으로 보류견 영상의 선택 프레임이 늘었지만 10초 연속 구간을 만들지 못해 분류는 여전히 `unknown`이다. 시간별 실제 행동 정답 확보와 짧은 입력용 별도 모델 검증이 다음 단계다.
+| 위치 | 역할 |
+|---|---|
+| `scripts/capture_agent.py` | 화면의 자동 관찰 요청을 가져와 수집 프로그램을 실행·감시(재시작 5회, 장치 재탐지, 백엔드 단절 허용) |
+| `scripts/monitor_audio_events.py` | FFmpeg로 웹캠·마이크를 5초씩 수집, 업로드, 감지 구간 ±5초 사건 영상, 카메라 미리보기 |
+| `scripts/make_capture_input.py`, `preview_stream.py` | 장치 자동 선택(640×480 MJPEG 30fps), MJPEG 스트림 |
+| `petmind/yamnet_service/` | YAMNet 분석 서비스(8030) |
+| `petmind/backend/` | FastAPI·SQLite·MCP 검색·설명 제공자(규칙/Gemini)·수집 작업 API |
+| `petmind_app/` | Flutter 보호자 화면(웹) |
+| `scripts/live_bark_check.py`, `evaluate_yamnet_esc50.py` | 실제 소리 시험, ESC-50 전체 평가 |
 
-후속 공개 데이터 실험은 `docs/29_A2D_공개영상_행동실험.md`, `docs/30_A2D_공식주석_개탐지_평가.md`, `docs/31_중복_개박스_추적개선.md`다. 공식 A2D 개 행동 영상 189편과 주석 585프레임을 준비했다. 중복 박스 제거 후 3초 유효 궤적은 기본 탐지기로 58편, 미세조정 후보로 87편이었다. 두 3초 LSTM은 검증 임계값에서 공식 테스트 이동을 모두 놓쳐 미채택했다. 탐지기 후보는 A2D 주석의 탐색적 테스트에서 박스 재현율 61.8%→82.4%, 정밀도 94.4%→87.5%였으나 InterPet·TigDog의 4종 행동 출력은 개선되지 않았다. 기본 YOLOv8n과 기본 v2 LSTM은 유지하고 **중복 박스 제거만 기본 경로에 적용**했다. 후보는 `artifacts/a2d_detector/`와 `artifacts/a2d_short/`에 분리 보관한다. 다음 작업은 고정 카메라의 시간별 4종 라벨 및 외부 독립 탐지 정답 확보, 추적 연속성 개선이다.
+## 이어서 할 일 (우선순위)
 
-실제 성능 측정은 `docs/25_실제데이터_성능비교.md`를 우선 읽는다. 공식 TigDog 행동 라벨과 원본 개 영상 24개를 확보했다. 원본 시각·라벨·개체 조건을 통과한 이동 사례 9개에서 v1/v2 재현율 모두 44.4%, unknown 5개였다. 4종 전체 정확도와 개선은 입증되지 않았다. 새 테스트 데이터로 튜닝하지 않았으며 모델은 유지했다. `scripts.evaluate_tigdog --input-mode original`로 재현한다. 다음 개선은 추적 실패·카메라 이동 영향과 독립 실내 라벨 데이터다.
+1. **실제 강아지로 예행연습**: 시연 영상은 사용자 강아지로 촬영한다. 같은 방에서 30~60초 수집해 점수·마이크 위치·"오디오 개선 사항"(스피커 재생 시험 때문에 현재 꺼 둠) 설정을 비교한다. 다른 동물 소리(TV 등)가 나오지 않게 한다.
+2. 평가 보완: TV·말소리·초인종 같은 가정 소음, 1초 미만 짖음 자료([docs/YAMNET_ESC50_EVAL.md](docs/YAMNET_ESC50_EVAL.md)의 한계 참고).
+3. 다른 PC에서의 설치 검증. 같은 노트북의 새 clone에서는 확인했다(`requirements-runtime.txt`만으로 테스트 통과, `start_demo.ps1 -Seed` 3분 6초). Python 3.12·TensorFlow·Flutter가 없는 PC는 아직 시험하지 않았다.
+4. 장시간 운용과 장치 물리 분리 시험, Gemini 실호출(키 필요), 외부 사용자 모집 전 인증.
 
-최신 변경은 `docs/22_*`, `23_*`, `24_*`다. 공식 개 모션 51파일을 사전학습에 사용했고 촬영 그룹 분리·해시 검사·8개 특징·unknown 처리를 추가했다. 실제 모션 테스트는 단순 기준보다 오차가 커 성능 향상 미확인이다. RAG는 한국 시간 기간·피드백 검색·실제 Gemini 임베딩·캐시가 적용됐다. 자체 20질문 Recall@5 100%는 실제 사용자 전체 정확도가 아니다. 모델 v1 백업은 `artifacts/lstm/trajectory_lstm_v1_backup.pt`, v2는 기존 기본 체크포인트 경로에 설치했다. `.env`의 `PETMIND_SEMANTIC_SEARCH=on`을 유지한다.
+## 지켜야 할 것
 
-브라우저 클릭·시연 영상은 아직 검증 기록이 없다. 이전 세션의 연결 문제는 `docs/17_브라우저_연결준비.md`에 기록했으며, 새 환경에서 브라우저 연결 상태를 다시 확인한다.
+- `.env`, API 키, 개인 DB, 원본 음성·영상, 공개 데이터 원본, 모델 체크포인트, 빌드 결과는 Git에 넣지 않는다(`artifacts/`는 제외됨). 시험 중 마이크·웹캠 녹음은 시험 뒤 삭제한다(`live_bark_check.py`는 자동 삭제).
+- `제출문서/`(팀원 연락처 포함)와 로컬 설정 `.claude/`는 커밋하지 않는다. 푸시는 사용자가 요청할 때만 한다.
+- 물리 GPIO·음악 재생은 사용자가 장비 테스트를 명시할 때만 한다. 기본은 가상 장치.
+- 모델 점수는 "개 짖음 소리 후보"이며 감정·질환·원인을 판정하지 않는다. 확인하지 않은 것을 완료로 쓰지 않는다.
 
-1. 저장소의 최신 커밋과 `docs/STATUS.md`, 파트별 기록을 확인한다. `legacy/`는 현재 실행 경로와 분리한다.
-2. Gemini 실제 호출은 검증됐다. `.env` 변경 후 서버를 재시작하고 제공자를 확인한다. 실제 브라우저 시연을 이어서 검증한다.
-3. 최종 화면 렌더링·브라우저 연속 시연·발표 증거를 확보한다.
-4. 실제 장비와 실제 라벨·장기 기록으로 최종 졸업작품 검증을 이어간다.
+## 새 세션에 붙여넣기
 
-VS Code 채팅에 붙여넣기:
-
-> 이 저장소의 `AGENTS.md`, `README.md`, `VSCODE_HANDOFF.md`, `docs/STATUS.md`를 읽고 현재 변경을 보존한 채 전체 목표를 이어서 진행해 줘. `legacy/`는 이전 시제품 보관용이다. 파트가 끝날 때마다 Markdown에 실제 수정·실행 결과를 저장해 줘. 이미 검증한 Gemini 실제 호출과 아직 검증하지 않은 브라우저 시연을 구분하고, 완료 기준을 실제 실행 증거로 확인해 줘.
+> `AGENTS.md`, `README.md`, `VSCODE_HANDOFF.md`, `docs/STATUS.md`를 읽고 현재 변경을 보존한 채 이어서 진행해 줘. 위 "이어서 할 일"의 1번은 사용자(강아지)가 있어야 하므로 2~4번부터 진행하고, 실제로 실행해 확인한 것과 못 한 것을 구분해서 문서에 남겨 줘.

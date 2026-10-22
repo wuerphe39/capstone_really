@@ -1,4 +1,4 @@
-"""Evaluate the operating detector (YAMNet Bark direct score, threshold 0.05) on all 2,000 ESC-50 clips.
+r"""Evaluate the operating detector (YAMNet Bark direct score, threshold 0.05) on all 2,000 ESC-50 clips.
 
 ESC-50 comes from Freesound, not from AudioSet (YAMNet's pre-training set), and YAMNet is not trained here, so no
 training/selection overlap with this script: the threshold is the fixed operating value, not tuned on these clips.
