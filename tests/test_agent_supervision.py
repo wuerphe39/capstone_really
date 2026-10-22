@@ -64,10 +64,11 @@ class Harness:
         now = time.time()
         return {'server_time': datetime.now(timezone.utc).isoformat(), **reply}, now, now
 
-    def run(self):
+    def run(self, redetect=None):
         with mock.patch.object(agent, 'terminate_tree', lambda process: None):
             return agent.supervise(self.args, {'outing_id': 'o'}, self.folder, self.post, '/capture/o/heartbeat',
-                                   popen=self.popen, sleep=self.clock.sleep, monotonic=self.clock.monotonic)
+                                   popen=self.popen, sleep=self.clock.sleep, monotonic=self.clock.monotonic,
+                                   redetect=redetect)
 
 
 class SuperviseTests(unittest.TestCase):
@@ -125,6 +126,51 @@ class SuperviseTests(unittest.TestCase):
             h = Harness(folder, [FakeProcess(folder, polls=0, code=1)], replies=lambda n: {'stop': n >= 2})
             self.assertEqual(h.run(), 'stopped')
             self.assertEqual(h.started, 1)
+
+
+class RedetectTests(unittest.TestCase):
+    def test_waits_for_an_unplugged_device_without_using_up_restarts(self):
+        with TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            answers = iter([True, False, False, False, True])  # start ok; crash; missing x3; back
+            h = Harness(folder, [FakeProcess(folder, polls=1, code=1), FakeProcess(folder, polls=1000, stop_aware=True)],
+                        replies=lambda n: {'stop': n >= 14})
+            self.assertEqual(h.run(redetect=lambda: next(answers)), 'stopped')
+            self.assertEqual(h.started, 2)
+            self.assertGreaterEqual(h.states.count('starting'), 3)  # heartbeats kept flowing while it waited
+
+    def test_gives_up_when_the_device_never_returns(self):
+        with TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            h = Harness(folder, [])
+            self.assertEqual(h.run(redetect=lambda: False), 'failed')
+            self.assertEqual(h.started, 0)
+            self.assertGreaterEqual(h.clock.now, agent.DEVICE_WAIT_SECONDS)
+
+    def test_stop_request_while_waiting_for_the_device(self):
+        with TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            h = Harness(folder, [], replies=lambda n: {'stop': n >= 3})
+            self.assertEqual(h.run(redetect=lambda: False), 'stopped')
+            self.assertEqual(h.started, 0)
+
+    def test_a_crashing_lookup_is_treated_as_not_found(self):
+        with TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            calls = []
+            def lookup():
+                calls.append(1)
+                if len(calls) == 1: raise RuntimeError('ffmpeg hung')
+                return True
+            h = Harness(folder, [FakeProcess(folder, polls=1000, stop_aware=True)], replies=lambda n: {'stop': n >= 4})
+            self.assertEqual(h.run(redetect=lookup), 'stopped')
+            self.assertEqual(h.started, 1)
+
+    def test_without_redetect_nothing_is_looked_up(self):
+        with TemporaryDirectory() as tmp:
+            folder = Path(tmp)
+            h = Harness(folder, [FakeProcess(folder, polls=1000, stop_aware=True)], replies=lambda n: {'stop': n >= 2})
+            self.assertEqual(h.run(), 'stopped')
 
 
 class StallTests(unittest.TestCase):

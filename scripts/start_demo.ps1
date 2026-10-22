@@ -146,7 +146,7 @@ if ($Capture) {
     # The agent claims capture jobs created from the web UI and runs the capture program (webcam + microphone).
     $ids.agent = Start-Hidden 'agent' $Python @('-m', 'scripts.pi_outing_agent', '--base', 'http://127.0.0.1:8010', '--pet-id', $PetId,
         '--input-args-file', $CaptureConfig.input_args_file, '--ffmpeg', ('"' + $CaptureConfig.ffmpeg + '"'),
-        '--video-map', '0:v:0', '--audio-map', '1:a:0')
+        '--video-map', '0:v:0', '--audio-map', '1:a:0', '--redetect')
     $ids | ConvertTo-Json | Set-Content $PidFile
     Write-Host "  collector agent: pet '$PetId' (start an outing with 'auto observation' in the web UI)"
 }

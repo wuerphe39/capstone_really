@@ -93,3 +93,52 @@ class AudioBufferTests(unittest.TestCase):
         self.assertEqual(a[i + 1], '50')
         self.assertLess(i, a.index('audio=mic'))            # 옵션은 입력(-i audio=...) 앞에 와야 적용된다
         self.assertLess(a.index('video=cam'), i)             # 영상 입력에는 영향을 주지 않는다
+
+
+import json
+import tempfile
+from pathlib import Path
+from unittest import mock
+
+from scripts import make_capture_input as mci
+
+
+class RefreshTests(unittest.TestCase):
+    MODE = {'format': 'mjpeg', 'width': 640, 'height': 480, 'fps': 30.0}
+
+    def run_refresh(self, devices, modes, existing=None, **hints):
+        with tempfile.TemporaryDirectory() as tmp:
+            out = Path(tmp) / 'in.json'
+            if existing is not None:
+                out.write_text(json.dumps(existing), encoding='utf-8')
+            with mock.patch.object(mci, 'list_devices', return_value=devices), \
+                 mock.patch.object(mci, 'list_video_modes', return_value=modes):
+                ok = mci.refresh('ffmpeg', out, **hints)
+            return ok, json.loads(out.read_text(encoding='utf-8')) if out.exists() else None
+
+    def test_missing_device_returns_false_and_keeps_the_file(self):
+        old = mci.build_args('cam', 'mic', self.MODE)
+        ok, after = self.run_refresh({'video': [], 'audio': ['mic']}, [self.MODE], existing=old)
+        self.assertFalse(ok)
+        self.assertEqual(after, old)
+
+    def test_new_device_name_rewrites_the_input(self):
+        old = mci.build_args('old cam', 'mic', self.MODE)
+        ok, after = self.run_refresh({'video': ['new cam'], 'audio': ['mic']}, [self.MODE], existing=old)
+        self.assertTrue(ok)
+        self.assertIn('video=new cam', after)
+
+    def test_unreadable_modes_keep_the_known_good_input_for_the_same_devices(self):
+        old = mci.build_args('cam', 'mic', self.MODE)
+        ok, after = self.run_refresh({'video': ['cam'], 'audio': ['mic']}, [], existing=old)
+        self.assertTrue(ok)
+        self.assertEqual(after, old)  # still 640x480 30 fps, not the device default
+
+    def test_first_run_without_a_file_writes_one(self):
+        ok, after = self.run_refresh({'video': ['cam'], 'audio': ['mic']}, [self.MODE])
+        self.assertTrue(ok)
+        self.assertEqual(after, mci.build_args('cam', 'mic', self.MODE))
+
+    def test_hint_for_an_absent_device_is_treated_as_missing(self):
+        ok, _ = self.run_refresh({'video': ['cam'], 'audio': ['mic']}, [self.MODE], audio='G435')
+        self.assertFalse(ok)

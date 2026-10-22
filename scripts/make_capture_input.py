@@ -119,6 +119,40 @@ def list_video_modes(ffmpeg: str, name: str) -> list[dict]:
     return parse_modes(out.stderr + out.stdout)
 
 
+def device_names(args: list[str]) -> tuple[str | None, str | None]:
+    """입력 인수에서 (카메라 이름, 마이크 이름)을 읽는다."""
+    names = {"video": None, "audio": None}
+    for a in args:
+        for kind in names:
+            if a.startswith(kind + "="):
+                names[kind] = a[len(kind) + 1:]
+    return names["video"], names["audio"]
+
+
+def refresh(ffmpeg: str, output: Path, video: str | None = None, audio: str | None = None) -> bool:
+    """장치를 다시 찾아 입력 JSON을 갱신한다. 장치가 없으면(뽑힘 등) False를 돌려 주고 파일은 건드리지 않는다.
+
+    수집 프로그램이 막 죽은 직후에는 카메라가 아직 점유 중이라 모드 목록을 못 읽을 수 있다. 같은 장치 조합이면
+    기존 입력(해상도·fps 포함)을 그대로 두어 30fps 설정이 기본값으로 후퇴하지 않게 한다."""
+    try:
+        v, a = choose(list_devices(ffmpeg), video, audio)
+    except (SystemExit, subprocess.SubprocessError, OSError):
+        return False
+    mode = choose_mode(list_video_modes(ffmpeg, v))
+    old = None
+    try:
+        old = json.loads(output.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        pass
+    if mode is None and isinstance(old, list) and device_names(old) == (v, a):
+        return True
+    new = build_args(v, a, mode)
+    if new != old:
+        output.parent.mkdir(parents=True, exist_ok=True)
+        output.write_text(json.dumps(new, ensure_ascii=False), encoding="utf-8")
+    return True
+
+
 def main(argv: list[str] | None = None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")

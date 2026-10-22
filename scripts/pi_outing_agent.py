@@ -6,6 +6,9 @@ Runs on the same PC as the backend (the file name is a leftover from the Raspber
 If the capture program exits unexpectedly (device unplugged, FFmpeg crash, stalled microphone) it is restarted
 up to MAX_RESTARTS times; the gap stays visible as unobserved time in the outing summary. A brief backend outage
 does not stop capture either: it stops only after HEARTBEAT_FAILURES_BEFORE_STOP failed heartbeats in a row.
+
+With --redetect the devices are looked up again before every (re)start, so a replugged or renamed camera/microphone is
+picked up. While one is missing the job stays in 'starting' for up to DEVICE_WAIT_SECONDS; that wait does not use up restarts.
 """
 import argparse
 import json
@@ -26,6 +29,8 @@ RESTART_BACKOFF_SECONDS = 5    # waits 5 s, 10 s, ... between restarts (heartbea
 HEALTHY_RUN_SECONDS = 60       # a worker that ran this long resets the restart counter
 HEARTBEAT_FAILURES_BEFORE_STOP = 10   # consecutive failed heartbeats (about 20+ s) before capture is stopped
 STOP_GRACE_SECONDS = 150
+DEVICE_WAIT_SECONDS = 300      # with --redetect: how long to wait for an unplugged camera/microphone before failing
+DEVICE_POLL_SECONDS = 5
 
 
 def clock_healthy(server_time, sent_at, received_at):
@@ -67,7 +72,7 @@ def worker_state(folder):
     return 'starting'
 
 
-def supervise(args, job, folder, post, route, popen=subprocess.Popen, sleep=time.sleep, monotonic=time.monotonic):
+def supervise(args, job, folder, post, route, popen=subprocess.Popen, sleep=time.sleep, monotonic=time.monotonic, redetect=None):
     """Run the capture worker for one outing and keep it alive. Returns the final state to report:
     stopped, failed or clock_mismatch."""
     stop_at=None; clock_bad=False; failures=0; restarts=0; process=None
@@ -86,8 +91,25 @@ def supervise(args, job, folder, post, route, popen=subprocess.Popen, sleep=time
         if stop and stop_at is None:
             (folder/'stop').touch(); stop_at=monotonic()
 
+    def found():
+        try: return bool(redetect())
+        except Exception: return False   # a failed lookup counts as "not found yet", never as a crash of the agent
+
+    def devices_ready():
+        """True when capture may start. With redetect, waits (sending heartbeats) until the devices are present."""
+        if redetect is None or found(): return True
+        deadline=monotonic()+DEVICE_WAIT_SECONDS
+        print('camera or microphone not found; waiting for it to be connected',flush=True)
+        while stop_at is None and monotonic()<deadline:
+            beat('starting'); sleep(DEVICE_POLL_SECONDS)
+            if stop_at is None and found(): return True
+        return False
+
     try:
         while True:
+            if not devices_ready():
+                if clock_bad: return 'clock_mismatch'
+                return 'stopped' if stop_at is not None else 'failed'
             try: process=popen(worker_command(args,job,folder),start_new_session=True)
             except OSError: return 'failed'
             run_started=monotonic()
@@ -123,6 +145,9 @@ def main():
     parser.add_argument('--video-map',default='0:v:0')
     parser.add_argument('--audio-map',default='1:a:0')
     parser.add_argument('--preview-port',type=int,default=18081)
+    parser.add_argument('--redetect',action='store_true',help='look the camera/microphone up again before every (re)start (Windows DirectShow)')
+    parser.add_argument('--video-hint',help='part of the camera name to prefer when redetecting')
+    parser.add_argument('--audio-hint',help='part of the microphone name to prefer when redetecting')
     args=parser.parse_args()
     owner=uuid.uuid4().hex
     def post(route, state='starting'):
@@ -132,6 +157,10 @@ def main():
         received_at=time.time()
         result.raise_for_status()
         return result.json(), sent_at, received_at
+    redetect=None
+    if args.redetect:
+        from scripts import make_capture_input
+        redetect=lambda: make_capture_input.refresh(args.ffmpeg,args.input_args_file,args.video_hint,args.audio_hint)
     with tempfile.TemporaryDirectory(prefix='petmind-agent-') as temp:
         folder=Path(temp)
         try:
@@ -149,7 +178,7 @@ def main():
                     try: post(route,'clock_mismatch')
                     except requests.RequestException: pass
                     continue
-                final=supervise(args,job,folder,post,route)
+                final=supervise(args,job,folder,post,route,redetect=redetect)
                 try: post(route,final)
                 except requests.RequestException: pass
         except KeyboardInterrupt:
