@@ -9,9 +9,9 @@
 노트북 하나. 마이크·웹캠(FFmpeg) → 5초 구간 → YAMNet Bark(임계값 0.05) → SQLite → 보호자 확인 → 개별 기록 RAG 설명 → 승인형 음악 명령(가상). Raspberry Pi·영상 행동 분류·급식기는 범위 밖이다(`legacy/`와 일부 `docs/NN_*`는 보존용).
 
 ```powershell
-.\scripts\start_demo.ps1 -Seed      # 처음: 웹 빌드·서비스 시작·공개 음원 시연 데이터
-.\scripts\start_demo.ps1 -Capture   # 웹캠·마이크 수집까지(화면에서 '자동 관찰'로 외출 시작)
-.\scripts\start_demo.ps1 -Stop
+.\scripts\start_demo.cmd -Seed      # 처음: 웹 빌드·서비스 시작·공개 음원 시연 데이터
+.\scripts\start_demo.cmd -Capture   # 웹캠·마이크 수집까지(화면에서 '자동 관찰'로 외출 시작)
+.\scripts\start_demo.cmd -Stop
 .\.venv\Scripts\python.exe -m pytest tests petmind\backend\tests -q -p no:cacheprovider
 cd petmind_app; flutter analyze; flutter test
 ```
@@ -34,7 +34,7 @@ cd petmind_app; flutter analyze; flutter test
 
 1. **실제 강아지로 예행연습**: 시연 영상은 사용자 강아지로 촬영한다. 같은 방에서 30~60초 수집해 점수·마이크 위치·"오디오 개선 사항"(스피커 재생 시험 때문에 현재 꺼 둠) 설정을 비교한다. 다른 동물 소리(TV 등)가 나오지 않게 한다.
 2. 평가 보완: 1초 미만 짖음 자료(표본이 부족함). 가정 소음은 ESC-50·FSD50K로 평가했다([ESC-50](docs/YAMNET_ESC50_EVAL.md), [FSD50K](docs/YAMNET_FSD50K_HOUSEHOLD_EVAL.md)).
-3. 다른 PC에서의 설치 검증. 같은 노트북의 새 clone에서는 확인했다(`requirements-runtime.txt`만으로 테스트 통과, `start_demo.ps1 -Seed` 3분 6초). Python 3.12·TensorFlow·Flutter가 없는 PC는 아직 시험하지 않았다.
+3. **진짜 다른 PC에서의 설치 검증**: 이 노트북에서는 새 clone·새 venv·분리된 TensorFlow venv·실행 정책·누락 점검까지 시험했다([docs/STATUS.md](docs/STATUS.md)). Python·Git·Flutter가 없는 PC에서 README의 "새 PC에서 준비" 명령(`winget`, Flutter clone)이 되는지는 아직 시험하지 못했다.
 4. 장시간 운용과 장치 물리 분리 시험, Gemini 실호출(키 필요), 외부 사용자 모집 전 인증.
 
 ## 지켜야 할 것

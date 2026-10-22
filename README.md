@@ -19,18 +19,29 @@
 
 ## 한 번에 실행하기 (Windows 노트북)
 
-준비: Python 3.12, Flutter 3.32.x, 마이크·웹캠 권한(Windows 개인정보 설정).
+**새 PC에서 준비** (PowerShell, 한 번만):
 
 ```powershell
+winget install Python.Python.3.12 Git.Git Google.Chrome         # Python 3.12로 시험했습니다
+git clone https://github.com/flutter/flutter.git -b 3.32.4 $env:USERPROFILE\flutter   # Flutter 3.32.x; PATH에 넣거나 FLUTTER_HOME을 설정
+git clone https://github.com/wuerphe39/capstone_really.git ; cd capstone_really
 py -3.12 -m venv .venv
-.\.venv\Scripts\python.exe -m pip install -r requirements-runtime.txt        # 백엔드·수집·FFmpeg
-py -3.12 -m pip install -r requirements-yamnet-experiment.txt                  # YAMNet(TensorFlow)
-
-.\scripts\start_demo.ps1 -Seed            # 처음: 웹 빌드 → 서비스 시작 → 공개 음원으로 시연 데이터 → 브라우저
-.\scripts\start_demo.ps1 -Capture         # 웹캠·마이크 수집까지 켜기(데이터 유지)
-.\scripts\start_demo.ps1 -Rebuild         # petmind_app/lib을 고친 뒤 웹 다시 빌드
-.\scripts\start_demo.ps1 -Stop            # 모두 끄기
+.\.venv\Scripts\python.exe -m pip install -r requirements-runtime.txt       # 백엔드·수집·FFmpeg
+py -3.12 -m pip install -r requirements-yamnet-experiment.txt                  # YAMNet(TensorFlow, 약 0.5GB). 별도 venv를 쓰려면 아래 참고
 ```
+
+(위 `winget`·Flutter 설치 명령은 이 노트북에서 실행해 보지 않았습니다. 이미 도구가 설치된 노트북의 새 clone·새 가상환경에서 시험했습니다.)
+
+Windows는 기본적으로 `.ps1` 실행을 막으므로 **`scripts\start_demo.cmd`**(실행 정책을 바꾸지 않고 PowerShell 스크립트를 실행)를 쓰세요. 빠진 준비물이 있으면 시작 전에 한꺼번에 알려 주고 아무것도 켜거나 끄지 않습니다. 마이크·웹캠을 쓰려면 Windows 설정 → 개인 정보 보호에서 마이크·카메라 접근을 허용합니다.
+
+```powershell
+.\scripts\start_demo.cmd -Seed            # 처음: 웹 빌드 → 서비스 시작 → 공개 음원으로 시연 데이터 → 브라우저
+.\scripts\start_demo.cmd -Capture         # 웹캠·마이크 수집까지 켜기(데이터 유지)
+.\scripts\start_demo.cmd -Rebuild         # petmind_app/lib을 고친 뒤 웹 다시 빌드
+.\scripts\start_demo.cmd -Stop            # 모두 끄기
+```
+
+TensorFlow를 시스템 Python 대신 별도 가상환경에 설치했다면 `$env:PETMIND_YAMNET_PYTHON = "C:\경로\.tfvenv\Scripts\python.exe"`로 지정합니다(기본은 `py -3.12`). 새 PC 설치 시험 결과는 [docs/STATUS.md](docs/STATUS.md)를 참고하세요.
 
 화면은 http://localhost:8021/ 입니다. 화면에서 **외출·음원 → 자동 관찰**로 외출을 시작하면 수집 에이전트가 노트북 웹캠·마이크로 수집을 시작합니다. 데이터는 `artifacts/demo/`(Git 제외)에 저장되고, 외부로 나가는 요청은 없으며 설명 제공자는 규칙 방식입니다. 시연 데이터는 실제 반려견 기록이 아니라 공개 음원(ESC-50)과 시연 담당자 의견입니다.
 

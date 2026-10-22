@@ -16,8 +16,11 @@
   .\scripts\start_demo.ps1 -Rebuild     rebuild the web app after changing petmind_app/lib
   .\scripts\start_demo.ps1 -Stop        stop everything
 
-  Requirements: .venv (requirements-core.txt + soundfile scipy opencv-python), Python 3.12 with TensorFlow
-  (requirements-yamnet-experiment.txt) as "py -3.12", Flutter 3.32.x (PATH, $env:FLUTTER_HOME or ~/flutter).
+  Requirements: .venv (requirements-runtime.txt), Python 3.12 with TensorFlow (requirements-yamnet-experiment.txt)
+  as "py -3.12" or the interpreter in $env:PETMIND_YAMNET_PYTHON, Flutter 3.32.x (PATH, $env:FLUTTER_HOME or ~/flutter).
+  They are checked first and every missing piece is reported at once.
+  Windows blocks .ps1 files by default: run  powershell -ExecutionPolicy Bypass -File .\scripts\start_demo.ps1 ...
+  or use scripts\start_demo.cmd, which does that.
 #>
 [CmdletBinding()]
 param(
@@ -77,7 +80,51 @@ function Find-Flutter {
 if ($Stop) { Stop-Demo; Write-Host 'Stopped.'; return }
 
 $Python = Join-Path $Root '.venv\Scripts\python.exe'
-if (-not (Test-Path $Python)) { throw ".venv not found. Create it: py -3.12 -m venv .venv ; .\.venv\Scripts\python.exe -m pip install -r requirements-core.txt soundfile scipy opencv-python" }
+# The YAMNet service needs TensorFlow, which is installed outside .venv. Default: "py -3.12". Another interpreter
+# (for example a venv) can be chosen with the environment variable PETMIND_YAMNET_PYTHON.
+$YamnetExe = if ($env:PETMIND_YAMNET_PYTHON) { $env:PETMIND_YAMNET_PYTHON } else { 'py' }
+$YamnetPre = if ($env:PETMIND_YAMNET_PYTHON) { @() } else { @('-3.12') }
+
+function Test-PythonModules([string]$Exe, [string[]]$Pre, [string[]]$Modules) {
+    # Returns the missing module names, or $null when the interpreter itself cannot run.
+    $list = ($Modules | ForEach-Object { "'$_'" }) -join ','
+    $code = "import importlib.util as u; print(' '.join(m for m in ($list) if u.find_spec(m) is None))"
+    $old = $ErrorActionPreference; $ErrorActionPreference = 'Continue'
+    try { $out = & $Exe @Pre -c $code 2>$null; $ok = ($LASTEXITCODE -eq 0) } catch { $ok = $false } finally { $ErrorActionPreference = $old }
+    if (-not $ok) { return $null }
+    return ("$out").Trim()
+}
+
+function Test-Prerequisites {
+    # Check everything up front and report all problems at once, instead of failing minutes into the start-up.
+    $problems = @()
+    if (-not (Test-Path $Python)) {
+        $problems += ".venv not found.`n    Fix: py -3.12 -m venv .venv ; .\.venv\Scripts\python.exe -m pip install -r requirements-runtime.txt"
+    } else {
+        $missing = Test-PythonModules $Python @() @('fastapi', 'uvicorn', 'sqlalchemy', 'requests', 'soundfile', 'scipy', 'cv2', 'imageio_ffmpeg', 'mcp')
+        if ($null -eq $missing) { $problems += ".venv Python does not run.`n    Fix: delete .venv and create it again with Python 3.12 (see README)." }
+        elseif ($missing) { $problems += "Missing packages in .venv: $missing`n    Fix: .\.venv\Scripts\python.exe -m pip install -r requirements-runtime.txt" }
+    }
+    $missing = Test-PythonModules $YamnetExe $YamnetPre @('tensorflow', 'tensorflow_hub', 'soundfile', 'scipy')
+    if ($null -eq $missing) {
+        $problems += "Python for the YAMNet service not found ($YamnetExe $($YamnetPre -join ' ')).`n    Fix: install Python 3.12 (winget install Python.Python.3.12), or set PETMIND_YAMNET_PYTHON to a Python that has TensorFlow."
+    } elseif ($missing) {
+        $problems += "Missing packages for the YAMNet service: $missing`n    Fix: $YamnetExe $($YamnetPre -join ' ') -m pip install -r requirements-yamnet-experiment.txt"
+    }
+    if ($Rebuild -or -not (Test-Path (Join-Path $BuildRoot 'web\index.html'))) {
+        try { $null = Find-Flutter } catch { $problems += "Flutter is needed to build the web app: $($_.Exception.Message)`n    Fix: install Flutter 3.32.x and put it on PATH (or set FLUTTER_HOME)." }
+    }
+    if ($problems.Count -gt 0) {
+        Write-Host ''
+        Write-Host 'Cannot start the demo yet:' -ForegroundColor Red
+        $i = 1; foreach ($p in $problems) { Write-Host "  $i. $p"; $i++ }
+        Write-Host ''
+        Write-Host "$($problems.Count) prerequisite(s) missing. Nothing was started or stopped." -ForegroundColor Red
+        exit 1
+    }
+}
+
+Test-Prerequisites
 New-Item -ItemType Directory -Force $Demo | Out-Null
 Stop-Demo   # clean start: free the ports first
 
@@ -119,7 +166,7 @@ $env:TF_CPP_MIN_LOG_LEVEL = '3'
 $env:PYTHONIOENCODING = 'utf-8'
 $ids = @{}
 Write-Host 'Starting services...'
-$ids.yamnet = Start-Hidden 'yamnet' 'py' @('-3.12', '-m', 'petmind.yamnet_service.app', '--port', '8030')
+$ids.yamnet = Start-Hidden 'yamnet' $YamnetExe (@($YamnetPre) + @('-m', 'petmind.yamnet_service.app', '--port', '8030'))
 
 $env:PETMIND_DATABASE_URL = 'sqlite:///artifacts/demo/petmind_demo.db'
 $env:PETMIND_AUDIO_STORAGE_DIR = 'artifacts/demo/user_audio'
@@ -135,7 +182,7 @@ if ($Capture) {
 $env:PETMIND_LLM_PROVIDER = 'rule'
 $env:PETMIND_SEMANTIC_SEARCH = 'off'
 $ids.backend = Start-Hidden 'backend' $Python @('-m', 'uvicorn', 'petmind.backend.main:app', '--host', '127.0.0.1', '--port', '8010')
-$ids.web = Start-Hidden 'web' 'py' @('-3.12', '-m', 'http.server', '8021', '--bind', '127.0.0.1', '--directory', $WebDir)
+$ids.web = Start-Hidden 'web' $Python @('-m', 'http.server', '8021', '--bind', '127.0.0.1', '--directory', $WebDir)
 $ids | ConvertTo-Json | Set-Content $PidFile
 
 Wait-Url 'http://127.0.0.1:8021/' 'web (8021)'
