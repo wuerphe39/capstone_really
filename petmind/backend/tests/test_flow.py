@@ -107,6 +107,8 @@ def test_care_rejects_model_summary_that_changes_other_sound_review_to_uncertain
 def test_health_reports_audio_checkpoint_presence_without_claiming_validity(client, tmp_path, monkeypatch):
     monkeypatch.setattr(main, 'ROOT', tmp_path)
     monkeypatch.setattr(main, 'SessionLocal', client.sessions)
+    # The checkpoint is only reported for the LSTM detector, which is no longer the default.
+    monkeypatch.setattr(main, 'settings', replace(main.settings, audio_detector='lstm'))
     key = 'audio_lstm_checkpoint_present'
     assert client.get('/health').json()['components'][key] is False
     checkpoint = tmp_path/'artifacts/audio_lstm/esc50_lstm.pt'

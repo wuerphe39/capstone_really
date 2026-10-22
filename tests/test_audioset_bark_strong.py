@@ -1,3 +1,6 @@
+import pytest
+
+pytest.importorskip('torch', reason='training/comparison tests need torch (requirements-vision.txt)')
 from scripts.prepare_audioset_bark_strong import source_candidates
 from scripts.train_audioset_bark_lstm import window_label
 from scripts.evaluate_audioset_strong_bark import evaluate

@@ -269,7 +269,7 @@ class _OutingsPanelState extends State<OutingsPanel> {
         const SizedBox(height: 8),
         Text('외출 모드 · 귀가 리포트', style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 8),
-        Text('자동 관찰은 연결된 Pi에서 음성 분석과 사건 영상 저장을 시작합니다. 장비 응답 전에는 대기로 표시됩니다.',
+        Text('자동 관찰은 수집 프로그램이 PC 마이크·웹캠으로 음성 분석과 사건 영상 저장을 시작합니다. 프로그램 응답 전에는 대기로 표시됩니다.',
           style: Theme.of(context).textTheme.bodySmall),
         const SizedBox(height: 20),
         if (active == null) Wrap(spacing: 12, crossAxisAlignment: WrapCrossAlignment.center, children: [

@@ -1,8 +1,8 @@
-"""Local-only, fixed-source camera preview. Never persists frames."""
+"""Local-only, fixed-source camera view (live MJPEG stream and single snapshot). Never persists frames."""
 import os
 import requests
 from fastapi import APIRouter, HTTPException
-from fastapi.responses import HTMLResponse, Response
+from fastapi.responses import HTMLResponse, Response, StreamingResponse
 
 router = APIRouter(prefix='/camera', tags=['camera'])
 MAX_FRAME = 2 * 1024 * 1024
@@ -29,29 +29,49 @@ def snapshot():
     return Response(bytes(data), media_type='image/jpeg', headers={'Cache-Control': 'no-store'})
 
 
+@router.get('/stream')
+def stream():
+    """Relay the capture program's MJPEG stream (the same host/port as PETMIND_CAMERA_SNAPSHOT_URL)."""
+    base = os.getenv('PETMIND_CAMERA_SNAPSHOT_URL', '')
+    if not base:
+        raise HTTPException(503, 'PC 카메라 미리보기 연결이 설정되지 않았습니다.')
+    try:
+        upstream = requests.get(base.rsplit('/', 1)[0] + '/stream', stream=True, timeout=(2, 5), allow_redirects=False)
+    except requests.RequestException:
+        raise HTTPException(503, '카메라 영상을 받지 못했습니다. 웹캠과 수집 프로그램 연결을 확인하세요.') from None
+    content_type = upstream.headers.get('content-type', '')
+    if upstream.status_code != 200 or not content_type.startswith('multipart/x-mixed-replace'):
+        upstream.close()
+        raise HTTPException(503, '카메라 영상을 받지 못했습니다. 웹캠과 수집 프로그램 연결을 확인하세요.')
+
+    def body():
+        try:
+            for chunk in upstream.iter_content(16384):
+                if chunk:
+                    yield chunk
+        except requests.RequestException:
+            return
+        finally:
+            upstream.close()
+    return StreamingResponse(body(), media_type=content_type, headers={'Cache-Control': 'no-store'})
+
+
 @router.get('/view', response_class=HTMLResponse)
 def view():
     return HTMLResponse('''<!doctype html><html lang="ko"><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>PetMind 최근 카메라 장면</title>
-<style>body{font:16px system-ui;background:#f8faf9;color:#244437;margin:16px}img{width:100%;max-height:65vh;object-fit:contain;background:#e8eeeb;border-radius:12px}button{padding:10px;margin-bottom:12px}#state{min-height:48px}</style>
-<h3>PC 웹캠 · 최근 카메라 장면</h3>
-<p>최근 화면을 주기적으로 확인합니다. 자동 외출 수집 중에는 약 5초 단위 장면이며 지연될 수 있습니다. 이 보기 버튼은 녹화·음성 분석을 시작하지 않습니다.</p>
-<button id="toggle">카메라 보기 시작</button><div id="state" role="status">중지됨</div><img id="frame" hidden alt="PC 웹캠 최근 화면">
+<title>PetMind 실시간 카메라 장면</title>
+<style>body{font:16px system-ui;background:#f8faf9;color:#244437;margin:16px}img{width:100%;max-height:65vh;object-fit:contain;background:#e8eeeb;border-radius:12px}button{padding:10px;margin-bottom:12px}</style>
+<h3>PC 웹캠 · 실시간 카메라 장면</h3>
+<p>수집 중인 웹캠 화면을 바로 보여 줍니다(웹캠이 내는 속도에 따라 초당 최대 30장). 이 보기 버튼은 녹화·음성 분석을 시작하지 않으며 화면은 저장되지 않습니다.</p>
+<button id="toggle">카메라 보기 시작</button><div id="state" role="status">중지됨</div><img id="frame" hidden alt="PC 웹캠 실시간 화면">
 <script>
-let running=false, epoch=0, timer, objectUrl;
+let running=false;
 const button=document.getElementById('toggle'), state=document.getElementById('state'), frame=document.getElementById('frame');
-function clearFrame(){frame.hidden=true;frame.removeAttribute('src');if(objectUrl)URL.revokeObjectURL(objectUrl);objectUrl=null;}
-async function refresh(e){
- if(!running||e!==epoch)return;
- try{const res=await fetch('/camera/snapshot',{cache:'no-store',signal:AbortSignal.timeout(6000)});
- if(!res.ok)throw Error('카메라 연결 불가 · 웹캠·수집 프로그램 설정을 확인하고 다시 시작하세요.');
- const blob=await res.blob();if(!running||e!==epoch)return;
- clearFrame();objectUrl=URL.createObjectURL(blob);frame.src=objectUrl;frame.hidden=false;
- state.textContent='연결됨 · 수신 '+new Date().toLocaleTimeString();
- }catch(err){if(e!==epoch)return;clearFrame();state.textContent=err.message;}
- if(running&&e===epoch)timer=setTimeout(()=>refresh(e),500);
-}
-button.onclick=()=>{running=!running;epoch++;clearTimeout(timer);button.textContent=running?'보기 중지':'카메라 보기 시작';clearFrame();state.textContent=running?'연결 중…':'중지됨';if(running)refresh(epoch);};
-document.addEventListener('visibilitychange',()=>{if(document.hidden&&running)button.click();});
+function stop(message){running=false;frame.hidden=true;frame.removeAttribute('src');button.textContent='카메라 보기 시작';state.textContent=message||'중지됨';}
+function start(){running=true;button.textContent='보기 중지';state.textContent='연결 중…';frame.hidden=false;frame.src='/camera/stream?'+Date.now();}
+frame.onload=()=>{if(running)state.textContent='연결됨 · 실시간 '+new Date().toLocaleTimeString();};
+frame.onerror=()=>{if(running)stop('카메라 연결 불가 · 웹캠·수집 프로그램 설정을 확인하고 다시 시작하세요.');};
+button.onclick=()=>{running?stop():start();};
+document.addEventListener('visibilitychange',()=>{if(document.hidden&&running)stop();});
 </script></html>''', headers={'Cache-Control': 'no-store'})

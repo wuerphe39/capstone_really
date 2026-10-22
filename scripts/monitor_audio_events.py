@@ -11,6 +11,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import tempfile
+import threading
 import time
 import uuid
 
@@ -18,11 +19,29 @@ import requests
 import soundfile as sf
 
 from pet_monitor.event_video import EventPlanner, candidate_windows
+from scripts.preview_stream import FrameHub, pump, start_preview_server
 
 
-def run_ffmpeg(executable, arguments):
-    subprocess.run([executable,'-hide_banner','-loglevel','error','-nostdin','-y',*arguments],
-                   check=True, timeout=120, stdout=subprocess.DEVNULL)
+PREVIEW_FPS = 30  # live camera view (MJPEG stream); the camera must deliver it, see make_capture_input.py
+STALL_SECONDS = 30  # a live capture that produces no new segment for this long is treated as failed (see capture_stalled)
+
+
+def capture_stalled(idle_seconds, stopping):
+    """FFmpeg can stay alive while a device stops delivering (microphone asleep, USB hiccup). No new 5 s segment for
+    STALL_SECONDS means the capture is dead; the caller fails so the agent restarts it. Never while stopping."""
+    return not stopping and idle_seconds>STALL_SECONDS
+
+
+def run_ffmpeg(executable, arguments, retries=1):
+    """Run one FFmpeg job. A transient failure (e.g. a Windows file lock) is retried once."""
+    for attempt in range(retries+1):
+        try:
+            subprocess.run([executable,'-hide_banner','-loglevel','error','-nostdin','-y',*arguments],
+                           check=True, timeout=120, stdout=subprocess.DEVNULL)
+            return
+        except subprocess.CalledProcessError:
+            if attempt==retries: raise
+            time.sleep(.3)
 
 
 def model_ready(analysis):
@@ -30,8 +49,8 @@ def model_ready(analysis):
     return bool(analysis.get('audio_model') or analysis.get('audio_lstm'))
 
 
-def build_capture_command(ffmpeg, input_args, video_map, audio_map, folder):
-    return [ffmpeg,'-hide_banner','-loglevel','error','-nostdin','-y',*input_args,
+def build_capture_command(ffmpeg, input_args, video_map, audio_map, folder, preview=False):
+    command = [ffmpeg,'-hide_banner','-loglevel','error','-nostdin','-y',*input_args,
             '-map',video_map,'-map',audio_map,'-vf','scale=640:-2','-r','10',
             '-c:v','libx264','-preset','ultrafast','-pix_fmt','yuv420p',
             '-g','50','-keyint_min','50','-sc_threshold','0',
@@ -40,6 +59,12 @@ def build_capture_command(ffmpeg, input_args, video_map, audio_map, folder):
             '-f','segment','-segment_time','5','-segment_time_delta','0.1','-reset_timestamps','1',
             '-segment_list',str(folder/'segments.csv'),'-segment_list_type','csv',
             str(folder/'seg-%06d.mp4')]
+    if preview:
+        # Second output of the same FFmpeg process: JPEG frames on stdout for the live camera view
+        # (see scripts/preview_stream.py). Frames are only held in memory, never persisted.
+        command += ['-map',video_map,'-an','-vf',f'fps={PREVIEW_FPS},scale=640:-2','-q:v','6',
+                    '-f','image2pipe','-c:v','mjpeg','pipe:1']
+    return command
 
 
 def export_event(ffmpeg, segments, event, directory):
@@ -81,7 +106,7 @@ def main():
     parser.add_argument('--max-buffer-mb',type=int,default=128)
     parser.add_argument('--stop-file',type=Path)
     parser.add_argument('--progress-file',type=Path)
-    parser.add_argument('--preview-file',type=Path)
+    parser.add_argument('--preview-port',type=int,help='serve the live camera view on 127.0.0.1:PORT (/stream, /snapshot.jpg)')
     args=parser.parse_args()
     if not args.ffmpeg or not args.store_consent:
         parser.error('FFmpeg and --store-consent are required')
@@ -113,10 +138,19 @@ def main():
     with tempfile.TemporaryDirectory(prefix='petmind-capture-') as temporary:
         folder=Path(temporary); segments=[]; processed=set(); analysed_until=0.
         error_log=(folder/'capture.log').open('w',encoding='utf-8')
-        command=build_capture_command(args.ffmpeg,input_args,args.video_map,args.audio_map,folder)
+        command=build_capture_command(args.ffmpeg,input_args,args.video_map,args.audio_map,folder,bool(args.preview_port))
         command.remove('-nostdin')
-        process=subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.DEVNULL,stderr=error_log)
+        process=subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE if args.preview_port else subprocess.DEVNULL,stderr=error_log)
+        preview_server=None
+        if args.preview_port:
+            hub=FrameHub()
+            try: preview_server=start_preview_server(hub,args.preview_port)
+            except OSError as exc:
+                process.kill(); process.wait()
+                raise SystemExit(f'preview port {args.preview_port} is not available: {exc}')
+            threading.Thread(target=pump,args=(process.stdout,hub),daemon=True).start()
         stopping=False
+        last_segment_at=time.monotonic()
         def publish(event):
             try:
                 output,actual_start=export_event(args.ffmpeg,segments,event,folder)
@@ -149,18 +183,21 @@ def main():
                 completed=list(csv.reader(listing.read_text(encoding='utf-8').splitlines())) if listing.exists() else []
                 for row in completed:
                     if len(row)!=3 or row[0] in processed: continue
+                    last_segment_at=time.monotonic()
                     path=folder/Path(row[0]).name
                     start,end=float(row[1]),float(row[2])
                     if not path.is_file() or end<=start: continue
                     segment={'path':path,'start':start,'end':end}
                     segments.append(segment)
-                    if args.preview_file:
-                        args.preview_file.parent.mkdir(parents=True,exist_ok=True)
-                        preview=args.preview_file.with_suffix('.tmp.jpg')
-                        run_ffmpeg(args.ffmpeg,['-sseof','-0.2','-i',str(path),'-frames:v','1','-update','1',str(preview)])
-                        preview.replace(args.preview_file)
-                    wav=folder/'audio.wav'
-                    run_ffmpeg(args.ffmpeg,['-i',str(path),'-vn','-ar','16000','-ac','1','-t',str(end-start),str(wav)])
+                    wav=folder/f'audio-{path.stem}.wav'  # unique per segment: no reuse of a file Windows may still hold
+                    try:
+                        run_ffmpeg(args.ffmpeg,['-i',str(path),'-vn','-ar','16000','-ac','1','-t',str(end-start),str(wav)])
+                    except subprocess.CalledProcessError:
+                        # The last segment closed by a stop request can lack an audio stream. Skip only
+                        # this segment; the unanalysed time stays visible in the outing summary.
+                        segments.remove(segment); processed.add(row[0]); path.unlink(missing_ok=True)
+                        log(segment_skipped=path.name,reason='unreadable_segment')
+                        continue
                     # Demuxers may emit a completed segment ahead of wall clock;
                     # AAC padding can also extend its audio by a few samples.
                     # Wait for its actual sample end rather than submit future data.
@@ -188,6 +225,8 @@ def main():
                     for segment in list(segments):
                         if segment['end']<oldest:
                             segment['path'].unlink(missing_ok=True);segments.remove(segment)
+                if process.poll() is None and capture_stalled(time.monotonic()-last_segment_at,stopping):
+                    raise RuntimeError('capture stalled: no new segment from the input device')
                 if process.poll() is not None:
                     # The encoder can close its final segment after the CSV snapshot
                     # above. Read it on the next iteration before draining events.
@@ -205,6 +244,7 @@ def main():
                 try: process.wait(timeout=5)
                 except subprocess.TimeoutExpired: process.kill();process.wait()
             error_log.close()
+            if preview_server: preview_server.shutdown(); preview_server.server_close()
             # On interruption, retain analysed audio and mark unpublished video explicitly.
             for event in planner.pending:
                 try: post('/event-videos/missing',json={'pet_id':args.pet_id,'clip_ids':event.clip_ids,'reason':'camera_unavailable'})

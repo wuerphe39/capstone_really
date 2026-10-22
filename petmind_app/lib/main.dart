@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
 import 'package:http/http.dart' as http;
+import 'format.dart';
 import 'genesis_theme.dart';
 import 'outings_panel.dart';
 import 'camera_panel.dart';
@@ -16,6 +17,7 @@ const String apiBase = String.fromEnvironment(
 const bool yamnetTrial = bool.fromEnvironment('PETMIND_YAMNET_TRIAL', defaultValue: false);
 
 void main() {
+  ErrorWidget.builder = readableErrorBox;
   runApp(const PetMindApp());
   if (kIsWeb) SemanticsBinding.instance.ensureSemantics();
 }
@@ -368,7 +370,7 @@ class _DashboardPageState extends State<DashboardPage> {
             _pageIntro(),
             _overview(),
             if (activeOuting?['input_mode'] == 'live') Text('자동 외출 · ${activeOuting?['capture_label'] ?? '장치 상태 확인 중'}'),
-            if (observation != null) Text('관찰 #${observation!['id']} · ${observation!['source']} · ${observation!['observed_at']}'),
+            if (observation != null) Text('관찰 #${observation!['id']} · ${sourceLabel(observation!['source'])} · ${formatKst(observation!['observed_at'])}'),
             if (section == 0) const CameraPanel(base: apiBase),
             Wrap(spacing: 12, runSpacing: 8, children: [
               OutlinedButton(onPressed: () => setState(() => section = 1), child: const Text('외출 기록·음원 분석으로')),
@@ -491,7 +493,7 @@ class _DashboardPageState extends State<DashboardPage> {
           OutlinedButton(onPressed: busy ? null : () => demo('bored_pacing'), child: const Text('왕복 이동 시연')),
         ]),
         if (observation != null) Padding(padding: const EdgeInsets.only(top: 12),
-          child: Text('관찰 #${observation!['id']} · ${observation!['source']} · ${observation!['observed_at']}')),
+          child: Text('관찰 #${observation!['id']} · ${sourceLabel(observation!['source'])} · ${formatKst(observation!['observed_at'])}')),
       ],
     )));
   }
@@ -529,7 +531,7 @@ class _DashboardPageState extends State<DashboardPage> {
         for (final record in records) ListTile(
           contentPadding: EdgeInsets.zero,
           title: Text('#${record['id']} · ${record['summary']}'),
-          subtitle: Text('${record['input_scope'] == 'public_demo' ? '공개·생성 시연 자료' : record['source']} · ${record['observed_at']}'),
+          subtitle: Text('${record['input_scope'] == 'public_demo' ? '공개·생성 시연 자료' : sourceLabel(record['source'])} · ${formatKst(record['observed_at'])}'),
         ),
         for (final record in records)
           for (final feedback in (record['guardian_feedback'] as List<dynamic>? ?? const []))

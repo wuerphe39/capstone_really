@@ -19,6 +19,27 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('clip with missing review and window scores still renders', (tester) async {
+    tester.view.physicalSize = const Size(1200, 1500);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    final clip = {'id': 'clip-x', 'observation_id': 3, 'duration_s': 5, 'training_consent': false,
+      'expires_at': '2026-10-18T00:00:00Z', 'deleted': false, 'audio_available': true,
+      'source_note': '수집', 'analysis': {'audio_model': {'model_name': 'YAMNet Bark', 'windows': [{'label': 'other'}]}}};
+    final client = MockClient((request) async => request.url.path.endsWith('/review-queue')
+      ? http.Response(jsonEncode({'items': []}), 200, headers: {'content-type': 'application/json; charset=utf-8'})
+      : http.Response(jsonEncode([clip]), 200, headers: {'content-type': 'application/json; charset=utf-8'}));
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: SingleChildScrollView(child: AudioPanel(
+      client: client, base: 'http://localhost', petId: 'dog-a', onChanged: () {})))));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('사용자 음원 · 보호자 확인'));
+    await tester.pumpAndSettle();
+    expect(tester.takeException(), isNull);
+    expect(find.textContaining('관찰 #3'), findsOneWidget);
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets('review queue failure still shows clips and recovers', (tester) async {
     tester.view.physicalSize = const Size(1200, 1500);
     tester.view.devicePixelRatio = 1;

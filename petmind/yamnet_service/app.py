@@ -1,10 +1,13 @@
-"""Local-only WAV comparison site using the frozen YAMNet Bark score.
+"""Local YAMNet analysis service: the operating audio detector of PetMind.
 
-Run with the separate TensorFlow environment documented in README.md. This
-does not write observations, change the PetMind API, or train a model.
+The backend (PETMIND_AUDIO_DETECTOR=yamnet) posts WAV bytes to /analyze and gets
+frozen YAMNet Bark scores for 5-second windows. Run it in the TensorFlow
+environment (requirements-yamnet-experiment.txt). It does not write observations
+or train a model.
 """
 
 import argparse
+import csv
 import io
 import json
 import os
@@ -117,16 +120,24 @@ def make_handler(model, bark_index):
     return Handler
 
 
+def bark_class_index(model) -> int:
+    """Index of the 'Bark' class in the YAMNet class map (no dependency on training scripts)."""
+    with tf.io.gfile.GFile(model.class_map_path().numpy().decode(), 'r') as stream:
+        for row in csv.DictReader(stream):
+            if row['display_name'] == 'Bark':
+                return int(row['index'])
+    raise RuntimeError('YAMNet class map has no Bark class')
+
+
 def main():
     parser = argparse.ArgumentParser(description='Local YAMNet-only WAV test site')
     parser.add_argument('--port', type=int, default=8030)
     args = parser.parse_args()
     tf.config.threading.set_intra_op_parallelism_threads(2)
     model = hub.load(MODEL_HANDLE)
-    from scripts.extract_yamnet_bark_features import class_indices
-    bark_index = class_indices(model)[0]
+    bark_index = bark_class_index(model)
     with ThreadingHTTPServer(('127.0.0.1', args.port), make_handler(model, bark_index)) as server:
-        print(f'YAMNet-only site: http://127.0.0.1:{args.port}/', flush=True)
+        print(f'YAMNet service: http://127.0.0.1:{args.port}/', flush=True)
         server.serve_forever()
 
 

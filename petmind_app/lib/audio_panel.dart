@@ -220,12 +220,12 @@ class _AudioPanelState extends State<AudioPanel> {
               style: Theme.of(context).textTheme.bodySmall),
             for (final rawWindow in model['windows']) Builder(builder: (context) {
               final window = Map<String,dynamic>.from(rawWindow);
-              final start = (window['start_s'] as num).toDouble();
-              final end = (window['end_s'] as num).toDouble();
+              final start = (window['start_s'] as num? ?? 0).toDouble();
+              final end = (window['end_s'] as num? ?? 0).toDouble();
               return ListTile(
                 dense: true,
                 title: Text('${start.toStringAsFixed(1)}~${end.toStringAsFixed(1)}초 · ${window['label'] == 'dog_candidate' ? '개 짖음 소리 후보' : '기타 소리 후보'}'),
-                subtitle: Text('모델 점수 ${((window['dog_score'] as num) * 100).toStringAsFixed(1)} / 100 · '
+                subtitle: Text('모델 점수 ${scoreLabel(window['dog_score'])} · '
                   '${item['analysis']?['demo_source'] == null ? '보호자' : '시연 담당자'} 확인 ${item['review']?['label'] == null ? '전' : '의견 있음'}'),
                 trailing: TextButton(onPressed: item['audio_available'] == true ? () => play(item, start, end) : null,
                   child: const Text('구간 듣기')),
@@ -233,7 +233,7 @@ class _AudioPanelState extends State<AudioPanel> {
             }),
           ],
           if (model == null) const Text('음성 모델이 준비되지 않았거나 분석에 실패했습니다. 소리 크기 변화만으로 짖음을 판별할 수 없습니다.'),
-          if ((item['review'] as Map).isNotEmpty) Text('${item['review']['source'] == 'demo_operator_opinion' ? '시연 담당자 의견' : '보호자 의견'}: ${reviewLabel(item['review']['label'])} · ${item['review']['note']}'),
+          if (item['review'] is Map && (item['review'] as Map).isNotEmpty) Text('${item['review']['source'] == 'demo_operator_opinion' ? '시연 담당자 의견' : '보호자 의견'}: ${reviewLabel(item['review']['label'])} · ${item['review']['note']}'),
           Text('학습 참여 ${item['training_consent'] == true ? '동의' : '미동의'} · 원본 만료 ${expiryLabel(item['expires_at'])}'),
           Wrap(spacing:8,children:[
             TextButton(onPressed:item['audio_available'] == true ? () => play(item) : null,child:Text(item['deleted'] == true ? '원본 삭제됨' : '음원 듣기')),

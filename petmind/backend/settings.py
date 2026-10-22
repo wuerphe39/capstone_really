@@ -21,7 +21,7 @@ class Settings:
     gemini_timeout_seconds: float = float(os.getenv('PETMIND_GEMINI_TIMEOUT_SECONDS', '12'))
     action_timeout_seconds: int = int(os.getenv('PETMIND_ACTION_TIMEOUT_SECONDS', '30'))
     audio_lstm_checkpoint_name: str = os.getenv('PETMIND_AUDIO_LSTM_CHECKPOINT', 'esc50_lstm.pt')
-    audio_detector: str = os.getenv('PETMIND_AUDIO_DETECTOR', 'lstm').lower()
+    audio_detector: str = os.getenv('PETMIND_AUDIO_DETECTOR', 'yamnet').lower()
     yamnet_url: str = os.getenv('PETMIND_YAMNET_URL', 'http://127.0.0.1:8030/analyze')
     audio_storage_dir: Path = Path(os.getenv('PETMIND_AUDIO_STORAGE_DIR', str(ROOT/'artifacts'/'user_audio')))
 

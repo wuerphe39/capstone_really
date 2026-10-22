@@ -1,3 +1,6 @@
+import pytest
+
+pytest.importorskip('torch', reason='training/comparison tests need torch (requirements-vision.txt)')
 import numpy as np
 import pytest
 

@@ -136,7 +136,7 @@ void main() {
     expect(find.textContaining('공개 자료 목록을 불러오지 못했습니다'), findsOneWidget);
     await tester.drag(find.byType(ListView).first, const Offset(0, -1000));
     await tester.pumpAndSettle();
-    expect(find.textContaining('관찰 #7 · synthetic_demo'), findsOneWidget);
+    expect(find.textContaining('관찰 #7 · 합성 시연'), findsOneWidget);
     failCatalog = false;
     await tester.drag(find.byType(ListView).first, const Offset(0, 1000));
     await tester.pumpAndSettle();
@@ -172,7 +172,7 @@ void main() {
     expect(state.connectionIssue as String, contains('집계 지표'));
     await tester.drag(find.byType(ListView).first, const Offset(0, -1000));
     await tester.pumpAndSettle();
-    expect(find.textContaining('관찰 #8 · user_audio'), findsOneWidget);
+    expect(find.textContaining('관찰 #8 · 사용자 음원'), findsOneWidget);
     extrasOnline = true;
     await tester.drag(find.byType(ListView).first, const Offset(0, 1000));
     await tester.pumpAndSettle();

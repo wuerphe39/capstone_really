@@ -1,10 +1,13 @@
-"""Poll automatic outings on Pi; one camera owner for capture and preview.
+"""Poll automatic outings and run the capture program (webcam + microphone) for each; it also serves the live camera view.
 
 Run from repo root with --pet-id and --input-args-file (FFmpeg device JSON).
-Use an SSH reverse tunnel to the PC API. No GPIO or sound output.
+Runs on the same PC as the backend (the file name is a leftover from the Raspberry Pi design). No GPIO or sound output.
+
+If the capture program exits unexpectedly (device unplugged, FFmpeg crash, stalled microphone) it is restarted
+up to MAX_RESTARTS times; the gap stays visible as unobserved time in the outing summary. A brief backend outage
+does not stop capture either: it stops only after HEARTBEAT_FAILURES_BEFORE_STOP failed heartbeats in a row.
 """
 import argparse
-from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 import json
 import os
 from pathlib import Path
@@ -12,13 +15,17 @@ import signal
 import subprocess
 import sys
 import tempfile
-import threading
 import time
 import uuid
 from datetime import datetime, timezone
 import requests
 
 CLOCK_TOLERANCE_SECONDS = 2.0
+MAX_RESTARTS = 5               # consecutive unexpected capture exits before the job is marked failed
+RESTART_BACKOFF_SECONDS = 5    # waits 5 s, 10 s, ... between restarts (heartbeats continue meanwhile)
+HEALTHY_RUN_SECONDS = 60       # a worker that ran this long resets the restart counter
+HEARTBEAT_FAILURES_BEFORE_STOP = 10   # consecutive failed heartbeats (about 20+ s) before capture is stopped
+STOP_GRACE_SECONDS = 150
 
 
 def clock_healthy(server_time, sent_at, received_at):
@@ -34,7 +41,7 @@ def worker_command(args, job, folder):
         '--input-args-file', str(args.input_args_file.resolve()), '--ffmpeg', args.ffmpeg,
         '--video-map', args.video_map, '--audio-map', args.audio_map, '--store-consent',
         '--stop-file', str(folder/'stop'), '--progress-file', str(folder/'progress.json'),
-        '--preview-file', str(folder/'preview.jpg')]
+        '--preview-port', str(args.preview_port)]
 
 
 def terminate_tree(process):
@@ -50,31 +57,66 @@ def terminate_tree(process):
         process.wait()
 
 
-def serve_preview(folder, port):
-    class Handler(BaseHTTPRequestHandler):
-        def do_GET(self):
-            if self.path != '/snapshot.jpg': self.send_error(404); return
-            try:
-                path=folder/'preview.jpg'
-                if time.time()-path.stat().st_mtime > 12: raise OSError('stale')
-                data=path.read_bytes()
-            except OSError:
-                self.send_error(503, 'Capture inactive or stale'); return
-            self.send_response(200)
-            self.send_header('Content-Type','image/jpeg')
-            self.send_header('Cache-Control','no-store')
-            self.send_header('Content-Length',str(len(data)))
-            self.end_headers()
-            try: self.wfile.write(data)
-            except (BrokenPipeError, ConnectionResetError): pass
-    server=ThreadingHTTPServer(('127.0.0.1',port),Handler)
-    threading.Thread(target=server.serve_forever,daemon=True).start()
-    return server
+def worker_state(folder):
+    """capturing / model_unavailable from the worker's progress file, otherwise starting."""
+    try:
+        progress=json.loads((folder/'progress.json').read_text(encoding='utf-8'))
+        if time.time()-progress['at']<20:
+            return 'capturing' if progress['model_ready'] else 'model_unavailable'
+    except (OSError,ValueError,KeyError): pass
+    return 'starting'
+
+
+def supervise(args, job, folder, post, route, popen=subprocess.Popen, sleep=time.sleep, monotonic=time.monotonic):
+    """Run the capture worker for one outing and keep it alive. Returns the final state to report:
+    stopped, failed or clock_mismatch."""
+    stop_at=None; clock_bad=False; failures=0; restarts=0; process=None
+
+    def beat(state):
+        nonlocal stop_at, clock_bad, failures
+        try:
+            reply, sent_at, received_at=post(route,'draining' if stop_at else state)
+            failures=0
+            stop=reply.get('stop',False)
+            if not clock_healthy(reply['server_time'],sent_at,received_at):
+                clock_bad=True; stop=True
+        except requests.RequestException:
+            failures+=1
+            stop=failures>=HEARTBEAT_FAILURES_BEFORE_STOP
+        if stop and stop_at is None:
+            (folder/'stop').touch(); stop_at=monotonic()
+
+    try:
+        while True:
+            try: process=popen(worker_command(args,job,folder),start_new_session=True)
+            except OSError: return 'failed'
+            run_started=monotonic()
+            while process.poll() is None:
+                beat(worker_state(folder))
+                if stop_at and monotonic()-stop_at>STOP_GRACE_SECONDS:
+                    terminate_tree(process); break
+                sleep(2)
+            if clock_bad: return 'clock_mismatch'
+            if stop_at is not None:
+                return 'stopped' if process.returncode==0 else 'failed'
+            # The capture program ended without being asked to: restart it unless it keeps failing.
+            if monotonic()-run_started>=HEALTHY_RUN_SECONDS: restarts=0
+            restarts+=1
+            print(f'capture program exited ({process.returncode}); restart {restarts}/{MAX_RESTARTS}',flush=True)
+            if restarts>MAX_RESTARTS: return 'failed'
+            terminate_tree(process); process=None
+            wait_until=monotonic()+RESTART_BACKOFF_SECONDS*restarts
+            while monotonic()<wait_until and stop_at is None:
+                beat('starting'); sleep(2)
+            if clock_bad: return 'clock_mismatch'
+            if stop_at is not None: return 'stopped'
+    finally:
+        if process: terminate_tree(process)
 
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--base',default='http://127.0.0.1:18010')
+    parser.add_argument('--base',default='http://127.0.0.1:8010')
     parser.add_argument('--pet-id',required=True)
     parser.add_argument('--input-args-file',type=Path,required=True)
     parser.add_argument('--ffmpeg',default='ffmpeg')
@@ -91,8 +133,7 @@ def main():
         result.raise_for_status()
         return result.json(), sent_at, received_at
     with tempfile.TemporaryDirectory(prefix='petmind-agent-') as temp:
-        folder=Path(temp); server=serve_preview(folder,args.preview_port)
-        process=None
+        folder=Path(temp)
         try:
             while True:
                 try: claim, sent_at, received_at=post('/capture/claim'); job=claim['job']
@@ -100,52 +141,19 @@ def main():
                     time.sleep(3); continue
                 if not job:
                     time.sleep(3); continue
-                for name in ('stop','progress.json','preview.jpg'):
+                for name in ('stop','progress.json'):
                     (folder/name).unlink(missing_ok=True)
                 route=f"/capture/{job['outing_id']}/heartbeat"
                 if not clock_healthy(claim['server_time'],sent_at,received_at):
-                    print('PC/Pi clock mismatch or slow connection; synchronize clocks before capture.',flush=True)
+                    print('PC clock mismatch or slow connection; synchronize clocks before capture.',flush=True)
                     try: post(route,'clock_mismatch')
                     except requests.RequestException: pass
                     continue
-                stop_at=None
-                clock_bad=False
-                try:
-                    process=subprocess.Popen(worker_command(args,job,folder),start_new_session=True)
-                    while process.poll() is None:
-                        state='starting'
-                        try:
-                            progress=json.loads((folder/'progress.json').read_text(encoding='utf-8'))
-                            if time.time()-progress['at']<20:
-                                state='capturing' if progress['model_ready'] else 'model_unavailable'
-                        except (OSError,ValueError,KeyError): pass
-                        try:
-                            reply, sent_at, received_at=post(route,'draining' if stop_at else state)
-                            stop=reply.get('stop',False)
-                            if not clock_healthy(reply['server_time'],sent_at,received_at):
-                                clock_bad=True; stop=True
-                        except requests.RequestException: stop=True
-                        if stop and stop_at is None:
-                            (folder/'stop').touch(); stop_at=time.monotonic()
-                        if stop_at and time.monotonic()-stop_at>150:
-                            terminate_tree(process); break
-                        time.sleep(2)
-                    final=('clock_mismatch' if clock_bad else
-                           'stopped' if stop_at and process.returncode==0 else 'failed')
-                    try: post(route,final)
-                    except requests.RequestException: pass
-                except OSError:
-                    try: post(route,'failed')
-                    except requests.RequestException: pass
-                finally:
-                    if process: terminate_tree(process)
-                    process=None
-                    (folder/'preview.jpg').unlink(missing_ok=True)
+                final=supervise(args,job,folder,post,route)
+                try: post(route,final)
+                except requests.RequestException: pass
         except KeyboardInterrupt:
             pass
-        finally:
-            if process: terminate_tree(process)
-            server.shutdown(); server.server_close()
 
 
 if __name__=='__main__': main()

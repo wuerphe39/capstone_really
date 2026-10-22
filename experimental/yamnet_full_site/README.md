@@ -8,7 +8,7 @@
 
 ```powershell
 # 창 1 · YAMNet 로컬 분석 서비스
-artifacts\yamnet_env\Scripts\python.exe -m experimental.yamnet_only_site.app --port 8030
+artifacts\yamnet_env\Scripts\python.exe -m petmind.yamnet_service.app --port 8030
 ```
 
 ```powershell

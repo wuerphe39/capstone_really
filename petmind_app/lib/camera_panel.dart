@@ -17,7 +17,7 @@ class _CameraPanelState extends State<CameraPanel> {
       children: [
         Text('최근 카메라 장면', style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 8),
-        const Text('PC 웹캠이 수집한 최근 장면을 확인하세요. 자동 외출 중에는 약 5초 구간이 닫힌 뒤 갱신되므로 지연됩니다.\n'
+        const Text('PC 웹캠이 수집 중인 장면을 실시간으로 확인하세요.\n'
           '장비 연결 후 사용할 수 있습니다. 카메라 보기는 녹화나 음성 분석을 시작하지 않습니다.'),
         const SizedBox(height: 12),
         OutlinedButton.icon(

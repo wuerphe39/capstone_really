@@ -1,3 +1,4 @@
+from dataclasses import replace
 from datetime import datetime, timedelta, timezone
 import io
 import json
@@ -17,13 +18,12 @@ def capture_setup(tmp_path,monkeypatch):
     monkeypatch.setattr(audio_clips,'FOLDER',tmp_path/'audio')
     monkeypatch.setattr(audio_clips,'ROOT',tmp_path)
     monkeypatch.setattr(outings,'MEDIA_ROOT',tmp_path/'media')
-    checkpoint=tmp_path/'artifacts/audio_lstm/esc50_lstm.pt'
-    checkpoint.parent.mkdir(parents=True); checkpoint.touch()
-    class Predictor:
-        def predict(self,path):
-            return {'dog_score':.95,'threshold':.9,'windows':[
-                {'start_s':0,'end_s':5,'dog_score':.95,'label':'dog_candidate'}]}
-    monkeypatch.setattr('pet_monitor.audio_model_cache.get_audio_predictor',lambda _:Predictor())
+    # YAMNet is the operating detector; the local analysis service is replaced by a fixed positive window.
+    monkeypatch.setattr(audio_clips,'settings',replace(audio_clips.settings,audio_detector='yamnet'))
+    monkeypatch.setattr(audio_clips,'predict_yamnet',lambda content,duration_s:{
+        'model_name':'YAMNet Bark','model_role':'experimental','dog_score':.95,'threshold':.05,
+        'windows':[{'start_s':0,'end_s':5,'dog_score':.95,'label':'dog_candidate','padded':False}],
+        'scope':'direct YAMNet Bark score; not calibrated probability or dog identity'})
     wav=io.BytesIO(); sf.write(wav,np.zeros(80000,dtype=np.float32),16000,format='WAV')
     origin=datetime.now(timezone.utc)-timedelta(minutes=2)
     return wav.getvalue(),origin,tmp_path
@@ -114,7 +114,7 @@ def test_no_candidate_bad_video_wrong_time_consent_and_missing(client,capture_se
     assert evidence['event_video']['status']=='missing' and evidence['audio_available']
     with client.sessions() as db:
         row=db.get(AudioClipLog,a['id']);data=json.loads(row.analysis_json)
-        data['audio_lstm']['windows'][0]['dog_score']=.1;row.analysis_json=json.dumps(data);db.commit()
+        data['audio_model']['windows'][0]['dog_score']=.01;row.analysis_json=json.dumps(data);db.commit()
     assert attach(client,capture_setup,[a['id']]).status_code==422
 
 

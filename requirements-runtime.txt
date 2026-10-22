@@ -1,0 +1,7 @@
+# Everything needed to run the PetMind backend, the capture program and the demo on one machine.
+# The YAMNet analysis service uses a separate TensorFlow environment: requirements-yamnet-experiment.txt
+-r requirements-core.txt
+soundfile>=0.12,<1
+scipy>=1.13,<2
+opencv-python>=4.8,<5
+imageio-ffmpeg>=0.5,<1

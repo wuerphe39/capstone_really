@@ -7,7 +7,7 @@
 ```powershell
 python -m venv artifacts/yamnet_env
 artifacts/yamnet_env/Scripts/python.exe -m pip install -r requirements-yamnet-experiment.txt
-artifacts/yamnet_env/Scripts/python.exe -m experimental.yamnet_only_site.app --port 8030
+artifacts/yamnet_env/Scripts/python.exe -m petmind.yamnet_service.app --port 8030
 ```
 
 YAMNet 모델은 [공식 TensorFlow Hub 모델](https://tfhub.dev/google/yamnet/1)이며 처음 실행할 때 내려받을 수 있다. 입력은 30초·12MB 이하 WAV다. 16kHz 모노로 변환하고 5초마다 YAMNet을 호출한다. 각 구간의 `Bark` 패치 최고 점수를 표시하며, 후보 기준 **0.05**는 기존 FSD50K/ESC 검증 실험에서 정한 값을 고정 사용한다. 업로드 자료를 보고 기준을 바꾸지 않는다. 점수는 확률·정확도·짖음 횟수·정확한 발성 시각이 아니다.
