@@ -8,7 +8,7 @@ from unittest import mock
 
 import requests
 
-from scripts import pi_outing_agent as agent
+from scripts import capture_agent as agent
 from scripts.monitor_audio_events import STALL_SECONDS, capture_stalled
 
 

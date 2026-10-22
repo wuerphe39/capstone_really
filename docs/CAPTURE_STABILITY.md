@@ -1,6 +1,6 @@
 # 수집 안정성 보강과 시험 — 2026-10-23
 
-대상: 노트북 웹캠·마이크 자동 수집(`scripts/pi_outing_agent.py` → `scripts/monitor_audio_events.py`). 파일 이름의 `pi`는 라즈베리파이 설계의 흔적이며 지금은 같은 PC에서 실행한다.
+대상: 노트북 웹캠·마이크 자동 수집(`scripts/capture_agent.py` → `scripts/monitor_audio_events.py`).
 
 ## 바꾼 것
 

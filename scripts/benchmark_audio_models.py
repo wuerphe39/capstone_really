@@ -31,7 +31,7 @@ def main():
                               'RSS snapshots are not peak allocation; OS file cache not cleared',
                               'model load excludes library import; CLAP excludes text encoding and retrieval',
                               'same process loads LSTM then CLAP; memory is not an isolated incremental measurement',
-                              'not measured on Raspberry Pi; not evidence of live recording support']}
+                              'not evidence of live recording support']}
     for name in ('lstm', 'clap'):
         if name == 'clap':
             from transformers import ClapModel, ClapProcessor

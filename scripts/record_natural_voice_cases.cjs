@@ -28,7 +28,7 @@ async function one(browser,item,index){
   await page.goto('http://127.0.0.1:8024/');
   await page.getByText('연결됨').waitFor();await pause(800);
   await page.getByText('외출 기록·음원 분석으로').click();await pause(650);
-  await page.getByText('자동 관찰 · Pi 마이크').click();await pause(200);
+  await page.getByText('자동 관찰 · PC 입력').click();await pause(200);
   await page.mouse.click(110,435);await pause(180); // Flutter dropdown option: 사용자 음원
   await page.getByRole('button',{name:'외출 시작'}).click();await pause(650);
   await page.getByText('사용자 음원 · 보호자 확인').click();await pause(450);

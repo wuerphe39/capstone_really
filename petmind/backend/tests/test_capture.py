@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, timezone
 from .test_flow import client
 from ..database import CaptureJob, OutingLog, utcnow
-from scripts.pi_outing_agent import clock_healthy
+from scripts.capture_agent import clock_healthy
 
 
 def start(client, **extra):

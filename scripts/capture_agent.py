@@ -1,7 +1,7 @@
 """Poll automatic outings and run the capture program (webcam + microphone) for each; it also serves the live camera view.
 
 Run from repo root with --pet-id and --input-args-file (FFmpeg device JSON).
-Runs on the same PC as the backend (the file name is a leftover from the Raspberry Pi design). No GPIO or sound output.
+Runs on the same PC as the backend. No GPIO or sound output.
 
 If the capture program exits unexpectedly (device unplugged, FFmpeg crash, stalled microphone) it is restarted
 up to MAX_RESTARTS times; the gap stays visible as unobserved time in the outing summary. A brief backend outage

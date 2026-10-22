@@ -41,6 +41,6 @@ artifacts/yamnet_env/Scripts/python.exe -m scripts.check_yamnet_visitor_scene
 python -m scripts.check_yamnet_visitor_prediction
 ```
 
-실제 검증: 특징 추출 596개 완료, 시연 음원 두 창 모두 추론, 전체 Python 테스트 **153개 통과**, 실험 환경 `pip check` 정상. Windows PC에서 YAMNet 모델을 미리 로드한 뒤 평가 음원 182개의 특징 추출은 약 **3.25초**였다. PyTorch 결합 LSTM의 저장 특징 추론은 약 **0.008초**였지만 두 수치를 합친 값이 실제 Pi 지연은 아니다. Pi 메모리·지연·동기화는 아직 검증하지 않았다.
+실제 검증: 특징 추출 596개 완료, 시연 음원 두 창 모두 추론, 전체 Python 테스트 **153개 통과**, 실험 환경 `pip check` 정상. Windows PC에서 YAMNet 모델을 미리 로드한 뒤 평가 음원 182개의 특징 추출은 약 **3.25초**였다. PyTorch 결합 LSTM의 저장 특징 추론은 약 **0.008초**였지만 두 수치를 합친 값이 실제 수집 지연은 아니다.
 
 **결정:** 새 모델은 실험 체크포인트로만 보존하고 운영에 연결하지 않는다. 독립적인 가정 음원과 명시적 짖음 정답을 확보한 뒤 YAMNet 단독과 임베딩 LSTM을 재평가한다. 그때도 LSTM이 단독 모델보다 의미 있는 이득을 보이지 않으면 YAMNet 단독을 채택하는 편이 타당하다.

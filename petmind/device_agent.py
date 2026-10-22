@@ -1,4 +1,4 @@
-"""PC/Pi-compatible virtual music agent: persist a received command before completing it."""
+"""Virtual music agent: persist a received command before completing it."""
 import argparse
 import json
 import sqlite3

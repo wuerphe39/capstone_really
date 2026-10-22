@@ -41,7 +41,7 @@ function Stop-Demo {
     # The collector agent, its capture worker and the capture FFmpeg open no port of their own: find them by command line.
     # Without this a restart leaves old agents running (they would claim the next outing with outdated code).
     Get-CimInstance Win32_Process -ErrorAction SilentlyContinue |
-        Where-Object { $_.CommandLine -and ($_.CommandLine -match 'scripts\.pi_outing_agent|scripts\.monitor_audio_events' -or
+        Where-Object { $_.CommandLine -and ($_.CommandLine -match 'scripts\.capture_agent|scripts\.monitor_audio_events' -or
             ($_.Name -like 'ffmpeg*' -and $_.CommandLine -match 'petmind-capture-')) } |
         ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
     foreach ($port in $Ports) {
@@ -144,7 +144,7 @@ Wait-Url 'http://127.0.0.1:8030/' 'YAMNet service (8030)'
 
 if ($Capture) {
     # The agent claims capture jobs created from the web UI and runs the capture program (webcam + microphone).
-    $ids.agent = Start-Hidden 'agent' $Python @('-m', 'scripts.pi_outing_agent', '--base', 'http://127.0.0.1:8010', '--pet-id', $PetId,
+    $ids.agent = Start-Hidden 'agent' $Python @('-m', 'scripts.capture_agent', '--base', 'http://127.0.0.1:8010', '--pet-id', $PetId,
         '--input-args-file', $CaptureConfig.input_args_file, '--ffmpeg', ('"' + $CaptureConfig.ffmpeg + '"'),
         '--video-map', '0:v:0', '--audio-map', '1:a:0', '--redetect')
     $ids | ConvertTo-Json | Set-Content $PidFile

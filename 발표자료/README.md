@@ -1,12 +1,12 @@
 # 발표자료 안내
 
-중간발표(2026-10-13)와 그 이후에 쓰거나 만든 자료를 한곳에 정리한 문서다. **발표 당시 자료**는 그때의 사실을 기록한 것이므로 이후 결정(Raspberry Pi 미사용, YAMNet 채택)과 다를 수 있다. 최신 구조는 맨 아래 "현재 기준"을 따른다.
+중간발표(2026-10-13)와 그 이후에 쓰거나 만든 자료를 한곳에 정리한 문서다. **발표 당시 자료**는 그때의 사실을 기록한 것이므로 이후 결정(YAMNet 채택, 마이크·웹캠 PC 직결)과 다를 수 있다. 최신 구조는 맨 아래 "현재 기준"을 따른다.
 
 ## 1. 발표 PPT
 
 | 파일 | 상태 | 비고 |
 |---|---|---|
-| [PetMind_3주차발표자료.pptx](../docs/presentation/PetMind_3주차발표자료.pptx) | **발표에 사용한 원본** (23장) | Raspberry Pi 사용, 음성 LSTM 운영으로 서술. 발표 후 결정이라 수정하지 않기로 함 |
+| [PetMind_3주차발표자료.pptx](../docs/presentation/PetMind_3주차발표자료.pptx) | **발표에 사용한 원본** (23장) | 별도 수집 장치 포함 구조, 음성 LSTM 운영으로 서술. 발표 후 결정이라 수정하지 않기로 함 |
 | [PetMind_3주차발표자료_최신화.pptx](../docs/presentation/PetMind_3주차발표자료_최신화.pptx) | 참고용 복사본 | 슬라이드 4, 9, 11, 21, 22에 "YAMNet 기준 전환" 문구를 넣은 것. 발표 자료는 고치지 않기로 해서 사용하지 않음 |
 | [PetMind_설명.docx](../docs/presentation/PetMind_설명.docx) | 슬라이드별 설명 원고 | 발표 당시 기준 |
 
@@ -29,8 +29,7 @@
 | 파일 | 상태 | 비고 |
 |---|---|---|
 | [PetMind_동작_애니메이션.html](../PetMind_동작_애니메이션.html) / [.svg](../PetMind_동작_애니메이션.svg) | **최신** | 교수님 스케치 반영: 마이크·웹캠 PC 직결, YAMNet 로컬, DB → MCP → 클라우드 LLM → API. 8단계. README 맨 위에 삽입됨. 생성기는 `scripts/build_flow_animation.py` |
-| [docs/PetMind_실장비_블록도.html](../docs/PetMind_실장비_블록도.html), [docs/presentation/PetMind_블록도.html](../docs/presentation/PetMind_블록도.html), [docs/PetMind_전체_블록도.svg](../docs/PetMind_전체_블록도.svg) | 발표 당시 | Raspberry Pi 포함 구조. 현재와 다름 |
-| [참고/교수님 블록도 피드백.jpg](참고/교수님%20블록도%20피드백.jpg) | 교수님 화이트보드 스케치 | 마이크 → 라파 → Windows(YAMNet local → 짖음 감지 → DB), MCP, Cloud(Google Gemini), API. 공개 저장소에는 올리지 않음 |
+| [참고/교수님 블록도 피드백.jpg](참고/교수님%20블록도%20피드백.jpg) | 교수님 화이트보드 스케치 | 마이크 → Windows(YAMNet local → 짖음 감지 → DB), MCP, Cloud(Google Gemini), API. 공개 저장소에는 올리지 않음 |
 
 ## 4. 대본
 
@@ -44,7 +43,7 @@
 
 ## 현재 기준 (발표 이후 결정)
 
-- Raspberry Pi 5는 사용하지 않는다. 마이크와 웹캠은 PC(노트북)에 직접 연결한다.
+- 마이크와 웹캠은 PC(노트북)에 직접 연결한다.
 - 음성 감지는 YAMNet을 쓴다(PC에서 로컬 실행).
 - 클라우드 LLM(Gemini)은 외부 서비스로 분리해서 표현한다.
 - 위 변경은 README의 "범위 변경(2026-10-13)" 안내와 블록도 애니메이션에 반영돼 있다. **README 4장, AGENTS.md, 코드의 일부 문구는 아직 LSTM 기준이다.**
