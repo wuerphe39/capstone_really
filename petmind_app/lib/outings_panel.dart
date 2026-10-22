@@ -24,6 +24,8 @@ class _OutingsPanelState extends State<OutingsPanel> {
   String? selected;
   String mode = 'live';
   bool storeConsent = false;
+  static const momentPage = 30;  // the list of moments is drawn in chunks; an automatic outing can hold hundreds
+  int momentLimit = momentPage;
   Map<String, dynamic>? capture;
   Timer? captureTimer;
   bool polling = false;
@@ -85,7 +87,7 @@ class _OutingsPanelState extends State<OutingsPanel> {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.petId != widget.petId) {
       generation++;
-      outings = []; active = null; selected = null; capture = null; storeConsent = false; report = null; explanation = null; dayReport = null; dayExplanation = null;
+      momentLimit = momentPage; outings = []; active = null; selected = null; capture = null; storeConsent = false; report = null; explanation = null; dayReport = null; dayExplanation = null;
       load();
     } else if (oldWidget.observationId != widget.observationId) { load(); }
   }
@@ -306,7 +308,7 @@ class _OutingsPanelState extends State<OutingsPanel> {
               : outingLabel(Map<String, dynamic>.from(o)),
               overflow: TextOverflow.ellipsis),
           )).toList(),
-          onChanged: busy ? null : (value) { selected = value; load(); }),
+          onChanged: busy ? null : (value) { selected = value; momentLimit = momentPage; load(); }),
         TextButton(onPressed: busy ? null : load, child: const Text('외출 기록 새로고침')),
         const Divider(height: 32),
         AudioPanel(key: ValueKey(widget.petId), client: widget.client, base: widget.base,
@@ -356,11 +358,13 @@ class _OutingsPanelState extends State<OutingsPanel> {
           const SizedBox(height: 24),
           Text('중요한 순간 · 관찰 근거', style: Theme.of(context).textTheme.titleMedium),
           if (moments.isEmpty) const Text('저장된 관찰이 없습니다.'),
-          for (final item in moments) ListTile(contentPadding: EdgeInsets.zero,
+          for (final item in moments.take(momentLimit)) ListTile(contentPadding: EdgeInsets.zero,
             title: Text('#${item['observation_id']} · ${item['reason']}'),
             subtitle: Text(item['event_video'] == null ? item['summary'] : '${item['summary']}\n${item['note']}'),
             trailing: TextButton(onPressed: item['media_available'] == true || item['audio_available'] == true ? () => openMoment(Map<String, dynamic>.from(item)) : null,
               child: Text(item['media_available'] == true ? '구간 보기' : item['audio_available'] == true ? '음원 듣기' : '원본 없음'))),
+          if (moments.length > momentLimit) TextButton(onPressed: () => setState(() => momentLimit += momentPage),
+            child: Text('다음 관찰 더 보기 (${moments.length - momentLimit}건 남음)')),
         ],
         const Divider(height: 40),
         Text('하루 관찰 요약 · $dayText (한국 시간)', style: Theme.of(context).textTheme.titleMedium),

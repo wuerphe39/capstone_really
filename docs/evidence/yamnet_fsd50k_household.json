@@ -1,0 +1,285 @@
+{
+ "dataset": "FSD50K eval subset (official exhaustive annotation), CC0/CC-BY; see manifest",
+ "detector": "YAMNet Bark direct score, max over 5 s windows",
+ "threshold": 0.05,
+ "threshold_note": "fixed operating value; not chosen from this evaluation",
+ "bark_clips": 49,
+ "negative_clips": 631,
+ "bark_detected": 40,
+ "bark_recall": 0.816,
+ "bark_recall_95ci": [
+  0.686,
+  0.9
+ ],
+ "bark_recall_by_clip_length": {
+  "1-3 s": {
+   "detected": 5,
+   "clips": 5,
+   "recall": 1.0,
+   "ci95": [
+    0.566,
+    1.0
+   ]
+  },
+  "<1 s": {
+   "detected": 1,
+   "clips": 1,
+   "recall": 1.0,
+   "ci95": [
+    0.207,
+    1.0
+   ]
+  },
+  ">=3 s": {
+   "detected": 34,
+   "clips": 43,
+   "recall": 0.791,
+   "ci95": [
+    0.648,
+    0.886
+   ]
+  }
+ },
+ "false_alarm_clips": 9,
+ "false_alarm_clip_rate": 0.0143,
+ "false_alarm_clip_95ci": [
+  0.0075,
+  0.0269
+ ],
+ "false_alarm_windows": 9,
+ "negative_windows": 1590,
+ "false_alarm_window_rate": 0.0057,
+ "false_alarm_window_95ci": [
+  0.003,
+  0.0107
+ ],
+ "by_negative_group": {
+  "alarm": {
+   "clips": 40,
+   "false_alarm_clips": 0,
+   "windows": 130,
+   "false_alarm_windows": 0,
+   "false_alarm_clip_rate": 0.0,
+   "ci95": [
+    0.0,
+    0.088
+   ]
+  },
+  "bell": {
+   "clips": 40,
+   "false_alarm_clips": 0,
+   "windows": 131,
+   "false_alarm_windows": 0,
+   "false_alarm_clip_rate": 0.0,
+   "ci95": [
+    0.0,
+    0.088
+   ]
+  },
+  "cat": {
+   "clips": 60,
+   "false_alarm_clips": 3,
+   "windows": 149,
+   "false_alarm_windows": 3,
+   "false_alarm_clip_rate": 0.05,
+   "ci95": [
+    0.017,
+    0.137
+   ]
+  },
+  "crying": {
+   "clips": 28,
+   "false_alarm_clips": 4,
+   "windows": 91,
+   "false_alarm_windows": 4,
+   "false_alarm_clip_rate": 0.143,
+   "ci95": [
+    0.057,
+    0.315
+   ]
+  },
+  "door": {
+   "clips": 40,
+   "false_alarm_clips": 0,
+   "windows": 70,
+   "false_alarm_windows": 0,
+   "false_alarm_clip_rate": 0.0,
+   "ci95": [
+    0.0,
+    0.088
+   ]
+  },
+  "doorbell": {
+   "clips": 26,
+   "false_alarm_clips": 0,
+   "windows": 65,
+   "false_alarm_windows": 0,
+   "false_alarm_clip_rate": 0.0,
+   "ci95": [
+    0.0,
+    0.129
+   ]
+  },
+  "knock": {
+   "clips": 60,
+   "false_alarm_clips": 0,
+   "windows": 122,
+   "false_alarm_windows": 0,
+   "false_alarm_clip_rate": 0.0,
+   "ci95": [
+    0.0,
+    0.06
+   ]
+  },
+  "laughter": {
+   "clips": 40,
+   "false_alarm_clips": 1,
+   "windows": 103,
+   "false_alarm_windows": 1,
+   "false_alarm_clip_rate": 0.025,
+   "ci95": [
+    0.004,
+    0.129
+   ]
+  },
+  "music": {
+   "clips": 60,
+   "false_alarm_clips": 0,
+   "windows": 109,
+   "false_alarm_windows": 0,
+   "false_alarm_clip_rate": 0.0,
+   "ci95": [
+    0.0,
+    0.06
+   ]
+  },
+  "other_animal": {
+   "clips": 60,
+   "false_alarm_clips": 0,
+   "windows": 194,
+   "false_alarm_windows": 0,
+   "false_alarm_clip_rate": 0.0,
+   "ci95": [
+    0.0,
+    0.06
+   ]
+  },
+  "ringtone": {
+   "clips": 37,
+   "false_alarm_clips": 0,
+   "windows": 72,
+   "false_alarm_windows": 0,
+   "false_alarm_clip_rate": 0.0,
+   "ci95": [
+    0.0,
+    0.094
+   ]
+  },
+  "speech": {
+   "clips": 80,
+   "false_alarm_clips": 1,
+   "windows": 219,
+   "false_alarm_windows": 1,
+   "false_alarm_clip_rate": 0.013,
+   "ci95": [
+    0.002,
+    0.067
+   ]
+  },
+  "telephone": {
+   "clips": 60,
+   "false_alarm_clips": 0,
+   "windows": 135,
+   "false_alarm_windows": 0,
+   "false_alarm_clip_rate": 0.0,
+   "ci95": [
+    0.0,
+    0.06
+   ]
+  }
+ },
+ "missed_bark_clips": [
+  [
+   "182501.wav",
+   13.436,
+   0.0
+  ],
+  [
+   "338326.wav",
+   26.37,
+   0.0001
+  ],
+  [
+   "185951.wav",
+   19.704,
+   0.0003
+  ],
+  [
+   "98843.wav",
+   27.696,
+   0.0004
+  ],
+  [
+   "189737.wav",
+   16.84,
+   0.0004
+  ],
+  [
+   "424740.wav",
+   17.624,
+   0.0005
+  ],
+  [
+   "118577.wav",
+   18.204,
+   0.0012
+  ],
+  [
+   "62335.wav",
+   16.241,
+   0.0018
+  ],
+  [
+   "264842.wav",
+   14.189,
+   0.0383
+  ]
+ ],
+ "threshold_sweep_informational": [
+  {
+   "threshold": 0.02,
+   "bark_detected": 41,
+   "bark_total": 49,
+   "false_alarm_clips": 23,
+   "negative_clips": 631
+  },
+  {
+   "threshold": 0.05,
+   "bark_detected": 40,
+   "bark_total": 49,
+   "false_alarm_clips": 9,
+   "negative_clips": 631
+  },
+  {
+   "threshold": 0.1,
+   "bark_detected": 39,
+   "bark_total": 49,
+   "false_alarm_clips": 5,
+   "negative_clips": 631
+  },
+  {
+   "threshold": 0.2,
+   "bark_detected": 36,
+   "bark_total": 49,
+   "false_alarm_clips": 1,
+   "negative_clips": 631
+  },
+  {
+   "threshold": 0.5,
+   "bark_detected": 32,
+   "bark_total": 49,
+   "false_alarm_clips": 0,
+   "negative_clips": 631
+  }
+ ]
+}

@@ -12,15 +12,15 @@
 | 카메라 미리보기 | 640×480 MJPEG, 브라우저 수신 평균 29.9fps(22초) | README |
 | 수집 안정성 | 10분 수집 중 FFmpeg 2회 강제 종료 → 자동 재시작, 메모리·임시 디스크 증가 없음. 장치 재탐지, 백엔드 일시 단절 허용 | [CAPTURE_STABILITY.md](CAPTURE_STABILITY.md) |
 | 실제 소리 감지 | 노트북 스피커로 튼 개 짖음을 내장 마이크가 받아 2/2·3/4 감지, 사건 영상(H.264+AAC 35초) 저장, 빗소리·조용한 구간 오탐 없음 | [LIVE_BARK_TEST.md](LIVE_BARK_TEST.md) |
-| 음성 모델 | ESC-50 2,000클립: 개 40/40, 오탐 34/1,960(1.7%). AudioSet 106창 F1 0.816 | [YAMNET_ESC50_EVAL.md](YAMNET_ESC50_EVAL.md), [파트 47](47_AudioSet_시간구간_짖음_평가.md) |
+| 음성 모델 | 임계값 0.05 고정. ESC-50 2,000클립: 개 40/40, 오탐 1.7%. FSD50K 가정 소음 680클립: 짖음 40/49, 오탐 1.4%(말소리 1/80, 초인종·노크·전화·알람·음악 0, 울음 4/28, 고양이 3/60). AudioSet 106창 F1 0.816 | [ESC-50](YAMNET_ESC50_EVAL.md), [FSD50K 가정 소음](YAMNET_FSD50K_HOUSEHOLD_EVAL.md), [파트 47](47_AudioSet_시간구간_짖음_평가.md) |
 | 새 환경 설치 | 로컬 저장소를 `C:\petmind_fresh`에 새로 clone → 새 `.venv`에 `requirements-runtime.txt`만 설치(3분 47초) → Python 202 passed·10 skipped → `start_demo.ps1 -Seed`가 웹 빌드부터 시연 데이터 채우기까지 **3분 6초**에 끝나고 화면에 시연 표본 표시. 같은 노트북(Python 3.12·TensorFlow·Flutter 기설치, 모델 캐시 있음)에서의 확인이다 | |
 | 화면·API | 외출·음원·RAG·기록 화면, 음원 목록 페이징(`limit`/`offset`), 오류 표시 상자, 음원 패널 PageStorage 오류 수정 | git 이력 |
-| 테스트 | Python **202 passed, 10 skipped**(torch 없으면 학습용 건너뜀), Flutter **29 passed**, `flutter analyze` 문제 없음 | |
+| 테스트 | Python **205 passed, 10 skipped**(torch 없으면 학습용 건너뜀), Flutter **30 passed**, `flutter analyze` 문제 없음 | |
 
 **아직 확인하지 못한 것**
 
 - **실제 반려견 소리**: 시연은 사용자 강아지로 찍을 예정이며 예행연습이 필요하다. 지금까지는 공개 음원을 스피커로 되녹음한 기능 확인뿐이다.
-- 짧은(1초 미만) 짖음의 재현율, 다른 동물 소리 오탐(ESC-50에서 6.7%), TV·말소리·초인종.
+- 짧은(1초 미만) 짖음의 재현율(FSD50K에는 3초 미만 클립이 6개뿐, AudioSet 평가는 다수 놓침), 비슷한 음색 오탐(다른 동물 ESC-50 6.7%, 울음 FSD50K 14%).
 - 수 시간 이상 운용, 장치를 실제로 뽑았다 꽂는 시험.
 - Gemini 실제 호출(이 노트북에는 키 없음. 규칙 제공자로 시연). 과거 기록: [rag_v2_real_integration.json](evidence/rag_v2_real_integration.json).
 - 물리 음악 재생(가상 장치 왕복만), 사용자 인증(로컬 단일 가정 시제품).

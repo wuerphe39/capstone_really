@@ -43,6 +43,42 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('a long list of moments is drawn in chunks', (tester) async {
+    tester.view.physicalSize = const Size(1200, 1800);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(tester.view.resetPhysicalSize);
+    addTearDown(tester.view.resetDevicePixelRatio);
+    final report = {'sample_seconds': 350, 'unknown_seconds': 0, 'video_role': 'evidence_only',
+      'moments': [for (var n = 1; n <= 70; n++) {'observation_id': n, 'reason': '음성 모델 후보 없음',
+        'summary': '5초 음성 관찰', 'note': '', 'event_video': {'status': 'not_triggered'},
+        'media_available': false, 'audio_available': false}]};
+    final client = MockClient((request) async {
+      final path = request.url.path;
+      final dynamic result = path == '/outings'
+        ? [{'id': 'long', 'status': 'ended', 'input_mode': 'live', 'started_at': '2026-10-12T00:00:00Z'}]
+        : path == '/audio-clips' ? [] : path == '/audio-clips/review-queue' ? {'items': []} : report;
+      return http.Response(jsonEncode(result), 200, headers: {'content-type': 'application/json; charset=utf-8'});
+    });
+    await tester.pumpWidget(MaterialApp(home: Scaffold(body: SingleChildScrollView(
+      child: OutingsPanel(client: client, base: 'http://localhost', petId: 'dog', onActiveChanged: (_) {})))));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('#30 · '), findsOneWidget);
+    expect(find.textContaining('#31 · '), findsNothing);                       // only the first 30 are built
+    expect(find.text('다음 관찰 더 보기 (40건 남음)'), findsOneWidget);
+    await tester.ensureVisible(find.text('다음 관찰 더 보기 (40건 남음)'));
+    await tester.tap(find.text('다음 관찰 더 보기 (40건 남음)'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('#60 · '), findsOneWidget);
+    expect(find.text('다음 관찰 더 보기 (10건 남음)'), findsOneWidget);
+    await tester.ensureVisible(find.text('다음 관찰 더 보기 (10건 남음)'));
+    await tester.tap(find.text('다음 관찰 더 보기 (10건 남음)'));
+    await tester.pumpAndSettle();
+    expect(find.textContaining('#70 · '), findsOneWidget);
+    expect(find.textContaining('다음 관찰 더 보기'), findsNothing);              // everything is shown
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox());
+  });
+
   testWidgets('narrow outing selector keeps date status and input legible', (tester) async {
     tester.view.physicalSize = const Size(390, 900);
     tester.view.devicePixelRatio = 1;
