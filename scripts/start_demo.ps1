@@ -17,6 +17,8 @@
   .\scripts\start_demo.ps1 -Gemini      explanations by Gemini (key in .env); only derived facts are sent, never audio
   .\scripts\start_demo.ps1 -Lan         also open the app to phones and PCs on the same network (needs an access key)
   .\scripts\start_demo.ps1 -Notify      phone notification (ntfy app) when barking candidates last 30 seconds; needs -Lan for the link
+  .\scripts\start_demo.ps1 -Speaker     an approved music suggestion really plays on this PC's speaker (quiet generated piece or
+                                       artifacts\music\reggae|soft_rock\*); without it the music command is only virtual
   .\scripts\start_demo.ps1 -Stop        stop everything
 
   Requirements: .venv (requirements-runtime.txt), Python 3.12 with TensorFlow (requirements-yamnet-experiment.txt)
@@ -35,6 +37,7 @@ param(
     [switch]$Gemini,
     [switch]$Lan,
     [switch]$Notify,
+    [switch]$Speaker,
     [string]$PetId = 'demo-dog',
     [string]$BuildRoot = $(if ($env:PETMIND_BUILD_ROOT) { $env:PETMIND_BUILD_ROOT } else { 'C:\petmind_build' })
 )
@@ -50,7 +53,7 @@ function Stop-Demo {
     # The collector agent, its capture worker and the capture FFmpeg open no port of their own: find them by command line.
     # Without this a restart leaves old agents running (they would claim the next outing with outdated code).
     Get-CimInstance Win32_Process -ErrorAction SilentlyContinue |
-        Where-Object { $_.CommandLine -and ($_.CommandLine -match 'scripts\.capture_agent|scripts\.monitor_audio_events' -or
+        Where-Object { $_.CommandLine -and ($_.CommandLine -match 'scripts\.capture_agent|scripts\.monitor_audio_events|petmind\.device_agent' -or
             ($_.Name -like 'ffmpeg*' -and $_.CommandLine -match 'petmind-capture-')) } |
         ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
     foreach ($port in $Ports) {
@@ -235,6 +238,9 @@ if ($Notify) {
     Remove-Item Env:PETMIND_NTFY_TOPIC -ErrorAction SilentlyContinue
     Remove-Item Env:PETMIND_PUBLIC_URL -ErrorAction SilentlyContinue
 }
+# -Speaker: the music agent really plays an approved suggestion on this PC (Windows default output). Nothing plays without the
+# guardian's approval in the app; the volume is whatever the PC is set to, so check it before a demo.
+if ($Speaker) { $env:PETMIND_ACTION_MODE = 'speaker' } else { Remove-Item Env:PETMIND_ACTION_MODE -ErrorAction SilentlyContinue }
 $ids.backend = Start-Hidden 'backend' $Python @('-m', 'uvicorn', 'petmind.backend.main:app', '--host', $BindHost, '--port', '8010')
 $ids.web = Start-Hidden 'web' $Python @('-m', 'http.server', '8021', '--bind', '127.0.0.1', '--directory', $WebDir)
 $ids | ConvertTo-Json | Set-Content $PidFile
@@ -243,6 +249,11 @@ Wait-Url 'http://127.0.0.1:8021/' 'web (8021)'
 Wait-Url 'http://127.0.0.1:8010/health' 'backend (8010)'
 Wait-Url 'http://127.0.0.1:8030/' 'YAMNet service (8030)'
 
+if ($Speaker) {
+    $ids.speaker = Start-Hidden 'speaker' $Python @('-m', 'petmind.device_agent', '--base', 'http://127.0.0.1:8010', '--play',
+        '--cache', 'artifacts/demo/device_commands.db', '--music-dir', 'artifacts/music')
+    $ids | ConvertTo-Json | Set-Content $PidFile
+}
 if ($Capture) {
     # The agent claims capture jobs created from the web UI and runs the capture program (webcam + microphone).
     $ids.agent = Start-Hidden 'agent' $Python @('-m', 'scripts.capture_agent', '--base', 'http://127.0.0.1:8010', '--pet-id', $PetId,
@@ -327,6 +338,11 @@ if ($Lan) {
         }
     }
     Write-Host '  Anyone with this address can see the recordings. Do not share it, and do not use it on a public network.'
+}
+if ($Speaker) {
+    Write-Host ''
+    Write-Host 'Speaker is ON: approving a music suggestion plays calm music on this PC for up to 60 seconds.' -ForegroundColor Green
+    Write-Host '  Check the PC volume first. Put your own songs in artifacts\music\reggae and artifacts\music\soft_rock (played in turn, genres alternate); without them a quiet placeholder piece is generated.'
 }
 if ($Notify) {
     Write-Host ''

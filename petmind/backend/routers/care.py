@@ -70,4 +70,4 @@ def pending_actions(db=Depends(get_db)):
 
 @router.post('/actions/{command_id}/ack')
 def acknowledge_action(command_id: str, data: ActionAckIn, db=Depends(get_db)):
-    return acknowledge(db, command_id, data.status, data.detail)
+    return acknowledge(db, command_id, data.status, data.detail, data.simulated)

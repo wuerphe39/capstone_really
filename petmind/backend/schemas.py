@@ -130,6 +130,7 @@ class ApproveRequest(StrictModel):
 class ActionAckIn(StrictModel):
     status: Literal['acknowledged', 'completed', 'failed']
     detail: str | None = Field(default=None, max_length=1000)
+    simulated: bool = True  # False only when the agent really played the music on a speaker
 
 
 class DemoRequest(StrictModel):

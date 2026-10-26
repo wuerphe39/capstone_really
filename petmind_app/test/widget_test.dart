@@ -353,7 +353,7 @@ void main() {
       'created_at': '2026-10-26T08:00:00Z',
     };
 
-    Future<void> open(WidgetTester tester, Map<String, dynamic> suggestion) async {
+    Future<void> open(WidgetTester tester, Map<String, dynamic> suggestion, {String actionMode = 'simulated'}) async {
       tester.view.physicalSize = const Size(1200, 1800);
       tester.view.devicePixelRatio = 1;
       addTearDown(tester.view.resetPhysicalSize);
@@ -363,6 +363,7 @@ void main() {
         final dynamic data = path == '/care/latest' ? suggestion
           : path == '/observations' ? [{'id': 1, 'source': 'live', 'observed_at': '2026-10-26T08:00:00Z', 'context': {}}]
           : path.endsWith('/profile') ? null
+          : path == '/health' ? {'components': {'care_provider': 'rule', 'action_mode': actionMode}}
           : path == '/metrics' || path == '/media/catalog' ? {}
           : path == '/outings/day' ? {'moments': [], 'sample_seconds': 0, 'unknown_seconds': 0}
           : path == '/audio-clips/review-queue' ? {'items': []} : [];
@@ -382,6 +383,20 @@ void main() {
       await tester.tap(find.text('원본 확인하고 승인하러 가기'));
       await tester.pumpAndSettle();
       expect(find.text('근거 기반 케어 제안'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('the approve button says whether the music really plays', (tester) async {
+      await open(tester, alertSuggestion('pending'));
+      await tester.tap(find.byKey(const ValueKey('nav-2')));
+      await tester.pumpAndSettle();
+      expect(find.text('가상 음악 실행 승인'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+      await open(tester, alertSuggestion('pending'), actionMode: 'speaker');
+      await tester.tap(find.byKey(const ValueKey('nav-2')));
+      await tester.pumpAndSettle();
+      expect(find.text('PC 스피커 음악 재생 승인'), findsOneWidget);
+      expect(find.text('가상 음악 실행 승인'), findsNothing);
       await tester.pumpWidget(const SizedBox());
     });
 

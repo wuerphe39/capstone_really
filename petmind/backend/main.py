@@ -115,7 +115,7 @@ def health():
             'audio_lstm_checkpoint_present': settings.audio_detector == 'lstm' and audio_lstm_checkpoint_path(ROOT).is_file(),
             'audio_lstm_model_role': ('not_used' if settings.audio_detector != 'lstm' else
                                       'default' if settings.audio_lstm_checkpoint_name == 'esc50_lstm.pt' else 'experimental'),
-            'action_mode': 'simulated'}, 'version': app.version}
+            'action_mode': settings.action_mode}, 'version': app.version}
 
 
 @app.post('/observations', response_model=ObservationOut, status_code=201)

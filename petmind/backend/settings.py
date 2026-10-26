@@ -26,6 +26,8 @@ class Settings:
     audio_storage_dir: Path = Path(os.getenv('PETMIND_AUDIO_STORAGE_DIR', str(ROOT/'artifacts'/'user_audio')))
     # LAN mode (start_demo -Lan): private-network clients may connect with this key. Empty = this PC only.
     lan_token: str = os.getenv('PETMIND_LAN_TOKEN', '').strip()
+    # 'speaker' only when the launcher starts the speaker agent (start_demo -Speaker); the guardian's approval decides every play.
+    action_mode: str = os.getenv('PETMIND_ACTION_MODE', 'simulated').strip().lower()
     # Phone notification for a sustained-barking alert, through ntfy (https://ntfy.sh or a self-hosted server). Empty topic = off.
     ntfy_topic: str = os.getenv('PETMIND_NTFY_TOPIC', '').strip()
     ntfy_server: str = os.getenv('PETMIND_NTFY_SERVER', 'https://ntfy.sh').strip()
@@ -35,6 +37,8 @@ class Settings:
 
 
 settings = Settings()
+if settings.action_mode not in {'simulated', 'speaker'}:
+    raise ValueError('PETMIND_ACTION_MODE must be simulated or speaker')
 if settings.ntfy_topic and len(settings.ntfy_topic) < 16:
     raise ValueError('PETMIND_NTFY_TOPIC must be at least 16 characters (the topic name is the only secret on a public ntfy server)')
 if settings.lan_token and len(settings.lan_token) < 16:

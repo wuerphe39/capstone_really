@@ -267,7 +267,7 @@ def approve(db, suggestion_id, action_type):
         db.rollback()
         raise HTTPException(409, '이미 승인 또는 거절된 제안입니다.')
     action = CareActionLog(suggestion_id=suggestion_id, command_id=str(uuid.uuid4()),
-                          request_json=json.dumps({'style': row.music_style, 'mode': 'simulated'}))
+                          request_json=json.dumps({'style': row.music_style, 'mode': settings.action_mode}))
     db.add(action)
     try:
         db.commit()  # Persist before the virtual agent can receive a command.
@@ -301,7 +301,7 @@ def expire_stale_actions(db):
     db.commit()
 
 
-def acknowledge(db, command_id, status, detail):
+def acknowledge(db, command_id, status, detail, simulated=True):
     expire_stale_actions(db)
     row = db.scalars(select(CareActionLog).where(CareActionLog.command_id == command_id)).first()
     if row is None:
@@ -312,7 +312,7 @@ def acknowledge(db, command_id, status, detail):
     changed = db.execute(update(CareActionLog).where(
         CareActionLog.id == row.id, CareActionLog.status.in_(predecessors)
     ).values(status=status, updated_at=utcnow(), error=detail if status == 'failed' else None,
-             result_json=json.dumps({'simulated': True, 'detail': detail}, ensure_ascii=False))).rowcount
+             result_json=json.dumps({'simulated': simulated, 'detail': detail}, ensure_ascii=False))).rowcount
     if not changed:
         db.rollback()
         raise HTTPException(409, '현재 상태에서 해당 응답으로 변경할 수 없습니다.')

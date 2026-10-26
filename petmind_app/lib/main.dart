@@ -59,6 +59,7 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   Map<String, dynamic>? suggestion;
   Map<String, dynamic>? observation;
+  String actionMode = 'simulated'; // 'speaker' when the launcher started the speaker agent
   Map<String, dynamic>? careTarget; // observation the care evaluation looks at (newest dog candidate of the outing)
   Map<String, dynamic>? profile;
   Map<String, dynamic>? savedFeedback;
@@ -169,8 +170,7 @@ class _DashboardPageState extends State<DashboardPage> {
             optionalFailures.add('프로필');
             return profile;
           }),
-        if (yamnetTrial) _get('/health').catchError((Object _) => null)
-          else Future<dynamic>.value(null),
+        _get('/health').catchError((Object _) => null),
         _get('/care/target?pet_id=$petQuery').catchError((Object _) => null),
       ]);
       if (!mounted || sequence != _refreshSequence || requestedPet != petId) return;
@@ -185,7 +185,9 @@ class _DashboardPageState extends State<DashboardPage> {
         final audioFiles = (catalog['files'] as List<dynamic>? ?? const []).where((file) => file['type'] == 'audio');
         audioFilename ??= audioFiles.isEmpty ? null : audioFiles.first['filename'].toString();
         profile = values[6] as Map<String, dynamic>?;
-        careProvider = (values[7] as Map<String, dynamic>?)?['components']?['care_provider']?.toString() ?? 'unknown';
+        final health = values[7] is Map<String, dynamic> ? values[7] as Map<String, dynamic> : null;
+        careProvider = health?['components']?['care_provider']?.toString() ?? 'unknown';
+        actionMode = health?['components']?['action_mode'] == 'speaker' ? 'speaker' : 'simulated';
         final target = values[8];
         careTarget = target is Map<String, dynamic> ? target : null; // optional: the page works without it
         connected = true;
@@ -477,7 +479,9 @@ class _DashboardPageState extends State<DashboardPage> {
       crossAxisAlignment: CrossAxisAlignment.start, children: [
         Text('관찰 입력과 시연', style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 8),
-        const Text('아래 시나리오는 합성 영상 좌표·음성입니다. 가상 장치는 실제 소리를 재생하지 않습니다.'),
+        Text(actionMode == 'speaker'
+          ? '아래 시나리오는 합성 영상 좌표·음성입니다. 음악 승인은 이 PC의 스피커로 실제 재생됩니다.'
+          : '아래 시나리오는 합성 영상 좌표·음성입니다. 가상 장치는 실제 소리를 재생하지 않습니다.'),
         const SizedBox(height: 12),
         DropdownButton<String>(
           value: petId,
@@ -795,7 +799,8 @@ class _DashboardPageState extends State<DashboardPage> {
     );
   }
 
-  String _actionName(String value) => value == 'music' ? '가상 음악 실행' : value;
+  String _actionName(String value) =>
+      value == 'music' ? (actionMode == 'speaker' ? 'PC 스피커 음악 재생' : '가상 음악 실행') : value;
 
   String _audioReviewName(String? value) => const {
     'pet_vocalization': '반려견 소리',
@@ -816,6 +821,7 @@ class _DashboardPageState extends State<DashboardPage> {
     if (name.startsWith('gemini:')) return 'Gemini AI';
     if (name == 'rule-fallback') return '기본 판단(대체 동작)';
     if (name == 'rule') return '기본 케어 판단';
+    if (name == 'sustained-bark-rule') return '지속 짖음 알림 규칙';
     return name;
   }
 

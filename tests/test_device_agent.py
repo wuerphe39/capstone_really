@@ -50,3 +50,62 @@ def test_isolated_pi_test_does_not_handle_other_commands(tmp_path, monkeypatch):
         raise AssertionError('Unselected command must not be acknowledged')
     monkeypatch.setattr(device_agent.requests, 'post', unexpected_post)
     assert device_agent.run_once('http://test', tmp_path/'commands.db', command_id_filter='different-command') == []
+
+
+class Posts:
+    """Records the acknowledgements the agent sends."""
+    def __init__(self):
+        self.sent = []
+    def __call__(self, url, json=None, timeout=None):
+        self.sent.append(json)
+        return Response()
+
+
+class Pending:
+    status_code = 200
+    def raise_for_status(self):
+        pass
+    def json(self):
+        return [{'command_id': 'c1', 'status': 'requested', 'request': {'style': 'calm_piano', 'mode': 'speaker'}}]
+
+
+class FakePlayer:
+    def __init__(self, error=None):
+        self.error, self.calls = error, []
+    def start(self, style):
+        self.calls.append(style)
+        if self.error:
+            raise self.error
+        return f'played {style}'
+
+
+def run_play(tmp_path, monkeypatch, player, times=1):
+    posts = Posts()
+    monkeypatch.setattr(device_agent.requests, 'get', lambda *a, **k: Pending())
+    monkeypatch.setattr(device_agent.requests, 'post', posts)
+    for _ in range(times):
+        device_agent.run_once('http://test', tmp_path / 'commands.db', player=player)
+    return posts.sent
+
+
+def test_virtual_agent_still_says_it_played_nothing(tmp_path, monkeypatch):
+    sent = run_play(tmp_path, monkeypatch, None)
+    assert sent[-1] == {'status': 'completed', 'detail': 'virtual music; no physical playback', 'simulated': True}
+
+
+def test_playing_agent_reports_a_real_playback(tmp_path, monkeypatch):
+    player = FakePlayer()
+    sent = run_play(tmp_path, monkeypatch, player)
+    assert player.calls == ['calm_piano']
+    assert sent[-1] == {'status': 'completed', 'detail': 'played calm_piano', 'simulated': False}
+
+
+def test_a_retried_command_is_never_played_twice(tmp_path, monkeypatch):
+    player = FakePlayer()
+    run_play(tmp_path, monkeypatch, player, times=2)
+    assert player.calls == ['calm_piano']
+
+
+def test_a_playback_error_is_reported_as_failed(tmp_path, monkeypatch):
+    sent = run_play(tmp_path, monkeypatch, FakePlayer(RuntimeError('no output device')))
+    assert sent[-1]['status'] == 'failed' and 'no output device' in sent[-1]['detail'] and sent[-1]['simulated'] is False
