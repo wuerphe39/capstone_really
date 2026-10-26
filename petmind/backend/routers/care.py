@@ -3,7 +3,7 @@ from sqlalchemy import select
 
 from ..database import CareActionLog, CareSuggestionLog, get_db
 from ..schemas import ActionAckIn, ApproveRequest, EvaluateRequest
-from ..services.care import (acknowledge, action_to_out, approve, dismiss, evaluate,
+from ..services.care import (acknowledge, action_to_out, approve, care_target, dismiss, evaluate,
                              expire_stale_actions, suggestion_to_out)
 
 router = APIRouter(prefix='/care', tags=['care'])
@@ -12,6 +12,11 @@ router = APIRouter(prefix='/care', tags=['care'])
 @router.post('/evaluate')
 def evaluate_current(data: EvaluateRequest, db=Depends(get_db)):
     return evaluate(db, data.observation_id, data.question)
+
+
+@router.get('/target')
+def target(pet_id: str, db=Depends(get_db)):
+    return care_target(db, pet_id)
 
 
 @router.get('/latest')

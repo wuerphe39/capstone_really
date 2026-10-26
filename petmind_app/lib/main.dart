@@ -59,6 +59,7 @@ class DashboardPage extends StatefulWidget {
 class _DashboardPageState extends State<DashboardPage> {
   Map<String, dynamic>? suggestion;
   Map<String, dynamic>? observation;
+  Map<String, dynamic>? careTarget; // observation the care evaluation looks at (newest dog candidate of the outing)
   Map<String, dynamic>? profile;
   Map<String, dynamic>? savedFeedback;
   Map<String, dynamic>? baseline;
@@ -170,6 +171,7 @@ class _DashboardPageState extends State<DashboardPage> {
           }),
         if (yamnetTrial) _get('/health').catchError((Object _) => null)
           else Future<dynamic>.value(null),
+        _get('/care/target?pet_id=$petQuery').catchError((Object _) => null),
       ]);
       if (!mounted || sequence != _refreshSequence || requestedPet != petId) return;
       setState(() {
@@ -184,6 +186,8 @@ class _DashboardPageState extends State<DashboardPage> {
         audioFilename ??= audioFiles.isEmpty ? null : audioFiles.first['filename'].toString();
         profile = values[6] as Map<String, dynamic>?;
         careProvider = (values[7] as Map<String, dynamic>?)?['components']?['care_provider']?.toString() ?? 'unknown';
+        final target = values[8];
+        careTarget = target is Map<String, dynamic> ? target : null; // optional: the page works without it
         connected = true;
         if (!silent) _optionalFailures = optionalFailures;
         connectionIssue = _optionalFailures.isEmpty ? null
@@ -206,7 +210,7 @@ class _DashboardPageState extends State<DashboardPage> {
     if (observation == null) return;
     await _run(() async {
       suggestion = await _post('/care/evaluate', {
-        'observation_id': observation!['id'], 'question': question.text,
+        'observation_id': careTarget?['observation_id'] ?? observation!['id'], 'question': question.text,
       }) as Map<String, dynamic>;
       notice = '새 케어 제안을 생성했습니다.';
       await refresh(silent: true);
@@ -401,6 +405,7 @@ class _DashboardPageState extends State<DashboardPage> {
             TextField(controller: question, decoration: const InputDecoration(labelText: '기록에 대해 질문하기'), maxLength: 1000),
             FilledButton.icon(onPressed: busy || observation == null ? null : evaluate,
               icon: const Icon(Icons.psychology_alt), label: const Text('현재 상태 평가하기')),
+            if (careTarget != null) Text(careTargetLabel(careTarget!)),
             _suggestionCard(), _evidenceCard(), _comparisonCard(),
           ]),
           _sectionPage(3, [

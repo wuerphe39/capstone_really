@@ -38,6 +38,25 @@ void main() {
     }
   });
 
+  group('careTargetLabel', () {
+    test('names the candidate observation and says it is the newest candidate', () {
+      final text = careTargetLabel({'observation_id': 661, 'observed_at': '2026-10-26T07:26:34.348619Z', 'window_s': 4.992,
+        'reason': 'latest_candidate', 'analyzed_windows': 1, 'dog_candidate_windows': 1});
+      expect(text, contains('관찰 #661'));
+      expect(text, contains('2026-10-26 16:26'));
+      expect(text, contains('4.99초'));
+      expect(text, contains('후보 창 1/1'));
+      expect(text, contains('가장 최근 후보'));
+    });
+    test('says so when no observation has a candidate', () {
+      final text = careTargetLabel({'observation_id': 7, 'observed_at': '2026-10-26T07:26:34Z', 'window_s': null,
+        'reason': 'latest', 'analyzed_windows': 1, 'dog_candidate_windows': 0});
+      expect(text, contains('후보 창 0/1'));
+      expect(text, contains('가장 최근 관찰을 평가합니다'));
+      expect(text, isNot(contains('초')));
+    });
+  });
+
   group('resolveApiBase', () {
     test('an explicit address is used as given', () {
       expect(resolveApiBase('http://localhost:8010', Uri.parse('http://192.168.0.5:8010/')), 'http://localhost:8010');

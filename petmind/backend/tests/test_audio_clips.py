@@ -242,3 +242,29 @@ def test_clip_list_rejects_out_of_range_paging(client):
     assert client.get('/audio-clips?pet_id=dog-a&limit=0').status_code == 422
     assert client.get('/audio-clips?pet_id=dog-a&limit=501').status_code == 422
     assert client.get('/audio-clips?pet_id=dog-a&offset=-1').status_code == 422
+
+
+def test_care_target_prefers_the_newest_candidate_in_the_latest_outing(client, monkeypatch):
+    monkeypatch.setattr(audio_clips, 'settings', replace(audio_clips.settings,
+        audio_detector='yamnet', yamnet_url='http://127.0.0.1:8030/analyze'))
+    scores = []
+    class Response:
+        def raise_for_status(self):
+            pass
+        def json(self):
+            return {'model': 'YAMNet Bark (direct score; no LSTM)', 'threshold': .05,
+                    'windows': [{'start_s': 0, 'end_s': 1, 'bark_score': scores.pop(0), 'padded': True}]}
+    monkeypatch.setattr(audio_clips.requests, 'post', lambda *args, **kwargs: Response())
+    assert client.get('/care/target?pet_id=dog-a').json() is None
+    outing = client.post('/outings', json={'pet_id': 'dog-a', 'input_mode': 'uploaded_audio'}).json()['id']
+    scores[:] = [.01]
+    quiet = upload(client, '&outing_id=' + outing)['observation_id']
+    target = client.get('/care/target?pet_id=dog-a').json()
+    assert (target['observation_id'], target['reason'], target['dog_candidate_windows']) == (quiet, 'latest', 0)
+    scores[:] = [.82, .01, .01]
+    barking = upload(client, '&outing_id=' + outing)['observation_id']
+    upload(client, '&outing_id=' + outing)
+    tail = upload(client, '&outing_id=' + outing)['observation_id']
+    target = client.get('/care/target?pet_id=dog-a').json()
+    assert target['observation_id'] == barking and target['observation_id'] != tail
+    assert (target['reason'], target['dog_candidate_windows'], target['analyzed_windows']) == ('latest_candidate', 1, 1)

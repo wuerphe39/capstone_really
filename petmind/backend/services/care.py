@@ -9,7 +9,8 @@ from fastapi import HTTPException
 from sqlalchemy import select, update
 from sqlalchemy.exc import IntegrityError
 
-from ..database import AudioClipLog, CareActionLog, CareSuggestionLog, ObservationLog, PetProfileLog, utcnow
+from ..database import (AudioClipLog, CareActionLog, CareSuggestionLog, ObservationLog, OutingObservation,
+                        PetProfileLog, utcnow)
 from ..mcp_client import retrieve_records
 from ..providers import RuleBasedProvider, get_provider
 from ..schemas import CareSuggestionDraft
@@ -59,6 +60,36 @@ def current_audio_evidence(db, observation_id):
             'model_name': model.get('model_name', 'LSTM'),
             'review_label': review.get('label'),
             'review_source': review.get('source')}
+
+
+TARGET_SCAN_LIMIT = 100
+
+
+def care_target(db, pet_id):
+    """The observation the care evaluation should look at: the newest one with a dog candidate window in the
+    latest observation's outing, otherwise the newest observation. The newest one alone is often the short tail
+    of an outing with no candidate, which answers a question about the whole outing with the wrong window."""
+    latest = db.scalars(select(ObservationLog).where(ObservationLog.pet_id == pet_id)
+                        .order_by(ObservationLog.observed_at.desc())).first()
+    if latest is None:
+        return None
+    link = db.get(OutingObservation, latest.id)
+    query = select(ObservationLog).where(ObservationLog.pet_id == pet_id)
+    if link:
+        query = (query.join(OutingObservation, OutingObservation.observation_id == ObservationLog.id)
+                 .where(OutingObservation.outing_id == link.outing_id))
+    chosen, audio = latest, current_audio_evidence(db, latest.id)
+    if not audio or not audio['dog_candidate_windows']:
+        for row in db.scalars(query.order_by(ObservationLog.observed_at.desc()).limit(TARGET_SCAN_LIMIT)):
+            candidate = current_audio_evidence(db, row.id)
+            if candidate and candidate['dog_candidate_windows']:
+                chosen, audio = row, candidate
+                break
+    reason = 'latest_candidate' if audio and audio['dog_candidate_windows'] else 'latest'
+    return {'observation_id': chosen.id, 'observed_at': chosen.observed_at.isoformat() + 'Z', 'source': chosen.source,
+            'window_s': json.loads(chosen.context_json).get('window_s'), 'reason': reason,
+            'analyzed_windows': audio['analyzed_windows'] if audio else 0,
+            'dog_candidate_windows': audio['dog_candidate_windows'] if audio else 0}
 
 
 def care_draft_matches_current_audio(draft, audio):

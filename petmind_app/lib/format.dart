@@ -30,6 +30,20 @@ String sourceLabel(Object? source) {
   return _sourceLabels[key] ?? key;
 }
 
+/// RAG·케어 평가가 어느 관찰을 보는지 한 줄로 알려 준다. 평가는 관찰 하나의 소리 분석을 "현재"로 쓰므로,
+/// 가장 최근 관찰이 후보 없는 짧은 꼬리 구간이어도 외출의 후보 관찰을 보게 하고 그 사실을 보여 준다.
+String careTargetLabel(Map<String, dynamic> target) {
+  final seconds = target['window_s'];
+  final length = seconds is num ? ' · ${double.parse(seconds.toStringAsFixed(2))}초' : '';
+  final analyzed = target['analyzed_windows'] ?? 0;
+  final candidates = target['dog_candidate_windows'] ?? 0;
+  final head = '평가 대상: 관찰 #${target['observation_id']} · ${formatKst(target['observed_at'])}$length';
+  if (target['reason'] == 'latest_candidate') {
+    return '$head · 개 짖음 후보 창 $candidates/$analyzed (이번 외출에서 가장 최근 후보). 외출 전체 수치는 귀가 요약에서 확인하세요.';
+  }
+  return '$head · 개 짖음 후보 창 $candidates/$analyzed (후보가 있는 관찰이 없어 가장 최근 관찰을 평가합니다).';
+}
+
 /// 화면 일부를 그리다 예외가 나면 Flutter 릴리스 빌드는 이유 없이 큰 회색 상자만 보여 준다.
 /// 대신 원인을 한 줄로 알려 주는 작은 상자를 그려, 한 항목의 문제가 화면 전체를 가리지 않게 한다.
 Widget readableErrorBox(FlutterErrorDetails details) {
