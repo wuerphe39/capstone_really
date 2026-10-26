@@ -343,4 +343,55 @@ void main() {
     expect(approved, isTrue);
     await tester.pumpWidget(const SizedBox());
   });
+  group('sustained barking alert', () {
+    Map<String, dynamic> alertSuggestion(String status, {String provider = 'sustained-bark-rule'}) => {
+      'id': 5, 'pet_id': 'demo-dog', 'observation_id': 1, 'state': 'care_option',
+      'summary': '개 짖음 소리 후보가 약 30초 동안 이어지고 있습니다(5초 구간 6개 중 6개).',
+      'reasons': ['모델 후보는 실제 짖음의 확정이 아닙니다.'], 'recommended_actions': ['music'], 'music_style': 'calm_piano',
+      'severity': 'attention', 'status': status, 'provider': provider, 'context': {}, 'care_steps': [],
+      'retrieval': {'records': [], 'stats': {}}, 'cited_observation_ids': [1], 'question': '지속 짖음 알림',
+      'created_at': '2026-10-26T08:00:00Z',
+    };
+
+    Future<void> open(WidgetTester tester, Map<String, dynamic> suggestion) async {
+      tester.view.physicalSize = const Size(1200, 1800);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      final client = MockClient((request) async {
+        final path = request.url.path;
+        final dynamic data = path == '/care/latest' ? suggestion
+          : path == '/observations' ? [{'id': 1, 'source': 'live', 'observed_at': '2026-10-26T08:00:00Z', 'context': {}}]
+          : path.endsWith('/profile') ? null
+          : path == '/metrics' || path == '/media/catalog' ? {}
+          : path == '/outings/day' ? {'moments': [], 'sample_seconds': 0, 'unknown_seconds': 0}
+          : path == '/audio-clips/review-queue' ? {'items': []} : [];
+        return http.Response.bytes(utf8.encode(jsonEncode(data)), 200);
+      });
+      await tester.pumpWidget(MaterialApp(home: DashboardPage(client: client)));
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('a pending alert is shown on every page and leads to the approval', (tester) async {
+      await open(tester, alertSuggestion('pending'));
+      expect(find.byKey(const ValueKey('sustained-bark-alert')), findsOneWidget);
+      expect(find.textContaining('약 30초 동안 이어지고 있습니다'), findsWidgets);
+      await tester.tap(find.byKey(const ValueKey('nav-3')));
+      await tester.pumpAndSettle();
+      expect(find.byKey(const ValueKey('sustained-bark-alert')), findsOneWidget);
+      await tester.tap(find.text('원본 확인하고 승인하러 가기'));
+      await tester.pumpAndSettle();
+      expect(find.text('근거 기반 케어 제안'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('no banner once the alert is answered, or for an ordinary suggestion', (tester) async {
+      await open(tester, alertSuggestion('approved'));
+      expect(find.byKey(const ValueKey('sustained-bark-alert')), findsNothing);
+      await tester.pumpWidget(const SizedBox());
+      await open(tester, alertSuggestion('pending', provider: 'gemini:gemini-3.5-flash-lite'));
+      expect(find.byKey(const ValueKey('sustained-bark-alert')), findsNothing);
+      await tester.pumpWidget(const SizedBox());
+    });
+  });
 }

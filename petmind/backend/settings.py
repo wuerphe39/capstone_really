@@ -26,11 +26,17 @@ class Settings:
     audio_storage_dir: Path = Path(os.getenv('PETMIND_AUDIO_STORAGE_DIR', str(ROOT/'artifacts'/'user_audio')))
     # LAN mode (start_demo -Lan): private-network clients may connect with this key. Empty = this PC only.
     lan_token: str = os.getenv('PETMIND_LAN_TOKEN', '').strip()
+    # Phone notification for a sustained-barking alert, through ntfy (https://ntfy.sh or a self-hosted server). Empty topic = off.
+    ntfy_topic: str = os.getenv('PETMIND_NTFY_TOPIC', '').strip()
+    ntfy_server: str = os.getenv('PETMIND_NTFY_SERVER', 'https://ntfy.sh').strip()
+    public_url: str = os.getenv('PETMIND_PUBLIC_URL', '').strip()  # opened when the notification is tapped
     # Built Flutter web app served by this backend at "/" (same origin, so phones need one address only).
     web_dir: Path | None = Path(os.environ['PETMIND_WEB_DIR']) if os.getenv('PETMIND_WEB_DIR') else None
 
 
 settings = Settings()
+if settings.ntfy_topic and len(settings.ntfy_topic) < 16:
+    raise ValueError('PETMIND_NTFY_TOPIC must be at least 16 characters (the topic name is the only secret on a public ntfy server)')
 if settings.lan_token and len(settings.lan_token) < 16:
     raise ValueError('PETMIND_LAN_TOKEN must be at least 16 characters')
 

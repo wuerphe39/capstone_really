@@ -24,6 +24,7 @@ from starlette.concurrency import run_in_threadpool
 
 from ..database import AudioClipLog, get_db, utcnow
 from ..schemas import ObservationIn, StrictModel
+from ..services import alerts
 from ..services.observations import save
 from ..settings import ROOT, audio_lstm_checkpoint_path, settings
 
@@ -206,8 +207,11 @@ async def upload(request: Request, pet_id: str = Query(min_length=1,max_length=8
         if len(content) > MAX_BYTES:
             raise HTTPException(413, '파일은 12MB 이하여야 합니다.')
     purge_expired(db)
-    return await run_in_threadpool(store_clip, db, bytes(content), pet_id, training_consent,
-                                   retention_days, outing_id, demo_source, captured_at, capture_kind, capture_session)
+    stored = await run_in_threadpool(store_clip, db, bytes(content), pet_id, training_consent,
+                                     retention_days, outing_id, demo_source, captured_at, capture_kind, capture_session)
+    if outing_id and capture_kind == 'device':
+        await run_in_threadpool(alerts.after_device_clip, db, outing_id, pet_id)
+    return stored
 
 
 @router.get('')

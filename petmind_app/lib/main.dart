@@ -367,6 +367,7 @@ class _DashboardPageState extends State<DashboardPage> {
         ],
       ),
       body: Column(children: [
+        if (sustainedBarkAlert) _alertBanner(),
         Padding(padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Wrap(spacing: 8, runSpacing: 8, children: [
             for (var i = 0; i < sectionNames.length; i++) ChoiceChip(
@@ -689,6 +690,25 @@ class _DashboardPageState extends State<DashboardPage> {
       ),
     );
   }
+
+  /// A sustained-barking alert waits for the guardian's decision; it stays on every page until it is approved or dismissed.
+  bool get sustainedBarkAlert => suggestion?['provider'] == 'sustained-bark-rule' && suggestion?['status'] == 'pending';
+
+  Widget _alertBanner() => Container(
+    key: const ValueKey('sustained-bark-alert'),
+    width: double.infinity,
+    margin: const EdgeInsets.fromLTRB(16, 8, 16, 0),
+    padding: const EdgeInsets.all(14),
+    decoration: BoxDecoration(color: const Color(0xFFFFF7E6), border: Border.all(color: GenesisTheme.warning),
+      borderRadius: BorderRadius.circular(12)),
+    child: Wrap(spacing: 12, runSpacing: 8, crossAxisAlignment: WrapCrossAlignment.center, children: [
+      const Icon(Icons.notifications_active, color: GenesisTheme.warningInk),
+      ConstrainedBox(constraints: const BoxConstraints(maxWidth: 720),
+        child: Text('${suggestion!['summary']}', style: const TextStyle(color: GenesisTheme.warningInk))),
+      FilledButton(onPressed: () { setState(() => section = 2); refresh(silent: true); },
+        child: const Text('원본 확인하고 승인하러 가기')),
+    ]),
+  );
 
   Widget _suggestionCard() {
     if (suggestion == null) {

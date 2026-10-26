@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Depends, Query
 from sqlalchemy import select
 
-from ..database import CareActionLog, CareSuggestionLog, get_db
+from ..database import CareActionLog, CareSuggestionLog, SustainedBarkAlert, get_db
 from ..schemas import ActionAckIn, ApproveRequest, EvaluateRequest
+from ..services.alerts import alert_to_out
 from ..services.care import (acknowledge, action_to_out, approve, care_target, dismiss, evaluate,
                              expire_stale_actions, suggestion_to_out)
 
@@ -17,6 +18,13 @@ def evaluate_current(data: EvaluateRequest, db=Depends(get_db)):
 @router.get('/target')
 def target(pet_id: str, db=Depends(get_db)):
     return care_target(db, pet_id)
+
+
+@router.get('/alerts')
+def alerts(pet_id: str, limit: int = Query(10, ge=1, le=50), db=Depends(get_db)):
+    rows = db.scalars(select(SustainedBarkAlert).where(SustainedBarkAlert.pet_id == pet_id)
+                      .order_by(SustainedBarkAlert.created_at.desc()).limit(limit)).all()
+    return [alert_to_out(row) for row in rows]
 
 
 @router.get('/latest')

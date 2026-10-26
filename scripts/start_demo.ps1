@@ -16,6 +16,7 @@
   .\scripts\start_demo.ps1 -Rebuild     rebuild the web app after changing petmind_app/lib
   .\scripts\start_demo.ps1 -Gemini      explanations by Gemini (key in .env); only derived facts are sent, never audio
   .\scripts\start_demo.ps1 -Lan         also open the app to phones and PCs on the same network (needs an access key)
+  .\scripts\start_demo.ps1 -Notify      phone notification (ntfy app) when barking candidates last 30 seconds; needs -Lan for the link
   .\scripts\start_demo.ps1 -Stop        stop everything
 
   Requirements: .venv (requirements-runtime.txt), Python 3.12 with TensorFlow (requirements-yamnet-experiment.txt)
@@ -33,6 +34,7 @@ param(
     [switch]$Capture,
     [switch]$Gemini,
     [switch]$Lan,
+    [switch]$Notify,
     [string]$PetId = 'demo-dog',
     [string]$BuildRoot = $(if ($env:PETMIND_BUILD_ROOT) { $env:PETMIND_BUILD_ROOT } else { 'C:\petmind_build' })
 )
@@ -214,6 +216,25 @@ if ($Lan) {
     Remove-Item Env:PETMIND_LAN_TOKEN -ErrorAction SilentlyContinue
     Remove-Item Env:PETMIND_WEB_DIR -ErrorAction SilentlyContinue
 }
+# -Notify: a sustained-barking alert is also pushed to the phone through ntfy. The topic name is the only secret on the public
+# ntfy server, so it is random, created once and kept in artifacts/demo (git-ignored). Only a short sentence and the app
+# address are sent - never audio, video or the recordings.
+if ($Notify) {
+    $TopicFile = Join-Path $Demo 'ntfy-topic.txt'
+    if (-not (Test-Path $TopicFile)) {
+        $bytes = New-Object byte[] 18
+        [Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($bytes)
+        ('petmind-' + ([Convert]::ToBase64String($bytes)).Replace('+', 'a').Replace('/', 'b').Replace('=', 'c')) | Set-Content -Encoding ascii $TopicFile
+    }
+    $NtfyTopic = (Get-Content $TopicFile -Raw).Trim()
+    $env:PETMIND_NTFY_TOPIC = $NtfyTopic
+    $tap = @(Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
+        Where-Object { $_.IPAddress -match '^100[.]' -and $_.InterfaceAlias -match 'Tailscale' } | Select-Object -ExpandProperty IPAddress)
+    if ($Lan -and $tap) { $env:PETMIND_PUBLIC_URL = "http://$($tap[0]):8010/" } else { Remove-Item Env:PETMIND_PUBLIC_URL -ErrorAction SilentlyContinue }
+} else {
+    Remove-Item Env:PETMIND_NTFY_TOPIC -ErrorAction SilentlyContinue
+    Remove-Item Env:PETMIND_PUBLIC_URL -ErrorAction SilentlyContinue
+}
 $ids.backend = Start-Hidden 'backend' $Python @('-m', 'uvicorn', 'petmind.backend.main:app', '--host', $BindHost, '--port', '8010')
 $ids.web = Start-Hidden 'web' $Python @('-m', 'http.server', '8021', '--bind', '127.0.0.1', '--directory', $WebDir)
 $ids | ConvertTo-Json | Set-Content $PidFile
@@ -306,5 +327,12 @@ if ($Lan) {
         }
     }
     Write-Host '  Anyone with this address can see the recordings. Do not share it, and do not use it on a public network.'
+}
+if ($Notify) {
+    Write-Host ''
+    Write-Host 'Phone notification is ON. In the ntfy app (Android/iOS) choose "Subscribe to topic" and enter:' -ForegroundColor Green
+    Write-Host "  $NtfyTopic"
+    Write-Host '  (server https://ntfy.sh - keep the topic private; the notification only says that barking candidates are continuing)'
+    if (-not ($Lan -and $env:PETMIND_PUBLIC_URL)) { Write-Host '  Without -Lan and Tailscale the notification has no link to open the app.' -ForegroundColor Yellow }
 }
 if (-not $NoBrowser) { Start-Process 'http://localhost:8021/' }

@@ -65,6 +65,19 @@ class CareSuggestionLog(Base):
     created_at = Column(DateTime, default=utcnow, index=True)
 
 
+class SustainedBarkAlert(Base):
+    __tablename__ = 'sustained_bark_alerts'
+    id = Column(Integer, primary_key=True)
+    pet_id = Column(String, nullable=False, index=True)
+    outing_id = Column(String, ForeignKey('outings.id'), nullable=False, index=True)
+    suggestion_id = Column(Integer, ForeignKey('care_suggestions.id'), nullable=False)
+    window_seconds = Column(Integer, nullable=False)
+    candidate_windows = Column(Integer, nullable=False)
+    notify_status = Column(String, nullable=False, default='not_configured')  # not_configured | pending | sent | failed
+    notify_detail = Column(String, nullable=False, default='')
+    created_at = Column(DateTime, default=utcnow, index=True)
+
+
 class CareActionLog(Base):
     __tablename__ = 'care_actions'
     id = Column(Integer, primary_key=True)

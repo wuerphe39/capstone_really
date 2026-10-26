@@ -92,6 +92,31 @@ def care_target(db, pet_id):
             'dog_candidate_windows': audio['dog_candidate_windows'] if audio else 0}
 
 
+# Sentences that restate whether a dog candidate was found: the service states that itself (below), so a provider's
+# own wording of it is dropped. "No candidate" must never read as "no bark", and a candidate is still not a confirmed bark.
+_ABSENT = re.compile(r'후보[^.]*(발견되지|감지되지|판정되지|확정되지|나타나지)|짖음[^.]*(판정되지|없었)|후보가 있어도')
+_PRESENT = re.compile(r'후보[^.]*(발견되었|감지되었|확정할 수|확정되지|확정하지|판정되지)')
+# Per-minute figures and past "counts" come from loudness changes, not from the bark model; a provider's sentence about
+# them reads as a bark rate, so it is not repeated in the summary (the evidence section still lists the figures).
+_COUNTS = re.compile(r'분당\s*\d|\d+(?:\.\d+)?\s*[~-]\s*\d+(?:\.\d+)?회|횟수는 각각|빈도 값')
+
+
+def audio_lead(audio):
+    n, k = audio['analyzed_windows'], audio['dog_candidate_windows']
+    if k:
+        return f'개 짖음 소리 후보가 감지되었습니다(분석 창 {n}개 중 {k}개). 실제 짖음인지는 보호자가 원본을 듣고 확인해 주세요.'
+    return (f'이 구간에서는 모델이 짖음 점수를 기준 이상으로 내지 않았습니다(분석 창 {n}개 중 후보 0개). '
+            '짖음이 없었다는 뜻은 아닙니다. 원본을 들어 놓친 소리가 없는지 확인해 주세요.')
+
+
+def with_audio_lead(summary, audio):
+    """Put the service's own statement about dog candidates first and drop the provider's restatement of it."""
+    drop = _PRESENT if audio['dog_candidate_windows'] else _ABSENT
+    kept = [t for t in re.split(r'(?<=[.!?])\s+', summary.strip())
+            if t and not drop.search(t) and not _COUNTS.search(t)]
+    return ' '.join([audio_lead(audio), *kept])
+
+
 def care_draft_matches_current_audio(draft, audio):
     if not audio or not audio['analyzed_windows']:
         return True
@@ -197,7 +222,10 @@ def evaluate(db, observation_id, question):
                   current_audio['review_source'] == 'demo_operator_opinion' else '보호자')
         review_reason = (f"{source} 확인 의견: {review_labels.get(current_audio['review_label'], '미확인')}. "
                          '모델 정답이나 즉시 재학습 결과가 아닙니다.')
-        draft = draft.model_copy(update={'reasons': [model_reason, review_reason, *draft.reasons][:10]})
+        drop = _PRESENT if current_audio['dog_candidate_windows'] else _ABSENT
+        reasons = [r for r in draft.reasons if not drop.search(r) and not _COUNTS.search(r)]
+        draft = draft.model_copy(update={'reasons': [model_reason, review_reason, *reasons][:10],
+                                         'summary': with_audio_lead(draft.summary, current_audio)})
         music_eligible = (current_audio['dog_candidate_windows'] > 0 and
                           current_audio['review_label'] == 'pet_vocalization')
         if music_eligible:
