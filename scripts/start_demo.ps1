@@ -15,6 +15,7 @@
   .\scripts\start_demo.ps1              start again (keeps data)
   .\scripts\start_demo.ps1 -Rebuild     rebuild the web app after changing petmind_app/lib
   .\scripts\start_demo.ps1 -Gemini      explanations by Gemini (key in .env); only derived facts are sent, never audio
+  .\scripts\start_demo.ps1 -Lan         also open the app to phones and PCs on the same network (needs an access key)
   .\scripts\start_demo.ps1 -Stop        stop everything
 
   Requirements: .venv (requirements-runtime.txt), Python 3.12 with TensorFlow (requirements-yamnet-experiment.txt)
@@ -31,6 +32,7 @@ param(
     [switch]$NoBrowser,
     [switch]$Capture,
     [switch]$Gemini,
+    [switch]$Lan,
     [string]$PetId = 'demo-dog',
     [string]$BuildRoot = $(if ($env:PETMIND_BUILD_ROOT) { $env:PETMIND_BUILD_ROOT } else { 'C:\petmind_build' })
 )
@@ -159,7 +161,7 @@ if ($needBuild) {
         & $flutter pub get
         if ($LASTEXITCODE -ne 0) { throw 'flutter pub get failed' }
         # --pwa-strategy=none: no service-worker cache, so a rebuilt page is never mixed with an old cached one (gray boxes)
-        & $flutter build web --release --no-web-resources-cdn --pwa-strategy=none --output=$WebDir --dart-define=PETMIND_API_BASE=http://localhost:8010
+        & $flutter build web --release --no-web-resources-cdn --pwa-strategy=none --output=$WebDir --dart-define=PETMIND_API_BASE=auto
         if ($LASTEXITCODE -ne 0) { throw 'flutter build web failed' }
     } finally { Pop-Location }
 } else {
@@ -194,7 +196,25 @@ if ($Capture) {
 # Explanations use the rule-based provider (no external calls) unless -Gemini is given; the key is read from .env only.
 $env:PETMIND_LLM_PROVIDER = if ($Gemini) { 'gemini' } else { 'rule' }
 $env:PETMIND_SEMANTIC_SEARCH = 'off'
-$ids.backend = Start-Hidden 'backend' $Python @('-m', 'uvicorn', 'petmind.backend.main:app', '--host', '127.0.0.1', '--port', '8010')
+# -Lan: listen on all interfaces. The backend still refuses everything except this PC and private-network clients that
+# hold the access key (petmind/backend/access.py). The key is created once and kept in artifacts/demo (git-ignored).
+$BindHost = '127.0.0.1'
+if ($Lan) {
+    $KeyFile = Join-Path $Demo 'lan-key.txt'
+    if (-not (Test-Path $KeyFile)) {
+        $bytes = New-Object byte[] 18
+        [Security.Cryptography.RandomNumberGenerator]::Create().GetBytes($bytes)
+        ([Convert]::ToBase64String($bytes)).Replace('+', '-').Replace('/', '_') | Set-Content -Encoding ascii $KeyFile
+    }
+    $LanKey = (Get-Content $KeyFile -Raw).Trim()
+    $env:PETMIND_LAN_TOKEN = $LanKey
+    $env:PETMIND_WEB_DIR = $WebDir
+    $BindHost = '0.0.0.0'
+} else {
+    Remove-Item Env:PETMIND_LAN_TOKEN -ErrorAction SilentlyContinue
+    Remove-Item Env:PETMIND_WEB_DIR -ErrorAction SilentlyContinue
+}
+$ids.backend = Start-Hidden 'backend' $Python @('-m', 'uvicorn', 'petmind.backend.main:app', '--host', $BindHost, '--port', '8010')
 $ids.web = Start-Hidden 'web' $Python @('-m', 'http.server', '8021', '--bind', '127.0.0.1', '--directory', $WebDir)
 $ids | ConvertTo-Json | Set-Content $PidFile
 
@@ -225,4 +245,66 @@ if ($Seed) {
 
 Write-Host ''
 Write-Host 'PetMind demo is running:  http://localhost:8021/   (stop with: .\scripts\start_demo.ps1 -Stop)'
+if ($Lan) {
+    # Private IPv4 addresses of real adapters (not VMware/Hyper-V/VirtualBox virtual ones).
+    $vpn = @(Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
+        Where-Object { $_.IPAddress -match '^100[.]' -and $_.InterfaceAlias -match 'Tailscale' } |
+        Select-Object -ExpandProperty IPAddress)
+    $local = @(Get-NetIPAddress -AddressFamily IPv4 -ErrorAction SilentlyContinue |
+        Where-Object { $_.IPAddress -match '^(10[.]|192[.]168[.]|172[.](1[6-9]|2[0-9]|3[01])[.])' -and
+                       $_.InterfaceAlias -notmatch 'VMware|vEthernet|VirtualBox|Loopback|Bluetooth|WSL' } |
+        Select-Object -ExpandProperty IPAddress)
+    $addresses = @($vpn) + @($local)
+    $rule = 'PetMind demo (private network, TCP 8010)'
+    if (-not (Get-NetFirewallRule -DisplayName $rule -ErrorAction SilentlyContinue)) {
+        try {
+            New-NetFirewallRule -DisplayName $rule -Direction Inbound -Protocol TCP -LocalPort 8010 -Action Allow `
+                -Profile Private -RemoteAddress LocalSubnet -ErrorAction Stop | Out-Null
+            Write-Host '  firewall: allowed TCP 8010 from the local subnet on private networks'
+        } catch {
+            Write-Host '  firewall: no rule yet (needs an administrator). Allow the Windows prompt, or run once in an admin PowerShell:' -ForegroundColor Yellow
+            Write-Host "    New-NetFirewallRule -DisplayName '$rule' -Direction Inbound -Protocol TCP -LocalPort 8010 -Action Allow -Profile Private -RemoteAddress LocalSubnet"
+        }
+    }
+    if ($vpn) {
+        $vpnRule = 'PetMind demo (Tailscale VPN, TCP 8010)'
+        if (-not (Get-NetFirewallRule -DisplayName $vpnRule -ErrorAction SilentlyContinue)) {
+            try {
+                New-NetFirewallRule -DisplayName $vpnRule -Direction Inbound -Protocol TCP -LocalPort 8010 -Action Allow `
+                    -InterfaceAlias 'Tailscale' -RemoteAddress 100.64.0.0/10 -Profile Any -ErrorAction Stop | Out-Null
+                Write-Host '  firewall: allowed TCP 8010 from Tailscale addresses on the Tailscale interface only'
+            } catch {
+                Write-Host '  firewall: no Tailscale rule yet (needs an administrator). Run once in an admin PowerShell:' -ForegroundColor Yellow
+                Write-Host "    New-NetFirewallRule -DisplayName '$vpnRule' -Direction Inbound -Protocol TCP -LocalPort 8010 -Action Allow -InterfaceAlias 'Tailscale' -RemoteAddress 100.64.0.0/10 -Profile Any"
+            }
+        }
+    } else {
+        Write-Host '  Tailscale is not running on this PC: addresses below only work on the same network. For access away from home install Tailscale (see README).' -ForegroundColor Yellow
+    }
+    Write-Host ''
+    Write-Host 'Open on a phone or another PC (the key is remembered after the first visit). The Tailscale address works at home AND away:' -ForegroundColor Green
+    if (-not $addresses) { Write-Host '  no private network address found - connect to Wi-Fi or a hotspot first' -ForegroundColor Yellow }
+    foreach ($a in $addresses) {
+        $kind = if ($vpn -contains $a) { 'Tailscale VPN - works anywhere' } else { 'same network only' }
+        Write-Host "  http://${a}:8010/?key=$LanKey   ($kind)"
+    }
+    if ($addresses) {
+        # A QR code for the first address (the VPN address when there is one): scanning it avoids typing the key.
+        $first = @($addresses)[0]
+        # A new file name every run: an image viewer that still has the previous QR open would block overwriting it,
+        # and a stale QR (old address) must never be what gets shown.
+        Get-ChildItem $Demo -Filter 'lan-qr*.png' -ErrorAction SilentlyContinue | Remove-Item -Force -ErrorAction SilentlyContinue
+        $qr = Join-Path $Demo ('lan-qr-' + (Get-Date -Format 'HHmmss') + '.png')
+        # The QR code is a convenience: whatever goes wrong here (viewer holding the file, console encoding) must not stop the demo.
+        $qrOk = $false
+        $old = $ErrorActionPreference; $ErrorActionPreference = 'Continue'
+        try { & $Python -m scripts.make_lan_qr "http://${first}:8010/?key=$LanKey" $qr 2>$null | Out-Null; $qrOk = ($LASTEXITCODE -eq 0) } catch { $qrOk = $false } finally { $ErrorActionPreference = $old }
+        if (-not $qrOk) { Write-Host '  (no QR code this time - type the address above into the phone)' -ForegroundColor Yellow }
+        if ($qrOk) {
+            Write-Host "  QR code for the phone camera: $qr"
+            if (-not $NoBrowser) { Start-Process $qr }
+        }
+    }
+    Write-Host '  Anyone with this address can see the recordings. Do not share it, and do not use it on a public network.'
+}
 if (-not $NoBrowser) { Start-Process 'http://localhost:8021/' }

@@ -10,10 +10,20 @@ import 'genesis_theme.dart';
 import 'outings_panel.dart';
 import 'camera_panel.dart';
 
-const String apiBase = String.fromEnvironment(
+const String _apiBaseSetting = String.fromEnvironment(
   'PETMIND_API_BASE',
   defaultValue: 'http://localhost:8010',
 );
+
+/// Where the API lives. The demo build passes `auto`: the address this page was opened from, on the API port (8010).
+/// That makes the same build work on this PC (localhost:8021 or :8010) and on a phone or another PC on the same
+/// network (http://PC-address:8010 when the server was started with start_demo -Lan).
+String resolveApiBase(String setting, Uri page) {
+  if (setting != 'auto') return setting;
+  return page.port == 8010 ? page.origin : '${page.scheme}://${page.host}:8010';
+}
+
+final String apiBase = resolveApiBase(_apiBaseSetting, Uri.base);
 const bool yamnetTrial = bool.fromEnvironment('PETMIND_YAMNET_TRIAL', defaultValue: false);
 
 void main() {
@@ -371,7 +381,7 @@ class _DashboardPageState extends State<DashboardPage> {
             _overview(),
             if (activeOuting?['input_mode'] == 'live') Text('자동 외출 · ${activeOuting?['capture_label'] ?? '장치 상태 확인 중'}'),
             if (observation != null) Text('관찰 #${observation!['id']} · ${sourceLabel(observation!['source'])} · ${formatKst(observation!['observed_at'])}'),
-            if (section == 0) const CameraPanel(base: apiBase),
+            if (section == 0) CameraPanel(base: apiBase),
             Wrap(spacing: 12, runSpacing: 8, children: [
               OutlinedButton(onPressed: () => setState(() => section = 1), child: const Text('외출 기록·음원 분석으로')),
               OutlinedButton(onPressed: () => setState(() => section = 2), child: const Text('근거 질문·케어로')),

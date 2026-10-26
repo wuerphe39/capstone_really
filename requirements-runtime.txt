@@ -5,3 +5,4 @@ soundfile>=0.12,<1
 scipy>=1.13,<2
 opencv-python>=4.8,<5
 imageio-ffmpeg>=0.5,<1
+segno>=1.6,<2

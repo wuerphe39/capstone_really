@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:petmind_app/format.dart';
+import 'package:petmind_app/main.dart' show resolveApiBase;
 
 void main() {
   test('UTC ISO becomes Korean time without seconds', () {
@@ -35,5 +36,16 @@ void main() {
     } finally {
       ErrorWidget.builder = old;  // flutter_test checks this before tearDown callbacks run
     }
+  });
+
+  group('resolveApiBase', () {
+    test('an explicit address is used as given', () {
+      expect(resolveApiBase('http://localhost:8010', Uri.parse('http://192.168.0.5:8010/')), 'http://localhost:8010');
+    });
+    test('auto follows the page address and uses the API port', () {
+      expect(resolveApiBase('auto', Uri.parse('http://localhost:8021/')), 'http://localhost:8010');
+      expect(resolveApiBase('auto', Uri.parse('http://192.168.0.5:8010/#/home')), 'http://192.168.0.5:8010');
+      expect(resolveApiBase('auto', Uri.parse('http://192.168.0.5:8021/')), 'http://192.168.0.5:8010');
+    });
   });
 }

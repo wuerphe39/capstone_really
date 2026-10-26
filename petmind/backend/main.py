@@ -8,8 +8,8 @@ from contextlib import asynccontextmanager, suppress
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-from fastapi import Depends, FastAPI, Query, Request
-from fastapi.responses import JSONResponse
+from fastapi import Depends, FastAPI, HTTPException, Query, Request
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import func, select, text
 
@@ -31,6 +31,7 @@ from .schemas import DemoRequest, ObservationIn, ObservationOut
 from .services.observations import save, to_out
 from .services.audio_retention import cleanup_once, cleanup_loop
 from starlette.concurrency import run_in_threadpool
+from . import access
 from .settings import ROOT, settings, audio_lstm_checkpoint_path
 
 
@@ -51,20 +52,43 @@ app = FastAPI(title='PetMind integrated API', version='0.3.0', lifespan=lifespan
 
 
 @app.middleware('http')
-async def local_preview_boundary(request: Request, call_next):
-    """This unauthenticated prototype must remain on loopback/SSH tunnels."""
+async def access_boundary(request: Request, call_next):
+    """No accounts exist, so the API stays on this PC unless LAN mode is on (see access.py)."""
     host = request.client.host if request.client else ''
-    try:
-        local_client = ipaddress.ip_address(host).is_loopback
-    except ValueError:
-        local_client = host == 'testclient'
+    kind = access.client_kind(host)
     origin = request.headers.get('origin')
-    local_origin = not origin or bool(re.fullmatch(
-        r'http://(?:localhost|127\.0\.0\.1)(?::\d+)?', origin))
-    if not local_client or not local_origin:
-        return JSONResponse({'detail': 'PetMind 시제품은 로컬/SSH 연결에서만 접근할 수 있습니다.'},
+    token = settings.lan_token
+    if kind == 'loopback' and access.via_proxy(request.headers):
+        # A tunnel/proxy on this PC would make an internet client look like the PC itself.
+        return JSONResponse({'detail': '프록시·터널을 거친 접속은 지원하지 않습니다. 같은 네트워크나 VPN(Tailscale)으로 직접 접속해 주세요.'},
                             status_code=403)
-    return await call_next(request)
+    if kind == 'loopback':
+        if origin and not access.LOCAL_ORIGIN.fullmatch(origin):
+            return JSONResponse({'detail': 'PetMind 시제품은 로컬 연결에서만 접근할 수 있습니다.'}, status_code=403)
+        return await call_next(request)
+    if not token or kind == 'public':
+        return JSONResponse({'detail': 'PetMind 시제품은 로컬/SSH 연결에서만 접근할 수 있습니다.'}, status_code=403)
+    if access.locked_out(host):
+        return JSONResponse({'detail': '키를 여러 번 잘못 입력했습니다. 잠시 후 다시 시도해 주세요.'}, status_code=429)
+    if access.public_asset(request.method, request.url.path):
+        return await call_next(request)
+    host_header = request.headers.get('host', '')
+    if origin and not access.same_origin(origin, request.url.scheme, host_header):
+        return JSONResponse({'detail': '다른 사이트에서 온 요청은 허용하지 않습니다.'}, status_code=403)
+    supplied = request.cookies.get(access.COOKIE) or request.headers.get('x-petmind-key')
+    if access.key_matches(supplied, token):
+        return await call_next(request)
+    key = request.query_params.get('key')
+    if request.method == 'GET' and access.key_matches(key, token):
+        access.forget(host)
+        response = RedirectResponse(access.without_key(str(request.url)), status_code=303)
+        response.set_cookie(access.COOKIE, token, max_age=access.COOKIE_MAX_AGE, httponly=True, samesite='lax', path='/')
+        return response
+    if supplied or key:
+        access.record_failure(host)
+    if request.method == 'GET' and 'text/html' in request.headers.get('accept', ''):
+        return HTMLResponse(access.NEED_KEY_HTML, status_code=401)
+    return JSONResponse({'detail': '접속 키가 필요합니다.'}, status_code=401)
 
 
 app.add_middleware(CORSMiddleware, allow_origin_regex=r'http://(localhost|127\.0\.0\.1)(:\d+)?',
@@ -188,3 +212,21 @@ def metrics(pet_id: str, db=Depends(get_db)):
             'gemini_successes': sum(row.provider.startswith('gemini:') for row in suggestions),
             'actions_completed': sum(row.status == 'completed' for row in actions),
             'actions_failed': sum(row.status in {'failed', 'timed_out'} for row in actions)}
+
+
+@app.get('/{path:path}', include_in_schema=False)
+def web_app(path: str):
+    """Serve the built Flutter web app when PETMIND_WEB_DIR is set. Registered last, so every API route wins."""
+    root = settings.web_dir
+    if root is None:
+        raise HTTPException(404, 'Not Found')
+    root = root.resolve()
+    target = (root / path).resolve()
+    if path and target.is_file() and target.is_relative_to(root):
+        return FileResponse(target)
+    if Path(path).suffix:                       # a missing asset is a 404, not the app shell
+        raise HTTPException(404, 'Not Found')
+    index = root / 'index.html'
+    if not index.is_file():
+        raise HTTPException(404, 'Not Found')
+    return FileResponse(index, headers={'Cache-Control': 'no-cache'})

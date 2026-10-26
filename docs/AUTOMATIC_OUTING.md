@@ -45,4 +45,4 @@
 - `services/outings.py`: RAG 근거에 미분석 시간과 해석 제한 추가.
 - 테스트: `petmind/backend/tests/test_capture.py`(수집 수명주기), `tests/test_agent_supervision.py`(재시작·장치 대기), `petmind_app/test/outings_panel_test.dart`.
 
-API는 비로컬 접속과 외부 웹 Origin을 거부하지만 사용자·장치 인증을 구현한 것은 아니다. 외부 공개 전에는 인증과 사용자별 접근 제어가 필요하다. 작업 소유 토큰은 중복 실행 방지용이며 인증을 대체하지 않는다.
+API는 기본으로 비로컬 접속과 외부 웹 Origin을 거부한다. `start_demo.cmd -Lan`을 쓰면 접속 키가 있는 사설망 기기(폰 등)도 허용하지만, 사용자·기기별 인증을 구현한 것은 아니다. 외부 공개 전에는 인증과 사용자별 접근 제어가 필요하다. 작업 소유 토큰은 중복 실행 방지용이며 인증을 대체하지 않는다.

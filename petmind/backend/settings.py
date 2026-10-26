@@ -24,9 +24,15 @@ class Settings:
     audio_detector: str = os.getenv('PETMIND_AUDIO_DETECTOR', 'yamnet').lower()
     yamnet_url: str = os.getenv('PETMIND_YAMNET_URL', 'http://127.0.0.1:8030/analyze')
     audio_storage_dir: Path = Path(os.getenv('PETMIND_AUDIO_STORAGE_DIR', str(ROOT/'artifacts'/'user_audio')))
+    # LAN mode (start_demo -Lan): private-network clients may connect with this key. Empty = this PC only.
+    lan_token: str = os.getenv('PETMIND_LAN_TOKEN', '').strip()
+    # Built Flutter web app served by this backend at "/" (same origin, so phones need one address only).
+    web_dir: Path | None = Path(os.environ['PETMIND_WEB_DIR']) if os.getenv('PETMIND_WEB_DIR') else None
 
 
 settings = Settings()
+if settings.lan_token and len(settings.lan_token) < 16:
+    raise ValueError('PETMIND_LAN_TOKEN must be at least 16 characters')
 
 
 def audio_lstm_checkpoint_path(root: Path | None = None) -> Path:

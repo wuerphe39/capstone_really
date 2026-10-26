@@ -68,6 +68,23 @@ flutter:
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/to/asset-from-package
 
+  # Korean/Latin text font bundled with the app (SIL OFL, see assets/fonts/OFL.txt). The web build cannot use
+  # system fonts, so without this it downloads fallback fonts from fonts.gstatic.com and shows no text offline.
+  # The family name matches the first entry of GenesisTheme's fallback list.
+  fonts:
+    - family: Noto Sans KR
+      fonts:
+        - asset: assets/fonts/NotoSansKR-Regular.ttf
+        - asset: assets/fonts/NotoSansKR-Bold.ttf
+          weight: 700
+    # The Flutter web engine downloads "Roboto" from fonts.gstatic.com at start-up unless the app registers a font
+    # with that name, and a failed download blanks all text. Same files under that name, so it never goes online.
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/NotoSansKR-Regular.ttf
+        - asset: assets/fonts/NotoSansKR-Bold.ttf
+          weight: 700
+
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

@@ -30,12 +30,25 @@ cd petmind_app; flutter analyze; flutter test
 | `petmind_app/` | Flutter 보호자 화면(웹) |
 | `scripts/live_bark_check.py`, `evaluate_yamnet_esc50.py` | 실제 소리 시험, ESC-50 전체 평가 |
 
+## 집에서 이어서 할 일 (2026-10-26에 중단한 지점)
+
+프로젝트의 쓰임은 **외출 중 폰으로 강아지 상태를 확인**하는 것인데, 지금은 같은 네트워크 안에서만 접속된다(`start_demo.cmd -Lan`, 접속 키 + 사설망 한정, 코드·테스트 완료, 커밋 전).
+
+1. (완료: 집 와이파이 실제 폰 접속·카메라 확인, 2026-10-26) **실제 폰으로 `-Lan` 시험**: 집 와이파이(또는 폰 핫스팟)에서 `start_demo.cmd -Lan -Capture` → QR 스캔. 이 PC에서는 와이파이 주소로 접속하는 것과 폰 크기 브라우저까지만 확인했다. Windows 네트워크 종류가 "공용"이면 "개인"으로 바꾸고, 방화벽 규칙(런처가 안내하는 명령)은 관리자 PowerShell에서 한 번 실행.
+2. **집 밖 접속(핵심 기능)**: 런처는 이미 Tailscale `100.x` 주소를 먼저 보여 주고 QR을 만든다(코드 완료). 남은 것: PC·폰에 Tailscale 설치·로그인(사용자), 모바일 데이터로 접속 시험, 관리자 PowerShell로 Tailscale 방화벽 규칙 1회.
+3. (완료·테스트 포함) **터널 구멍 막기**: 프록시·터널을 거친 요청(`X-Forwarded-For`, `CF-Connecting-IP` 등)은 PC 자신에서 온 것처럼 보여 키 없이 통과한다. 그런 헤더가 있으면 loopback이어도 키를 요구하고 잠금은 원래 접속자 기준으로 하게 고친다. 고치기 전에는 Cloudflare Tunnel·ngrok을 쓰지 말 것.
+4. **QR 생성 실패**: 한 번 launcher에서 Traceback이 났고 원인은 확정하지 못했다(손으로 실행하면 정상. 이미지 뷰어가 파일을 잡고 있었거나 콘솔 인코딩으로 추정). 이제 실패해도 서버 시작은 계속된다. 재현되면 원인을 찾는다.
+5. 서버를 켜 둔 채 외출하려면 PC가 절전·잠금으로 꺼지지 않게 설정하고 수집 프로그램이 도는지 확인.
+6. 시연 영상 촬영(실제 강아지)과 시연 DB 정리는 `docs/`의 촬영 계획을 따른다.
+
+발표 전에는 "같은 네트워크에서는 폰으로 접속되고, 집 밖은 VPN을 붙일 계획이며 아직 시험하지 못했다"고 말한다.
+
 ## 이어서 할 일 (우선순위)
 
 1. **실제 강아지로 예행연습**: 시연 영상은 사용자 강아지로 촬영한다. 같은 방에서 30~60초 수집해 점수·마이크 위치·"오디오 개선 사항"(스피커 재생 시험 때문에 현재 꺼 둠) 설정을 비교한다. 다른 동물 소리(TV 등)가 나오지 않게 한다.
 2. 평가 보완: 1초 미만 짖음 자료(표본이 부족함). 가정 소음은 ESC-50·FSD50K로 평가했다([ESC-50](docs/YAMNET_ESC50_EVAL.md), [FSD50K](docs/YAMNET_FSD50K_HOUSEHOLD_EVAL.md)).
 3. **진짜 다른 PC에서의 설치 검증**: 이 노트북에서는 새 clone·새 venv·분리된 TensorFlow venv·실행 정책·누락 점검까지 시험했다([docs/STATUS.md](docs/STATUS.md)). Python·Git·Flutter가 없는 PC에서 README의 "새 PC에서 준비" 명령(`winget`, Flutter clone)이 되는지는 아직 시험하지 못했다.
-4. 장시간 운용과 장치 물리 분리 시험, 외부 사용자 모집 전 인증. (Gemini 실호출은 2026-10-23에 확인함: [docs/GEMINI_REAL_CALL_CHECK.md](docs/GEMINI_REAL_CALL_CHECK.md))
+4. **실제 폰으로 `-Lan` 접속 시험**(이 PC에서는 와이파이 주소로 접속하는 것까지만 확인, 학교 와이파이는 기기 간 통신을 막을 수 있어 핫스팟이 안전). 집 밖에서 보려면 Tailscale 같은 VPN이 필요하고 아직 시험하지 않음. 5. 장시간 운용과 장치 물리 분리 시험, 외부 사용자 모집 전 인증. (Gemini 실호출은 2026-10-23에 확인함: [docs/GEMINI_REAL_CALL_CHECK.md](docs/GEMINI_REAL_CALL_CHECK.md))
 
 ## 지켜야 할 것
 
