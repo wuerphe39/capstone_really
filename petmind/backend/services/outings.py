@@ -307,6 +307,20 @@ def facts_for_report(db, outing, question):
             facts.append({'id': 'comparison.bark_rate', 'kind': 'comparison',
                           'text': f"저장 구간의 분당 소리 크기 변화: 이번 {current['bark_candidates_per_minute']:g}회, 이전 {old['bark_candidates_per_minute']:g}회. 짖음 횟수나 전체 외출 활동량은 아닙니다.",
                           'observation_ids': ids + old['counted_observation_ids']})
+        # An earlier outing exists: always say what can and cannot be compared, so that a reader (or the cloud model) does not
+        # conclude from the absence of a comparison that there is no earlier record.
+        now_windows, now_dog = current['lstm_analyzed_window_count'], current['lstm_dog_window_count']
+        old_windows, old_dog = old['lstm_analyzed_window_count'], old['lstm_dog_window_count']
+        if now_windows and old_windows:
+            facts.append({'id': 'comparison.model_windows', 'kind': 'comparison',
+                          'text': (f'이번 외출은 분석 창 {now_windows}개 중 개 짖음 후보 창 {now_dog}개, 이전 외출은 분석 창 {old_windows}개 중 {old_dog}개입니다. '
+                                   '외출 길이와 환경이 달라 평소 패턴과 비교한 것이 아니며, 후보 창 수는 짖은 횟수가 아닙니다.'),
+                          'observation_ids': ids + old['counted_observation_ids']})
+        elif not comparable:
+            reason = '입력 출처가 달라' if status == 'incompatible_provenance' else '분석한 표본이 부족해'
+            facts.append({'id': 'comparison.unavailable', 'kind': 'comparison',
+                          'text': f'이전 외출 기록은 있으나 {reason} 이번 외출과 비교하지 않았습니다. 이전 기록이 없는 것이 아닙니다.',
+                          'observation_ids': ids + old['counted_observation_ids']})
     lowered = unicodedata.normalize('NFKC', question).lower()
     if 'guardian_opinion' in question_intents(question) and any(
             term in lowered for term in ('지난', '이전', '전보다', '비교', 'tv', '텔레비전', '티비')):
@@ -329,6 +343,13 @@ def facts_for_report(db, outing, question):
     if not ids:
         selected = [fact for fact in selected if fact['id'] == 'current.capture_gap' or
                     fact['id'].startswith('previous.')]
+    elif ('guardian_opinion' in question_intents(question) and set(question_intents(question)) <= {'guardian_opinion', 'summary'} and
+          not any(f['kind'] == 'guardian_opinion' for f in selected)):
+        # Asked only about what the guardian confirmed, and nothing was confirmed: say that, instead of filling the answer with
+        # unrelated observation lines that read as if they answered the question.
+        selected = [{'id': 'guardian.none', 'kind': 'guardian_opinion',
+                     'text': '이번 외출과 확인할 수 있는 이전 외출에는 보호자가 남긴 확인 의견이 없습니다.', 'observation_ids': ids},
+                    *[f for f in selected if f['kind'] in ('quality', 'provenance')]]
     return current, selected
 
 
@@ -395,10 +416,25 @@ def next_check_suggestions(report, claims):
              'observation_ids': ids, 'basis_fact_ids': basis}]
 
 
+HEALTH_WORDS = ('아프', '아픈', '아파', '병', '질병', '질환', '건강', '진단', '우울', '불안', '기분', '감정', '스트레스', '화났', '화가')
+
+
+def no_evidence_answer(question):
+    if any(word in question for word in HEALTH_WORDS):
+        return ('이 시스템은 건강 상태나 감정을 판단하지 않습니다. 개 짖음 소리 후보와 보호자가 확인한 기록만 보여 줍니다. '
+                '걱정되면 원본 소리를 듣고, 필요하면 수의사와 상담해 주세요.')
+    return '질문을 뒷받침할 외출 기록이 부족합니다.'
+
+
 def narrate(report, facts, question, use_gemini=True, retrieval_mode='local', retrieval_error=None):
     chosen, provider, failure, selection_completed = facts, 'grounded-template', None, False
+    cloud_request = {'sent': False, 'reason': '질문에 맞는 사실을 PC 안의 규칙으로 골랐습니다. 클라우드로 보낸 것이 없습니다.'}
     if facts and use_gemini and settings.provider == 'gemini' and settings.gemini_api_key:
         import requests
+        cloud_request = {'sent': True, 'model': settings.gemini_model, 'host': 'generativelanguage.googleapis.com',
+                         'purpose': '질문에 맞는 사실 번호만 고르게 합니다. 문장과 수치는 서버가 사실에서 만들어 붙입니다.',
+                         'facts_sent': [{'id': f['id'], 'text': f['text']} for f in facts], 'question': question,
+                         'not_sent': ['원본 음원·영상', 'API 키(요청 헤더에만 사용)', '접속 키', '파일 경로']}
         try:
             response = requests.post(
                 f'https://generativelanguage.googleapis.com/v1beta/models/{settings.gemini_model}:generateContent',
@@ -438,12 +474,15 @@ def narrate(report, facts, question, use_gemini=True, retrieval_mode='local', re
                 if missing or not required_kinds.issubset({f['kind'] for f in chosen}):
                     raise ValueError('incomplete evidence selection')
             provider = f'gemini:{settings.gemini_model}:fact-selection'
+            cloud_request['selected_fact_ids'] = [f['id'] for f in chosen]
+            cloud_request['used_in_answer'] = True
         except Exception as exc:
             provider, failure = 'grounded-template-fallback', type(exc).__name__
+            cloud_request['used_in_answer'] = False
     return {'report': report, 'question': question, 'provider': provider, 'failure': failure,
             'retrieval_mode': retrieval_mode, 'retrieval_failure': retrieval_error,
             'selection_completed': selection_completed,
             'claims': chosen, 'next_steps': next_check_suggestions(report, chosen),
-            'retrieved_fact_ids': [f['id'] for f in facts],
-            'answer': '\n'.join(f['text'] for f in chosen) if chosen else '질문을 뒷받침할 외출 기록이 부족합니다.',
+            'retrieved_fact_ids': [f['id'] for f in facts], 'cloud_request': cloud_request,
+            'answer': '\n'.join(f['text'] for f in chosen) if chosen else no_evidence_answer(question),
             'note': 'RAG는 검색된 사실을 선택하며 수치와 문장은 서버가 근거에서 렌더링합니다. 감정·질환·음악 효과를 판정하지 않습니다.'}

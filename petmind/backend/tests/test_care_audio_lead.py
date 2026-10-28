@@ -41,3 +41,23 @@ def test_decimal_per_minute_values_and_the_echoed_caution_are_dropped():
     assert '24.04' not in text and text.endswith('원본을 들어 주세요.')
     text = with_audio_lead('후보가 있어도 실제 반려견의 짖음으로 확정하지 않으므로 원본 재청취를 제안합니다. 전후 장면을 확인해 주세요.', SOME)
     assert '후보가 있어도' not in text and text.endswith('전후 장면을 확인해 주세요.')
+
+
+PAST = '이번 외출은 분석 창 1개 중 개 짖음 후보 창 1개, 이전 외출은 분석 창 1개 중 1개입니다. 외출 길이와 환경이 달라 평소 패턴과 비교한 것이 아닙니다.'
+
+
+def test_denying_earlier_records_is_replaced_by_the_servers_comparison_sentence():
+    from ..services.care import past_comparison_fact
+    text = with_audio_lead('이전 외출이나 비교할 과거 기록이 없어 비교 근거가 부족합니다. 원본을 들어 주세요.', SOME, PAST)
+    assert '기록이 없어' not in text and PAST in text and text.endswith('원본을 들어 주세요.')
+    facts = [{'id': 'comparison.model_windows', 'text': PAST}]
+    assert past_comparison_fact(facts, '지난번과 비교해서 어떤 케어가 필요할까요?') == PAST
+    assert past_comparison_fact(facts, '짖은 횟수는 몇번?') is None  # only for comparison questions
+    assert past_comparison_fact([{'id': 'current.samples', 'text': 'x'}], '지난번과 비교해 줘') is None
+
+
+def test_other_statements_of_missing_records_are_left_alone():
+    # No earlier outing known to the server (no past fact), or a statement about something else: nothing is rewritten.
+    assert '과거 기록이 없어' in with_audio_lead('비교할 과거 기록이 없어 근거가 부족합니다.', SOME, None)
+    kept = with_audio_lead('아직 확인 의견 기록이 없습니다. 원본을 들어 주세요.', SOME, PAST)
+    assert '확인 의견 기록이 없습니다' in kept and PAST not in kept

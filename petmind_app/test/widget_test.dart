@@ -409,4 +409,83 @@ void main() {
       await tester.pumpWidget(const SizedBox());
     });
   });
+  group('what the AI received and the answer for the whole outing', () {
+    Map<String, dynamic> suggestionWith(Map<String, dynamic> cloudRequest) => {
+      'id': 9, 'pet_id': 'demo-dog', 'observation_id': 1, 'state': 'insufficient_observation', 'summary': '기록이 적습니다.',
+      'reasons': ['근거 부족'], 'recommended_actions': [], 'music_style': null, 'severity': 'info', 'status': 'informational',
+      'provider': 'gemini:test', 'context': {}, 'care_steps': [], 'cited_observation_ids': [], 'question': '짖은 횟수는 몇번?',
+      'retrieval': {'records': [], 'stats': {}, 'cloud_request': cloudRequest}, 'created_at': '2026-10-26T08:00:00Z',
+    };
+
+    Future<void> pumpRag(WidgetTester tester, Map<String, dynamic> evaluated, {bool outingAnswers = true}) async {
+      tester.view.physicalSize = const Size(1200, 2600);
+      tester.view.devicePixelRatio = 1;
+      addTearDown(tester.view.resetPhysicalSize);
+      addTearDown(tester.view.resetDevicePixelRatio);
+      var evaluatedYet = false; // the server returns the new suggestion as the latest one after an evaluation
+      final client = MockClient((request) async {
+        final path = request.url.path;
+        if (path == '/care/evaluate') evaluatedYet = true;
+        final dynamic data = path == '/care/evaluate' ? evaluated
+          : path == '/outings/outing-1/explain' ? (outingAnswers ? {'question': '짖은 횟수는 몇번?', 'provider': 'gemini:test:fact-selection',
+              'answer': 'YAMNet Bark 분석 창 25개 중 개 짖음 소리 후보 창은 10개입니다. 5초 창은 정확한 발성 횟수가 아닙니다.'} : null)
+          : path == '/care/target' ? {'observation_id': 1, 'outing_id': 'outing-1', 'reason': 'latest_candidate', 'observed_at': '2026-10-26T08:00:00Z',
+              'window_s': 5.0, 'analyzed_windows': 1, 'dog_candidate_windows': 1}
+          : path == '/observations' ? [{'id': 1, 'source': 'live', 'observed_at': '2026-10-26T08:00:00Z', 'context': {}}]
+          : path == '/care/latest' ? (evaluatedYet ? evaluated : null)
+          : path.endsWith('/profile') ? null
+          : path == '/health' ? {'components': {'care_provider': 'gemini', 'action_mode': 'simulated'}}
+          : path == '/metrics' || path == '/media/catalog' ? {}
+          : path == '/outings/day' ? {'moments': [], 'sample_seconds': 0, 'unknown_seconds': 0}
+          : path == '/audio-clips/review-queue' ? {'items': []} : [];
+        return http.Response.bytes(utf8.encode(jsonEncode(data)), 200);
+      });
+      await tester.pumpWidget(MaterialApp(home: DashboardPage(client: client)));
+      await tester.pumpAndSettle();
+      await tester.tap(find.byKey(const ValueKey('nav-2')));
+      await tester.pumpAndSettle();
+      await tester.enterText(find.byType(TextField), '짖은 횟수는 몇번?');
+      await tester.tap(find.text('현재 상태 평가하기'));
+      await tester.pumpAndSettle();
+    }
+
+    testWidgets('shows what was sent to the cloud and what was not', (tester) async {
+      await pumpRag(tester, suggestionWith({
+        'sent': true, 'used_in_answer': true, 'model': 'gemini-test', 'host': 'generativelanguage.googleapis.com',
+        'system_instruction': '규칙 문장', 'user_message': '질문과 데이터입니다.', 'record_ids': [4, 6, 5], 'chars': 40,
+        'not_sent': ['원본 음원·영상', '접속 키'],
+      }));
+      expect(find.byKey(const ValueKey('cloud-request')), findsOneWidget);
+      expect(find.text('AI(Gemini)에 보낸 내용'), findsOneWidget);
+      expect(find.textContaining('찾은 과거 기록 3건(번호 4, 6, 5)'), findsOneWidget);
+      expect(find.textContaining('클라우드가 이 PC의 DB나 MCP에 접속한 것이 아닙니다'), findsOneWidget);
+      expect(find.textContaining('보내지 않은 것: 원본 음원·영상 · 접속 키'), findsOneWidget);
+      await tester.tap(find.text('보낸 전체 내용 보기'));
+      await tester.pumpAndSettle();
+      expect(find.text('질문과 데이터입니다.'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('says plainly when nothing went to the cloud', (tester) async {
+      await pumpRag(tester, suggestionWith({'sent': false, 'reason': '규칙 제공자가 PC 안에서 만든 제안입니다. 클라우드로 보낸 것이 없습니다.', 'not_sent': ['접속 키']}));
+      expect(find.text('클라우드로 보낸 내용 없음'), findsOneWidget);
+      expect(find.textContaining('클라우드로 보낸 것이 없습니다'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('answers the question from the whole outing, next to the suggestion', (tester) async {
+      await pumpRag(tester, suggestionWith({'sent': false, 'reason': 'x', 'not_sent': []}));
+      expect(find.byKey(const ValueKey('outing-answer')), findsOneWidget);
+      expect(find.textContaining('분석 창 25개 중 개 짖음 소리 후보 창은 10개입니다'), findsOneWidget);
+      expect(find.textContaining('Gemini는 어떤 사실을 보여 줄지 번호만 골랐습니다'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+    });
+
+    testWidgets('the suggestion still shows when the outing answer is unavailable', (tester) async {
+      await pumpRag(tester, suggestionWith({'sent': false, 'reason': 'x', 'not_sent': []}), outingAnswers: false);
+      expect(find.byKey(const ValueKey('outing-answer')), findsNothing);
+      expect(find.text('근거 기반 케어 제안'), findsOneWidget);
+      await tester.pumpWidget(const SizedBox());
+    });
+  });
 }

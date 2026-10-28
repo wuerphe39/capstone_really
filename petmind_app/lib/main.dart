@@ -60,6 +60,7 @@ class _DashboardPageState extends State<DashboardPage> {
   Map<String, dynamic>? suggestion;
   Map<String, dynamic>? observation;
   String actionMode = 'simulated'; // 'speaker' when the launcher started the speaker agent
+  Map<String, dynamic>? outingAnswer; // answer to the question from the whole outing's recorded facts
   Map<String, dynamic>? careTarget; // observation the care evaluation looks at (newest dog candidate of the outing)
   Map<String, dynamic>? profile;
   Map<String, dynamic>? savedFeedback;
@@ -214,6 +215,17 @@ class _DashboardPageState extends State<DashboardPage> {
       suggestion = await _post('/care/evaluate', {
         'observation_id': careTarget?['observation_id'] ?? observation!['id'], 'question': question.text,
       }) as Map<String, dynamic>;
+      // The suggestion looks at one observation. A question about the outing ("how many times ...") is answered from the
+      // outing's own recorded facts as well, so it is not answered from a short tail window alone.
+      outingAnswer = null;
+      final outingId = careTarget?['outing_id'];
+      if (outingId != null && question.text.trim().isNotEmpty) {
+        try {
+          outingAnswer = await _post('/outings/$outingId/explain', {'pet_id': petId, 'question': question.text}) as Map<String, dynamic>;
+        } catch (_) {
+          outingAnswer = null; // the suggestion above is still valid without it
+        }
+      }
       notice = '새 케어 제안을 생성했습니다.';
       await refresh(silent: true);
     });
@@ -409,7 +421,7 @@ class _DashboardPageState extends State<DashboardPage> {
             FilledButton.icon(onPressed: busy || observation == null ? null : evaluate,
               icon: const Icon(Icons.psychology_alt), label: const Text('현재 상태 평가하기')),
             if (careTarget != null) Text(careTargetLabel(careTarget!)),
-            _suggestionCard(), _evidenceCard(), _comparisonCard(),
+            _outingAnswerCard(), _suggestionCard(), _cloudRequestCard(), _evidenceCard(), _comparisonCard(),
           ]),
           _sectionPage(3, [
             _sectionTitle('처리 기록', '관찰·제안·승인 이력을 확인합니다.'),
@@ -494,7 +506,7 @@ class _DashboardPageState extends State<DashboardPage> {
           onChanged: busy ? null : (value) {
             if (value == null) return;
             setState(() {
-              petId = value; observation = null; suggestion = null;
+              petId = value; observation = null; suggestion = null; outingAnswer = null;
               actions = const []; timeline = const []; metrics = {}; mediaResult = null; profile = null;
               savedFeedback = null; baseline = null; comparison = null; activeOuting = null;
             });
@@ -516,6 +528,88 @@ class _DashboardPageState extends State<DashboardPage> {
           child: Text('관찰 #${observation!['id']} · ${sourceLabel(observation!['source'])} · ${formatKst(observation!['observed_at'])}')),
       ],
     )));
+  }
+
+  Widget _outingAnswerCard() {
+    final answer = outingAnswer;
+    if (answer == null) return const SizedBox.shrink();
+    final viaGemini = '${answer['provider']}'.startsWith('gemini');
+    return Card(
+      key: const ValueKey('outing-answer'),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(children: [
+            const Icon(Icons.question_answer_outlined),
+            const SizedBox(width: 8),
+            Expanded(child: Text('질문에 대한 답 · 이번 외출 전체 기록 기준', style: Theme.of(context).textTheme.titleMedium)),
+          ]),
+          const SizedBox(height: 10),
+          Text('질문: ${answer['question']}', style: const TextStyle(color: GenesisTheme.secondaryInk)),
+          const SizedBox(height: 8),
+          Text('${answer['answer']}'),
+          const SizedBox(height: 10),
+          Text(viaGemini
+              ? '문장과 수치는 서버가 기록에서 계산한 사실입니다. Gemini는 어떤 사실을 보여 줄지 번호만 골랐습니다.'
+              : '문장과 수치는 서버가 기록에서 계산한 사실입니다. 이번에는 클라우드로 보낸 것이 없습니다.',
+              style: const TextStyle(color: GenesisTheme.secondaryInk, fontSize: 13)),
+        ]),
+      ),
+    );
+  }
+
+  /// What the cloud service received for this suggestion: shown as it was recorded, not as a description of the design.
+  Widget _cloudRequestCard() {
+    final retrieval = suggestion?['retrieval'];
+    final request = retrieval is Map ? retrieval['cloud_request'] : null;
+    if (request is! Map) return const SizedBox.shrink();
+    final sent = request['sent'] == true;
+    final notSent = (request['not_sent'] as List<dynamic>? ?? const []).join(' · ');
+    final ids = (request['record_ids'] as List<dynamic>? ?? const []).join(', ');
+    return Card(
+      key: const ValueKey('cloud-request'),
+      child: Padding(
+        padding: const EdgeInsets.all(20),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Row(children: [
+            Icon(sent ? Icons.cloud_upload_outlined : Icons.cloud_off_outlined),
+            const SizedBox(width: 8),
+            Expanded(child: Text(sent ? 'AI(Gemini)에 보낸 내용' : '클라우드로 보낸 내용 없음', style: Theme.of(context).textTheme.titleMedium)),
+          ]),
+          const SizedBox(height: 10),
+          if (!sent) Text('${request['reason']}'),
+          if (sent) ...[
+            Text('이 PC가 찾은 기록을 요청에 담아 ${request['model']}에 보냈습니다. 클라우드가 이 PC의 DB나 MCP에 접속한 것이 아닙니다.'),
+            const SizedBox(height: 8),
+            Text('• 질문, 현재 관찰, 찾은 과거 기록 ${(request['record_ids'] as List<dynamic>? ?? const []).length}건${ids.isEmpty ? '' : '(번호 $ids)'}'),
+            Text('• 규칙 문장(시스템 지시) ${(request['system_instruction'] ?? '').toString().length}자와 질문·데이터(유저 메시지) 분리 전달'),
+            if (request['used_in_answer'] == false)
+              const Padding(
+                padding: EdgeInsets.only(top: 6),
+                child: Text('이번 답은 검사에 통과하지 못해 PC의 규칙 제공자가 대신 만들었습니다. 위 내용은 답에 쓰이지 않았습니다.',
+                    style: TextStyle(color: GenesisTheme.warningInk)),
+              ),
+            ExpansionTile(
+              tilePadding: EdgeInsets.zero,
+              title: const Text('보낸 전체 내용 보기'),
+              // SelectionArea, not SelectableText: SelectableText has its own scrollable, which shares the page-storage slot of the
+              // tile's open/closed state and fails to restore it.
+              children: [
+                SelectionArea(child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                  const Text('시스템 지시(규칙)', style: TextStyle(fontWeight: FontWeight.w600)),
+                  Text('${request['system_instruction']}', style: const TextStyle(fontSize: 12)),
+                  const SizedBox(height: 10),
+                  const Text('유저 메시지(질문·관찰·찾은 기록)', style: TextStyle(fontWeight: FontWeight.w600)),
+                  Text('${request['user_message']}', style: const TextStyle(fontSize: 12)),
+                ])),
+              ],
+            ),
+          ],
+          const SizedBox(height: 6),
+          Text('보내지 않은 것: $notSent', style: const TextStyle(color: GenesisTheme.secondaryInk, fontSize: 13)),
+        ]),
+      ),
+    );
   }
 
   Widget _evidenceCard() {

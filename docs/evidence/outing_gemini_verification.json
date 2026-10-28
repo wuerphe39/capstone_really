@@ -1,5 +1,5 @@
 {
-  "tested_at": "2026-10-22T20:27:21.152809+00:00",
+  "tested_at": "2026-10-28T06:29:46.730032+00:00",
   "model": "gemini-3.5-flash-lite",
   "source": "generated synthetic facts only; no user database or raw audio transmitted",
   "results": [
@@ -19,12 +19,13 @@
       },
       "claims": [
         {
-          "id": "observation.101",
-          "text": "합성 관찰: 소리 후보 3회.",
+          "id": "current.samples",
+          "text": "이번 외출에 연결된 분석 표본은 30초입니다.",
           "observation_ids": [
-            101
+            101,
+            102
           ],
-          "kind": "observation"
+          "kind": "summary"
         },
         {
           "id": "observation.102",
@@ -33,15 +34,6 @@
             102
           ],
           "kind": "observation"
-        },
-        {
-          "id": "current.samples",
-          "text": "이번 외출에 연결된 분석 표본은 30초입니다.",
-          "observation_ids": [
-            101,
-            102
-          ],
-          "kind": "summary"
         },
         {
           "id": "current.unknown",

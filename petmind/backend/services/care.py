@@ -65,6 +65,11 @@ def current_audio_evidence(db, observation_id):
 TARGET_SCAN_LIMIT = 100
 
 
+def link_of(db, observation_id):
+    link = db.get(OutingObservation, observation_id)
+    return link.outing_id if link else None
+
+
 def care_target(db, pet_id):
     """The observation the care evaluation should look at: the newest one with a dog candidate window in the
     latest observation's outing, otherwise the newest observation. The newest one alone is often the short tail
@@ -86,7 +91,7 @@ def care_target(db, pet_id):
                 chosen, audio = row, candidate
                 break
     reason = 'latest_candidate' if audio and audio['dog_candidate_windows'] else 'latest'
-    return {'observation_id': chosen.id, 'observed_at': chosen.observed_at.isoformat() + 'Z', 'source': chosen.source,
+    return {'observation_id': chosen.id, 'outing_id': (link_of(db, chosen.id) or None), 'observed_at': chosen.observed_at.isoformat() + 'Z', 'source': chosen.source,
             'window_s': json.loads(chosen.context_json).get('window_s'), 'reason': reason,
             'analyzed_windows': audio['analyzed_windows'] if audio else 0,
             'dog_candidate_windows': audio['dog_candidate_windows'] if audio else 0}
@@ -109,12 +114,39 @@ def audio_lead(audio):
             '짖음이 없었다는 뜻은 아닙니다. 원본을 들어 놓친 소리가 없는지 확인해 주세요.')
 
 
-def with_audio_lead(summary, audio):
+# "No earlier records" said about a dog that has earlier records. Only dropped when the server knows an earlier outing exists.
+_DENIES_PAST = re.compile(r'(과거|이전|지난)[^.]*(기록|외출)[^.]*(없|못|부족)')
+COMPARISON_WORDS = ('비교', '지난', '이전', '차이', '전보다')
+
+
+def past_comparison_fact(outing_facts, question):
+    """The server's own sentence about what can be compared with an earlier outing, for comparison questions."""
+    if not any(word in question for word in COMPARISON_WORDS):
+        return None
+    return next((f['text'] for f in outing_facts if f['id'].startswith('comparison.')), None)
+
+
+def with_audio_lead(summary, audio, past_fact=None):
     """Put the service's own statement about dog candidates first and drop the provider's restatement of it."""
     drop = _PRESENT if audio['dog_candidate_windows'] else _ABSENT
-    kept = [t for t in re.split(r'(?<=[.!?])\s+', summary.strip())
-            if t and not drop.search(t) and not _COUNTS.search(t)]
-    return ' '.join([audio_lead(audio), *kept])
+    sentences = [t for t in re.split(r'(?<=[.!?])\s+', summary.strip()) if t and not drop.search(t) and not _COUNTS.search(t)]
+    denied = bool(past_fact) and any(_DENIES_PAST.search(t) for t in sentences)
+    kept = [t for t in sentences if not (denied and _DENIES_PAST.search(t))]
+    return ' '.join([audio_lead(audio), *([past_fact] if denied else []), *kept])
+
+
+NOT_SENT = ['원본 음원·영상', 'API 키(요청 헤더에만 사용)', '접속 키', '파일 경로']
+
+
+def cloud_request_record(provider, provider_name):
+    """What this evaluation handed to a cloud service, for the guardian's \"what did the AI receive\" view."""
+    sent = getattr(provider, 'sent', None)
+    if not sent:
+        return {'sent': False, 'reason': '규칙 제공자가 PC 안에서 만든 제안입니다. 클라우드로 보낸 것이 없습니다.' if provider_name == 'rule'
+                else '클라우드 요청을 만들기 전에 중단되어 보낸 것이 없습니다.', 'not_sent': NOT_SENT}
+    return {'sent': True, 'used_in_answer': provider_name.startswith('gemini'), 'model': sent['model'], 'host': sent['host'],
+            'system_instruction': sent['system_instruction'], 'user_message': sent['user_message'], 'record_ids': sent['record_ids'],
+            'chars': sent['chars'], 'not_sent': NOT_SENT}
 
 
 def care_draft_matches_current_audio(draft, audio):
@@ -161,6 +193,36 @@ def care_steps(context, evidence):
     return ['관찰 원본과 당시 주변 상황을 확인하고, 다음 기록에서도 같은 신호가 반복되는지 비교해 주세요.']
 
 
+OUTING_FACT_LIMIT = 8
+
+
+def outing_facts_for_care(db, observation, question):
+    """Server-computed facts of the observation's outing (and earlier outings' guardian opinions when asked).
+
+    The observation search alone cannot see a guardian's review of an earlier recording, so a question like \"was a recording
+    confirmed as TV?\" was answered \"none found\" although one existed. The outing facts carry those reviews."""
+    link = db.get(OutingObservation, observation.id)
+    if link is None:
+        return [], None
+    facts, tool = None, None
+    if settings.retrieval_mode == 'mcp':
+        try:
+            from ..mcp_client import retrieve_outing_facts
+            facts = asyncio.run(retrieve_outing_facts(observation.pet_id, link.outing_id, question))['facts']
+            tool = {'tool': 'get_outing_facts', 'status': 'ok'}
+        except Exception:  # noqa: BLE001 - the same facts are computed locally below
+            facts = None
+    if facts is None:
+        try:
+            from .outings import facts_for_report, require_outing
+            facts = facts_for_report(db, require_outing(db, link.outing_id, observation.pet_id), question)[1]
+            tool = {'tool': 'get_outing_facts', 'status': 'local'}
+        except Exception:  # noqa: BLE001 - no outing facts is a valid, weaker evidence set
+            return [], {'tool': 'get_outing_facts', 'status': 'failed'}
+    return [{'id': f['id'], 'kind': f['kind'], 'text': f['text'], 'observation_ids': f.get('observation_ids', [])}
+            for f in facts[:OUTING_FACT_LIMIT]], tool
+
+
 def evaluate(db, observation_id, question):
     observation = db.get(ObservationLog, observation_id)
     if observation is None:
@@ -185,6 +247,9 @@ def evaluate(db, observation_id, question):
                     'care_history': retrieval.get_care_history(db, observation.pet_id, before, start=plan['start']),
                     'tool_calls': []}
     evidence['query_plan'] = plan
+    evidence['outing_facts'], outing_tool = outing_facts_for_care(db, observation, question)
+    if outing_tool:
+        evidence.setdefault('tool_calls', []).append(outing_tool)
     evidence['current_observation_id'] = observation.id
     evidence['current_audio'] = current_audio_evidence(db, observation.id)
     evidence['profile'] = profile_out(db.get(PetProfileLog, observation.pet_id))
@@ -197,7 +262,8 @@ def evaluate(db, observation_id, question):
     try:
         draft = CareSuggestionDraft.model_validate(provider.suggest(context, evidence, question))
         provider_stage = 'citation_validation'
-        allowed_citations = {observation.id, *(r['id'] for r in evidence['records'])}
+        allowed_citations = {observation.id, *(r['id'] for r in evidence['records']),
+                             *(i for f in evidence['outing_facts'] for i in f['observation_ids'])}
         if not set(draft.cited_observation_ids).issubset(allowed_citations):
             raise ValueError('provider cited a record outside current or retrieved evidence')
         provider_stage = 'audio_consistency_validation'
@@ -213,6 +279,7 @@ def evaluate(db, observation_id, question):
                 {'field': '.'.join(map(str, error['loc'])), 'code': error['type']}
                 for error in exc.errors()]
         draft = RuleBasedProvider().suggest(context, evidence, question)
+    evidence['cloud_request'] = cloud_request_record(provider, provider_name)
     if current_audio and current_audio['analyzed_windows']:
         model_reason = (f"현재 {current_audio['model_name']} 분석 창 {current_audio['analyzed_windows']}개 중 개 짖음 소리 후보 "
                         f"{current_audio['dog_candidate_windows']}개입니다. 5초 창은 정확한 짖음 횟수가 아닙니다.")
@@ -225,7 +292,8 @@ def evaluate(db, observation_id, question):
         drop = _PRESENT if current_audio['dog_candidate_windows'] else _ABSENT
         reasons = [r for r in draft.reasons if not drop.search(r) and not _COUNTS.search(r)]
         draft = draft.model_copy(update={'reasons': [model_reason, review_reason, *reasons][:10],
-                                         'summary': with_audio_lead(draft.summary, current_audio)})
+                                         'summary': with_audio_lead(draft.summary, current_audio,
+                                                                    past_comparison_fact(evidence['outing_facts'], question))})
         music_eligible = (current_audio['dog_candidate_windows'] > 0 and
                           current_audio['review_label'] == 'pet_vocalization')
         if music_eligible:
