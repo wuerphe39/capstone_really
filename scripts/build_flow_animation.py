@@ -1,4 +1,4 @@
-"""README의 시스템 구조를 8단계 동작 애니메이션으로 만든다.
+"""README의 시스템 구조를 9단계 동작 애니메이션으로 만든다.
 
     python scripts/build_flow_animation.py
 
@@ -17,56 +17,63 @@ import textwrap
 from pathlib import Path
 
 OUT = Path(__file__).resolve().parents[1]  # 저장소 루트: 열자마자 보이도록 docs/가 아닌 최상위에 둔다
-STEP_S = 6.0      # 단계당 길이(초)
+STEP_S = 6.5      # 단계당 길이(초)
 PACKET_S = 1.3    # 신호 한 번 이동 시간(초)
 
 # ---- 장면 데이터 -------------------------------------------------------------
-# 배치 원칙: 큰 줄기는 위 줄에서 왼쪽→오른쪽(마이크·웹캠 → 수집 → YAMNet → DB), DB에서 아래로 내려가
-# 과거 기록 검색(MCP) → 오른쪽 밖의 클라우드 LLM, LLM의 제안은 아래 줄의 API로 돌아온다.
-# 사용자 쪽(보호자 화면, 음악 명령, 스피커)은 아래 줄에서 오른쪽→왼쪽. 화살표는 대부분 직선이고 교차하지 않는다.
+# 배치 원칙: 큰 줄기는 위 줄에서 왼쪽→오른쪽(마이크·웹캠 → 수집 → YAMNet → DB). 가운데 세로줄은 DB - MCP 서버(같은 PC 안) - 백엔드이고,
+# 클라우드 LLM·ntfy·폰은 백엔드가 요청을 보내는 바깥쪽이다(클라우드가 DB·MCP에 접속하는 화살표는 없다).
+# 사용자 쪽(보호자 화면, 음악 명령, 스피커)은 아래 줄에서 오른쪽→왼쪽.
 ZONES = [
     ("device", 24, 70, 212, 440, "PC에 연결된 장치"),
     ("server", 256, 70, 688, 440, "Windows PC (로컬 실행)"),
-    ("cloud", 964, 210, 212, 190, "외부 클라우드 · 인터넷"),
+    ("cloud", 964, 90, 212, 310, "외부 클라우드 · 인터넷"),
 ]
 # id: (x, y, w, h, 제목, 설명(\n으로 줄 나눔), 점선 여부)
 NODES = {
     "dev": (40, 118, 176, 90, "마이크 · 웹캠", "노트북 내장 · 재생음 확인\n실제 강아지는 미확인", False),
-    "spk": (40, 388, 176, 90, "스피커", "가상 실행\n물리 미연결", True),
+    "spk": (40, 388, 176, 90, "PC 스피커", "승인 후 재생(-Speaker)\n실제 소리는 미확인", True),
     "agent": (272, 118, 184, 90, "수집 프로그램", "FFmpeg 5초 구간 · 업로드\n후보면 전후 영상 저장", False),
     "audio": (508, 118, 184, 90, "YAMNet (로컬)", "Bark 점수 계산\n기준 0.05 넘으면 후보", False),
     "db": (744, 118, 184, 90, "기록 DB (SQLite)", "상태 저장\n관찰 · 의견 · 제안", False),
-    "rag": (744, 253, 184, 90, "과거 기록 검색", "MCP · 같은 반려견의\n과거 기록만", False),
-    "api": (744, 388, 184, 90, "API · 제안 수신", "근거 ID 검사\n실패 시 규칙 제공자", False),
-    "view": (508, 388, 184, 90, "보호자 화면", "확인 · 의견 · 승인\n폰·PC 브라우저 (Flutter)", False),
+    "rag": (744, 253, 184, 90, "MCP 서버 (로컬)", "이 PC 안 · 도구 3개\n같은 반려견 기록만", False),
+    "api": (744, 388, 184, 90, "백엔드 (FastAPI)", "찾은 기록을 담아 요청\n응답 검사 · 규칙 대체", False),
+    "view": (508, 388, 184, 90, "보호자 화면 (웹)", "확인 · 의견 · 승인\nPC 브라우저 (Flutter)", False),
     "cmd": (272, 388, 184, 90, "음악 명령 관리", "요청 → 수신 → 완료", False),
-    "llm": (974, 262, 192, 90, "클라우드 LLM", "Google Gemini API\n외부 서비스", False),
+    "llm": (974, 262, 192, 90, "클라우드 LLM", "Google Gemini API\n받은 내용만 보고 답함", False),
+    "ntfy": (974, 134, 192, 76, "ntfy 알림 서비스", "짖음 후보 지속 알림\n문장 + 앱 주소만", False),
+    "phone": (974, 430, 192, 76, "보호자 폰 (집 밖)", "Tailscale VPN으로 웹 접속\nntfy 앱으로 알림 수신", False),
 }
 # id: (path, 양방향 여부)
 EDGES = {
     "dev_agent": ("M216,163 H270", False),
     "agent_audio": ("M456,163 H506", False),
     "audio_db": ("M692,150 H742", False),
-    "db_rag": ("M836,208 V251", False),
-    "rag_llm": ("M928,298 H972", False),
-    "llm_api": ("M1070,352 V433 H930", False),
+    "db_rag": ("M836,208 V251", True),
+    "rag_api": ("M836,343 V386", True),
     "api_db": ("M790,388 V360 H728 V194 H742", False),
-    "api_view": ("M744,433 H694", False),
-    "view_db": ("M600,388 V374 H708 V176 H742", True),
+    "api_view": ("M744,433 H694", True),
     "view_cmd": ("M508,433 H458", False),
     "cmd_spk": ("M272,433 H218", True),
+    "api_llm": ("M928,410 H1070 V352", True),
+    "api_phone": ("M928,468 H972", True),
+    "api_ntfy": ("M905,388 V366 H954 V172 H972", False),
+    "ntfy_phone": ("M1166,172 H1188 V474 H1168", False),
 }
 # 화살표 라벨: 간선 id -> (x, y, 글자). 교수님 스케치의 'wav', '짖음 감지' 표기
 EDGE_LABELS = {
     "agent_audio": (481, 152, "WAV"),
     "audio_db": (717, 142, "짖음\n감지"),
-    "view_remote": (600, 498, "집 밖: Tailscale VPN 경유"),
+    "api_llm": (1010, 425, "기록 포함 요청 ⇄ 제안"),
+    "api_phone": (950, 462, "VPN"),
+    "llm_note": (1070, 246, "받은 내용만 보고 답합니다\n이 PC의 DB·MCP에는 접속 안 함"),
 }
-# 단계: 제목, 설명, 배지, 강조 노드, [(간선, 역방향)] 순차 신호
+# 단계: 제목, 설명, 배지, 강조 노드, [(간선, 역방향)] 순차 신호 (한 단계에 신호 4개까지: 단계 길이 안에 다 지나가야 한다)
 STEPS = [
     dict(title="1. 외출을 시작합니다",
          desc="보호자가 화면에서 외출을 시작하면 서버에 수집 요청이 만들어집니다. PC의 수집 프로그램이 이 요청을 확인해 마이크·웹캠 수집을 시작합니다.",
-         badge="구현됨 · 노트북 마이크·웹캠으로 10분 수집, 끊겨도 자동 재시작 확인", nodes=["view", "db", "agent"], packets=[("view_db", False)]),
+         badge="구현됨 · 노트북 마이크·웹캠으로 10분 수집, 끊겨도 자동 재시작 확인", nodes=["view", "api", "db", "agent"],
+         packets=[("api_view", True), ("api_db", False)]),
     dict(title="2. 소리와 영상을 모읍니다",
          desc="PC에 직접 연결한 마이크와 웹캠의 입력을 약 5초 단위 구간으로 나눠 임시 보관합니다. 오래된 구간은 지워 저장 공간을 아낍니다.",
          badge="구현됨 · 640×480 30fps 미리보기, 스피커로 튼 소리를 내장 마이크로 감지 / 실제 강아지는 미확인", nodes=["dev", "agent"],
@@ -79,28 +86,36 @@ STEPS = [
          desc="점수가 기준을 넘으면 수집 프로그램이 그 앞뒤 각 5초 영상을 잘라 서버에 올리고, 서버가 관찰에 연결해 저장합니다. 관찰 ID, 시각, 출처, 분석 결과는 반려견별로 SQLite에 저장되며 서버를 다시 시작해도 남습니다. 카메라는 보호자가 직접 확인하는 용도이고 영상으로 행동을 자동 판단하지 않습니다.",
          badge="구현됨 · 실제 마이크로 감지한 구간의 35초 사건 영상(영상+소리) 저장 확인", nodes=["audio", "db"],
          packets=[("audio_db", False)]),
-    dict(title="5. 보호자가 직접 확인합니다",
-         desc="폰이나 PC 브라우저의 화면에서 원본 소리와 영상을 재생하고 '개 짖음 소리 / TV 소리 / 잘 모르겠음' 같은 의견을 남깁니다. 집 와이파이에서는 주소와 접속 키로, 집 밖에서는 Tailscale VPN을 거쳐 같은 주소로 접속하며 공개 인터넷에는 열지 않습니다. AI 판정과 보호자 의견은 따로 보관됩니다.",
-         badge="구현됨 · 폰(집 와이파이·모바일 데이터)과 다른 PC 접속 확인. 느린 모바일 망에서는 카메라 화면이 끊김", nodes=["view", "db"], packets=[("view_db", True), ("view_db", False)]),
-    dict(title="6. 과거 기록을 찾아 클라우드 LLM에 보냅니다",
-         desc="같은 반려견의 과거 기록만 MCP로 조회해, 기록에서 뽑은 문장을 외부 클라우드 LLM(Gemini)에 전달합니다. 음원과 영상은 보내지 않습니다. API 키가 없으면 외부로 보내지 않고 PC의 규칙 제공자가 대신합니다.",
-         badge="구현됨 · Gemini 실호출 확인(귀가 설명 3/3, 합성·공개 음원 시연 자료)", nodes=["db", "rag", "llm"],
-         packets=[("db_rag", False), ("rag_llm", False)]),
-    dict(title="7. LLM이 근거를 바탕으로 만든 확인 제안을 받습니다",
-         desc="클라우드 LLM이 기록을 근거로 보호자가 확인할 제안을 만들어 API로 돌려줍니다. 진단이나 감정 판정이 아닙니다. 서버가 인용한 근거 ID를 검사해 보호자 화면에 표시하고(케어 제안은 이력으로 DB에 저장, 귀가 요약 설명은 요청할 때마다 만들어 보여 줌), 호출 실패나 잘못된 인용이면 규칙 제공자로 대체합니다.",
-         badge="구현됨 · 인용 범위만 검사, 문장별 수치·인과 검증은 남아 있음", nodes=["llm", "api", "db", "view"],
-         packets=[("llm_api", False), ("api_db", False), ("api_view", False)]),
-    dict(title="8. 승인하면 음악 명령을 보냅니다",
-         desc="음성 후보와 보호자의 '개 소리' 확인 의견이 함께 있을 때만 음악이 제안됩니다. 보호자가 승인하면 명령이 요청 → 수신 → 완료 순으로 진행하고, 응답이 없으면 시간 초과로 기록합니다.",
-         badge="가상 실행 · 실제 스피커는 연결하지 않음", nodes=["view", "cmd", "spk"],
+    dict(title="5. 짖음 후보가 30초 이어지면 폰으로 알립니다",
+         desc="서버가 최근 5초 구간들을 살펴, 30초(6개 구간) 중 5개 이상이 짖음 후보이고 가장 최근 구간도 후보이면 승인 대기 상태의 '잔잔한 음악' 제안을 만들고 웹 화면에 경고를 띄웁니다. ntfy를 켠 경우에는 '짖음 후보가 약 30초 이어졌습니다'라는 문장과 앱 주소만 ntfy 서비스를 거쳐 폰으로 보내며, 음원·영상·접속 키는 보내지 않습니다. 같은 외출에서 5분 안에는 다시 알리지 않습니다.",
+         badge="구현됨 · 폰 ntfy 알림 수신 확인 / 실제 강아지가 30초 짖는 경우는 미확인", nodes=["db", "api", "ntfy", "phone"],
+         packets=[("api_db", True), ("api_ntfy", False), ("ntfy_phone", False)]),
+    dict(title="6. 보호자가 폰이나 PC 화면에서 확인합니다",
+         desc="폰 브라우저는 Tailscale VPN을 거쳐 PC의 서버(FastAPI)에 접속해 같은 웹 화면을 봅니다. 공개 인터넷에는 열지 않고 접속 키도 필요합니다. 화면에서 원본 소리와 영상을 재생하고 '개 짖음 소리 / TV 소리 / 잘 모르겠음' 같은 의견을 남깁니다. AI 판정과 보호자 의견은 따로 보관됩니다.",
+         badge="구현됨 · 폰(집 와이파이·모바일 데이터)과 다른 PC 접속 확인. 느린 모바일 망에서는 카메라 화면이 끊김", nodes=["phone", "api", "view", "db"],
+         packets=[("api_phone", True), ("api_db", True), ("api_phone", False)]),
+    dict(title="7. '현재 상태 평가'는 기록을 찾아 클라우드 LLM에 보냅니다",
+         desc="평가를 누르면 서버가 같은 PC의 MCP 서버를 불러 같은 반려견의 과거 기록과 이번 외출의 사실을 찾고, 찾은 기록을 요청에 담아 Gemini에 한 번 보냅니다. 클라우드 LLM은 이 PC의 DB나 MCP에 접속하지 않고 받은 내용만 보고 답합니다. 음원·영상·키는 보내지 않으며, 보낸 내용은 화면의 'AI에 보낸 내용'에서 그대로 볼 수 있습니다.",
+         badge="구현됨 · 실제 요청 캡처로 확인(기록 5건 포함, 음원·키 없음) / 합성·공개 음원 자료로만 확인", nodes=["view", "api", "rag", "db", "llm"],
+         packets=[("api_view", True), ("rag_api", True), ("db_rag", True), ("api_llm", False)]),
+    dict(title="8. 응답을 검사하고, 통과하지 못하면 규칙으로 대체합니다",
+         desc="클라우드 LLM이 기록을 근거로 확인 제안을 만들어 돌려주면 서버가 인용한 근거 번호가 조회한 기록 안에 있는지, 현재 음성 분석과 모순되지 않는지 검사합니다. 후보 유무를 말하는 첫 문장은 서버가 직접 쓰고, 통과하지 못하면 PC의 규칙 제공자가 대신 만듭니다. 진단이나 감정 판정이 아닙니다.",
+         badge="구현됨 · 인용 번호 범위·음성 분석 모순만 검사(문장별 수치 검증은 없음) / 개발자 질문 20건 자동 검사 5회 99/100, 사람 채점 아님", nodes=["llm", "api", "db", "view"],
+         packets=[("api_llm", True), ("api_db", False), ("api_view", False)]),
+    dict(title="9. 승인하면 음악 명령을 보내고 PC 스피커에서 재생합니다",
+         desc="음성 후보가 있고 보호자가 '개 소리'로 확인했거나 30초 알림이 온 경우에만 음악이 제안되며, 승인하기 전에는 아무 소리도 나지 않습니다. 승인하면 명령이 요청 → 수신 → 완료 순으로 진행하고, -Speaker를 켠 경우 장치 에이전트가 PC 스피커로 최대 60초 재생합니다(켜지 않으면 가상 실행). 음악이 짖음에 효과가 있다는 근거는 아직 없습니다.",
+         badge="구현됨 · 승인→명령→완료 흐름은 확인 / 실제 스피커 소리는 아직 확인하지 않음", nodes=["view", "cmd", "spk"],
          packets=[("view_cmd", False), ("cmd_spk", False), ("cmd_spk", True)]),
 ]
 STEP_NODES = [set(s["nodes"]) for s in STEPS]
 GLOSSARY = [
     ("짖음 후보", "모델이 '개 짖음 소리일 수 있다'고 본 5초 구간입니다. 실제 짖음 횟수나 감정을 뜻하지 않습니다."),
     ("YAMNet", "구글이 미리 학습해 둔 소리 분류 모델입니다. 이 시스템에서는 PC에서 로컬로 실행해 5초 소리에서 'Bark(개 짖음)' 점수를 읽어 짖음 후보를 찾습니다. 점수는 확률이나 정확도가 아닙니다."),
-    ("RAG · MCP", "질문과 관련된 과거 기록을 먼저 찾아 AI에게 근거로 건네는 방식입니다. MCP는 그 검색 도구를 부르는 표준 방법입니다."),
-    ("클라우드 LLM (Gemini)", "인터넷의 외부 서비스로 동작하는 생성형 AI입니다. API 키가 없거나 호출이 실패하면 PC의 규칙 기반 제공자가 대신 설명합니다."),
+    ("RAG · MCP", "질문과 관련된 과거 기록을 먼저 찾아 AI에게 근거로 건네는 방식입니다. MCP는 그 검색 도구를 부르는 표준 방법이며, 이 시스템에서는 같은 PC 안의 프로세스입니다. 클라우드가 MCP나 DB에 접속하는 것이 아니라 서버가 찾은 결과를 요청에 담아 보냅니다."),
+    ("클라우드 LLM (Gemini)", "인터넷의 외부 서비스로 동작하는 생성형 AI입니다. 받은 내용만 보고 답하며, API 키가 없거나 호출이 실패하면 PC의 규칙 기반 제공자가 대신 설명합니다."),
+    ("FastAPI", "PC에서 도는 서버 프로그램입니다. 화면(웹)과 수집 프로그램, MCP, 클라우드 호출을 모두 이 서버가 이어 줍니다."),
+    ("Tailscale VPN", "폰과 PC를 같은 가상 사설망으로 묶어, 공개 인터넷에 서버를 열지 않고도 집 밖에서 PC에 접속하게 해 주는 서비스입니다."),
+    ("ntfy", "폰으로 짧은 알림을 보내는 외부 서비스입니다. 이 시스템은 '짖음 후보가 약 30초 이어졌습니다'라는 문장과 앱 주소만 보냅니다."),
     ("SQLite", "서버 PC 안의 파일 하나로 동작하는 작은 데이터베이스입니다."),
 ]
 
@@ -219,10 +234,10 @@ def build_svg() -> str:
         dots.append(f'<circle cx="{1000 + i * 24}" cy="552" r="6" fill="var(--zl)"/><circle cx="{1000 + i * 24}" cy="552" r="6" fill="var(--ac)" opacity="0">'
                     f'<animate attributeName="opacity" values="{v}" keyTimes="{k}" dur="{total}s" repeatCount="indefinite"/></circle>')
     return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" width="1200" height="720" role="img" '
-            f'aria-label="PetMind 동작 흐름 애니메이션: 외출 시작부터 음악 명령까지 8단계">\n<style>{STYLE_COMMON}{STYLE_SVG}</style>{DEFS}\n'
+            f'aria-label="PetMind 동작 흐름 애니메이션: 외출 시작부터 음악 재생까지 9단계">\n<style>{STYLE_COMMON}{STYLE_SVG}</style>{DEFS}\n'
             f'<rect width="1200" height="720" fill="var(--bg)"/>\n'
             f'<text class="cap" x="24" y="40">PetMind 동작 애니메이션</text>'
-            f'<text class="lg" x="24" y="60">반려견 소리 기록 → 보호자 확인 → 과거 기록 기반 설명 · 8단계가 반복 재생됩니다</text>\n'
+            f'<text class="lg" x="24" y="60">반려견 소리 기록 → 보호자 확인 → 과거 기록 기반 설명 · 9단계가 반복 재생됩니다</text>\n'
             f'{scene_svg(True)}\n{"".join(dots)}\n{"".join(cap)}\n{legend(700)}</svg>\n')
 
 
@@ -261,7 +276,7 @@ dt{font-weight:700;margin-top:8px}dd{margin:0;color:var(--mu)}
 <body>
 <div class="wrap">
 <h1>PetMind 동작 애니메이션</h1>
-<p class="lead">반려견 소리를 기록하고, 보호자가 확인하고, 과거 기록으로 설명하는 흐름을 8단계로 보여줍니다. 처음이라면 ▶ 재생을 누르고 아래 설명을 따라가 보세요.</p>
+<p class="lead">반려견 소리를 기록하고, 보호자가 확인하고, 과거 기록으로 설명하는 흐름을 9단계로 보여줍니다. 처음이라면 ▶ 재생을 누르고 아래 설명을 따라가 보세요.</p>
 <div class="stage"><svg viewBox="0 54 1200 470" role="img" aria-label="PetMind 시스템 블록도">__DEFS____SCENE__</svg></div>
 <div class="panel" aria-live="polite"><div class="badge" id="badge"></div><h2 id="title"></h2><p id="desc"></p></div>
 <div class="ctrl">
@@ -271,7 +286,7 @@ dt{font-weight:700;margin-top:8px}dd{margin:0;color:var(--mu)}
 <label>속도 <select id="speed"><option value="0.6">느리게</option><option value="1" selected>보통</option><option value="1.6">빠르게</option></select></label>
 <div class="dots" id="dots"></div>
 </div>
-<p class="note">범례: 실선 상자는 구현·검증한 부분, 점선 상자는 가상 실행이거나 실장비 미검증인 부분입니다. 그림은 흐름을 단순화했습니다. 수집 프로그램·보호자 화면·가상 장치는 모두 서버 API(FastAPI)를 거쳐 DB와 YAMNet 서비스를 씁니다. 초록 점은 데이터·명령이 이동하는 모습입니다. 키보드 ← → 로 단계를 넘기고 Space로 재생/정지합니다.</p>
+<p class="note">범례: 실선 상자는 구현·검증한 부분, 점선 상자는 가상 실행이거나 실장비 미검증인 부분입니다. 그림은 흐름을 단순화했습니다. 수집 프로그램·보호자 화면·폰은 모두 서버(FastAPI)를 거쳐 DB와 YAMNet 서비스를 씁니다. 클라우드(Gemini·ntfy)로는 서버만 요청을 보내고, 클라우드가 이 PC에 접속하지는 않습니다. 초록 점은 데이터·명령이 이동하는 모습입니다. 키보드 ← → 로 단계를 넘기고 Space로 재생/정지합니다.</p>
 <details><summary>용어 설명</summary><dl>__GLOSSARY__</dl></details>
 <p class="note">근거: 저장소 README.md 0~4장. 이 애니메이션은 시스템의 동작 구조를 설명하는 자료이며 모델 정확도나 실제 가정 환경의 성능을 보증하지 않습니다.</p>
 </div>
