@@ -21,7 +21,7 @@ SAMPLE_RATE = 22050
 GENERATED = ('calm_piano', 'white_noise')
 AUDIO_SUFFIXES = {'.wav', '.mp3', '.flac', '.m4a', '.ogg'}
 FADE_IN_S, FADE_OUT_S = 2, 8
-DEFAULT_LUFS = -40.0  # 12 dB (a quarter of the amplitude) below the first version (-28), which was louder than expected; chosen by ear
+DEFAULT_LUFS = -34.0  # 6 dB (half the amplitude) below the first version (-28), which was louder than expected; -40 was then too quiet; chosen by ear
 
 
 def target_lufs():

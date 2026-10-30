@@ -73,10 +73,10 @@ def test_a_lower_target_makes_a_quieter_file_and_the_default_is_quieter_than_bef
     quiet = music.music_file(tmp_path, 'calm_piano', 10, lufs=-40)
     assert loud != quiet and rms(quiet) < rms(loud) * 0.4  # 12 dB is a quarter of the amplitude
     monkeypatch.delenv('PETMIND_MUSIC_LUFS', raising=False)
-    assert music.target_lufs() == -40.0
+    assert music.target_lufs() == -34.0
     monkeypatch.setenv('PETMIND_MUSIC_LUFS', '-42')
     assert music.target_lufs() == -42.0
     monkeypatch.setenv('PETMIND_MUSIC_LUFS', 'loud')
-    assert music.target_lufs() == -40.0   # a bad value falls back instead of failing during a demo
+    assert music.target_lufs() == -34.0   # a bad value falls back instead of failing during a demo
     monkeypatch.setenv('PETMIND_MUSIC_LUFS', '0')
     assert music.target_lufs() == -14.0   # and a silly value is clamped

@@ -104,7 +104,7 @@ STEPS = [
          packets=[("api_llm", True), ("api_db", False), ("api_view", False)]),
     dict(title="9. 승인하면 음악 명령을 보내고 PC 스피커에서 재생합니다",
          desc="음성 후보가 있고 보호자가 '개 소리'로 확인했거나 30초 알림이 온 경우에만 음악이 제안되며, 승인하기 전에는 아무 소리도 나지 않습니다. 승인하면 명령이 요청 → 수신 → 완료 순으로 진행하고, -Speaker를 켠 경우 장치 에이전트가 PC 스피커로 최대 60초 재생합니다(켜지 않으면 가상 실행). 음악이 짖음에 효과가 있다는 근거는 아직 없습니다.",
-         badge="구현됨 · 승인→명령→PC 스피커 재생을 임시 합성곡으로 확인 / 레게·소프트록 곡으로는 아직 재생해 보지 않음", nodes=["view", "cmd", "spk"],
+         badge="구현됨 · 승인→명령→PC 스피커 재생을 확인(임시 합성곡, 레게 곡 Beach Party) / 짖는 소리는 폰 재생, 실제 강아지로는 아직 하지 않음", nodes=["view", "cmd", "spk"],
          packets=[("view_cmd", False), ("cmd_spk", False), ("cmd_spk", True)]),
 ]
 STEP_NODES = [set(s["nodes"]) for s in STEPS]
