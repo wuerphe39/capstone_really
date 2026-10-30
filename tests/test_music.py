@@ -63,3 +63,20 @@ def test_reggae_and_soft_rock_alternate(tmp_path):
             song(tmp_path / folder / f'{name}.flac', 12)
     played = [music.music_file(tmp_path, 'calm_piano', 10).name.split('_')[0] for _ in range(6)]
     assert played == ['r1', 's1', 'r2', 's2', 's3', 'r1']  # genres alternate; the longer list finishes, then it starts over
+
+
+def test_a_lower_target_makes_a_quieter_file_and_the_default_is_quieter_than_before(tmp_path, monkeypatch):
+    (tmp_path / 'reggae').mkdir()
+    song(tmp_path / 'reggae' / 's.flac', 20)
+    rms = lambda path: float(np.sqrt(np.mean(sf.read(path)[0] ** 2)))
+    loud = music.music_file(tmp_path, 'calm_piano', 10, lufs=-28)
+    quiet = music.music_file(tmp_path, 'calm_piano', 10, lufs=-40)
+    assert loud != quiet and rms(quiet) < rms(loud) * 0.4  # 12 dB is a quarter of the amplitude
+    monkeypatch.delenv('PETMIND_MUSIC_LUFS', raising=False)
+    assert music.target_lufs() == -40.0
+    monkeypatch.setenv('PETMIND_MUSIC_LUFS', '-42')
+    assert music.target_lufs() == -42.0
+    monkeypatch.setenv('PETMIND_MUSIC_LUFS', 'loud')
+    assert music.target_lufs() == -40.0   # a bad value falls back instead of failing during a demo
+    monkeypatch.setenv('PETMIND_MUSIC_LUFS', '0')
+    assert music.target_lufs() == -14.0   # and a silly value is clamped

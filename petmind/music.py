@@ -9,6 +9,7 @@ generated locally as a placeholder (no recording, no licence question): slow sof
 filtered noise for white_noise. Nothing here is proven to calm a particular dog; it is only played after the guardian approves.
 """
 import json
+import os
 import subprocess
 from pathlib import Path
 
@@ -20,6 +21,16 @@ SAMPLE_RATE = 22050
 GENERATED = ('calm_piano', 'white_noise')
 AUDIO_SUFFIXES = {'.wav', '.mp3', '.flac', '.m4a', '.ogg'}
 FADE_IN_S, FADE_OUT_S = 2, 8
+DEFAULT_LUFS = -40.0  # 12 dB (a quarter of the amplitude) below the first version (-28), which was louder than expected; chosen by ear
+
+
+def target_lufs():
+    """Loudness the songs are brought to. Lower (e.g. -40) is quieter; set PETMIND_MUSIC_LUFS to change it. The PC volume still applies."""
+    try:
+        value = float(os.getenv('PETMIND_MUSIC_LUFS', DEFAULT_LUFS))
+    except ValueError:
+        return DEFAULT_LUFS
+    return min(max(value, -50.0), -14.0)
 
 
 def _fade(signal, seconds):
@@ -86,16 +97,17 @@ def next_index(music_dir, style, count):
     return position
 
 
-def prepared(source, music_dir, seconds):
+def prepared(source, music_dir, seconds, lufs=None):
     """A quiet WAV of at most `seconds` made from `source`, fading in and slowly out. Cached next to the music."""
     cache = Path(music_dir) / '_cache'
     cache.mkdir(parents=True, exist_ok=True)
-    out = cache / f'{source.stem}_{int(seconds)}s_{int(source.stat().st_mtime)}.wav'
+    lufs = target_lufs() if lufs is None else lufs
+    out = cache / f'{source.stem}_{int(seconds)}s_{int(lufs)}lu_{int(source.stat().st_mtime)}.wav'  # a new level makes a new file
     if not out.is_file():
         raw = out.with_suffix('.raw.wav')
         # loudnorm to a low level so the songs have similar loudness; the PC volume still decides how loud it really is
         subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), '-hide_banner', '-loglevel', 'error', '-y', '-i', str(source), '-t', str(seconds),
-                        '-af', 'loudnorm=I=-28:TP=-4', '-ar', '44100', '-ac', '2', '-c:a', 'pcm_s16le', str(raw)], check=True)
+                        '-af', f'loudnorm=I={lufs:g}:TP=-4', '-ar', '44100', '-ac', '2', '-c:a', 'pcm_s16le', str(raw)], check=True)
         data, rate = sf.read(raw, dtype='float32')
         raw.unlink()
         # The fades follow the real length: a song shorter than `seconds` must still end softly.
@@ -107,13 +119,13 @@ def prepared(source, music_dir, seconds):
     return out
 
 
-def music_file(music_dir, style, seconds=60):
+def music_file(music_dir, style, seconds=60, lufs=None):
     """Path of a WAV to play for `style`: the guardian's own songs in turn, else a generated quiet piece."""
     music_dir = Path(music_dir)
     music_dir.mkdir(parents=True, exist_ok=True)
     files = own_files(music_dir, style)
     if files:
-        return prepared(files[next_index(music_dir, style, len(files))], music_dir, seconds)
+        return prepared(files[next_index(music_dir, style, len(files))], music_dir, seconds, lufs)
     if style not in GENERATED:
         raise FileNotFoundError(f'no music for {style}: put files in {music_dir / style} (this style is not generated)')
     path = music_dir / f'generated_{style}_{int(seconds)}s.wav'
